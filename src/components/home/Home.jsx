@@ -5,8 +5,8 @@ import './Home.css';
 const Home = () => {
 	return (
 		<div className="Home">
-			<h1>RunEat</h1>
-			<p>Join the revolution. Change Your life.</p>
+			<h1>IronProfile</h1>
+			<p>Today we will create an app with authorization, adding some cool styles!</p>
 			<Link to="/signup">Signup</Link>
 			<br/>
 			<Link to="/login">Login</Link>
