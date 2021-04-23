@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { signup } from '../../services/AuthService';
 
-const cities = 'Madrid' || 'Barcelona' || 'Miami' || 'Paris' || 'Berlin' || 'Amsterdam' || 'México' || 'Sao Paulo' || 'Lisbon'
+const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const validators = {
   username: value => {
@@ -26,6 +26,50 @@ const validators = {
     }
 
     return message
+  },
+  email: value => {
+    let message
+
+    if (!value) {
+      message = 'Email is required'
+    } else if (!EMAIL_PATTERN.test(value)) {
+      message = 'Email is invalid'
+    }
+
+    return message
+  },
+  height: value => {
+    let message
+
+    if (!value) {
+      message = 'Height is required'
+    } else if (value && value < 130 || value > 230) {
+      message = 'Height should be a number in cm between 130 and 230. E.g.: 172'
+    }
+
+    return message
+  },
+  weight: value => {
+    let message
+
+    if (!value) {
+      message = 'Weight is required'
+    } else if (value && value < 40 || value > 300) {
+      message = 'Weight should be a number between 40 and 300'
+    }
+
+    return message
+  },
+  age: value => {
+    let message
+
+    if (!value) {
+      message = 'Age is required'
+    } else if (value && value < 16 || value > 120) {
+      message = 'You must be at least 16 years old'
+    }
+
+    return message
   }
 }
 
@@ -37,14 +81,18 @@ const Signup = () => {
     username: '',
     password: '',
     email: '',
-    heigth: '',
+    height: '',
     weight: '',
     age: '',
 	})
 
 	const [errors, setErrors] = useState({
 		username: validators.username(),
-		password: validators.password(),
+    password: validators.password(),
+    email: validators.email(),
+    heigth: validators.height(),
+    weight: validators.weight(),
+    age: validators.age(),
 	})
 
   const [touched, setTouched] = useState({})
@@ -55,7 +103,7 @@ const Signup = () => {
     
     console.log(user)
 	  signup(user)
-	  	.then(() => push('/login'))
+	  	.then(() => push('/checkEmail'))
   }
 
   const onChange = (e) => {
@@ -91,12 +139,13 @@ const Signup = () => {
     }))
   }
 
-  const { username, password } = user
+  const { username, password, email, height, weight, age} = user
   
 	return (
 		<div className="Login mt-4 container d-flex justify-content-center flex-column">
 		<h1>Sign up</h1>
-			<form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+      <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+        
 				<div className="mb-3">
 				<label htmlFor="username" className="form-label">Username </label>
 				<input
@@ -115,6 +164,46 @@ const Signup = () => {
 					value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
 				/>
 				 <div className="invalid-feedback">{errors.password}</div>
+        </div>
+        
+        <div className="mb-3">
+				<label htmlFor="email" className="form-label">Email</label>
+				<input
+					className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
+					type="email" id="email" name="email"
+					value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+				/>
+				 <div className="invalid-feedback">{errors.email}</div>
+        </div>
+        
+        <div className="mb-3">
+				<label htmlFor="height" className="form-label">Height</label>
+				<input
+					className={`form-control ${touched.height && errors.height ? 'is-invalid' : ''}`}
+					type="number" id="height" name="height" min={130} max={230}
+					value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+				/>
+				 <div className="invalid-feedback">{errors.height}</div>
+        </div>
+        
+        <div className="mb-3">
+				<label htmlFor="weight" className="form-label">Weight</label>
+				<input
+					className={`form-control ${touched.weight && errors.weight ? 'is-invalid' : ''}`}
+					type="number" id="weight" name="weight" min={40} max={300}
+					value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+				/>
+				 <div className="invalid-feedback">{errors.weight}</div>
+        </div> 
+
+        <div className="mb-3">
+				<label htmlFor="age" className="form-label">Age</label>
+				<input
+					className={`form-control ${touched.age && errors.age ? 'is-invalid' : ''}`}
+					type="number" id="age" name="age" min={16} max={120}
+					value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+				/>
+				 <div className="invalid-feedback">{errors.age}</div>
         </div> 
 
 				<button type="submit" className="btn btn-outline-primary">
