@@ -1,5 +1,4 @@
 import { create } from "./BaseService";
-import { Redirect } from "react-router-dom"
 
 const http = create({
   useAccessToken: false,

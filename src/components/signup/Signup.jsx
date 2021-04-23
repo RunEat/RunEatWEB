@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { signup } from '../../services/AuthService';
 
+// eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const validators = {
@@ -38,39 +39,39 @@ const validators = {
 
     return message
   },
-  height: value => {
-    let message
+  // height: value => {
+  //   let message
 
-    if (!value) {
-      message = 'Height is required'
-    } else if (value && value < 130 || value > 230) {
-      message = 'Height should be a number in cm between 130 and 230. E.g.: 172'
-    }
+  //   if (!value) {
+  //     message = 'Height is required'
+  //   } else if (value && value < 130 || value > 230) {
+  //     message = 'Height should be a number in cm between 130 and 230. E.g.: 172'
+  //   }
 
-    return message
-  },
-  weight: value => {
-    let message
+  //   return message
+  // },
+  // weight: value => {
+  //   let message
 
-    if (!value) {
-      message = 'Weight is required'
-    } else if (value && value < 40 || value > 300) {
-      message = 'Weight should be a number between 40 and 300'
-    }
+  //   if (!value) {
+  //     message = 'Weight is required'
+  //   } else if (value && value < 40 || value > 300) {
+  //     message = 'Weight should be a number between 40 and 300'
+  //   }
 
-    return message
-  },
-  age: value => {
-    let message
+  //   return message
+  // },
+  // age: value => {
+  //   let message
 
-    if (!value) {
-      message = 'Age is required'
-    } else if (value && value < 16 || value > 120) {
-      message = 'You must be at least 16 years old'
-    }
+  //   if (!value) {
+  //     message = 'Age is required'
+  //   } else if (value && value < 16 || value > 120) {
+  //     message = 'You must be at least 16 years old'
+  //   }
 
-    return message
-  }
+  //   return message
+  // }
 }
 
 const Signup = () => {
@@ -81,18 +82,18 @@ const Signup = () => {
     username: '',
     password: '',
     email: '',
-    height: '',
-    weight: '',
-    age: '',
+    height: 150,
+    weight: 60,
+    age: 16,
 	})
 
 	const [errors, setErrors] = useState({
 		username: validators.username(),
     password: validators.password(),
     email: validators.email(),
-    heigth: validators.height(),
-    weight: validators.weight(),
-    age: validators.age(),
+    // heigth: validators.height(),
+    // weight: validators.weight(),
+    // age: validators.age(),
 	})
 
   const [touched, setTouched] = useState({})
@@ -176,7 +177,7 @@ const Signup = () => {
 				 <div className="invalid-feedback">{errors.email}</div>
         </div>
         
-        <div className="mb-3">
+        <div className="mb-3 d-none">
 				<label htmlFor="height" className="form-label">Height</label>
 				<input
 					className={`form-control ${touched.height && errors.height ? 'is-invalid' : ''}`}
@@ -186,7 +187,7 @@ const Signup = () => {
 				 <div className="invalid-feedback">{errors.height}</div>
         </div>
         
-        <div className="mb-3">
+        <div className="mb-3 d-none">
 				<label htmlFor="weight" className="form-label">Weight</label>
 				<input
 					className={`form-control ${touched.weight && errors.weight ? 'is-invalid' : ''}`}
@@ -196,7 +197,7 @@ const Signup = () => {
 				 <div className="invalid-feedback">{errors.weight}</div>
         </div> 
 
-        <div className="mb-3">
+        <div className="mb-3 d-none">
 				<label htmlFor="age" className="form-label">Age</label>
 				<input
 					className={`form-control ${touched.age && errors.age ? 'is-invalid' : ''}`}
