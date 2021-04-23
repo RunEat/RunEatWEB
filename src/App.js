@@ -31,7 +31,7 @@ function App() {
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/checkEmail' component={CheckEmail}/>
         <Route exact path='/user/activate/:token' component={Activate} />
-        <Route exact path='/login' component={Login} />
+        <Route exact path='/login' render={() => <Login doLogin={getUser} />} />
         <Route exact path='/profile' component={Profile}/>
       </Switch>
     </div>

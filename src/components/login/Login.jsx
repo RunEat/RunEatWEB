@@ -28,7 +28,7 @@ const validators = {
   }
 }
 
-const Login = ({ doLogin }) => {
+const Login = ({doLogin}) => {
   const { push } = useHistory()
 
   const [state, setState] = useState({
@@ -58,7 +58,7 @@ const Login = ({ doLogin }) => {
         .then(response => {
           setAccessToken(response.access_token)
           doLogin()
-            .then(() => push('/loggedin'))
+            .then(() => push('/profile'))
         })
     }
   }
