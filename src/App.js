@@ -8,6 +8,7 @@ import Signup from './components/signup/Signup';
 import Activate from './components/signup/Activate'
 import CheckEmail from './components/signup/CheckEmail'
 import Profile from './components/Profile/Profile';
+import ProfileForm from './components/Profile/ProfileForm'
 import Diary from './components/Diary/Diary'
 import Meal from './components/Meal/Meal'
 import Sport from './components/Sport/Sport'
@@ -39,6 +40,7 @@ function App() {
         {/* <Route exact path='/login' render={() => <Login doLogin={getUser} />} /> */}
         <Route exact path='/login' component={Login}/>
         <Route exact path='/profile' component={Profile} />
+        <Route exact path='/profile/edit' component={ProfileForm} />
         <Route exact path='/diary' component={Diary} />
         <Route exact path='/meal' component={Meal} />
         <Route exact path='/sport' component={Sport} />
