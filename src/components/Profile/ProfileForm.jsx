@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { signup } from '../../services/AuthService';
 import { useUser } from '../../hooks/userUserContext';
+import { editUser } from '../../services/UserService';
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -80,7 +81,7 @@ const ProfileForm = () => {
 
   const { user } = useUser()
   
-  const [userEdit, setUser] = useState({
+  const [userToEdit, setUser] = useState({
     avatar: 'https://7ab4a7a7b3e97d265133-3c456ba518a2c8c1f13f8ac58cd6a50f.ssl.cf5.rackcdn.com/6mfo16uxpq.jpg',
     username: '',
     password: '',
@@ -99,31 +100,42 @@ const ProfileForm = () => {
     age: validators.age(),
 	})
 
-  useEffect(()=>{
-    const ele = document.querySelector('.buble');
-    if (ele) {
-      ele.style.left = `${Number(age / 4)}px`;
-    }
-  })
-
   const [touched, setTouched] = useState({})
 
   const onSubmit = (e) => {
     e.preventDefault()
     
-    console.log(user)
-	  signup(userEdit)
-	  	.then(() => push('/checkEmail'))
+    const formData = new FormData();
+
+    Object.entries(userToEdit).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    editUser(formData)
+      .then(() => {
+        push("/profile");
+      })
+      .catch((e) => {
+        if (e.response.status === 400) {
+          setErrors(e.response.data.errors);
+        }
+      });
   }
 
   const onChange = (e) => {
+    setUser((prevState) => {
+      let value = e.target.value;
+      if (e.target.type === "file") {
+        value = e.target.files[0];
+      }
+      return {
+        ...prevState,
+        [e.target.id]: value
+      }
+    });
+    
     const { name, value } = e.target
 
-    setUser((prevState) => ({
-          ...prevState,
-          [name]: value
-    }))
-    
     setErrors((prevState) => ({
           ...prevState,
           [name]: validators[name] && validators[name](value)
@@ -149,8 +161,22 @@ const ProfileForm = () => {
     }))
   }
 
-  const { avatar, username, password, email, height, weight, age } = userEdit
-  
+  const onClick = (e) => {
+    const { value } = e.target
+
+    setUser((prevState) => ({
+          ...prevState,
+          avatar: value
+    }))
+    
+    // setErrors((prevState) => ({
+    //       ...prevState,
+    //       [name]: validators[name] && validators[name](value)
+    // }))
+  }
+
+  const { avatar, username, password, email, height, weight, age } = userToEdit
+
   return (
     !user ? ('loading...') : (
 
@@ -159,8 +185,14 @@ const ProfileForm = () => {
         <h1>Set Up Profile</h1>
           <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
             
-          <img src={avatar} alt={user.username} className="ProfileAvatar"></img>
-          <small className="EditAvatar" onClick={props.clickToDelete}>&#10060;</small>
+          <div className="mb-3">
+            <input className="form-control" type="file" onClick={onClick} onChange={onChange}
+              name="avatar" id="avatar" 
+            />
+            {/* <span className="EditAvatar">&#9999;</span> */}
+            </div>
+            
+          {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
           
           <div className="mb-3">
             <p>Username: {user.username}</p>
@@ -218,7 +250,7 @@ const ProfileForm = () => {
             <p>{weight}</p>
 
           <button type="submit" className="btn btn-outline-primary">
-          Next
+          Update
           </button>
         </form>
       </div>)
