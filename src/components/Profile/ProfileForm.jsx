@@ -1,8 +1,7 @@
-import React from 'react';
-
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { signup } from '../../services/AuthService';
+import { useUser } from '../../hooks/userUserContext';
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -78,8 +77,11 @@ const validators = {
 
 const ProfileForm = () => {
   const { push } = useHistory()
+
+  const { user } = useUser()
   
-  const [user, setUser] = useState({
+  const [userEdit, setUser] = useState({
+    avatar: 'https://7ab4a7a7b3e97d265133-3c456ba518a2c8c1f13f8ac58cd6a50f.ssl.cf5.rackcdn.com/6mfo16uxpq.jpg',
     username: '',
     password: '',
     email: '',
@@ -97,13 +99,20 @@ const ProfileForm = () => {
     age: validators.age(),
 	})
 
+  useEffect(()=>{
+    const ele = document.querySelector('.buble');
+    if (ele) {
+      ele.style.left = `${Number(age / 4)}px`;
+    }
+  })
+
   const [touched, setTouched] = useState({})
 
   const onSubmit = (e) => {
     e.preventDefault()
     
     console.log(user)
-	  signup(user)
+	  signup(userEdit)
 	  	.then(() => push('/checkEmail'))
   }
 
@@ -140,83 +149,80 @@ const ProfileForm = () => {
     }))
   }
 
-  const { username, password, email, height, weight, age } = user
+  const { avatar, username, password, email, height, weight, age } = userEdit
   
   return (
-    // user.plan ? (form profile) : (form intermedio)
-  
-		<div className="Login mt-4 container d-flex justify-content-center flex-column">
-		<h1>Set Up Profile</h1>
-      <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-        
-        <div className="mb-3">
-          <p>Email: {user.email}</p>
-				{/* <label htmlFor="username" className="form-label">Username </label>
-				<input
-					className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
-					type="username" id="username" name="username" autoComplete="off"
-					value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				<div className="invalid-feedback">{errors.username}</div> */}
-				</div>
+    !user ? ('loading...') : (
 
-        <div className="mb-3">
-          <p>Email: {user.email}</p>
-				{/* <label htmlFor="password" className="form-label">Password</label>
-				<input
-					className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
-					type="password" id="password" name="password"
-					value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.password}</div> */}
-        </div>
-        
-        <div className="mb-3">
-          <p>Email: {user.email}</p>
-				{/* <label htmlFor="email" className="form-label">Email</label>
-				<input
-					className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
-					type="email" id="email" name="email"
-					value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.email}</div> */}
-         </div>
-        
-        <div className="mb-3">
-				<label htmlFor="height" className="form-label">Height</label>
-				<input
-					className={`form-control ${touched.height && errors.height ? 'is-invalid' : ''}`}
-					type="number" id="height" name="height" min={130} max={230}
-					value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.height}</div>
-        </div>
-        
-        <div className="mb-3">
-				<label htmlFor="weight" className="form-label">Weight</label>
-				<input
-					className={`form-control ${touched.weight && errors.weight ? 'is-invalid' : ''}`}
-					type="number" id="weight" name="weight" min={40} max={300}
-					value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.weight}</div>
-        </div> 
+    user.avatar ? ('loading...') : (
+      <div className="Login mt-4 container d-flex justify-content-center flex-column">
+        <h1>Set Up Profile</h1>
+          <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+            
+          <img src={avatar} alt={user.username} className="ProfileAvatar"></img>
+          <small className="EditAvatar" onClick={props.clickToDelete}>&#10060;</small>
+          
+          <div className="mb-3">
+            <p>Username: {user.username}</p>
+          {/* <label htmlFor="username" className="form-label">Username </label>
+          <input
+            className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
+            type="username" id="username" name="username" autoComplete="off"
+            value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.username}</div> */}
+          </div>
 
-        <div className="mb-3">
-				<label htmlFor="age" className="form-label">Age</label>
-				<input
-					className={`form-control ${touched.age && errors.age ? 'is-invalid' : ''}`}
-					type="number" id="age" name="age" min={16} max={120}
-					value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.age}</div>
-        </div> 
+          <div className="mb-3">
+            <p>Email: {user.email}</p>
+          {/* <label htmlFor="email" className="form-label">Email</label>
+          <input
+            className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
+            type="email" id="email" name="email"
+            value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.email}</div> */}
+              
 
-				<button type="submit" className="btn btn-outline-primary">
-				Submit
-				</button>
-			</form>
-    </div>
+          {/* <label htmlFor="password" className="form-label">Password</label>
+          <input
+            className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
+            type="password" id="password" name="password"
+            value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.password}</div> */}
+            </div>
+            
+          
+
+
+          <label for="range23" className="form-label">RANGE AGE</label>
+          <input type="range" className="form-range form-control" id="range23"
+            id="age" name="age" min={16} max={120}
+            value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+            <p>{age}</p>
+
+          <label for="range23" className="form-label">RANGE height</label>
+          <input type="range" className="form-range form-control" id="range23"
+            id="height" name="height" min={130} max={230}
+            value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+            <p>{height}</p>
+
+          <label for="range23" className="form-label">RANGE weight</label>
+          <input type="range" className="form-range form-control" id="range23"
+            id="weight" name="weight" min={40} max={300}
+            value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+            <p>{weight}</p>
+
+          <button type="submit" className="btn btn-outline-primary">
+          Next
+          </button>
+        </form>
+      </div>)
+    )
   );
 };
 
