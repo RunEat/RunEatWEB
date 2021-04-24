@@ -8,39 +8,39 @@ import { editUser } from '../../services/UserService';
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const validators = {
-  username: value => {
-    let message
+  // username: value => {
+  //   let message
 
-    if (!value) {
-      message = 'username is required'
-    } else if (value && value.length < 4) {
-      message = 'username is invalid'
-    }
+  //   if (!value) {
+  //     message = 'username is required'
+  //   } else if (value && value.length < 4) {
+  //     message = 'username is invalid'
+  //   }
 
-    return message
-  },
-  password: value => {
-    let message
+  //   return message
+  // },
+  // password: value => {
+  //   let message
 
-    if (!value) {
-      message = 'Password is required'
-    } else if (value && value.length < 8) {
-      message = 'Password must have 8 character or more'
-    }
+  //   if (!value) {
+  //     message = 'Password is required'
+  //   } else if (value && value.length < 8) {
+  //     message = 'Password must have 8 character or more'
+  //   }
 
-    return message
-  },
-  email: value => {
-    let message
+  //   return message
+  // },
+  // email: value => {
+  //   let message
 
-    if (!value) {
-      message = 'Email is required'
-    } else if (!EMAIL_PATTERN.test(value)) {
-      message = 'Email is invalid'
-    }
+  //   if (!value) {
+  //     message = 'Email is required'
+  //   } else if (!EMAIL_PATTERN.test(value)) {
+  //     message = 'Email is invalid'
+  //   }
 
-    return message
-  },
+  //   return message
+  // },
   height: value => {
     let message
 
@@ -83,18 +83,12 @@ const ProfileForm = () => {
   
   const [userToEdit, setUser] = useState({
     avatar: 'https://7ab4a7a7b3e97d265133-3c456ba518a2c8c1f13f8ac58cd6a50f.ssl.cf5.rackcdn.com/6mfo16uxpq.jpg',
-    username: '',
-    password: '',
-    email: '',
     height: 150,
     weight: 60,
     age: 16,
 	})
 
 	const [errors, setErrors] = useState({
-		username: validators.username(),
-    password: validators.password(),
-    email: validators.email(),
     heigth: validators.height(),
     weight: validators.weight(),
     age: validators.age(),
@@ -104,14 +98,16 @@ const ProfileForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    
+
     const formData = new FormData();
-
+    
     Object.entries(userToEdit).forEach(([key, value]) => {
-      formData.append(key, value);
+        if ([key] === weight || height || age) {
+          formData.append(key, value);
+        }
     });
-
-    console.log('formData', formData)
+      
+    console.log('formData after append', formData)
 
     editUser(formData)
       .then(() => {
@@ -125,7 +121,7 @@ const ProfileForm = () => {
   }
 
   const onChange = (e) => {
-    console.log(e)
+    console.log(e.target)
 
     setUser((prevState) => {
       let value = e.target.value;
@@ -184,14 +180,14 @@ const ProfileForm = () => {
   return (
     !user ? ('loading...') : (
 
-    user.avatar ? ('loading...') : (
+    user.avatar ? ('Edit Profile') : (
       <div className="Login mt-4 container d-flex justify-content-center flex-column">
         <h1>Set Up Profile</h1>
           <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
             
           <div className="mb-3">
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="<Avatar" id="avatar" 
+              name="<Avatar" id="avatar"
             />
             {/* <span className="EditAvatar">&#9999;</span> */}
             </div>
@@ -230,22 +226,22 @@ const ProfileForm = () => {
             </div>
 
 
-          <label htmlFor="range23" className="form-label">RANGE AGE</label>
-          <input type="range" className="form-range form-control" id="range23"
+          <label htmlFor="ageRange" className="form-label">Age</label>
+          <input type="range" className="form-range form-control" id="ageRange"
             id="age" name="age" min={16} max={120}
             value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
           />
             <p>{age}</p>
 
-          <label htmlFor="range23" className="form-label">RANGE height</label>
-          <input type="range" className="form-range form-control" id="range23"
+          <label htmlFor="heightRange" className="form-label">Height</label>
+          <input type="range" className="form-range form-control" id="heightRange"
             id="height" name="height" min={130} max={230}
             value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
           />
             <p>{height}</p>
 
-          <label htmlFor="range23" className="form-label">RANGE weight</label>
-          <input type="range" className="form-range form-control" id="range23"
+          <label htmlFor="weightRange" className="form-label">Weight</label>
+          <input type="range" className="form-range form-control" id="weightRange"
             id="weight" name="weight" min={40} max={300}
             value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
           />
