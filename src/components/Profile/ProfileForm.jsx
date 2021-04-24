@@ -111,6 +111,8 @@ const ProfileForm = () => {
       formData.append(key, value);
     });
 
+    console.log('formData', formData)
+
     editUser(formData)
       .then(() => {
         push("/profile");
@@ -123,6 +125,8 @@ const ProfileForm = () => {
   }
 
   const onChange = (e) => {
+    console.log(e)
+
     setUser((prevState) => {
       let value = e.target.value;
       if (e.target.type === "file") {
@@ -187,7 +191,7 @@ const ProfileForm = () => {
             
           <div className="mb-3">
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="avatar" id="avatar" 
+              name="<Avatar" id="avatar" 
             />
             {/* <span className="EditAvatar">&#9999;</span> */}
             </div>
@@ -224,25 +228,23 @@ const ProfileForm = () => {
           />
           <div className="invalid-feedback">{errors.password}</div> */}
             </div>
-            
-          
 
 
-          <label for="range23" className="form-label">RANGE AGE</label>
+          <label htmlFor="range23" className="form-label">RANGE AGE</label>
           <input type="range" className="form-range form-control" id="range23"
             id="age" name="age" min={16} max={120}
             value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
           />
             <p>{age}</p>
 
-          <label for="range23" className="form-label">RANGE height</label>
+          <label htmlFor="range23" className="form-label">RANGE height</label>
           <input type="range" className="form-range form-control" id="range23"
             id="height" name="height" min={130} max={230}
             value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
           />
             <p>{height}</p>
 
-          <label for="range23" className="form-label">RANGE weight</label>
+          <label htmlFor="range23" className="form-label">RANGE weight</label>
           <input type="range" className="form-range form-control" id="range23"
             id="weight" name="weight" min={40} max={300}
             value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
