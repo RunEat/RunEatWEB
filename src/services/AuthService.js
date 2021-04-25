@@ -17,8 +17,12 @@ export const login = (body) => {
   return http.post('/user/login', body)
 }
 
-export const passwordReset = (user) => {
+export const passwordResetEmail = (user) => {
   return http.post('/user/password_reset', user)
+}
+
+export const passwordReset = (token) => {
+  return http.get(`/user/password_reset/${token}`)
 }
 
 export const updatePassword = (user) => {

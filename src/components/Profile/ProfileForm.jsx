@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { signup } from '../../services/AuthService';
+import { passwordResetEmail } from '../../services/AuthService';
 import { useUser } from '../../hooks/userUserContext';
 import { editUser } from '../../services/UserService';
 
@@ -78,14 +78,12 @@ const validators = {
 
 const ProfileForm = () => {
   const { push } = useHistory()
-
-  const { user } = useUser()
   
   const [userToEdit, setUser] = useState({
     avatar: 'https://7ab4a7a7b3e97d265133-3c456ba518a2c8c1f13f8ac58cd6a50f.ssl.cf5.rackcdn.com/6mfo16uxpq.jpg',
     height: 150,
     weight: 60,
-    age: 16,
+    age: 16
 	})
 
 	const [errors, setErrors] = useState({
@@ -104,14 +102,15 @@ const ProfileForm = () => {
     Object.entries(userToEdit).forEach(([key, value]) => {
         if ([key] === weight || height || age) {
           formData.append(key, value);
+          console.log (formData)
         }
     });
       
-    console.log('formData after append', formData)
+    //console.log('formData after append', formData)
 
     editUser(formData)
       .then(() => {
-        push("/profile");
+        push("/")
       })
       .catch((e) => {
         if (e.response.status === 400) {
@@ -121,7 +120,7 @@ const ProfileForm = () => {
   }
 
   const onChange = (e) => {
-    console.log(e.target)
+    //console.log(e.target)
 
     setUser((prevState) => {
       let value = e.target.value;
@@ -175,83 +174,147 @@ const ProfileForm = () => {
     // }))
   }
 
-  const { avatar, username, password, email, height, weight, age } = userToEdit
+  const changePassword = (e) => {
+    e.preventDefault()
+
+    passwordResetEmail(user)
+      .then(() => {
+        console.log('Revisa tu email')
+      })
+  }
+
+  const { user } = useUser()
+  
+  const { avatar, username, email, height, weight, age } = userToEdit
 
   return (
     !user ? ('loading...') : (
 
-    user.avatar ? ('Edit Profile') : (
-      <div className="Login mt-4 container d-flex justify-content-center flex-column">
+      user.avatar ? (
+        <div className="Login mt-4 container d-flex justify-content-center flex-column">
         <h1>Set Up Profile</h1>
-          <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-            
+        <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+          
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Username (Name y Surname?)</label>
+            <input
+              placeholder={user.username} className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
+              type="username" id="username" name="username" autoComplete="off"
+              value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+            <div className="invalid-feedback">{errors.username}</div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              placeholder={user.email} className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
+              type="email" id="email" name="email"
+              value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+            <div className="invalid-feedback">{errors.email}</div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="ageRange" className="form-label">Age</label>
+            <input type="range" className="form-range form-control" id="ageRange"
+              id="age" name="age" min={16} max={120}
+              value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p>{age}</p>  
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="heightRange" className="form-label">Height</label>
+            <input type="range" className="form-range form-control" id="heightRange"
+              id="height" name="height" min={130} max={230}
+              value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p>{height}</p> 
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="weightRange" className="form-label">Weight</label>
+            <input type="range" className="form-range form-control" id="weightRange"
+              id="weight" name="weight" min={40} max={300}
+              value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p>{weight}</p>
+          </div>
+
           <div className="mb-3">
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
               name="<Avatar" id="avatar"
             />
-            {/* <span className="EditAvatar">&#9999;</span> */}
-            </div>
+          {/* <span className="EditAvatar">&#9999;</span> */}
             
           {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
-          
-          <div className="mb-3">
-            <p>Username: {user.username}</p>
-          {/* <label htmlFor="username" className="form-label">Username </label>
-          <input
-            className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
-            type="username" id="username" name="username" autoComplete="off"
-            value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-          />
-          <div className="invalid-feedback">{errors.username}</div> */}
           </div>
-
-          <div className="mb-3">
-            <p>Email: {user.email}</p>
-          {/* <label htmlFor="email" className="form-label">Email</label>
-          <input
-            className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
-            type="email" id="email" name="email"
-            value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-          />
-          <div className="invalid-feedback">{errors.email}</div> */}
-              
-
-          {/* <label htmlFor="password" className="form-label">Password</label>
-          <input
-            className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
-            type="password" id="password" name="password"
-            value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-          />
-          <div className="invalid-feedback">{errors.password}</div> */}
-            </div>
-
-
-          <label htmlFor="ageRange" className="form-label">Age</label>
-          <input type="range" className="form-range form-control" id="ageRange"
-            id="age" name="age" min={16} max={120}
-            value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-          />
-            <p>{age}</p>
-
-          <label htmlFor="heightRange" className="form-label">Height</label>
-          <input type="range" className="form-range form-control" id="heightRange"
-            id="height" name="height" min={130} max={230}
-            value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-          />
-            <p>{height}</p>
-
-          <label htmlFor="weightRange" className="form-label">Weight</label>
-          <input type="range" className="form-range form-control" id="weightRange"
-            id="weight" name="weight" min={40} max={300}
-            value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-          />
-            <p>{weight}</p>
 
           <button type="submit" className="btn btn-outline-primary">
           Update
           </button>
         </form>
-      </div>)
+        
+        <div className="d-grid gap-2 col-8 mx-auto mt-3">
+          <button className="btn btn-danger" onClick={changePassword}>Change my password</button>
+        </div>
+      </div>
+      ) : (
+      <div className="Login mt-4 container d-flex justify-content-center flex-column">
+        <h1>Completed your Profile</h1>
+          <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+            
+          <div className="mb-3">
+            <p>Username: {user.username}</p>
+          </div>
+
+          <div className="mb-3">
+            <p>Email: {user.email}</p>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="ageRange" className="form-label">Age</label>
+            <input type="range" className="form-range form-control" id="ageRange"
+              id="age" name="age" min={16} max={120}
+              value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p>{age}</p>   
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="heightRange" className="form-label">Height</label>
+            <input type="range" className="form-range form-control" id="heightRange"
+              id="height" name="height" min={130} max={230}
+              value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p>{height}</p>    
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="weightRange" className="form-label">Weight</label>
+            <input type="range" className="form-range form-control" id="weightRange"
+              id="weight" name="weight" min={40} max={300}
+              value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p>{weight}</p>      
+          </div>
+
+          <div className="mb-3">
+            <input className="form-control" type="file" onClick={onClick} onChange={onChange}
+              name="<Avatar" id="avatar"
+            />
+          {/* <span className="EditAvatar">&#9999;</span> */}
+            
+          {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
+          </div>
+              
+          <button type="submit" className="btn btn-outline-primary">
+          Update
+          </button>
+        </form>
+      </div>
+      )
     )
   );
 };
