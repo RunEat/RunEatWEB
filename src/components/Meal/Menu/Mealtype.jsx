@@ -1,11 +1,19 @@
 import React from 'react';
 import Recipe from './Recipe';
 
-function Mealtype() {
+function Mealtype({ recipes }) {
+    
+    console.log('recipes', recipes)
+
     return (
-        <div className="Carousel">
-            <input></input>
-            <Recipe />
+        <div className="Carousel card-group">
+                { !recipes ? (<p>Loading..</p>) : (
+                    recipes.map(recipe =>
+                    <div className="card">
+                        <Recipe key={recipe.label} recipe={recipe} />
+                    </div>)
+                )   
+                }
         </div>
     );
 }
