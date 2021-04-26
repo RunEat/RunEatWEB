@@ -7,22 +7,47 @@ function Menu() {
 
 const [mealtype, setMealtype] = useState()
 const [query, setQuery] = useState()
+const [search, setSearch] = useState(' ')
+
 
 useEffect(() => {
-    getBreakfast()
+    
+})
+
+const onSubmit = (e) => {
+    e.preventDefault();
+    console.log('input', search)
+    
+    getBreakfast(search)
         .then((recipes) => {
             setMealtype(recipes)
-        })
-}, [])
+        }) 
+}
+
+const onChange = (e) => {
+    const { value } = e.target
+    console.log('value', value)
+
+    setSearch(value)
+
+}
     
-console.log (mealtype)
+//console.log ('mealtype', mealtype)
 
     return (
         <div className="Menu">
             {
-                !mealtype ? (<p>Loading..</p>) : (
+                !search ? (<p>Loading..</p>) : (
                 <>
                     <h2>Breakfast</h2>
+                    <form onSubmit={onSubmit}>    
+                    <input 
+                        type="search" className="form-control mb-2" name="search__recipe"
+                        id="search__recipe" placeholder="Search recipe..." autoComplete="off"
+                        onChange={onChange} value={search}
+                    />
+                    <button type="submit" className="btn btn-primary">Search</button>
+                    </form> 
                     <Mealtype recipes={mealtype}/>
                     <h2>Lunch</h2>
                     <Mealtype />

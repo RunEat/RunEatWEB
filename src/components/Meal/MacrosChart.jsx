@@ -3,7 +3,7 @@ import React from 'react';
 function MacrosChart() {
     return (
         <div className="MacrosChart">
-            <table>
+            {/* <table>
                 <tr className="text-align-center">
                 <td>Fats</td>
                 <td>20/50 g</td>
@@ -16,7 +16,7 @@ function MacrosChart() {
                 <td>Carbs</td>
                 <td>20/50 g</td>
                 </tr>
-            </table>
+            </table> */}
         </div>
     );
 }
