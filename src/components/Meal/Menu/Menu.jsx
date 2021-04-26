@@ -5,17 +5,18 @@ import { getBreakfast } from '../../../services/RecipeService';
 
 function Menu() {
 
-    const [mealType, setMealType] = useState()
-    const [query, setQuery] = useState()
+const [mealType, setMealType] = useState()
+const [query, setQuery] = useState()
 
 useEffect(() => {
-    getBreakfast(query)
+    getBreakfast(query, input.id)
         .then((response) => console.log (response))
 }, [query])
 
     return (
         <div className="Menu">
             <h2>Breakfast</h2>
+            <input id="breakfast"></input>
             <Mealtype />
             <h2>Lunch</h2>
             <Mealtype />

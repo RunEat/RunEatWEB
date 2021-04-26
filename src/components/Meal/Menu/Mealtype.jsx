@@ -4,6 +4,7 @@ import Recipe from './Recipe';
 function Mealtype() {
     return (
         <div className="Carousel">
+            <input></input>
             <Recipe />
         </div>
     );
