@@ -78,8 +78,10 @@ const validators = {
 
 const ProfileForm = () => {
   const { push } = useHistory()
+
+  const { user, setUser } = useUser();
   
-  const [userToEdit, setUser] = useState({
+  const [userToEdit, setUserToEdit] = useState({
     avatar: 'https://prod.liveshare.vsengsaas.visualstudio.com/join?CD38E7B67E848E56EC1A6FEA6807F1B33307',
     height: 150,
     weight: 60,
@@ -88,7 +90,7 @@ const ProfileForm = () => {
   
   useEffect(() => {
     getUserInfo()
-      .then((userToEdit)=> setUser(userToEdit))
+      .then((userToEdit)=> setUserToEdit(userToEdit))
   }, [])
 
 	const [errors, setErrors] = useState({
@@ -114,7 +116,8 @@ const ProfileForm = () => {
     //console.log('formData after append', formData)
 
     editUser(formData)
-      .then(() => {
+      .then((updatedUser) => {
+        setUser(updatedUser);
         push("/")
       })
       .catch((e) => {
@@ -127,7 +130,7 @@ const ProfileForm = () => {
   const onChange = (e) => {
     //console.log(e.target)
 
-    setUser((prevState) => {
+    setUserToEdit((prevState) => {
       let value = e.target.value;
       if (e.target.type === "file") {
         value = e.target.files[0];
@@ -168,7 +171,7 @@ const ProfileForm = () => {
   const onClick = (e) => {
     const { value } = e.target
 
-    setUser((prevState) => ({
+    setUserToEdit((prevState) => ({
           ...prevState,
           avatar: value
     }))
@@ -182,13 +185,11 @@ const ProfileForm = () => {
   const changePassword = (e) => {
     e.preventDefault()
 
-    passwordResetEmail(user)
+    passwordResetEmail(user.email)
       .then(() => {
         console.log('Revisa tu email')
       })
   }
-
-  const { user } = useUser()
   
   const { avatar, username, email, height, weight, age } = userToEdit
 

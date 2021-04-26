@@ -19,8 +19,9 @@ export const UserContextProvider = ({children}) => {
       }, [])
 
     const value = {
-        getUser,
-        user
+      getUser,
+      setUser,
+      user
     }
     
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>

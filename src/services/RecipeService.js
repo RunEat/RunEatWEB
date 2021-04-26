@@ -16,15 +16,15 @@ export const getBreakfast = (query) => {
 }
 
 export const getLunch = (query) => {
-    return http.get(`/search?mealType=lunch&q=${query}&app_id=9a7c60e0&app_key=e205a49b2a08604e7af4f6faa40d7ca0`)
+    return http.get(`/search?mealType=lunch&q=${query}&app_id=9a7c60e0&app_key=e205a49b2a08604e7af4f6faa40d7ca0&from=0&to=10`)
 }
 
 export const getDinner = (query) => {
-    return http.get(`/search?mealType=dinner&q=${query}&app_id=9a7c60e0&app_key=e205a49b2a08604e7af4f6faa40d7ca0`)
+    return http.get(`/search?mealType=dinner&q=${query}&app_id=9a7c60e0&app_key=e205a49b2a08604e7af4f6faa40d7ca0&from=0&to=10`)
 }
 
 export const getSnacks = (query) => {
-    return http.get(`/search?mealType=snack&q=${query}&app_id=9a7c60e0&app_key=e205a49b2a08604e7af4f6faa40d7ca0`)
+    return http.get(`/search?mealType=snack&q=${query}&app_id=9a7c60e0&app_key=e205a49b2a08604e7af4f6faa40d7ca0&from=0&to=10`)
 }
 
  
