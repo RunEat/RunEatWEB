@@ -1,24 +1,15 @@
 import React from 'react';
-import Chart from './Chart'
+import TotalCalories from './TotalCalories'
+import MacrosChart from './MacrosChart'
+import Menu from './Menu/Menu';
 
 const Meal = () => {
   return (
-    <div>
-      <Chart />
-      <table>
-        <tr className="text-align-center">
-          <td>Fats</td>
-          <td>20/50 g</td>
-        </tr>
-        <tr>
-          <td>Proteins</td>
-          <td>20/50 g</td>
-        </tr>
-        <tr>
-          <td>Carbs</td>
-          <td>20/50 g</td>
-        </tr>
-      </table>
+    <div className="Meal">
+      <TotalCalories/>
+      <MacrosChart/>
+      <Menu/>
+      
     </div>
   );
 };

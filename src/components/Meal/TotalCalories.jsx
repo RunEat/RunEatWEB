@@ -1,9 +1,9 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2'
 
-function Chart(props) {
+function TotalCalories() {
     return (
-        <div className="BarChart">
+        <div className="TotalCalories">
             <Doughnut
                 data={{
                     labels: ['Maximun calories', 'Calories'],
@@ -22,4 +22,4 @@ function Chart(props) {
     );
 }
 
-export default Chart;
+export default TotalCalories;
