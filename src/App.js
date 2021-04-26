@@ -12,6 +12,7 @@ import ProfileForm from './components/Profile/ProfileForm'
 import Diary from './components/Diary/Diary'
 import Meal from './components/Meal/Meal'
 import Sport from './components/Sport/Sport'
+import ChangePassword from './components/Profile/ChangePassword';
 
 import { getAccessToken } from './store/AccessTokenStore';
 import { getUserInfo } from './services/UserService'
@@ -38,6 +39,7 @@ function App() {
         <Route exact path='/checkEmail' component={CheckEmail}/>
         <Route exact path='/user/activate/:token' component={Activate} />
         {/* <Route exact path='/login' render={() => <Login doLogin={getUser} />} /> */}
+        <Route exact path='/user/password_reset/:token' component={ChangePassword} />
         <Route exact path='/login' component={Login}/>
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/profile/edit' component={ProfileForm} />

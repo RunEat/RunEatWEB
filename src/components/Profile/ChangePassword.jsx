@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { passwordReset, updatePassword } from "../../services/AuthService";
@@ -19,21 +19,32 @@ const validators = {
 }
 
 const ChangePassword = () => {
-    const [user, setUser] = useState();
     const { token } = useParams();
+    const { push } = useHistory()
+
+
+    const [user, setUser] = useState({
+        password: ''
+    });
+    
+    const [errors, setErrors] = useState({
+        password: validators.password(),
+	})
 
     useEffect(() => {
         passwordReset(token)
-            .then(user => setUser(user))
+          .then(user => setUser(user))
     }, [token])
     
+
+    const [touched, setTouched] = useState({})
 
     const onSubmit = (e) => {
         e.preventDefault()
     
         console.log(user)
         updatePassword(user)
-            .then(() => push('/user/login'))
+          .then(() => push('/user/login'))
     }
 
     const onChange = (e) => {
@@ -68,17 +79,27 @@ const ChangePassword = () => {
         [name]: false
         }))
     }
+
+    const {password} = user
         
     return (
-    <div className="ChangePassword">
-		<label htmlFor="password" className="form-label">Password</label>
-		<input
-			className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
-			type="password" id="password" name="password"
-			value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-		/>
-		<div className="invalid-feedback">{errors.password}</div>
-    </div>
+       !user ? 'loading' : (
+        <div className="ChangePassword">
+            <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+                <label htmlFor="password" className="form-label">Password</label>
+                <input
+                    className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
+                    type="password" id="password" name="password"
+                    value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+                />
+                <div className="invalid-feedback">{errors.password}</div>
+
+                <button type="submit" className="btn btn-outline-primary">
+                  Update password
+                </button>
+            </form>
+        </div>
+        )
   );
 };
 

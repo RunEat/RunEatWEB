@@ -15,11 +15,11 @@ function Profile() {
                     { user ? (<div className="card" style={{width: '18rem'}}>
                             <div className="card-body">
                                 <img src={user.avatar} className="card-img-top" alt={user.username}/>
-                                <h5 className="card-title">{user.username}</h5>
-                                <p className="card-text">{user.email}</p>
-                                <p className="card-text">{user.age}</p>
-                                <p className="card-text">{user.height}</p>
-                                <p className="card-text">{user.weight}</p>
+                                <h5 className="card-title">Username: {user.username}</h5>
+                                <p className="card-text">Email: {user.email}</p>
+                                <p className="card-text">Age: {user.age}</p>
+                                <p className="card-text">Height: {user.height}</p>
+                                <p className="card-text">Weight: {user.weight}</p>
                                 <Link to="/profile/edit" className="btn btn-primary">Edit Profile</Link>
                             </div>
                         </div>

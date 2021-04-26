@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { passwordResetEmail } from '../../services/AuthService';
 import { useUser } from '../../hooks/userUserContext';
-import { editUser } from '../../services/UserService';
+import { editUser, getUserInfo } from '../../services/UserService';
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -80,11 +80,16 @@ const ProfileForm = () => {
   const { push } = useHistory()
   
   const [userToEdit, setUser] = useState({
-    avatar: 'https://7ab4a7a7b3e97d265133-3c456ba518a2c8c1f13f8ac58cd6a50f.ssl.cf5.rackcdn.com/6mfo16uxpq.jpg',
+    avatar: 'https://prod.liveshare.vsengsaas.visualstudio.com/join?CD38E7B67E848E56EC1A6FEA6807F1B33307',
     height: 150,
     weight: 60,
     age: 16
-	})
+  })
+  
+  useEffect(() => {
+    getUserInfo()
+      .then((userToEdit)=> setUser(userToEdit))
+  }, [])
 
 	const [errors, setErrors] = useState({
     heigth: validators.height(),
@@ -100,10 +105,10 @@ const ProfileForm = () => {
     const formData = new FormData();
     
     Object.entries(userToEdit).forEach(([key, value]) => {
-        if ([key] === weight || height || age) {
-          formData.append(key, value);
-          console.log (formData)
-        }
+        // if ([key] === weight || height || age || avatar) {
+        //   console.log (formData)
+        // }
+        formData.append(key, value);
     });
       
     //console.log('formData after append', formData)
@@ -189,7 +194,6 @@ const ProfileForm = () => {
 
   return (
     !user ? ('loading...') : (
-
       user.avatar ? (
         <div className="Login mt-4 container d-flex justify-content-center flex-column">
         <h1>Set Up Profile</h1>
@@ -257,12 +261,12 @@ const ProfileForm = () => {
         </form>
         
         <div className="d-grid gap-2 col-8 mx-auto mt-3">
-          <button className="btn btn-danger" onClick={changePassword}>Change my password</button>
+          <button className="btn btn-danger" onClick={changePassword}>Update my password</button>
         </div>
       </div>
       ) : (
       <div className="Login mt-4 container d-flex justify-content-center flex-column">
-        <h1>Completed your Profile</h1>
+        <h1>Finish your Profile</h1>
           <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
             
           <div className="mb-3">

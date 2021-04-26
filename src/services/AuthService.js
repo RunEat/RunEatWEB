@@ -21,6 +21,7 @@ export const passwordResetEmail = (user) => {
   return http.post('/user/password_reset', user)
 }
 
+// Update Password
 export const passwordReset = (token) => {
   return http.get(`/user/password_reset/${token}`)
 }
