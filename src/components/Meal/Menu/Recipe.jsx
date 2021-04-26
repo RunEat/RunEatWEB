@@ -2,7 +2,7 @@ import React from 'react';
 
 function Recipe({ recipe }) {
     
-    console.log('recipeInRecipeComponent', recipe)
+    //console.log('recipeInRecipeComponent', recipe)
     
     return (
         <div className="Recipe">

@@ -48,7 +48,7 @@ const ChangePassword = () => {
     }
 
     const onChange = (e) => {
-        const {value } = e.target
+        const { value } = e.target
 
         setUser((prevState) => ({
             ...prevState,
