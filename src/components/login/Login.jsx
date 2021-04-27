@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
-import { login } from '../../services/AuthService';
+import { login, passwordResetEmail } from '../../services/AuthService';
 import { setAccessToken } from '../../store/AccessTokenStore';
+import { useState } from "react";
 
-// eslint-disable-next-line no-useless-escape
-const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+import { useUser } from '../../hooks/userUserContext';
 
 const validators = {
-  email: value => {
+  username: value => {
     let message
 
     if (!value) {
-      message = 'Email is required'
-    } else if (!EMAIL_PATTERN.test(value)) {
-      message = 'Email is invalid'
+      message = 'username is required'
+    } else if (value && value.length < 4) {
+      message = 'username is invalid'
     }
 
     return message
@@ -31,16 +31,17 @@ const validators = {
   }
 }
 
-const Login = ({ doLogin }) => {
+const Login = () => {
   const { push } = useHistory()
+  const { getUser: doLogin } = useUser();
 
   const [state, setState] = useState({
     fields: {
-      email: '',
+      username: '',
       password: ''
     },
     errors: {
-      email: validators.email(),
+      username: validators.username(),
       password: validators.password()
     }
   })
@@ -54,14 +55,14 @@ const Login = ({ doLogin }) => {
 
   const onSubmit = (e) => {
     const { fields } = state
-    e.preventDefault()
-
+	  e.preventDefault()
+	  
     if (isValid()) {
       login(fields)
         .then(response => {
           setAccessToken(response.access_token)
           doLogin()
-            .then(() => push('/'))
+            .then(() => push('/profile'))
         })
     }
   }
@@ -99,38 +100,74 @@ const Login = ({ doLogin }) => {
     }))
   }
 
-  const { email, password } = state.fields
+  const changePassword = (e) => {
+    e.preventDefault();
+
+    passwordResetEmail().then(() => {
+      console.log("Revisa tu email");
+    });
+  };
+
+  const { username, password } = state.fields
   const { errors } = state
 
   return (
-	  <div className="Login mt-4 container d-flex justify-content-center">
-		<h1>Log in</h1>
-			<form onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+    <div className="Login mt-4 container d-flex justify-content-center">
+      <h1>Log in</h1>
+      <form onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username{" "}
+          </label>
+          <input
+            className={`form-control ${
+              touched.username && errors.username ? "is-invalid" : ""
+            }`}
+            type="username"
+            id="username"
+            name="username"
+            autoComplete="off"
+            value={username}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.username}</div>
+        </div>
 
-				<div className="mb-3">
-				<label htmlFor="email" className="form-label">Email address</label>
-				<input
-					className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
-					type="email" id="email" name="email" autoComplete="off"
-					value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				<div className="invalid-feedback">{errors.email}</div>
-				</div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            className={`form-control ${
+              touched.password && errors.password ? "is-invalid" : ""
+            }`}
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.password}</div>
+        </div>
 
-				<div className="mb-3">
-				<label htmlFor="password" className="form-label">Password</label>
-				<input
-					className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
-					type="password" id="password" name="password"
-					value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				<div className="invalid-feedback">{errors.password}</div>
-				</div>
+        <button
+          type="submit"
+          className="btn btn-outline-primary"
+          disabled={!isValid()}
+        >
+          Submit
+        </button>
+      </form>
 
-				<button type="submit" className="btn btn-outline-primary" disabled={!isValid()}>
-				Submit
-				</button>
-			</form>
+      <div className="d-grid gap-2 col-8 mx-auto mt-3">
+        <button className="btn btn-danger" onClick={changePassword}>
+          Forgot my password
+        </button>
+      </div>
     </div>
   );
 };
