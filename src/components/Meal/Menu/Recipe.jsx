@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Recipe({ recipe }) {
+const Recipe = ({ recipe, mealtype }) => {
     
-    //console.log('uri', recipe.recipe.uri)
+    //console.log('mealtype recipe', mealtype)
     let slicedUri = recipe.recipe.uri.split('_')[1]
-    console.log('slicedUri', slicedUri)
+    
+    const newTo = {
+        pathname: `/recipe_detail/${slicedUri}`,
+        mealtype: {mealtype}
+    }
 
     return (
         <div className="Recipe">
@@ -13,7 +17,7 @@ function Recipe({ recipe }) {
             !recipe ? (<p>Loading...</p>)
             : (
                 <>        
-                    <Link to={`/recipe_detail/${slicedUri}`}>
+                    <Link to={newTo}>
                         <img className="w-75" src={recipe.recipe.image}/>
                         <p>Name: {recipe.recipe.label}</p>
                     </Link>

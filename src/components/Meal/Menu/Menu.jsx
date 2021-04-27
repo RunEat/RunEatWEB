@@ -149,7 +149,7 @@ function Menu() {
           Search
         </button>
       </form>
-      <Mealtype recipes={breakfast} />
+      <Mealtype recipes={breakfast} mealtype='breakfast'/>
 
       <h2>Lunch</h2>
       <form onSubmit={onSubmitLunch}>
@@ -167,7 +167,7 @@ function Menu() {
           Search
         </button>
       </form>
-      <Mealtype recipes={lunch} />
+      <Mealtype recipes={lunch} mealtype='lunch'/>
 
       <h2>Dinner</h2>
       <form onSubmit={onSubmitDinner}>
@@ -185,7 +185,7 @@ function Menu() {
           Search
         </button>
       </form>
-      <Mealtype recipes={dinner} />
+      <Mealtype recipes={dinner} mealtype='dinner' />
 
       <h2>Snacks</h2>
       <form onSubmit={onSubmitSnacks}>
@@ -203,7 +203,7 @@ function Menu() {
           Search
         </button>
       </form>
-      <Mealtype recipes={snacks} />
+      <Mealtype recipes={snacks} mealtype='snacks'/>
     </div>
   );
 }

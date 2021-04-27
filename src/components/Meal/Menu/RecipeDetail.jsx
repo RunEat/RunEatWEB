@@ -1,27 +1,76 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getRecipe } from '../../../services/RecipeService.js'
-import { useParams } from "react-router-dom";
+import { getRecipe } from '../../../services/RecipeService.js';
+import { useParams, useLocation } from "react-router-dom";
+import { addMeal } from '../../../services/MealService.js';
 
-const RecipeDetail = (props) => {
-	console.log('props', props)
-	const [recipe, setRecipe] = useState();
+const RecipeDetail = () => {
+
+	const { mealtype } = useLocation()
+	console.log('mealtype', mealtype.mealtype)
+
+	//console.log('mealtype recipeDetail', param1)
+
+	const [recipe, setRecipe] = useState({
+		name: '',
+    macros: {
+        carbs: '',
+        proteins: '',
+        fats: ''
+    },
+    calories: '',
+    ingredients: [],
+    date: '',
+    mealType: [],
+		dietLabel: [],
+		instructions: ''
+	});
+	
 	const {id} = useParams()
 
-	console.log('id', id)
+	const addDate = () => {
+		let date = new Date()
+		return date.toISOString();
+	}
 
+	// const mealTypeTransform = (mealtype) => {
+	// 	if (mealtype.includes('/')) {
+	// 		return mealtype.split('/')[0]
+	// 	} else {
+	// 		return mealtype[0]
+	// 	}
+	// }
+
+	// mealTypeTransform(['lunch/dinner'])
+	// mealTypeTransform(['dinner'])
+	
 	useEffect(() => {
 		getRecipe(id)
 			.then(recipe => {
-				setRecipe(recipe)
+				setRecipe({  
+					name: recipe.data[0].label,
+					image: recipe.data[0].image,
+					macros: {
+						carbs: recipe.data[0].totalNutrients.CHOCDF.quantity.toFixed(0),
+						proteins: recipe.data[0].totalNutrients.PROCNT.quantity.toFixed(0),
+						fats: recipe.data[0].totalNutrients.FAT.quantity.toFixed(0)
+					},
+					calories: recipe.data[0].calories.toFixed(0),
+					ingredients: recipe.data[0].ingredientLines,
+					date: addDate(),
+					mealType: [mealtype.mealtype],
+					dietLabel: recipe.data[0].dietLabels,
+					instructions: recipe.data[0].url
+				})
 			})
-		}, [id])
-	
-	// const onSubmit = () => {
-	// 	useEffect(() => {
-			
-	// 	})
-	// }
+	}, [id])
+
+	console.log('recipe', recipe)
+
+	const onClick = () => {
+		addMeal(recipe)
+			.then(meal => console.log(meal))
+	}
 
 		return (
 		<div className="RecipeDetail">
@@ -31,33 +80,31 @@ const RecipeDetail = (props) => {
 				: (
 						<>        
 							<h1>Recipe Detail</h1>
-							<img className="w-75" src={recipe.data[0].image}/>
-							<p>Name: {recipe.data[0].label}</p>
-							<p>Diet label:
+							<img className="w-75" src={recipe.image}/>
+							<p>Name: {recipe.name}</p>
+							<p>Diet label:</p>
 							{
-								recipe.data[0].dietLabels.map((dietLabel, i)=> <p key={i}>{dietLabel}</p>)
+								recipe.dietLabel.map((dietLabel, i)=> <p key={i}>{dietLabel}</p>)
 							}
-							</p>
-							<p>Ingredients:
+							<p>Ingredients:</p>
 							<ul>
 								{
-									recipe.data[0].ingredientLines.map((ingredientLine, i)=> <li key={i}>{ingredientLine}</li>)
+									recipe.ingredients.map((ingredientLine, i)=> <li key={i}>{ingredientLine}</li>)
 								}
 							</ul>
-							</p>
 							
-							<p>Calories: {recipe.data[0].calories.toFixed(0)} cal</p>
+							<p>Calories: {recipe.calories} cal</p>
 
-							<p>Carbohidrates: {recipe.data[0].totalNutrients.CHOCDF.quantity.toFixed(0)}g</p>
-							<p>Proteins: {recipe.data[0].totalNutrients.PROCNT.quantity.toFixed(0)}g</p>
-							<p>Fats: {recipe.data[0].totalNutrients.FAT.quantity.toFixed(0)}g</p>
+							<p>Carbohidrates: {recipe.macros.carbs}g</p>
+							<p>Proteins: {recipe.macros.proteins}g</p>
+							<p>Fats: {recipe.macros.fats}g</p>
 
 							<h4 className="font-weight-bold">How to prepare it:</h4>
-							<div className="embed-responsive embed-responsive-16by9">
-								<iframe className="embed-responsive-item w-75" src={recipe.data[0].url} title="Cook recipe"></iframe>
-							</div>
+							{/* <div className="embed-responsive embed-responsive-16by9">
+								<iframe className="embed-responsive-item w-75" src={recipe.instructions} title="Cook recipe"></iframe>
+							</div> */}
 							
-							<button className="btn btn-success">Add to menu</button>
+							<button className="btn btn-success" onClick={onClick}>Add to menu</button>
 							<Link to='/meal'>Back to menu</Link>
 						</>
 				)
