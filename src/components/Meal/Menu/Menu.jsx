@@ -35,69 +35,97 @@ function Menu() {
 
     }, []);
 
-  const onSubmit = (e) => {
+  const onSubmitBreakfast = (e) => {
     e.preventDefault();
-    const { id } = e.target
-    console.log("id", e.target);
+    // const { id } = e.target
+    // console.log("e.target", e.target.id);
       
     setSearch(prevState => ({
-        ...prevState,
-        show: true
+      ...prevState,
+      show: true
     }))
 
-      getBreakfast(search.search.breakfast)
-        .then((recipes) => {
-            setBreakfast(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
+    getBreakfast(search.search.breakfast)
+      .then((recipes) => {
+        setBreakfast(recipes);
+      })
+      .finally(() =>
+        setSearch(prevState => ({
+          ...prevState,
+          show: false
+        }))
+      );
+  }
 
-        getLunch(search.search.lunch)
-        .then((recipes) => {
-            setLunch(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
-        
-        getDinner(search.search.dinner)
-        .then((recipes) => {
-            setDinner(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
+  const onSubmitLunch = (e) => {
+    e.preventDefault();
 
-        getSnacks(search.search.snacks)
-        .then((recipes) => {
-            setSnacks(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
-  };
-
-  const onChange = (e) => {
-    const { value } = e.target;
-    //console.log("value", value);
-
-    setSearch((prevState) => ({
+    setSearch(prevState => ({
       ...prevState,
-      search: value,
-    }));
+      show: true
+    }))
+    
+    getLunch(search.search.lunch)
+    .then((recipes) => {
+        setLunch(recipes);
+    })
+    .finally(() => 
+        setSearch(prevState => ({
+            ...prevState,
+            show: false
+        }))
+    );
+    
+  }
+    
+  const onSubmitDinner = (e) => {
+    e.preventDefault();
+
+    setSearch(prevState => ({
+      ...prevState,
+      show: true
+    }))
+    
+    getDinner(search.search.dinner)
+      .then((recipes) => {
+        setDinner(recipes);
+      })
+      .finally(() =>
+        setSearch(prevState => ({
+          ...prevState,
+          show: false
+        }))
+      );
+  }
+        
+  const onSubmitSnacks = (e) => {
+    e.preventDefault();
+
+    setSearch(prevState => ({
+      ...prevState,
+      show: true
+    }))
+
+   getSnacks(search.search.snacks)
+     .then((recipes) => {
+       setSnacks(recipes);
+     })
+     .finally(() =>
+       setSearch(prevState => ({
+         ...prevState,
+         show: false
+       }))
+     );
+  }
+  
+    
+  const onChange = (e) => {
+
+    let value = e.target.value;
+
+    setSearch((prevState) => {
+      return { ...prevState, search: { [e.target.id]: value }};
+    })
   };
 
   //console.log ('mealtype', mealtype)
@@ -105,12 +133,12 @@ function Menu() {
   return (
     <div className="Menu container">
       <h2>Breakfast</h2>
-      <form onSubmit={onSubmit}>
+      <form className="mb-3" onSubmit={onSubmitBreakfast} id="helloId">
         <input
           type="search"
           className="form-control mb-2"
           name="search__breakfast"
-          id="search__breakfast"
+          id="breakfast"
           placeholder="Search recipe..."
           autoComplete="off"
           onChange={onChange}
@@ -123,12 +151,12 @@ function Menu() {
       <Mealtype recipes={breakfast} />
 
       <h2>Lunch</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitLunch}>
         <input
           type="search"
           className="form-control mb-2"
           name="search__lunch"
-          id="search__lunch"
+          id="lunch"
           placeholder="Search recipe..."
           autoComplete="off"
           onChange={onChange}
@@ -141,12 +169,12 @@ function Menu() {
       <Mealtype recipes={lunch} />
 
       <h2>Dinner</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitDinner}>
         <input
           type="search"
           className="form-control mb-2"
           name="search__dinner"
-          id="search__dinner"
+          id="dinner"
           placeholder="Search recipe..."
           autoComplete="off"
           onChange={onChange}
@@ -159,12 +187,12 @@ function Menu() {
       <Mealtype recipes={dinner} />
 
       <h2>Snacks</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitSnacks}>
         <input
           type="search"
           className="form-control mb-2"
           name="search__snacks"
-          id="search__snacks"
+          id="snacks"
           placeholder="Search recipe..."
           autoComplete="off"
           onChange={onChange}
