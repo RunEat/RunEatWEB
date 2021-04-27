@@ -47,7 +47,40 @@ function Menu() {
 
       getBreakfast(search.search.breakfast)
         .then((recipes) => {
-            //setMealtype(recipes);
+            setBreakfast(recipes);
+        })
+        .finally(() => 
+            setSearch(prevState => ({
+                ...prevState,
+                show: false
+            }))
+        );
+
+        getLunch(search.search.lunch)
+        .then((recipes) => {
+            setLunch(recipes);
+        })
+        .finally(() => 
+            setSearch(prevState => ({
+                ...prevState,
+                show: false
+            }))
+        );
+        
+        getDinner(search.search.dinner)
+        .then((recipes) => {
+            setDinner(recipes);
+        })
+        .finally(() => 
+            setSearch(prevState => ({
+                ...prevState,
+                show: false
+            }))
+        );
+
+        getSnacks(search.search.snacks)
+        .then((recipes) => {
+            setSnacks(recipes);
         })
         .finally(() => 
             setSearch(prevState => ({
@@ -70,7 +103,7 @@ function Menu() {
   //console.log ('mealtype', mealtype)
 
   return (
-    <div className="Menu">
+    <div className="Menu container">
       <h2>Breakfast</h2>
       <form onSubmit={onSubmit}>
         <input
