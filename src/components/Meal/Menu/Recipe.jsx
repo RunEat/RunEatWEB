@@ -5,17 +5,20 @@ function Recipe({ recipe }) {
     //console.log('recipeInRecipeComponent', recipe)
     
     return (
-        <div className="Recipe">
-        {
-            !recipe ? (<p>Loading..</p>)
-            : (
-                <>        
-                    <img className="w-75" src={recipe.recipe.image}/>
-                    <p>Name: {recipe.recipe.label}</p>
-                </>
-            )
-        }
-        </div> 
+      <div className="Recipe">
+        {!recipe ? (
+          <p>Loading..</p>
+        ) : (
+          <>
+            <img
+              className="w-75"
+              src={recipe.recipe.image}
+              alt={recipe.recipe.label}
+            />
+            <p>Name: {recipe.recipe.label}</p>
+          </>
+        )}
+      </div>
     );
 }
 

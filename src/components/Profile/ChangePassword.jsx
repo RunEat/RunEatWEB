@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { passwordReset, updatePassword } from "../../services/AuthService";

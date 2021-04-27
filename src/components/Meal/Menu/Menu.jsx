@@ -37,8 +37,6 @@ function Menu() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { id } = e.target
-    console.log("id", e.target);
       
     setSearch(prevState => ({
         ...prevState,

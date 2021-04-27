@@ -1,32 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { getDiary } from '../../services/DiaryService';
-import Meal from '../Meal/Meal';
-import Sport from '../Sport/Sport';
-import CalendarDiary from './CalendarDiary';
+// import Meal from '../Meal/Meal';
+// import Sport from '../Sport/Sport';
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import "./Diary.css";
 
 const Diary = () => {
+    const [date, setDate] = useState(new Date());
+    const [diary, setDiary] = useState()
+    
+    let newDate = date.toISOString();
 
     useEffect(() => {
-        //getDiary(() => {
-            //Usar date para que nos traiga el Diary
-        //})
-    })
+        console.log("newDate", newDate);
+        // getDiary(newDate)
+        //     .then((diary) => console.log(diary));
+    }, [newDate]);
+
+    
+    const onChange = (date) => {
+        setDate(date);
+    };
+
+    //console.log(date);
 
     return (
       <div>
-        <CalendarDiary />
-        {/* Subir la date de Calendar */}
-
+        <Calendar onChange={onChange} value={date} />
         <p>Total calories: </p>
 
-        <Link to="/meal">Meal</Link>
-        {/* Meter date aquí o el ID del Meal de este Diary/} */}
+        {/* <Link to={`/meal/${diary.meal}`}>Meal</Link> */}
 
         <br></br>
 
-        <Link to="/sport">Sport</Link>
-        {/* Meter date aquí o el ID del Sport de este Diary */}
+        {/* <Link to={`/sport/${diary.sport}`}>Sport</Link> */}
 
         <br></br>
 
