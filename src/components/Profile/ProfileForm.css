@@ -1,0 +1,9 @@
+.ProfileAvatar {
+    position: relative;
+}
+
+.ProfileAvatar .EditAvatar {
+    position: absolute;
+    right: 0.4 rem;
+    top: 0.2 rem;
+}
