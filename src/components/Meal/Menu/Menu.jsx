@@ -131,6 +131,7 @@ function Menu() {
   //console.log ('mealtype', mealtype)
 
   return (
+    // recetaenBD ? (receta añadir botón eliminar receta) : 
     <div className="Menu container">
       <h2>Breakfast</h2>
       <form className="mb-3" onSubmit={onSubmitBreakfast} id="helloId">
