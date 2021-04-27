@@ -1,13 +1,18 @@
 import Mealtype from "./Mealtype";
 import React, { useEffect, useState } from "react";
 import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/RecipeService";
+import { getMeal } from '../../../services/MealService'
+import { useDate } from '../../../hooks/useDateContext';
 
 function Menu() {
-    // const [mealtype, setMealtype] = useState();
+  const { date, setDate } = useDate()
+  console.log(date)
+  
+    const [meal, setMeal] = useState();
     const [breakfast, setBreakfast] = useState();
     const [lunch, setLunch] = useState();
     const [dinner, setDinner] = useState();
-    const [snacks, setSnacks] = useState()
+    const [snacks, setSnacks] = useState();
     
     const [search, setSearch] = useState({
         search: {
@@ -18,6 +23,11 @@ function Menu() {
         },
         show: false
      });
+
+    useEffect(()=> {
+      getMeal() //date de Recipe
+        .then((meal)=> setMeal(meal))
+    }, [])
 
     useEffect(() => {
       getBreakfast(search.search.breakfast).then((recipes) => {

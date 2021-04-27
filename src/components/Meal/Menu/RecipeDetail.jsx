@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getRecipe } from '../../../services/RecipeService.js';
+import { getRecipe } from '../../../services/RecipeService';
 import { useParams, useLocation } from "react-router-dom";
-import { addMeal } from '../../../services/MealService.js';
+import { addMeal } from '../../../services/MealService';
+
+import { useDate } from '../../../hooks/useDateContext';
 
 const RecipeDetail = () => {
+		
+	const {date, setDate} = useDate()
 
 	const { mealtype } = useLocation()
 	console.log('mealtype', mealtype.mealtype)
@@ -12,7 +16,7 @@ const RecipeDetail = () => {
 	//console.log('mealtype recipeDetail', param1)
 
 	const [recipe, setRecipe] = useState({
-		name: '',
+	name: '',
     macros: {
         carbs: '',
         proteins: '',
@@ -69,7 +73,10 @@ const RecipeDetail = () => {
 
 	const onClick = () => {
 		addMeal(recipe)
-			.then(meal => console.log(meal))
+			.then(meal => {
+				setDate(meal.date)
+				console.log(meal)
+			})
 	}
 
 		return (
