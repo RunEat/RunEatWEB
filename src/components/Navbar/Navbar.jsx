@@ -5,7 +5,7 @@ class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-center">
+                <nav className="navbar fixed-bottom navbar-light bg-light d-flex justify-content-center">
                     <button className="btn btn-primary mx-1"><Link className="text-white" to="/profile">Profile</Link></button>
                     <button className="btn btn-secondary mx-1"><Link className="text-white" to="/diary">Diary</Link></button>
                     <button className="btn btn-success mx-1"><Link className="text-white" to="/sport">Sport</Link></button>
