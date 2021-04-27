@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getRecipe } from '../../../services/RecipeService.js'
 import { useParams } from "react-router-dom";
-import { uuid } from 'react-uuid';
 
 const RecipeDetail = (props) => {
 	console.log('props', props)
@@ -17,8 +16,13 @@ const RecipeDetail = (props) => {
 				setRecipe(recipe)
 			})
 		}, [id])
+	
+	// const onSubmit = () => {
+	// 	useEffect(() => {
+			
+	// 	})
+	// }
 
-		
 		return (
 		<div className="RecipeDetail">
 		Recipe detail
@@ -41,9 +45,15 @@ const RecipeDetail = (props) => {
 								}
 							</ul>
 							</p>
-							{/* <a href={recipe.data[0].url} target="_blank">Cook recipe</a> */}
+							
+							<p>Calories: {recipe.data[0].calories.toFixed(0)} cal</p>
 
-							<div class="embed-responsive embed-responsive-16by9">
+							<p>Carbohidrates: {recipe.data[0].totalNutrients.CHOCDF.quantity.toFixed(0)}g</p>
+							<p>Proteins: {recipe.data[0].totalNutrients.PROCNT.quantity.toFixed(0)}g</p>
+							<p>Fats: {recipe.data[0].totalNutrients.FAT.quantity.toFixed(0)}g</p>
+
+							<h4 className="font-weight-bold">How to prepare it:</h4>
+							<div className="embed-responsive embed-responsive-16by9">
 								<iframe className="embed-responsive-item w-75" src={recipe.data[0].url} title="Cook recipe"></iframe>
 							</div>
 							

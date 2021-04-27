@@ -4,7 +4,6 @@ const http = axios.create({
     baseURL: 'https://api.edamam.com'
 });
 
-
 http.interceptors.response.use((response) => response.data.hits);
   
 export const getRecipe = (id) => {
