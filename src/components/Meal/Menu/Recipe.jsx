@@ -25,51 +25,46 @@ const [recipe, setRecipe] = useState({
     instructions: "",
 });
 
-  
-  const addDate = () => {
-      let date = new Date();
-      return date.toISOString();
-    };
+const addDate = () => {
+    let date = new Date();
+    return date.toISOString();
+};
     
-    useEffect(() => {
-        if (recipe.name !== '') {
-        addMeal(recipe)
-            .then(meal => {
-                setDate(meal.date)
-                console.log(meal)
-            })
-        }
-    }, [recipe])
+useEffect(() => {
+    addMeal(recipe)
+        .then(meal => {
+            setDate(meal.date)
+            console.log(meal)
+        })
+}, [recipe])
 
-    const onClick = (e) => {
-        console.log("recipeAPI Clicked", recipeFromAPI);
-        if (recipeFromAPI.recipe.uri == e.target.id) {
-            setRecipe({
-                name: recipeFromAPI.recipe.label,
-                image: recipeFromAPI.recipe.image,
-                macros: {
-                    carbs: recipeFromAPI.recipe.totalNutrients.CHOCDF.quantity.toFixed(0),
-                    proteins: recipeFromAPI.recipe.totalNutrients.PROCNT.quantity.toFixed(0),
-                    fats: recipeFromAPI.recipe.totalNutrients.FAT.quantity.toFixed(0),
-                },
-                calories: recipeFromAPI.recipe.calories.toFixed(0),
-                ingredients: recipeFromAPI.recipe.ingredientLines,
-                date: addDate(),
-                mealType: [mealtype],
-                dietLabel: recipeFromAPI.recipe.dietLabels,
-                instructions: recipeFromAPI.recipe.url,
-            });
-            
-            
-        }
+const onClick = (e) => {
+    if (recipeFromAPI.recipe.uri == e.target.id) {
+        setRecipe({
+            name: recipeFromAPI.recipe.label,
+            image: recipeFromAPI.recipe.image,
+            macros: {
+                carbs: recipeFromAPI.recipe.totalNutrients.CHOCDF.quantity.toFixed(0),
+                proteins: recipeFromAPI.recipe.totalNutrients.PROCNT.quantity.toFixed(0),
+                fats: recipeFromAPI.recipe.totalNutrients.FAT.quantity.toFixed(0),
+            },
+            calories: recipeFromAPI.recipe.calories.toFixed(0),
+            ingredients: recipeFromAPI.recipe.ingredientLines,
+            date: addDate(),
+            mealType: [mealtype],
+            dietLabel: recipeFromAPI.recipe.dietLabels,
+            instructions: recipeFromAPI.recipe.url,
+        });
+
     }
+}
     
-    const newTo = {
-        pathname: `/recipe_detail/${id}`,
-        mealtype: { mealtype },
-        recipeFromAPI: { recipeFromAPI },
-        onClick: {onClick}
-    };
+const newTo = {
+    pathname: `/recipe_detail/${id}`,
+    mealtype: { mealtype },
+    recipeFromAPI: { recipeFromAPI },
+    onClick: {onClick}
+};
     
 
 return (
