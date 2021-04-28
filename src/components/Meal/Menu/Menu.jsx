@@ -131,6 +131,10 @@ const Menu = ({meal}) => {
     })
   };
 
+  const deleteRecipe = () => {
+
+  }
+
   //console.log ('mealtype', mealtype)
 
   return (
@@ -140,11 +144,12 @@ const Menu = ({meal}) => {
       ) : (
         <>
           <h2>Breakfast</h2>
-            {meal !== undefined && meal[0].mealType.breakfast ? //deleteRecipe(setState que deje la receta vacia)
-              (
+          {meal !== undefined && meal.mealType.breakfast ? ( //deleteRecipe(setState que deje la receta vacia)
             <>
-              "Breakfast Selected"
-              <button className="btn btn-danger" onClick={deleteRecipe}>Delete recipe</button>
+              <h3>{meal.mealType.breakfast.name}</h3>
+              <button className="btn btn-danger" onClick={deleteRecipe}>
+                Delete recipe
+              </button>
             </>
           ) : (
             <>
@@ -168,7 +173,7 @@ const Menu = ({meal}) => {
           )}
 
           <h2>Lunch</h2>
-          {meal !== undefined && meal[0].mealType.lunch ? (
+          {meal !== undefined && meal.mealType.lunch ? (
             "Lunch Selected"
           ) : (
             <>
@@ -192,7 +197,7 @@ const Menu = ({meal}) => {
           )}
 
           <h2>Dinner</h2>
-          {meal !== undefined && meal[0].mealType.dinner ? (
+          {meal !== undefined && meal.mealType.dinner ? (
             "Dinner Selected"
           ) : (
             <>
@@ -216,7 +221,7 @@ const Menu = ({meal}) => {
           )}
 
           <h2>Snacks</h2>
-          {meal !== undefined && meal[0].mealType.snacks ? (
+          {meal !== undefined && meal.mealType.snacks ? (
             "Snacks Selected"
           ) : (
             <>

@@ -71,7 +71,7 @@ const RecipeDetail = () => {
 
   const onClick = () => {
     addMeal(recipe).then((meal) => {
-      setDate(meal.date);
+      //setDate(meal.date);
       //console.log(meal);
     });
   };

@@ -34,7 +34,7 @@ useEffect(() => {
     if (recipe.name !== '') {
         addMeal(recipe)
             .then(meal => {
-                //setDate(meal.date)
+                //setDate(meal.dat
                 console.log(meal)
             })
     }
