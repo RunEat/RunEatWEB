@@ -9,3 +9,7 @@ export const addMeal = (body) => {
 export const getMeal = (query) => {
 	return http.get(`/diary/meal?date=${query}`)
 }
+
+export const editMeal = (dateQuery, mealTypeQuery) => {
+	return http.put(`/diary/meal/edit?date=${dateQuery}&mealType=${mealTypeQuery}`)
+}

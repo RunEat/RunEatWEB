@@ -34,6 +34,7 @@ const onClick = (e) => {
         dietLabel: recipeFromAPI.recipe.dietLabels,
         instructions: recipeFromAPI.recipe.url,
       };
+
       addMeal(newRecipe).then((meal) => {
         getMeal(date).then((updateMeal) => {
           console.log("updateMeal", updateMeal);
@@ -41,7 +42,7 @@ const onClick = (e) => {
         });
         console.log(meal);
       });
-    }
+  }
   
 }
     

@@ -2,6 +2,7 @@ import Mealtype from "./Mealtype";
 import React, { useEffect, useState } from "react";
 import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/RecipeService";
 import { useDate } from '../../../hooks/useDateContext';
+import { addMeal, editMeal, getMeal } from "../../../services/MealService";
 
 const Menu = ({meal, setMeal}) => {
   const { date, setDate } = useDate()
@@ -121,7 +122,6 @@ const Menu = ({meal, setMeal}) => {
      );
   }
   
-    
   const onChange = (e) => {
 
     let value = e.target.value;
@@ -132,11 +132,30 @@ const Menu = ({meal, setMeal}) => {
   };
 
   const deleteRecipe = (e) => {
-    console.log(e.target.id)
-    if (e.target.id === 'breakfast') {
-      // setBreakfast((prevState) => {
-      //   return { ...prevState, search: { [e.target.id]: value } };
-      // });
+    //console.log(e.target.id)
+    if (e.target.id === "breakfast" && meal) {
+      editMeal(date, "breakfast").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
+    }
+    if (e.target.id === "lunch" && meal) {
+      editMeal(date, "lunch").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
+    }
+    if (e.target.id === "dinner" && meal) {
+      editMeal(date, "dinner").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
+    }
+    if (e.target.id === "snacks" && meal) {
+      editMeal(date, "snacks").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
     }
   }
 
@@ -199,7 +218,11 @@ const Menu = ({meal, setMeal}) => {
                 src={meal.mealType.lunch.image}
                 alt={meal.mealType.lunch.name}
               ></img>
-              <button className="btn btn-danger" onClick={deleteRecipe}>
+              <button
+                id="lunch"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
                 Delete recipe
               </button>
             </>
@@ -233,7 +256,11 @@ const Menu = ({meal, setMeal}) => {
                 src={meal.mealType.dinner.image}
                 alt={meal.mealType.dinner.name}
               ></img>
-              <button className="btn btn-danger" onClick={deleteRecipe}>
+              <button
+                id="dinner"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
                 Delete recipe
               </button>
             </>
@@ -267,7 +294,11 @@ const Menu = ({meal, setMeal}) => {
                 src={meal.mealType.snacks.image}
                 alt={meal.mealType.snacks.name}
               ></img>
-              <button className="btn btn-danger" onClick={deleteRecipe}>
+              <button
+                id="snacks"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
                 Delete recipe
               </button>
             </>

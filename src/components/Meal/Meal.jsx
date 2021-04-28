@@ -10,16 +10,16 @@ const Meal = () => {
   const { date, setDate } = useDate();
   const [meal, setMeal] = useState();
   
-  console.log('date', date)
+  //console.log('date', date)
   let mealDate = date.toISOString();
 
-  console.log('mealDate', mealDate);
+  //console.log('mealDate', mealDate);
 
   useEffect(() => {
     // if (meal) {
     getMeal(mealDate).then((meal) => {
       setMeal(meal);
-      console.log('meal MealComponent', meal)
+      //console.log('meal MealComponent', meal)
     });
   }, [mealDate]);
     
