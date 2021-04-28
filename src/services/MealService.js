@@ -7,5 +7,5 @@ export const addMeal = (body) => {
 }
 
 export const getMeal = (query) => {
-	return http.get(`/diary/meal?${query}`)
+	return http.get(`/diary/meal?date=${query}`)
 }

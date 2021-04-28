@@ -1,14 +1,12 @@
 import Mealtype from "./Mealtype";
 import React, { useEffect, useState } from "react";
 import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/RecipeService";
-import { getMeal } from '../../../services/MealService'
 import { useDate } from '../../../hooks/useDateContext';
 
-function Menu() {
+const Menu = ({meal}) => {
   const { date, setDate } = useDate()
-  //console.log(date)
-  
-    const [meal, setMeal] = useState();
+  console.log('meal', meal)
+
     const [breakfast, setBreakfast] = useState();
     const [lunch, setLunch] = useState();
     const [dinner, setDinner] = useState();
@@ -23,11 +21,6 @@ function Menu() {
         },
         show: false
      });
-
-    useEffect(()=> {
-      getMeal() //date de Recipe
-        .then((meal)=> setMeal(meal))
-    }, [])
 
     useEffect(() => {
       getBreakfast(search.search.breakfast).then((recipes) => {
@@ -141,79 +134,112 @@ function Menu() {
   //console.log ('mealtype', mealtype)
 
   return (
-    // recetaenBD ? (receta añadir botón eliminar receta) : 
     <div className="Menu container">
-      <h2>Breakfast</h2>
-      <form className="mb-3" onSubmit={onSubmitBreakfast} id="helloId">
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__breakfast"
-          id="breakfast"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.breakfast}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={breakfast} mealtype='breakfast'/>
+      {!date ? (
+        "Loading..."
+      ) : (
+        <>
+          <h2>Breakfast</h2>
+            {meal !== undefined && meal[0].mealType.breakfast ? //deleteRecipe(setState que deje la receta vacia)
+              (
+            <>
+              "Breakfast Selected"
+              <button className="btn btn-danger" onClick={deleteRecipe}>Delete recipe</button>
+            </>
+          ) : (
+            <>
+              <form className="mb-3" onSubmit={onSubmitBreakfast} id="helloId">
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__breakfast"
+                  id="breakfast"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.breakfast}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype recipes={breakfast} mealtype="breakfast" />
+            </>
+          )}
 
-      <h2>Lunch</h2>
-      <form onSubmit={onSubmitLunch}>
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__lunch"
-          id="lunch"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.lunch}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={lunch} mealtype='lunch'/>
+          <h2>Lunch</h2>
+          {meal !== undefined && meal[0].mealType.lunch ? (
+            "Lunch Selected"
+          ) : (
+            <>
+              <form onSubmit={onSubmitLunch}>
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__lunch"
+                  id="lunch"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.lunch}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype recipes={lunch} mealtype="lunch" />
+            </>
+          )}
 
-      <h2>Dinner</h2>
-      <form onSubmit={onSubmitDinner}>
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__dinner"
-          id="dinner"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.dinner}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={dinner} mealtype='dinner' />
+          <h2>Dinner</h2>
+          {meal !== undefined && meal[0].mealType.dinner ? (
+            "Dinner Selected"
+          ) : (
+            <>
+              <form onSubmit={onSubmitDinner}>
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__dinner"
+                  id="dinner"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.dinner}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype recipes={dinner} mealtype="dinner" />
+            </>
+          )}
 
-      <h2>Snacks</h2>
-      <form onSubmit={onSubmitSnacks}>
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__snacks"
-          id="snacks"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.snacks}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={snacks} mealtype='snacks'/>
+          <h2>Snacks</h2>
+          {meal !== undefined && meal[0].mealType.snacks ? (
+            "Snacks Selected"
+          ) : (
+            <>
+              <form onSubmit={onSubmitSnacks}>
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__snacks"
+                  id="snacks"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.snacks}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype recipes={snacks} mealtype="snacks" />
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }

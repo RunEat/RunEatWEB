@@ -10,7 +10,7 @@ const RecipeDetail = () => {
   const { date, setDate } = useDate();
 
   const { mealtype } = useLocation();
-  console.log("mealtype", mealtype.mealtype);
+  //console.log("mealtype", mealtype.mealtype);
 
   //console.log('mealtype recipeDetail', param1)
 
@@ -67,12 +67,12 @@ const RecipeDetail = () => {
     });
   }, [id]);
 
-  console.log("recipe", recipe);
+  //console.log("recipe", recipe);
 
   const onClick = () => {
     addMeal(recipe).then((meal) => {
       setDate(meal.date);
-      console.log(meal);
+      //console.log(meal);
     });
   };
 
@@ -80,7 +80,7 @@ const RecipeDetail = () => {
     <div className="RecipeDetail">
       Recipe detail
       {!recipe ? (
-        <p>Loading..</p>
+        <p>Loading...</p>
       ) : (
         <>
           <h1>Recipe Detail</h1>

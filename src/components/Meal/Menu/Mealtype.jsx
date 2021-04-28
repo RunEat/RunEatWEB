@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Recipe from './Recipe';
 
-function Mealtype({ recipes, mealtype }) {
+const Mealtype = ({ recipes, mealtype }) => {
 
     return (
       <div className="Carousel card-group">

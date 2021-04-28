@@ -5,8 +5,8 @@ import { useDate } from "../../../hooks/useDateContext";
 //import { getRecipe } from "../../../services/RecipeService";
 
 const Recipe = ({ recipeFromAPI, mealtype }) => {
-  //console.log("mealtype recipe", mealtype);
-  let id = recipeFromAPI.recipe.uri.split("_")[1]; // Slice Uri from object to us recipe id
+//console.log("mealtype recipe", mealtype);
+let id = recipeFromAPI.recipe.uri.split("_")[1]; // Slice Uri from object to us recipe id
 
 const { date, setDate } = useDate();
     
@@ -31,11 +31,13 @@ const addDate = () => {
 };
     
 useEffect(() => {
-    addMeal(recipe)
-        .then(meal => {
-            setDate(meal.date)
-            console.log(meal)
-        })
+    if (recipe.name !== '') {
+        addMeal(recipe)
+            .then(meal => {
+                //setDate(meal.date)
+                console.log(meal)
+            })
+    }
 }, [recipe])
 
 const onClick = (e) => {
@@ -55,17 +57,13 @@ const onClick = (e) => {
             dietLabel: recipeFromAPI.recipe.dietLabels,
             instructions: recipeFromAPI.recipe.url,
         });
-
     }
 }
     
 const newTo = {
     pathname: `/recipe_detail/${id}`,
     mealtype: { mealtype },
-    recipeFromAPI: { recipeFromAPI },
-    onClick: {onClick}
 };
-    
 
 return (
     <div className="Recipe">
