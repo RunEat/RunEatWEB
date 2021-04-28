@@ -6,7 +6,7 @@ import { useDate } from '../../../hooks/useDateContext';
 
 function Menu() {
   const { date, setDate } = useDate()
-  console.log(date)
+  //console.log(date)
   
     const [meal, setMeal] = useState();
     const [breakfast, setBreakfast] = useState();

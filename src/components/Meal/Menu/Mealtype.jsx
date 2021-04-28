@@ -10,7 +10,7 @@ function Mealtype({ recipes, mealtype }) {
         ) : (
           recipes.map((recipe) => (
             <div className="card" key={recipe.recipe.label}>
-              <Recipe key={recipe.label} recipe={recipe} mealtype={mealtype} />
+              <Recipe key={recipe.label} recipeFromAPI={recipe} mealtype={mealtype} />
             </div>
           ))
         )}
