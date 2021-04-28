@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/RecipeService";
 import { useDate } from '../../../hooks/useDateContext';
 
-const Menu = ({meal}) => {
+const Menu = ({meal, setMeal}) => {
   const { date, setDate } = useDate()
-  console.log('meal', meal)
+  //console.log('meal', meal)
 
     const [breakfast, setBreakfast] = useState();
     const [lunch, setLunch] = useState();
@@ -131,8 +131,13 @@ const Menu = ({meal}) => {
     })
   };
 
-  const deleteRecipe = () => {
-
+  const deleteRecipe = (e) => {
+    console.log(e.target.id)
+    if (e.target.id === 'breakfast') {
+      // setBreakfast((prevState) => {
+      //   return { ...prevState, search: { [e.target.id]: value } };
+      // });
+    }
   }
 
   //console.log ('mealtype', mealtype)
@@ -147,7 +152,16 @@ const Menu = ({meal}) => {
           {meal !== undefined && meal.mealType.breakfast ? ( //deleteRecipe(setState que deje la receta vacia)
             <>
               <h3>{meal.mealType.breakfast.name}</h3>
-              <button className="btn btn-danger" onClick={deleteRecipe}>
+              <img
+                className="w-25"
+                src={meal.mealType.breakfast.image}
+                alt={meal.mealType.breakfast.name}
+              ></img>
+              <button
+                id="breakfast"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
                 Delete recipe
               </button>
             </>
@@ -168,13 +182,27 @@ const Menu = ({meal}) => {
                   Search
                 </button>
               </form>
-              <Mealtype recipes={breakfast} mealtype="breakfast" />
+              <Mealtype
+                recipes={breakfast}
+                mealtype="breakfast"
+                setMeal={setMeal}
+              />
             </>
           )}
 
           <h2>Lunch</h2>
           {meal !== undefined && meal.mealType.lunch ? (
-            "Lunch Selected"
+            <>
+              <h3>{meal.mealType.lunch.name}</h3>
+              <img
+                className="w-25"
+                src={meal.mealType.lunch.image}
+                alt={meal.mealType.lunch.name}
+              ></img>
+              <button className="btn btn-danger" onClick={deleteRecipe}>
+                Delete recipe
+              </button>
+            </>
           ) : (
             <>
               <form onSubmit={onSubmitLunch}>
@@ -192,13 +220,23 @@ const Menu = ({meal}) => {
                   Search
                 </button>
               </form>
-              <Mealtype recipes={lunch} mealtype="lunch" />
+              <Mealtype recipes={lunch} mealtype="lunch" setMeal={setMeal} />
             </>
           )}
 
           <h2>Dinner</h2>
           {meal !== undefined && meal.mealType.dinner ? (
-            "Dinner Selected"
+            <>
+              <h3>{meal.mealType.dinner.name}</h3>
+              <img
+                className="w-25"
+                src={meal.mealType.dinner.image}
+                alt={meal.mealType.dinner.name}
+              ></img>
+              <button className="btn btn-danger" onClick={deleteRecipe}>
+                Delete recipe
+              </button>
+            </>
           ) : (
             <>
               <form onSubmit={onSubmitDinner}>
@@ -216,13 +254,23 @@ const Menu = ({meal}) => {
                   Search
                 </button>
               </form>
-              <Mealtype recipes={dinner} mealtype="dinner" />
+              <Mealtype recipes={dinner} mealtype="dinner" setMeal={setMeal} />
             </>
           )}
 
           <h2>Snacks</h2>
           {meal !== undefined && meal.mealType.snacks ? (
-            "Snacks Selected"
+            <>
+              <h3>{meal.mealType.snacks.name}</h3>
+              <img
+                className="w-25"
+                src={meal.mealType.snacks.image}
+                alt={meal.mealType.snacks.name}
+              ></img>
+              <button className="btn btn-danger" onClick={deleteRecipe}>
+                Delete recipe
+              </button>
+            </>
           ) : (
             <>
               <form onSubmit={onSubmitSnacks}>
@@ -240,7 +288,7 @@ const Menu = ({meal}) => {
                   Search
                 </button>
               </form>
-              <Mealtype recipes={snacks} mealtype="snacks" />
+              <Mealtype recipes={snacks} mealtype="snacks" setMeal={setMeal} />
             </>
           )}
         </>

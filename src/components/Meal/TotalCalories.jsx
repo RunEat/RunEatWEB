@@ -3,7 +3,7 @@ import {Doughnut} from 'react-chartjs-2'
 
 function TotalCalories({ meal }) {
     
-    console.log ('Meal totalCalories', meal)
+    //console.log ('Meal totalCalories', meal)
     return (
         <div className="TotalCalories">
             <Doughnut

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { getRecipe } from "../../../services/RecipeService";
 import { useParams, useLocation } from "react-router-dom";
 import { addMeal } from "../../../services/MealService";
@@ -13,6 +13,8 @@ const RecipeDetail = () => {
   //console.log("mealtype", mealtype.mealtype);
 
   //console.log('mealtype recipeDetail', param1)
+
+  const [redirect, setRedirect] = useState(false)
 
   const [recipe, setRecipe] = useState({
     name: "",
@@ -35,17 +37,6 @@ const RecipeDetail = () => {
     let date = new Date();
     return date.toISOString();
   };
-
-  // const mealTypeTransform = (mealtype) => {
-  // 	if (mealtype.includes('/')) {
-  // 		return mealtype.split('/')[0]
-  // 	} else {
-  // 		return mealtype[0]
-  // 	}
-  // }
-
-  // mealTypeTransform(['lunch/dinner'])
-  // mealTypeTransform(['dinner'])
 
   useEffect(() => {
     getRecipe(id).then((recipe) => {
@@ -71,11 +62,15 @@ const RecipeDetail = () => {
 
   const onClick = () => {
     addMeal(recipe).then((meal) => {
+      setRedirect(true)
       //setDate(meal.date);
       //console.log(meal);
     });
   };
-
+  
+  if (redirect) {
+    return <Redirect to="/meal"/>
+  }
   return (
     <div className="RecipeDetail">
       Recipe detail

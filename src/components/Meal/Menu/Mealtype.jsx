@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Recipe from './Recipe';
 
-const Mealtype = ({ recipes, mealtype }) => {
+const Mealtype = ({ recipes, mealtype, setMeal }) => {
 
     return (
       <div className="Carousel card-group">
@@ -10,7 +10,12 @@ const Mealtype = ({ recipes, mealtype }) => {
         ) : (
           recipes.map((recipe) => (
             <div className="card" key={recipe.recipe.label}>
-              <Recipe key={recipe.label} recipeFromAPI={recipe} mealtype={mealtype} />
+              <Recipe
+                key={recipe.label}
+                recipeFromAPI={recipe}
+                mealtype={mealtype}
+                setMeal={setMeal}
+              />
             </div>
           ))
         )}

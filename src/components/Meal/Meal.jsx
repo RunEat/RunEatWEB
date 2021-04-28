@@ -19,7 +19,7 @@ const Meal = () => {
     // if (meal) {
     getMeal(mealDate).then((meal) => {
       setMeal(meal);
-      //console.log('meal', meal)
+      console.log('meal MealComponent', meal)
     });
   }, [mealDate]);
     
@@ -29,7 +29,7 @@ const Meal = () => {
     <div className="Meal">
       <TotalCalories meal={meal}/>
       <MacrosChart meal={meal}/>
-      <Menu meal={meal}/>
+      <Menu meal={meal} setMeal={setMeal}/>
     </div>
   );
 };
