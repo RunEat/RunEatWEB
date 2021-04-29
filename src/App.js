@@ -11,6 +11,7 @@ import Profile from './components/Profile/Profile';
 import ProfileForm from './components/Profile/ProfileForm'
 import Diary from './components/Diary/Diary'
 import Meal from './components/Meal/Meal'
+import RecipeDetail from './components/Meal/Menu/RecipeDetail'
 import Sport from './components/Sport/Sport'
 import ChangePassword from './components/Profile/ChangePassword';
 
@@ -34,6 +35,7 @@ function App() {
   return (
     <div className="App">
       <Switch>
+        <Route exact path='/recipe_detail/:id' component={RecipeDetail}/>
         <Route exact path='/' component={Home}/>
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/checkEmail' component={CheckEmail}/>

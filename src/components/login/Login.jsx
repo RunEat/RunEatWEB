@@ -4,7 +4,7 @@ import { login, passwordResetEmail } from '../../services/AuthService';
 import { setAccessToken } from '../../store/AccessTokenStore';
 import { useState } from "react";
 
-import { useUser } from '../../hooks/userUserContext';
+import { useUser } from '../../hooks/useUserContext';
 
 const validators = {
   username: value => {

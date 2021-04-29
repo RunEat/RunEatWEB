@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import { UserContextProvider } from "./contexts/UserContext"
+import { DateContextProvider } from './contexts/DateContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserContextProvider>
-        <App />
+        <DateContextProvider>
+          <App />
+        </DateContextProvider>
       </UserContextProvider>
     </BrowserRouter>
   </React.StrictMode>,

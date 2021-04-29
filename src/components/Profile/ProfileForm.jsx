@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { passwordResetEmail } from '../../services/AuthService';
-import { useUser } from '../../hooks/userUserContext';
+import { useUser } from '../../hooks/useUserContext';
 import { editUser, getUserInfo } from '../../services/UserService';
 
 // eslint-disable-next-line no-useless-escape

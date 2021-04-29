@@ -1,13 +1,17 @@
 import Mealtype from "./Mealtype";
 import React, { useEffect, useState } from "react";
 import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/RecipeService";
+import { useDate } from '../../../hooks/useDateContext';
+import { addMeal, editMeal, getMeal } from "../../../services/MealService";
 
-function Menu() {
-    // const [mealtype, setMealtype] = useState();
+const Menu = ({meal, setMeal}) => {
+  const { date, setDate } = useDate()
+  //console.log('meal', meal)
+
     const [breakfast, setBreakfast] = useState();
     const [lunch, setLunch] = useState();
     const [dinner, setDinner] = useState();
-    const [snacks, setSnacks] = useState()
+    const [snacks, setSnacks] = useState();
     
     const [search, setSearch] = useState({
         search: {
@@ -35,144 +39,289 @@ function Menu() {
 
     }, []);
 
-  const onSubmit = (e) => {
+  const onSubmitBreakfast = (e) => {
     e.preventDefault();
       
     setSearch(prevState => ({
-        ...prevState,
-        show: true
+      ...prevState,
+      show: true
     }))
 
-      getBreakfast(search.search.breakfast)
-        .then((recipes) => {
-            setBreakfast(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
+    getBreakfast(search.search.breakfast)
+      .then((recipes) => {
+        setBreakfast(recipes);
+      })
+      .finally(() =>
+        setSearch(prevState => ({
+          ...prevState,
+          show: false
+        }))
+      );
+  }
 
-        getLunch(search.search.lunch)
-        .then((recipes) => {
-            setLunch(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
-        
-        getDinner(search.search.dinner)
-        .then((recipes) => {
-            setDinner(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
+  const onSubmitLunch = (e) => {
+    e.preventDefault();
 
-        getSnacks(search.search.snacks)
-        .then((recipes) => {
-            setSnacks(recipes);
-        })
-        .finally(() => 
-            setSearch(prevState => ({
-                ...prevState,
-                show: false
-            }))
-        );
-  };
-
-  const onChange = (e) => {
-    const { value } = e.target;
-    //console.log("value", value);
-
-    setSearch((prevState) => ({
+    setSearch(prevState => ({
       ...prevState,
-      search: value,
-    }));
+      show: true
+    }))
+    
+    getLunch(search.search.lunch)
+    .then((recipes) => {
+        setLunch(recipes);
+    })
+    .finally(() => 
+        setSearch(prevState => ({
+            ...prevState,
+            show: false
+        }))
+    );
+    
+  }
+    
+  const onSubmitDinner = (e) => {
+    e.preventDefault();
+
+    setSearch(prevState => ({
+      ...prevState,
+      show: true
+    }))
+    
+    getDinner(search.search.dinner)
+      .then((recipes) => {
+        setDinner(recipes);
+      })
+      .finally(() =>
+        setSearch(prevState => ({
+          ...prevState,
+          show: false
+        }))
+      );
+  }
+        
+  const onSubmitSnacks = (e) => {
+    e.preventDefault();
+
+    setSearch(prevState => ({
+      ...prevState,
+      show: true
+    }))
+
+   getSnacks(search.search.snacks)
+     .then((recipes) => {
+       setSnacks(recipes);
+     })
+     .finally(() =>
+       setSearch(prevState => ({
+         ...prevState,
+         show: false
+       }))
+     );
+  }
+  
+  const onChange = (e) => {
+
+    let value = e.target.value;
+
+    setSearch((prevState) => {
+      return { ...prevState, search: { [e.target.id]: value }};
+    })
   };
+
+  const deleteRecipe = (e) => {
+    //console.log(e.target.id)
+    if (e.target.id === "breakfast" && meal) {
+      editMeal(date, "breakfast").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
+    }
+    if (e.target.id === "lunch" && meal) {
+      editMeal(date, "lunch").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
+    }
+    if (e.target.id === "dinner" && meal) {
+      editMeal(date, "dinner").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
+    }
+    if (e.target.id === "snacks" && meal) {
+      editMeal(date, "snacks").then((updatedMeal) => {
+        //console.log("updatedMeal", updatedMeal);
+        setMeal(updatedMeal);
+      });
+    }
+  }
 
   //console.log ('mealtype', mealtype)
 
   return (
     <div className="Menu container">
-      <h2>Breakfast</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__breakfast"
-          id="search__breakfast"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.breakfast}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={breakfast} />
+      {!date ? (
+        "Loading..."
+      ) : (
+        <>
+          <h2>Breakfast</h2>
+          {meal !== undefined && meal.mealType.breakfast ? ( //deleteRecipe(setState que deje la receta vacia)
+            <>
+              <h3>{meal.mealType.breakfast.name}</h3>
+              <img
+                className="w-25"
+                src={meal.mealType.breakfast.image}
+                alt={meal.mealType.breakfast.name}
+              ></img>
+              <button
+                id="breakfast"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
+                Delete recipe
+              </button>
+            </>
+          ) : (
+            <>
+              <form className="mb-3" onSubmit={onSubmitBreakfast} id="helloId">
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__breakfast"
+                  id="breakfast"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.breakfast}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype
+                recipes={breakfast}
+                mealtype="breakfast"
+                setMeal={setMeal}
+              />
+            </>
+          )}
 
-      <h2>Lunch</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__lunch"
-          id="search__lunch"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.lunch}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={lunch} />
+          <h2>Lunch</h2>
+          {meal !== undefined && meal.mealType.lunch ? (
+            <>
+              <h3>{meal.mealType.lunch.name}</h3>
+              <img
+                className="w-25"
+                src={meal.mealType.lunch.image}
+                alt={meal.mealType.lunch.name}
+              ></img>
+              <button
+                id="lunch"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
+                Delete recipe
+              </button>
+            </>
+          ) : (
+            <>
+              <form onSubmit={onSubmitLunch}>
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__lunch"
+                  id="lunch"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.lunch}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype recipes={lunch} mealtype="lunch" setMeal={setMeal} />
+            </>
+          )}
 
-      <h2>Dinner</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__dinner"
-          id="search__dinner"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.dinner}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={dinner} />
+          <h2>Dinner</h2>
+          {meal !== undefined && meal.mealType.dinner ? (
+            <>
+              <h3>{meal.mealType.dinner.name}</h3>
+              <img
+                className="w-25"
+                src={meal.mealType.dinner.image}
+                alt={meal.mealType.dinner.name}
+              ></img>
+              <button
+                id="dinner"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
+                Delete recipe
+              </button>
+            </>
+          ) : (
+            <>
+              <form onSubmit={onSubmitDinner}>
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__dinner"
+                  id="dinner"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.dinner}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype recipes={dinner} mealtype="dinner" setMeal={setMeal} />
+            </>
+          )}
 
-      <h2>Snacks</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          type="search"
-          className="form-control mb-2"
-          name="search__snacks"
-          id="search__snacks"
-          placeholder="Search recipe..."
-          autoComplete="off"
-          onChange={onChange}
-          value={search.search.snacks}
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-      <Mealtype recipes={snacks} />
+          <h2>Snacks</h2>
+          {meal !== undefined && meal.mealType.snacks ? (
+            <>
+              <h3>{meal.mealType.snacks.name}</h3>
+              <img
+                className="w-25"
+                src={meal.mealType.snacks.image}
+                alt={meal.mealType.snacks.name}
+              ></img>
+              <button
+                id="snacks"
+                className="btn btn-danger"
+                onClick={deleteRecipe}
+              >
+                Delete recipe
+              </button>
+            </>
+          ) : (
+            <>
+              <form onSubmit={onSubmitSnacks}>
+                <input
+                  type="search"
+                  className="form-control mb-2"
+                  name="search__snacks"
+                  id="snacks"
+                  placeholder="Search recipe..."
+                  autoComplete="off"
+                  onChange={onChange}
+                  value={search.search.snacks}
+                />
+                <button type="submit" className="btn btn-primary">
+                  Search
+                </button>
+              </form>
+              <Mealtype recipes={snacks} mealtype="snacks" setMeal={setMeal} />
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }

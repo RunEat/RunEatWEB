@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUser } from '../../hooks/userUserContext';
+import { useUser } from '../../hooks/useUserContext';
 import { Link, Redirect } from 'react-router-dom';
 
 function Profile() {
