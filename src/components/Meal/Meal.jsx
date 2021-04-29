@@ -5,6 +5,7 @@ import Menu from './Menu/Menu';
 import { getMeal } from "../../services/MealService";
 import { useDate } from "../../hooks/useDateContext";
 import { useUser } from '../../hooks/useUserContext';
+import { getStoredDate } from '../../store/DateStore';
 
 const Meal = () => {
 
@@ -13,19 +14,15 @@ const Meal = () => {
   const { date, setDate } = useDate();
   const [meal, setMeal] = useState();
   
-  //console.log('date', date)
-  let mealDate = date.toISOString();
-
-  console.log('date In MEal', date)
-
-  //console.log('mealDate', mealDate);
+  let mealDate = getStoredDate()
 
   useEffect(() => {
     // if (meal) {
-    getMeal(mealDate).then((meal) => {
-      setMeal(meal);
-      //console.log('meal MealComponent', meal)
-    });
+    getMeal(mealDate)
+      .then((meal) => {
+        setMeal(meal);
+        //console.log('meal MealComponent', meal)
+      });
   }, [mealDate]);
     
   //console.log('meal', meal)

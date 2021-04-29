@@ -33,10 +33,10 @@ const RecipeDetail = () => {
 
   const { id } = useParams();
 
-  const addDate = () => {
-    // let date = new Date();
-    return date.toISOString();
-  };
+  // const addDate = () => {
+  //   // let date = new Date();
+  //   return date.toISOString();
+  // };
 
   useEffect(() => {
     getRecipe(id).then((recipe) => {
@@ -50,7 +50,7 @@ const RecipeDetail = () => {
         },
         calories: recipe.data[0].calories.toFixed(0),
         ingredients: recipe.data[0].ingredientLines,
-        date: addDate(),
+        date: date,
         mealType: [mealtype.mealtype],
         dietLabel: recipe.data[0].dietLabels,
         instructions: recipe.data[0].url,

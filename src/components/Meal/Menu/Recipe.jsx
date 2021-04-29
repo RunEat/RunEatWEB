@@ -14,10 +14,10 @@ const { date, setDate } = useDate();
   //   setDate(new Date("April 15, 2021 03:24:00")) 
   // },[])
 
-const addDate = () => {
-    // let date = new Date();
-    return date.toISOString();
-};
+// const addDate = () => {
+//     // let date = new Date();
+//     return date.toISOString();
+// };
   
 const onClick = (e) => {
   if (recipeFromAPI.recipe.uri == e.target.id) {
@@ -33,7 +33,7 @@ const onClick = (e) => {
         },
         calories: recipeFromAPI.recipe.calories.toFixed(0),
         ingredients: recipeFromAPI.recipe.ingredientLines,
-        date: addDate(),
+        date: date,
         mealType: [mealtype],
         dietLabel: recipeFromAPI.recipe.dietLabels,
         instructions: recipeFromAPI.recipe.url,
