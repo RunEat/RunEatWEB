@@ -5,12 +5,9 @@ import { useDate } from '../../hooks/useDateContext';
 import { setStoredDate } from "../../store/DateStore";
 
 const Navbar = () => {
+    const { date, setDate } = useDate();
     const [meal, setMeal] = useState()
 
-    const { date, setDate } = useDate();
-
-    const [redirect, setRedirect] = useState(false)
-    
     const onClick = () => {
         let today = new Date()
         getMeal(today)
@@ -20,7 +17,7 @@ const Navbar = () => {
         setDate(today)
         setStoredDate(today)
     }
-    
+
     return (
         <div>
             <nav className="navbar fixed-bottom navbar-light bg-light d-flex justify-content-center">

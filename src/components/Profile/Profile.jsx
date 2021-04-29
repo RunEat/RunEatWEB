@@ -20,7 +20,9 @@ function Profile() {
                                 <p className="card-text">Age: {user.age}</p>
                                 <p className="card-text">Height: {user.height}</p>
                                 <p className="card-text">Weight: {user.weight}</p>
+                                <p className="card-text">Gender: {user.gender}</p>
                                 <Link to="/profile/edit" className="btn btn-primary">Edit Profile</Link>
+                                <Link to="/profile/delete" className="btn btn-primary">Delete Account</Link>
                             </div>
                         </div>
                     ) : (

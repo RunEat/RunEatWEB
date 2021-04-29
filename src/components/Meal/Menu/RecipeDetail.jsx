@@ -75,6 +75,7 @@ const RecipeDetail = () => {
   if (redirect) {
     return <Redirect to="/meal"/>
   }
+  
   return (
     <div className="RecipeDetail">
       Recipe detail
@@ -103,9 +104,9 @@ const RecipeDetail = () => {
           <p>Fats: {recipe.macros.fats}g</p>
 
           <h4 className="font-weight-bold">How to prepare it:</h4>
-          {/* <div className="embed-responsive embed-responsive-16by9">
-								<iframe className="embed-responsive-item w-75" src={recipe.instructions} title="Cook recipe"></iframe>
-							</div> */}
+          <div className="embed-responsive embed-responsive-16by9">
+						<iframe className="embed-responsive-item w-75" src={recipe.instructions} title="Cook recipe"></iframe>
+					</div>
 
           <button className="btn btn-success" onClick={onClick}>
             Add to menu

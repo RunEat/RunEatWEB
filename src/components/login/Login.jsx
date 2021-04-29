@@ -112,7 +112,7 @@ const Login = () => {
   const { errors } = state
 
   return (
-    <div className="Login mt-4 container d-flex justify-content-center">
+    <div className="Login mt-4 container d-flex justify-content-center flex-column">
       <h1>Log in</h1>
       <form onSubmit={onSubmit} style={{ maxWidth: 500 }}>
         <div className="mb-3">

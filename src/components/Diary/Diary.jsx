@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getDiary } from '../../services/DiaryService';
 // import Meal from '../Meal/Meal';
 // import Sport from '../Sport/Sport';
@@ -9,11 +9,31 @@ import "./Diary.css";
 import { useDate } from '../../hooks/useDateContext';
 import { getMeal } from "../../services/MealService";
 import { setStoredDate, getStoredDate } from "../../store/DateStore";
+import { useUser } from '../../hooks/useUserContext';
 
 const Diary = () => {
-    const { date, setDate } = useDate()
+  const { date, setDate } = useDate()
 
-    const [diary, setDiary] = useState()
+  const [diary, setDiary] = useState()
+  
+  const { user, setUser } = useUser();
+
+  const [show, setShow] = useState(false)
+
+  const totalCalories = () => {
+      let breakfast = diary.meal.mealType.breakfast ? diary.meal.mealType.breakfast.calories : 0
+      let lunch = diary.meal.mealType.lunch ? diary.meal.mealType.lunch.calories : 0
+      let dinner = diary.meal.mealType.dinner ? diary.meal.mealType.dinner.calories : 0
+      let snacks = diary.meal.mealType.snacks ? diary.meal.mealType.snacks.calories : 0
+
+      return breakfast + lunch + dinner + snacks
+    }
+
+  console.log('user', user)
+
+  // if (user.id === diary.user) { 
+  //   setShow(true)
+  // }
         
     const onChange = (date) => {
       // console.log('date onChange', date)
@@ -29,21 +49,26 @@ const Diary = () => {
       })
     };
 
-    console.log('date Diary', date)
- 
+  console.log('date Diary', date)
+  
+  if (show) {
+  }
+  
   return (
     !date ? (
+        <p>
         <p>Loading</p>
+        </p>
     ) : (
       <div>
           <Calendar onChange={onChange} value={date} />
           {!diary ? ('create new Meal with newDate') :  (
             <>
-            <p>Total calories: {diary.meal.mealType.breakfast.calories}</p>
+            <p>Total calories: {totalCalories()} cal</p>
 
             <Link to={`/meal`}>Meal</Link>
 
-            <br></br>
+            <br/>
 
             <Link to={`/sport`}>Sport</Link>
 
@@ -52,8 +77,8 @@ const Diary = () => {
 
             <Link to="/">Back to home</Link>
       </div> 
-      )
-    );
+    )
+  );
 
 }
 
