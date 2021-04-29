@@ -4,8 +4,11 @@ import MacrosChart from './MacrosChart'
 import Menu from './Menu/Menu';
 import { getMeal } from "../../services/MealService";
 import { useDate } from "../../hooks/useDateContext";
+import { useUser } from '../../hooks/useUserContext';
 
 const Meal = () => {
+
+  const { user } = useUser()
   
   const { date, setDate } = useDate();
   const [meal, setMeal] = useState();
@@ -26,11 +29,13 @@ const Meal = () => {
   //console.log('meal', meal)
 
   return (
-    <div className="Meal">
-      <TotalCalories meal={meal}/>
-      <MacrosChart meal={meal}/>
-      <Menu meal={meal} setMeal={setMeal}/>
-    </div>
+    !user ? 'Error - Unauthorized' : (
+      <div className="Meal">
+        <TotalCalories meal={meal}/>
+        <MacrosChart meal={meal}/>
+        <Menu meal={meal} setMeal={setMeal}/>
+      </div>
+    )
   );
 };
 

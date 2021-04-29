@@ -7,7 +7,7 @@ function Profile() {
     const { user } = useUser()
     
     return (
-        !user ? ('loading...') : (
+        !user ? ('Error - Unauthorized') : (
             !user.avatar ? (
                 <Redirect to='/profile/edit'/>
             ) : (

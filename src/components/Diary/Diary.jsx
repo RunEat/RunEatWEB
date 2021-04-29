@@ -10,25 +10,44 @@ import "./Diary.css";
 const Diary = () => {
     const [date, setDate] = useState(new Date());
     const [diary, setDiary] = useState()
+    //console.log('context date prev toISOString()', date)
     
-    let newDate = date.toISOString();
+    //let newDate = date.toISOString().setUTCDate()
+    //newDate.toISOString()
+  
+    date.setHours(date.getHours() + 4)
+    let newDate= date.toISOString()
+    console.log('newDate', newDate)
 
+    //console.log("newDate", newDate);
+    
     useEffect(() => {
-        console.log("newDate", newDate);
-        // getDiary(newDate)
-        //     .then((diary) => console.log(diary));
+      console.log('newDate useEffect', newDate)
+      getDiary(newDate)
+          //SetDate(newDate)
+          .then((diary) => console.log(diary))
     }, [newDate]);
 
-    
     const onChange = (date) => {
-        setDate(date);
+      setDate(date);
     };
 
-    //console.log(date);
+  // useEffect(() => {
+  //   // if (meal) {
+  //   getMeal(mealDate).then((meal) => {
+  //     setMeal(meal);
+  //     //console.log('meal MealComponent', meal)
+  //   });
+  // }, [mealDate]);
 
-    return (
+    console.log('date', date);
+
+  return (
+    !newDate ? (
+        <p>Loading</p>
+    ) : (
       <div>
-        <Calendar onChange={onChange} value={date} />
+        <Calendar onChange={onChange} value={date}/>
         <p>Total calories: </p>
 
         {/* <Link to={`/meal/${diary.meal}`}>Meal</Link> */}
@@ -40,7 +59,8 @@ const Diary = () => {
         <br></br>
 
         <Link to="/">Back to home</Link>
-      </div>
+      </div> 
+      )
     );
 
 }

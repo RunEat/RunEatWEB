@@ -5,10 +5,14 @@ export const DateContext = createContext();
 export const DateContextProvider = ({children}) => {
     const [date, setDate] = useState(new Date())
 
-    const value = {
+      // date.setHours(date.getHours() + 4)
+      // let newDate = date.toISOString()
+      // setDate(newDate) 
+
+  const value = {
       setDate,
       date
-    }
+  }
     
-    return <DateContext.Provider value={value}>{children}</DateContext.Provider>
+  return <DateContext.Provider value={value}>{children}</DateContext.Provider>
 }
