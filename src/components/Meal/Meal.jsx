@@ -16,6 +16,8 @@ const Meal = () => {
   //console.log('date', date)
   let mealDate = date.toISOString();
 
+  console.log('date In MEal', date)
+
   //console.log('mealDate', mealDate);
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const Meal = () => {
   return (
     !user ? 'Error - Unauthorized' : (
       <div className="Meal">
+        <h1>Day food: {mealDate}</h1>
         <TotalCalories meal={meal}/>
         <MacrosChart meal={meal}/>
         <Menu meal={meal} setMeal={setMeal}/>

@@ -34,7 +34,7 @@ const RecipeDetail = () => {
   const { id } = useParams();
 
   const addDate = () => {
-    let date = new Date();
+    // let date = new Date();
     return date.toISOString();
   };
 
