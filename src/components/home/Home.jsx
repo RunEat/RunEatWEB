@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import Navbar from '../Navbar/Navbar'
-import { useUser } from '../../hooks/userUserContext';
+import { useUser } from '../../hooks/useUserContext';
 import { logout } from '../../store/AccessTokenStore';
 
 const Home = () => {
