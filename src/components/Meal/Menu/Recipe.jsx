@@ -43,7 +43,6 @@ const onClick = (e) => {
         console.log(meal);
       });
   }
-  
 }
     
 const newTo = {

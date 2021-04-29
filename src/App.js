@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Switch } from 'react-router';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 import Home from './components/home/Home';
 import Login from './components/login/Login';
@@ -15,8 +15,8 @@ import RecipeDetail from './components/Meal/Menu/RecipeDetail'
 import Sport from './components/Sport/Sport'
 import ChangePassword from './components/Profile/ChangePassword';
 
-import { getAccessToken } from './store/AccessTokenStore';
-import { getUserInfo } from './services/UserService'
+// import { getAccessToken } from './store/AccessTokenStore';
+// import { getUserInfo } from './services/UserService'
 
 
 function App() {

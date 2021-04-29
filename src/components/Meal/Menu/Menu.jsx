@@ -41,8 +41,6 @@ const Menu = ({meal, setMeal}) => {
 
   const onSubmitBreakfast = (e) => {
     e.preventDefault();
-    // const { id } = e.target
-    // console.log("e.target", e.target.id);
       
     setSearch(prevState => ({
       ...prevState,
