@@ -12,35 +12,15 @@ import { setStoredDate, getStoredDate } from "../../store/DateStore";
 
 const Diary = () => {
     const { date, setDate } = useDate()
-    // const [date, setDate] = useState(new Date());
 
     const [diary, setDiary] = useState()
-    //console.log('context date prev toISOString()', date)
-    
-    //let newDate = date.toISOString().setUTCDate()
-    //newDate.toISOString()
-    
-    
-    //console.log("newDate", newDate);
-    
-    // useEffect(() => {
-      //   console.log('newDate useEffect', newDate)
-      //   getDiary(newDate)
-      //     .then((diaryDB) => {
-        //       //setDate(newDate)  ---- Solucionar actualizar estado de Date
-        //       setDiary(diaryDB)
-        //     })
-        // }, [newDate]);
         
     const onChange = (date) => {
       // console.log('date onChange', date)
       date.setHours(date.getHours() + 4)
-      // let newDate= date.toISOString()
-      
    
       setDate(date);
       setStoredDate(date)
-
 
       getDiary(date)
       .then((diary)=> {
@@ -50,14 +30,6 @@ const Diary = () => {
     };
 
     console.log('date Diary', date)
-
-  // useEffect(() => {
-  //   if (diary) {
-  //     getMeal(date).then((meal) => {
-  //       console.log('meal MealComponent', meal)
-  //     });
-  //   }
-  // }, [date]);
  
   return (
     !date ? (
@@ -65,7 +37,7 @@ const Diary = () => {
     ) : (
       <div>
           <Calendar onChange={onChange} value={date} />
-          {!diary ? ('create new Meal con newDate') :  (
+          {!diary ? ('create new Meal with newDate') :  (
             <>
             <p>Total calories: {diary.meal.mealType.breakfast.calories}</p>
 

@@ -3,11 +3,12 @@ import { Link, Redirect } from "react-router-dom";
 import { getRecipe } from "../../../services/RecipeService";
 import { useParams, useLocation } from "react-router-dom";
 import { addMeal } from "../../../services/MealService";
+import { getStoredDate } from "../../../store/DateStore";
 
-import { useDate } from "../../../hooks/useDateContext";
+//import { useDate } from "../../../hooks/useDateContext";
 
 const RecipeDetail = () => {
-  const { date, setDate } = useDate();
+  //const { date, setDate } = useDate();
 
   const { mealtype } = useLocation();
   //console.log("mealtype", mealtype.mealtype);
@@ -33,6 +34,8 @@ const RecipeDetail = () => {
 
   const { id } = useParams();
 
+  let mealDate = getStoredDate()
+
   // const addDate = () => {
   //   // let date = new Date();
   //   return date.toISOString();
@@ -50,7 +53,7 @@ const RecipeDetail = () => {
         },
         calories: recipe.data[0].calories.toFixed(0),
         ingredients: recipe.data[0].ingredientLines,
-        date: date,
+        date: mealDate,
         mealType: [mealtype.mealtype],
         dietLabel: recipe.data[0].dietLabels,
         instructions: recipe.data[0].url,
@@ -61,7 +64,8 @@ const RecipeDetail = () => {
   //console.log("recipe", recipe);
 
   const onClick = () => {
-    addMeal(recipe).then((meal) => {
+    addMeal(recipe)
+    .then((meal) => {
       setRedirect(true)
       //setDate(meal.date);
       //console.log(meal);
