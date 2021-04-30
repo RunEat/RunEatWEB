@@ -21,11 +21,15 @@ const Home = () => {
 				</>
 			)
 			: (
-				<>
-				<h1>RunEat</h1>
-				<button className="btn btn-primary mx-1"><Link className="text-white" to="/signup">Sign up</Link></button>
+				<div className="Signup">
+				<video playsinline autoPlay muted loop id="bgvid" className="SignupVideo">
+					<source src="./RunEat_clip.webm" type="video/webm"/>
+					<source src="./RunEat_clip.mp4" type="video/mp4"/>
+				</video>
+				<h1 className="text-white font-weitght-bold">RunEat</h1>
+				<button className="btn btn-primary mx-1 rounded-2"><Link className="text-white" to="/signup">Sign up</Link></button>
 				<button className="btn btn-primary mx-1"><Link className="text-white" to="/login">Log in</Link></button>
-				</>
+				</div>
 			)
 			}
 		</div>	
