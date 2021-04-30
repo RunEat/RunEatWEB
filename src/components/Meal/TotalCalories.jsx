@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { maximumCalories } from "../../Utils/CalculateCalories";
 import { useUser } from "../../hooks/useUserContext";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const TotalCalories = ({ meal }) => {
@@ -40,13 +43,16 @@ const TotalCalories = ({ meal }) => {
           <CircularProgressbarWithChildren
             value={calories}
             maxValue={maxCalories}
-          >
-          </CircularProgressbarWithChildren>
-            <div>
-              <strong>Calories: {calories}</strong> cal
-              <br/>
-              <strong>MaxCalories: {maxCalories}</strong> cal
-            </div>
+            styles={buildStyles({
+              backgroundColor: "#85ef47",
+              trailColor: "#d6d6d6",
+            })}
+          ></CircularProgressbarWithChildren>
+          <div>
+            <strong>Calories: {calories}</strong> cal
+            <br />
+            <strong>MaxCalories: {maxCalories}</strong> cal
+          </div>
           {/* <Doughnut
             data={{
               labels: ["Maximun", "Calories"],

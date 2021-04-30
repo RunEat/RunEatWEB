@@ -76,13 +76,25 @@ function MacrosChart({ meal }) {
   return (
     <div className="MacrosChart container">
       <h4>Fats</h4>
-          <ProgressBar animated now={fats} max={maxFats}/>
+      <ProgressBar variant="warning" animated now={fats} max={maxFats} />
 
       <h4>Proteins</h4>
-          <ProgressBar animated now={proteins} max={maxProteins}/>
+      <ProgressBar
+        striped
+        variant="success"
+        animated
+        now={proteins}
+        max={maxProteins}
+      />
 
       <h4>Carbs</h4>
-          <ProgressBar animated now={carbs} max={maxCarbs}/>
+      <ProgressBar
+        striped
+        variant="info"
+        animated
+        now={carbs}
+        max={maxCarbs}
+      />
     </div>
   );
 }
