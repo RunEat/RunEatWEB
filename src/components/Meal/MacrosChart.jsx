@@ -2,7 +2,7 @@ import React from 'react';
 
 function MacrosChart({ meal }) {
     
-    console.log('mealMacros', meal)
+    //console.log('mealMacros', meal)
     return (
         <div className="MacrosChart">
             <table>

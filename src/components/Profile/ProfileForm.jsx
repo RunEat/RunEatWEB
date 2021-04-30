@@ -341,7 +341,7 @@ const ProfileForm = () => {
 
           <div className="mb-3">
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="<Avatar" id="avatar"
+              name="<Avatar" id="avatar" required
             />
           {/* <span className="EditAvatar">&#9999;</span> */}
             

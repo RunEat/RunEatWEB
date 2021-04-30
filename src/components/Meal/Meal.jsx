@@ -6,6 +6,7 @@ import { getMeal } from "../../services/MealService";
 import { useDate } from "../../hooks/useDateContext";
 import { useUser } from '../../hooks/useUserContext';
 import { getStoredDate } from '../../store/DateStore';
+import SyncLoader from 'react-spinners/SyncLoader';
 
 const Meal = () => {
 
@@ -27,8 +28,14 @@ const Meal = () => {
     
   //console.log('meal', meal)
 
+
   return (
-    !user ? 'Error - Unauthorized' : (
+    !date ? (
+      <div className="text-center">
+        <SyncLoader color="#3ec4fc"/>
+      </div>
+    ) : (
+    //user.id == meal.user.id &&
       <div className="Meal">
         <h1>Day food: {mealDate}</h1>
         <TotalCalories meal={meal}/>
@@ -36,7 +43,7 @@ const Meal = () => {
         <Menu meal={meal} setMeal={setMeal}/>
       </div>
     )
-  );
+  )
 };
 
 export default Meal;
