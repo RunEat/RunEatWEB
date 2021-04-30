@@ -1,3 +1,15 @@
+.Home {
+	height: 50rem;
+}
+
+.Signup h1 {
+	font-size: 4.5rem;
+}
+
+.Signup button {
+	border-radius: 2rem;
+}
+
 .Signup .SignupVideo {
   object-fit: cover;
   width: 100vw;

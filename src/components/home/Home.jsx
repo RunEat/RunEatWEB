@@ -10,7 +10,7 @@ const Home = () => {
 	const {user} = useUser()
 	
 	return (
-		<div className="Home">
+		<div className="Home d-flex justify-content-center align-items-center">
 			{
 			user ?
 				(
@@ -21,14 +21,20 @@ const Home = () => {
 				</>
 			)
 			: (
-				<div className="Signup">
-				<video playsinline autoPlay muted loop id="bgvid" className="SignupVideo">
-					<source src="./RunEat_clip.webm" type="video/webm"/>
-					<source src="./RunEat_clip.mp4" type="video/mp4"/>
-				</video>
-				<h1 className="text-white font-weitght-bold">RunEat</h1>
-				<button className="btn btn-primary mx-1 rounded-2"><Link className="text-white" to="/signup">Sign up</Link></button>
-				<button className="btn btn-primary mx-1"><Link className="text-white" to="/login">Log in</Link></button>
+				<div className="Signup text-white d-flex flex-column justify-content-between h-100">
+					<div>
+						<h4 className="mb-0 pb-0 mt-2">Welcome to</h4>
+						<h1 className="font-weitght-bold mt-0 p-0">RunEat</h1>
+					</div>
+					<video playsinline autoPlay muted loop id="bgvid" className="SignupVideo">
+						<source src="./RunEat_clip.webm" type="video/webm"/>
+						<source src="./RunEat_clip.mp4" type="video/mp4"/>
+					</video>
+					<div className="mb-3">
+						<button className="btn btn-success mx-1 w-100"><Link className="link text-white" to="/signup">SIGN UP</Link></button>
+						<p className="mt-3 mb-1">Got a RunEat account?</p>
+						<button className="btn btn-light mx-1 w-100"><Link className="link text-dark" to="/login">LOG IN</Link></button>
+					</div>
 				</div>
 			)
 			}
