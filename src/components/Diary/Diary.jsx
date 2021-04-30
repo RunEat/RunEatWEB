@@ -72,8 +72,14 @@ const Diary = () => {
           {
             //user.id == diary.user.id && (
             <>
-              {!diary ? (
-                "create new Meal with newDate"
+                {!diary ? (
+                  <>
+                    <Link to={`/meal`}>Create new Meal</Link>
+
+                    <br />
+
+                    <Link to={`/sport`}>Create new Sport</Link>
+                  </>
               ) : (
                 <>
                   <p>Total calories: {totalCalories()} cal</p>
