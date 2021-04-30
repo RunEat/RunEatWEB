@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { maximumCalories, maximumCarbs, maximumProteins, maximumFats } from "../../Utils/CalculateCalories";
-import { Bar } from "react-chartjs-2";
+import ProgressBar from "react-bootstrap/ProgressBar";
 import { useUser } from "../../hooks/useUserContext";
 
 function MacrosChart({ meal }) {
@@ -74,90 +74,15 @@ function MacrosChart({ meal }) {
   }, [meal]);
 
   return (
-    <div className="MacrosChart">
-      <table>
-        <tbody>
-          <tr className="text-align-center">
-            <Bar
-              pointStyle="star"
-              data={{
-                responsive: true,
-                offset: true,
-                datasets: [
-                  {
-                    label: "MaxFats",
-                    pointStyle: "rectRounded",
-                    backgroundColor: "#6ED3FF",
-                    barThickness: 40,
-                    categoryPercentage: 1,
-                  },
-                  {
-                    label: "FatsConsumed",
-                    backgroundColor: "#1497FF",
-                    barThickness: 40,
-                    categoryPercentage: 1,
-                    pointStyle: "triangle",
-                  },
-                ],
-              }}
-              height={220}
-              options={{
-                offsetGridLines: true,
-                drawTicks: true,
-                layout: {
-                  padding: {
-                    top: 30,
-                    right: 40,
-                    bottom: 40,
-                  },
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                  xAxes: [
-                    {
-                      stacked: true,
-                      ticks: {
-                        padding: 5,
-                      },
-                      gridLines: {
-                        display: false,
-                      },
-                    },
-                  ],
-                  yAxes: [
-                    {
-                      stacked: false,
-                      gridLines: {
-                        drawBorder: false,
-                      },
-                      ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 6,
-                        padding: 20,
-                        callback(n) {
-                          if (n < 1e3) return n;
-                          if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
-                        },
-                      },
-                    },
-                  ],
-                },
-              }}
-            />
-            <td>Fats</td>
-            <td>{fats}/ 50 g</td>
-          </tr>
-          <tr>
-            <td>Proteins</td>
-            <td>{proteins}/50 g</td>
-          </tr>
-          <tr>
-            <td>Carbs</td>
-            <td>{carbs}/50 g</td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="MacrosChart container">
+      <h4>Fats</h4>
+          <ProgressBar animated now={fats} max={maxFats}/>
+
+      <h4>Proteins</h4>
+          <ProgressBar animated now={proteins} max={maxProteins}/>
+
+      <h4>Carbs</h4>
+          <ProgressBar animated now={carbs} max={maxCarbs}/>
     </div>
   );
 }

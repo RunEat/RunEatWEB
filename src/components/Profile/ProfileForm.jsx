@@ -6,7 +6,7 @@ import { editUser, getUserInfo } from '../../services/UserService';
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const ACTIVITY = ['Sedentary', 'Moderate', 'Active', 'Very active'];
+const ACTIVITY = ['Low/Sedentary', 'Moderate', 'Active', 'Very active'];
 
 const validators = {
   // username: value => {

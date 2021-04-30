@@ -2,46 +2,52 @@ import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { maximumCalories } from "../../Utils/CalculateCalories";
 import { useUser } from "../../hooks/useUserContext";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const TotalCalories = ({ meal }) => {
   //console.log('Meal totalCalories', meal)
-    const [maxCalories, setMaxCalories] = useState()
-    const [calories, setCalories] = useState()
+  const [maxCalories, setMaxCalories] = useState();
+  const [calories, setCalories] = useState();
 
-    const { user } = useUser();
-    
-    useEffect(() => {
-        if (user) {
-          setMaxCalories(maximumCalories(user));
-        }
-    }, [user])
+  const { user } = useUser();
 
-    console.log('meal', meal)
+  useEffect(() => {
+    if (user) {
+      setMaxCalories(maximumCalories(user));
+    }
+  }, [user]);
 
-    useEffect(() => {
-        if (meal) {
-            let breakfast = meal.mealType.breakfast
-              ? meal.mealType.breakfast.calories
-              : 0;
-            let lunch = meal.mealType.lunch
-              ? meal.mealType.lunch.calories
-              : 0;
-            let dinner = meal.mealType.dinner
-              ? meal.mealType.dinner.calories
-              : 0;
-            let snacks = meal.mealType.snacks
-              ? meal.mealType.snacks.calories
-              : 0;
-      
-            setCalories(breakfast + lunch + dinner + snacks);  
-        }
-    }, [meal])
+  console.log("meal", meal);
+
+  useEffect(() => {
+    if (meal) {
+      let breakfast = meal.mealType.breakfast
+        ? meal.mealType.breakfast.calories
+        : 0;
+      let lunch = meal.mealType.lunch ? meal.mealType.lunch.calories : 0;
+      let dinner = meal.mealType.dinner ? meal.mealType.dinner.calories : 0;
+      let snacks = meal.mealType.snacks ? meal.mealType.snacks.calories : 0;
+
+      setCalories(breakfast + lunch + dinner + snacks);
+    }
+  }, [meal]);
 
   return (
     <div className="TotalCalories">
       {user ? (
         <>
-          <Doughnut
+          <CircularProgressbarWithChildren
+            value={calories}
+            maxValue={maxCalories}
+          >
+          </CircularProgressbarWithChildren>
+            <div>
+              <strong>Calories: {calories}</strong> cal
+              <br/>
+              <strong>MaxCalories: {maxCalories}</strong> cal
+            </div>
+          {/* <Doughnut
             data={{
               labels: ["Maximun", "Calories"],
               datasets: [
@@ -54,14 +60,21 @@ const TotalCalories = ({ meal }) => {
             }}
             height={200}
             weight={200}
-            options={{ maintainAspectRatio: false }}
-          />
+            options={{
+              ticks: {
+                stepSize: 1,
+                min: 0,
+                max: maxCalories,
+              },
+              maintainAspectRatio: false,
+            }}
+          /> */}
         </>
       ) : (
         "Calculate.."
       )}
     </div>
   );
-}
+};
 
 export default TotalCalories;

@@ -47,7 +47,7 @@ const onClick = (e) => {
           console.log("updateMeal", updateMeal);
           setMeal(updateMeal);
         });
-        console.log(meal);
+        //console.log(meal);
       });
   }
 }
