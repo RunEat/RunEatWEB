@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { MaxCalories, MaxMacros } from "../../Utils/CalculateCalories";
+import { maximumCalories } from "../../Utils/CalculateCalories";
 import { useUser } from "../../hooks/useUserContext";
 
-function TotalCalories({ meal }) {
+const TotalCalories = ({ meal }) => {
   //console.log('Meal totalCalories', meal)
     const [maxCalories, setMaxCalories] = useState()
     const [calories, setCalories] = useState()
@@ -12,7 +12,7 @@ function TotalCalories({ meal }) {
     
     useEffect(() => {
         if (user) {
-            setMaxCalories(MaxCalories(user))
+          setMaxCalories(maximumCalories(user));
         }
     }, [user])
 
@@ -47,8 +47,8 @@ function TotalCalories({ meal }) {
               datasets: [
                 {
                   labels: "Calories",
-                  data: [maxCalories, calories],
-                  backgroundColor: ["grey", "green"],
+                  data: [calories, maxCalories],
+                  backgroundColor: ["green", "grey"],
                 },
               ],
             }}
