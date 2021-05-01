@@ -7,7 +7,7 @@ import { editUser, getUserInfo } from '../../services/UserService';
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const ACTIVITY = ['Low/Sedentary', 'Moderate', 'Active', 'Very active'];
+const ACTIVITY = ['Sedentary', 'Moderate', 'Active', 'Very active'];
 
 const validators = {
   // username: value => {
@@ -412,12 +412,28 @@ const ProfileForm = () => {
               <p className="text-center text-secondary"><small>{weight} kg</small></p>      
           </div>
 
+          <div className="mb-3">
+          <label className="form-label"><small>What's your activity level?</small></label>
+          <br/>
+          {
+            ACTIVITY.map((act, idx) => (
+                <div  key={idx} className="d-inline">
+                <input type="radio" id={act} name={act} 
+                  value={act} className="btn btn-check checked" autoComplete="off"
+                />
+                <label htmlFor={act} className="btn m-2 text-white">{act}</label>
+                </div>
+              ))
+          }
+          <div className="invalid-feedback">{errors.activity}</div>
+
+        </div>
+
           <div className="mb-3 w-75">
           <label htmlFor="avatar" className="form-label">
             <small>Add an image</small>
             <br/>
-            <h1 className="text-white">+</h1>
-            <i className="fas fa-folder-upload bg-secondary fs-5"></i>
+            <i className="fas fa-upload text-secondary fs-1 p-4"></i>
           </label>
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
               name="<Avatar" id="avatar" placeholder="add an image" hidden
@@ -439,22 +455,20 @@ const ProfileForm = () => {
             <div className="invalid-feedback">{errors.gender}</div>
           </div> */}
 
-        <div className="form-group mt-3">
-          <label htmlFor="activity">What's your activity level?</label>
+        {/* <div className="mt-3">
+          <label htmlFor="activity" className="form-label"><small>What's your activity level?</small></label>
           <select
             id="activity"
             className={`form-control ${errors.activity && "is-invalid"} `}
             value={activity}
             onChange={onChange}
           >
-            {ACTIVITY.map((g, i) => (
-              <option key={i}>{g}</option>
+            {ACTIVITY.map((act, idx) => (
+              <option key={idx}>{act}</option>
             ))}
-          </select>
-          <div className="invalid-feedback">{errors.activity}</div>
-        </div>
-
-          <a href=""><small>Sources of recommendations</small></a>
+          </select> 
+        </div> */}
+          <a href="" className="mt-5"><small>Sources of recommendations</small></a>
           <button type="submit" className="btn text-white w-75 mt-2">NEXT</button>
         </form>
       </div>
