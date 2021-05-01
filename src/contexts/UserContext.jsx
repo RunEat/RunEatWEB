@@ -10,7 +10,7 @@ export const UserContextProvider = ({children}) => {
     const getUser = () => { 
         return getUserInfo() 
           .then(response => setUser(response))
-      } 
+    } 
     
       useEffect(() => { 
         if (getAccessToken()) {

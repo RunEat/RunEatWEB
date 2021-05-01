@@ -15,6 +15,7 @@ import RecipeDetail from './components/Meal/Menu/RecipeDetail'
 import Sport from './components/Sport/Sport'
 import ChangePassword from './components/Profile/ChangePassword';
 import LoginFirstStep from './components/login/LoginFirstStep'
+import ConfirmToDelete from './components/Profile/ConfirmToDelete';
 
 // import { getAccessToken } from './store/AccessTokenStore';
 // import { getUserInfo } from './services/UserService'
@@ -47,6 +48,7 @@ function App() {
         <Route exact path='/login-first' component={LoginFirstStep}/>
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/profile/edit' component={ProfileForm} />
+        <Route exact path='/profile/delete' component={ConfirmToDelete} />
         <Route exact path='/diary' component={Diary} />
         <Route exact path='/meal' component={Meal} />
         <Route exact path='/sport' component={Sport} />
