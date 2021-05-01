@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { signup } from '../../services/AuthService';
+import { Link } from "react-router-dom"
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -143,75 +144,82 @@ const Signup = () => {
   const { username, password, email, height, weight, age} = user
   
 	return (
-		<div className="Login mt-4 container d-flex justify-content-center flex-column">
-		<h1>Sign up</h1>
-      <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-        
-				<div className="mb-3">
-				<label htmlFor="username" className="form-label">Username </label>
-				<input
-					className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
-					type="username" id="username" name="username" autoComplete="off"
-					value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				<div className="invalid-feedback">{errors.username}</div>
-				</div>
+    <div className="Login mt-4 container d-flex justify-content-center flex-column">
+    <Link to='/'><i className="fas fa-chevron-left ms-4 mt-5 mb-5 colorLink"></i></Link>
+      <div className="d-flex flex-column justify-content-between align-items-center text-center">
+        <i class="fas fa-sign-in-alt signupIcon"></i>
+        <h1 style={{color: '#ff7d47'}} className="mb-5">Sign up</h1>
+        <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+          
+          <div className="mb-5">
+          <input
+            className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
+            type="username" id="username" name="username" autoComplete="off" placeholder="Username"
+            value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            style={{border: 'none', 'border-bottom': '1px solid #00bd56', 'border-radius': '0px'}}
+          />
+          <div className="invalid-feedback">{errors.username}</div>
+          </div>
 
-				<div className="mb-3">
-				<label htmlFor="password" className="form-label">Password</label>
-				<input
-					className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
-					type="password" id="password" name="password"
-					value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.password}</div>
-        </div>
-        
-        <div className="mb-3">
-				<label htmlFor="email" className="form-label">Email</label>
-				<input
-					className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
-					type="email" id="email" name="email"
-					value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.email}</div>
-        </div>
-        
-        <div className="mb-3 d-none">
-				<label htmlFor="height" className="form-label">Height</label>
-				<input
-					className={`form-control ${touched.height && errors.height ? 'is-invalid' : ''}`}
-					type="number" id="height" name="height" min={130} max={230}
-					value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.height}</div>
-        </div>
-        
-        <div className="mb-3 d-none">
-				<label htmlFor="weight" className="form-label">Weight</label>
-				<input
-					className={`form-control ${touched.weight && errors.weight ? 'is-invalid' : ''}`}
-					type="number" id="weight" name="weight" min={40} max={300}
-					value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.weight}</div>
-        </div> 
+          <div className="mb-5">
+          <input
+            className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
+            type="password" id="password" name="password" placeholder="Password"
+            value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            style={{border: 'none', 'border-bottom': '1px solid #00bd56', 'border-radius': '0px'}}
+          />
+          <div className="invalid-feedback">{errors.password}</div>
+          </div>
+          
+          <div className="mb-5">
+          <input
+            className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
+            type="email" id="email" name="email" placeholder='Email'
+            value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            style={{border: 'none', 'border-bottom': '1px solid #00bd56', 'border-radius': '0px'}}
+          />
+          <div className="invalid-feedback">{errors.email}</div>
+          </div>
+          
+          <div className="mb-3 d-none">
+          <label htmlFor="height" className="form-label">Height</label>
+          <input
+            className={`form-control ${touched.height && errors.height ? 'is-invalid' : ''}`}
+            type="number" id="height" name="height" min={130} max={230}
+            value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.height}</div>
+          </div>
+          
+          <div className="mb-3 d-none">
+          <label htmlFor="weight" className="form-label">Weight</label>
+          <input
+            className={`form-control ${touched.weight && errors.weight ? 'is-invalid' : ''}`}
+            type="number" id="weight" name="weight" min={40} max={300}
+            value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.weight}</div>
+          </div> 
 
-        <div className="mb-3 d-none">
-				<label htmlFor="age" className="form-label">Age</label>
-				<input
-					className={`form-control ${touched.age && errors.age ? 'is-invalid' : ''}`}
-					type="number" id="age" name="age" min={16} max={120}
-					value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-				/>
-				 <div className="invalid-feedback">{errors.age}</div>
-        </div> 
+          <div className="mb-3 d-none">
+          <label htmlFor="age" className="form-label">Age</label>
+          <input
+            className={`form-control ${touched.age && errors.age ? 'is-invalid' : ''}`}
+            type="number" id="age" name="age" min={16} max={120}
+              value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.age}</div>
+          </div> 
 
-				<button type="submit" className="btn btn-outline-primary">
-				Submit
-				</button>
-			</form>
-    </div>
+          <button
+            type="submit"
+            className="mt-5 btn LoginButton colorLink w-75"
+            style={{'border-radius': '5rem', color: '#fff', backgroundColor: '#00bd56'}}>
+          SUBMIT
+          </button>
+        </form>
+      </div>
+      </div>
   );
 };
 

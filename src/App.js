@@ -14,6 +14,7 @@ import Meal from './components/Meal/Meal'
 import RecipeDetail from './components/Meal/Menu/RecipeDetail'
 import Sport from './components/Sport/Sport'
 import ChangePassword from './components/Profile/ChangePassword';
+import LoginFirstStep from './components/login/LoginFirstStep'
 import ConfirmToDelete from './components/Profile/ConfirmToDelete';
 
 // import { getAccessToken } from './store/AccessTokenStore';
@@ -43,7 +44,8 @@ function App() {
         <Route exact path='/user/activate/:token' component={Activate} />
         {/* <Route exact path='/login' render={() => <Login doLogin={getUser} />} /> */}
         <Route exact path='/user/password_reset/:token' component={ChangePassword} />
-        <Route exact path='/login' component={Login}/>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/login-first' component={LoginFirstStep}/>
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/profile/edit' component={ProfileForm} />
         <Route exact path='/profile/delete' component={ConfirmToDelete} />

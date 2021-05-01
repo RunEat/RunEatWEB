@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ProfileForm.css'
 import { useHistory } from 'react-router';
 import { passwordResetEmail } from '../../services/AuthService';
 import { useUser } from '../../hooks/useUserContext';
@@ -195,13 +196,13 @@ const ProfileForm = () => {
       })
   }
   
-  const { avatar, username, email, height, weight, age, gender} = userToEdit
+  const { avatar, username, email, height, weight, age, activity } = userToEdit
 
   return (
     !user ? ('loading...') : (
       user.avatar ? (
-        <div className="Login mt-4 container d-flex justify-content-center flex-column">
-        <h1>Set Up Profile</h1>
+        <div className="ProfileForm mt-4 container d-flex justify-content-center flex-column">
+        <h2>Set Up Profile</h2>
         <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
           
           <div className="mb-3">
@@ -245,7 +246,7 @@ const ProfileForm = () => {
           <div className="mb-3">
             <label htmlFor="weightRange" className="form-label">Weight</label>
             <input type="range" className="form-range form-control" id="weightRange"
-              id="weight" name="weight" min={40} max={300}
+              id="weight" name="weight" min={40} max={300} 
               value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
               <p>{weight}</p>
@@ -285,44 +286,60 @@ const ProfileForm = () => {
         </div>
       </div>
       ) : (
-      <div className="Login mt-4 container d-flex justify-content-center flex-column">
-        <h1>Finish your Profile</h1>
-          <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-            
-          <div className="mb-3">
+      <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
+        <h2 className="text-center mt-4 text-secondary">FINISH YOUR PROFILE</h2>
+          {/* <div className="">
             <p>Username: {user.username}</p>
-          </div>
-
-          <div className="mb-3">
             <p>Email: {user.email}</p>
-          </div>
+          </div> */}
 
-          <div className="mb-3">
-            <label htmlFor="ageRange" className="form-label">Age</label>
-            <input type="range" className="form-range form-control" id="ageRange"
+          <form className="d-flex flex-column align-items-center my-4 w-100" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+          {/* <div className="mb-3 w-75">
+            <label htmlFor="mealPlan" className="form-label"><small>Choose your meal plan</small></label>
+            <select type="range" className="Slider my-2" id="mealPlan"
+              id="age" name="age" min={16} max={120}
+              value={mealPlan} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+            <p className="text-center text-secondary"><small>{age} years old</small></p>   
+          </div> */}
+          
+          
+          <div className="mb-3 w-75">
+            <label htmlFor="ageRange" className="form-label"><small>Your age</small></label>
+            <input type="range" className="Slider my-2" id="ageRange"
               id="age" name="age" min={16} max={120}
               value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{age}</p>   
+            <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="heightRange" className="form-label">Height</label>
-            <input type="range" className="form-range form-control" id="heightRange"
+          <div className="mb-3 w-75">
+            <label htmlFor="heightRange" className="form-label"><small>Your height</small></label>
+            <input type="range" className="Slider my-2" id="heightRange"
               id="height" name="height" min={130} max={230}
               value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{height}</p>    
+              <p className="text-center text-secondary"><small>{height} cm</small></p>    
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="weightRange" className="form-label">Weight</label>
-            <input type="range" className="form-range form-control" id="weightRange"
+          <div className="mb-3 w-75">
+            <label htmlFor="weightRange" className="form-label"><small>Your weight</small></label>
+            <input type="range" className="Slider my-2" id="weightRange"
               id="weight" name="weight" min={40} max={300}
               value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{weight}</p>      
+              <p className="text-center text-secondary"><small>{weight} kg</small></p>      
           </div>
+
+          <div className="mb-3 w-75">
+          <label htmlFor="avatar" className="form-label">
+            <small>Add an image</small>
+            <br/>
+            <h1 className="text-white">+</h1>
+            <i className="fas fa-folder-upload bg-secondary fs-5"></i>
+          </label>
+            <input className="form-control" type="file" onClick={onClick} onChange={onChange}
+              name="<Avatar" id="avatar" placeholder="add an image" hidden
 
           <div className="form-group mt-3">
             <label htmlFor="gender">Gender</label>
@@ -339,18 +356,8 @@ const ProfileForm = () => {
             <div className="invalid-feedback">{errors.gender}</div>
           </div>
 
-          <div className="mb-3">
-            <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="<Avatar" id="avatar" required
-            />
-          {/* <span className="EditAvatar">&#9999;</span> */}
-            
-          {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
-          </div>
-              
-          <button type="submit" className="btn btn-outline-primary">
-          Update
-          </button>
+          <a href=""><small>Sources of recommendations</small></a>
+          <button type="submit" className="btn text-white w-75 mt-2">NEXT</button>
         </form>
       </div>
       )
