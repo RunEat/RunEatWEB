@@ -1,13 +1,16 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const DateContext = createContext();
 
 export const DateContextProvider = ({children}) => {
     const [date, setDate] = useState(new Date())
 
-      // date.setHours(date.getHours() + 4)
-      // let newDate = date.toISOString()
-      // setDate(newDate) 
+  useEffect(() => {
+    date.setHours(date.getHours() + 4)
+    let newDate = date.toISOString()
+    setDate(new Date(newDate)) 
+    //console.log(date)
+  }, [])
 
   const value = {
       setDate,

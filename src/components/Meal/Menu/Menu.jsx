@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/RecipeService";
 import { useDate } from '../../../hooks/useDateContext';
 import { addMeal, editMeal, getMeal } from "../../../services/MealService";
+import { getStoredDate } from "../../../store/DateStore";
 
 const Menu = ({meal, setMeal}) => {
   const { date, setDate } = useDate()
@@ -129,28 +130,30 @@ const Menu = ({meal, setMeal}) => {
     })
   };
 
+  let mealDate = getStoredDate();
+
   const deleteRecipe = (e) => {
     //console.log(e.target.id)
     if (e.target.id === "breakfast" && meal) {
-      editMeal(date, "breakfast").then((updatedMeal) => {
+      editMeal(mealDate, "breakfast").then((updatedMeal) => {
         //console.log("updatedMeal", updatedMeal);
         setMeal(updatedMeal);
       });
     }
     if (e.target.id === "lunch" && meal) {
-      editMeal(date, "lunch").then((updatedMeal) => {
+      editMeal(mealDate, "lunch").then((updatedMeal) => {
         //console.log("updatedMeal", updatedMeal);
         setMeal(updatedMeal);
       });
     }
     if (e.target.id === "dinner" && meal) {
-      editMeal(date, "dinner").then((updatedMeal) => {
+      editMeal(mealDate, "dinner").then((updatedMeal) => {
         //console.log("updatedMeal", updatedMeal);
         setMeal(updatedMeal);
       });
     }
     if (e.target.id === "snacks" && meal) {
-      editMeal(date, "snacks").then((updatedMeal) => {
+      editMeal(mealDate, "snacks").then((updatedMeal) => {
         //console.log("updatedMeal", updatedMeal);
         setMeal(updatedMeal);
       });

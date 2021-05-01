@@ -3,11 +3,12 @@ import { Link, Redirect } from "react-router-dom";
 import { getRecipe } from "../../../services/RecipeService";
 import { useParams, useLocation } from "react-router-dom";
 import { addMeal } from "../../../services/MealService";
+import { getStoredDate } from "../../../store/DateStore";
 
-import { useDate } from "../../../hooks/useDateContext";
+//import { useDate } from "../../../hooks/useDateContext";
 
 const RecipeDetail = () => {
-  const { date, setDate } = useDate();
+  //const { date, setDate } = useDate();
 
   const { mealtype } = useLocation();
   //console.log("mealtype", mealtype.mealtype);
@@ -33,10 +34,12 @@ const RecipeDetail = () => {
 
   const { id } = useParams();
 
-  const addDate = () => {
-    let date = new Date();
-    return date.toISOString();
-  };
+  let mealDate = getStoredDate()
+
+  // const addDate = () => {
+  //   // let date = new Date();
+  //   return date.toISOString();
+  // };
 
   useEffect(() => {
     getRecipe(id).then((recipe) => {
@@ -50,7 +53,7 @@ const RecipeDetail = () => {
         },
         calories: recipe.data[0].calories.toFixed(0),
         ingredients: recipe.data[0].ingredientLines,
-        date: addDate(),
+        date: mealDate,
         mealType: [mealtype.mealtype],
         dietLabel: recipe.data[0].dietLabels,
         instructions: recipe.data[0].url,
@@ -61,7 +64,8 @@ const RecipeDetail = () => {
   //console.log("recipe", recipe);
 
   const onClick = () => {
-    addMeal(recipe).then((meal) => {
+    addMeal(recipe)
+    .then((meal) => {
       setRedirect(true)
       //setDate(meal.date);
       //console.log(meal);
@@ -71,6 +75,7 @@ const RecipeDetail = () => {
   if (redirect) {
     return <Redirect to="/meal"/>
   }
+  
   return (
     <div className="RecipeDetail">
       Recipe detail
@@ -99,9 +104,9 @@ const RecipeDetail = () => {
           <p>Fats: {recipe.macros.fats}g</p>
 
           <h4 className="font-weight-bold">How to prepare it:</h4>
-          {/* <div className="embed-responsive embed-responsive-16by9">
-								<iframe className="embed-responsive-item w-75" src={recipe.instructions} title="Cook recipe"></iframe>
-							</div> */}
+          <div className="embed-responsive embed-responsive-16by9">
+						<iframe className="embed-responsive-item w-75" src={recipe.instructions} title="Cook recipe"></iframe>
+					</div>
 
           <button className="btn btn-success" onClick={onClick}>
             Add to menu

@@ -6,6 +6,7 @@ import { editUser, getUserInfo } from '../../services/UserService';
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const GENDERS = ['male', 'female', 'other'];
 
 const validators = {
   // username: value => {
@@ -85,7 +86,8 @@ const ProfileForm = () => {
     avatar: 'https://prod.liveshare.vsengsaas.visualstudio.com/join?CD38E7B67E848E56EC1A6FEA6807F1B33307',
     height: 150,
     weight: 60,
-    age: 16
+    age: 16,
+    gender: 'Male'
   })
   
   useEffect(() => {
@@ -134,6 +136,8 @@ const ProfileForm = () => {
       let value = e.target.value;
       if (e.target.type === "file") {
         value = e.target.files[0];
+      } else if (e.target.id === 'gender') {
+        value = [...e.target.selectedOptions].map(opt => opt.value)
       }
       return {
         ...prevState,
@@ -191,7 +195,7 @@ const ProfileForm = () => {
       })
   }
   
-  const { avatar, username, email, height, weight, age } = userToEdit
+  const { avatar, username, email, height, weight, age, gender} = userToEdit
 
   return (
     !user ? ('loading...') : (
@@ -245,6 +249,21 @@ const ProfileForm = () => {
               value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
               <p>{weight}</p>
+          </div>
+
+          <div className="form-group mt-3">
+            <label htmlFor="gender">Gender</label>
+            <select
+              id="gender"
+              className={`form-control ${errors.gender && "is-invalid"} `}
+              value={gender}
+              onChange={onChange}
+            >
+              {GENDERS.map((g, i) => (
+                <option key={i}>{g}</option>
+              ))}
+            </select>
+            <div className="invalid-feedback">{errors.gender}</div>
           </div>
 
           <div className="mb-3">
@@ -305,9 +324,24 @@ const ProfileForm = () => {
               <p>{weight}</p>      
           </div>
 
+          <div className="form-group mt-3">
+            <label htmlFor="gender">Gender</label>
+            <select
+              id="gender"
+              className={`form-control ${errors.gender && "is-invalid"} `}
+              value={gender}
+              onChange={onChange}
+            >
+              {GENDERS.map((g, i) => (
+                <option key={i}>{g}</option>
+              ))}
+            </select>
+            <div className="invalid-feedback">{errors.gender}</div>
+          </div>
+
           <div className="mb-3">
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="<Avatar" id="avatar"
+              name="<Avatar" id="avatar" required
             />
           {/* <span className="EditAvatar">&#9999;</span> */}
             

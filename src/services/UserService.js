@@ -9,3 +9,7 @@ export const getUserInfo = () => {
 export const editUser = (editedUser) => {
   return http.put('/user/edit', editedUser)
 }
+
+export const deleteUser = () => {
+  return http.delete('/user/delete')
+}
