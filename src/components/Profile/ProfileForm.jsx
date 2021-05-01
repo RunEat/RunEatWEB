@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ProfileForm.css'
 import { useHistory } from 'react-router';
 import { passwordResetEmail } from '../../services/AuthService';
 import { useUser } from '../../hooks/useUserContext';
@@ -196,7 +197,7 @@ const ProfileForm = () => {
   return (
     !user ? ('loading...') : (
       user.avatar ? (
-        <div className="Login mt-4 container d-flex justify-content-center flex-column">
+        <div className="ProfileForm mt-4 container d-flex justify-content-center flex-column">
         <h1>Set Up Profile</h1>
         <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
           
@@ -241,7 +242,7 @@ const ProfileForm = () => {
           <div className="mb-3">
             <label htmlFor="weightRange" className="form-label">Weight</label>
             <input type="range" className="form-range form-control" id="weightRange"
-              id="weight" name="weight" min={40} max={300}
+              id="weight" name="weight" min={40} max={300} 
               value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
               <p>{weight}</p>
@@ -266,8 +267,8 @@ const ProfileForm = () => {
         </div>
       </div>
       ) : (
-      <div className="Login mt-4 container d-flex justify-content-center flex-column">
-        <h1>Finish your Profile</h1>
+      <div className="ProfileForm mt-4 container d-flex justify-content-center flex-column">
+        <h1>Finish your profile</h1>
           <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
             
           <div className="mb-3">
@@ -279,30 +280,30 @@ const ProfileForm = () => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="ageRange" className="form-label">Age</label>
-            <input type="range" className="form-range form-control" id="ageRange"
-              id="age" name="age" min={16} max={120}
+            <label htmlFor="ageRange" className="form-label">Your age</label>
+            <input type="range" className="Slider" id="ageRange"
+              id="age" name="age" min={16} max={120} step="1"
               value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{age}</p>   
+              <p>{age} years old</p>   
           </div>
 
           <div className="mb-3">
-            <label htmlFor="heightRange" className="form-label">Height</label>
+            <label htmlFor="heightRange" className="form-label">Your height</label>
             <input type="range" className="form-range form-control" id="heightRange"
               id="height" name="height" min={130} max={230}
               value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{height}</p>    
+              <p>{height} cm</p>    
           </div>
 
           <div className="mb-3">
-            <label htmlFor="weightRange" className="form-label">Weight</label>
+            <label htmlFor="weightRange" className="form-label">Your weight</label>
             <input type="range" className="form-range form-control" id="weightRange"
               id="weight" name="weight" min={40} max={300}
               value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{weight}</p>      
+              <p>{weight} kg</p>      
           </div>
 
           <div className="mb-3">

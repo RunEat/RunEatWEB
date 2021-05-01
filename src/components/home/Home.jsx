@@ -10,7 +10,7 @@ const Home = () => {
 	const {user} = useUser()
 	
 	return (
-		<div className="Home d-flex justify-content-center align-items-center">
+		<div className="Home text-center d-flex justify-content-center align-items-center">
 			{
 			user ?
 				(
@@ -33,7 +33,7 @@ const Home = () => {
 					<div className="mb-3">
 						<button className="btn btn-success mx-1 w-100"><Link className="link text-white" to="/signup">SIGN UP</Link></button>
 						<p className="mt-3 mb-1">Got a RunEat account?</p>
-						<button className="btn btn-light mx-1 w-100"><Link className="link text-dark" to="/login">LOG IN</Link></button>
+						<button className="btn btn-light mx-1 w-100"><Link className="link text-dark" to="/login-first">LOG IN</Link></button>
 					</div>
 				</div>
 			)
