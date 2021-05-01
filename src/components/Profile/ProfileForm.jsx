@@ -468,8 +468,8 @@ const ProfileForm = () => {
             ))}
           </select> 
         </div> */}
-          <a href="" className="mt-5"><small>Sources of recommendations</small></a>
-          <button type="submit" className="btn text-white w-75 mt-2">NEXT</button>
+          <a href="" className="mt-3"><small>Sources of recommendations</small></a>
+          <button type="submit" className="btn text-white w-75 mt-3">NEXT</button>
         </form>
       </div>
     )
