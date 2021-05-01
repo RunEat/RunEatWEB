@@ -1,0 +1,15 @@
+.imageProfile {
+    height: 8rem;
+    width: 8.2rem;
+    border-radius: 50%;
+    border: .3rem solid #00bd56;
+    position: relative;
+    z-index: +1;
+    top: -3rem;
+    left: 7.2rem;
+
+}
+
+.cover {
+    width: 100%;
+}

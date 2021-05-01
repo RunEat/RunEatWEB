@@ -24,7 +24,7 @@ const Navbar = () => {
         style={{ backgroundColor: "#00bd56" }}
       >
         <Link className="text-white" to="/profile">
-          <i class="fas fa-home p-3" style={{ fontSize: "2.2rem" }}></i>
+          <i class="fas fa-user-alt ms-1" style={{ fontSize: "2.2rem" }}></i>
         </Link>
 
         <Link className="text-white" to="/diary">
