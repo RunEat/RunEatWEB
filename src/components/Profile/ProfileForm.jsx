@@ -267,57 +267,52 @@ const ProfileForm = () => {
         </div>
       </div>
       ) : (
-      <div className="ProfileForm mt-4 container d-flex justify-content-center flex-column">
-        <h1>Finish your profile</h1>
-          <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-            
-          <div className="mb-3">
+      <div className="ProfileForm mt-4 container d-flex justify-content-center flex-column align-items-center text-center">
+        <h1 className="text-center">Finish your profile</h1>
+          <div className="">
             <p>Username: {user.username}</p>
-          </div>
-
-          <div className="mb-3">
             <p>Email: {user.email}</p>
           </div>
 
+          <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
           <div className="mb-3">
             <label htmlFor="ageRange" className="form-label">Your age</label>
             <input type="range" className="Slider" id="ageRange"
               id="age" name="age" min={16} max={120} step="1"
               value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{age} years old</p>   
+            <p className="text-center text-secondary">{age} years old</p>   
           </div>
 
           <div className="mb-3">
             <label htmlFor="heightRange" className="form-label">Your height</label>
-            <input type="range" className="form-range form-control" id="heightRange"
+            <input type="range" className="Slider" id="heightRange"
               id="height" name="height" min={130} max={230}
               value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{height} cm</p>    
+              <p className="text-center text-secondary">{height} cm</p>    
           </div>
 
-          <div className="mb-3">
+          <div className="mb-3 bg-light">
             <label htmlFor="weightRange" className="form-label">Your weight</label>
-            <input type="range" className="form-range form-control" id="weightRange"
-              id="weight" name="weight" min={40} max={300}
+            <input type="range" className="Slider" id="weightRange"
+              id="weight" name="weight" min={40} max={300} step={1}
               value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
-              <p>{weight} kg</p>      
+              <p className="text-center text-secondary">{weight} kg</p>      
           </div>
 
           <div className="mb-3">
-            <input className="form-control" type="file" onClick={onClick} onChange={onChange}
+          <label htmlFor="avatar" className="form-label">Add an image</label>
+            <input className="form-control TextInput" type="file" onClick={onClick} onChange={onChange}
               name="<Avatar" id="avatar"
             />
           {/* <span className="EditAvatar">&#9999;</span> */}
             
           {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
           </div>
-              
-          <button type="submit" className="btn btn-outline-primary">
-          Update
-          </button>
+          <a href="">Sources of recommendations</a>
+          <button type="submit" className="btn text-white w-75">UPDATE</button>
         </form>
       </div>
       )

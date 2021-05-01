@@ -1,4 +1,4 @@
-.ProfileForm .ProfileAvatar {
+ProfileForm .ProfileAvatar {
     position: relative;
 }
 
@@ -22,12 +22,13 @@
 .Slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 25px;
-    background: green;
+    height: 0.2rem;
+    background: #85ef47;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    display: block;
 }
 
 .Slider:hover {
@@ -37,8 +38,19 @@
 .Slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #04AA6D;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: #00bd56;
+    border-radius: 50%;
     cursor: pointer;
+}
+
+.form-label {
+    color: #00bd56;
+}
+
+
+.ProfileForm button {
+    border-radius: 2rem;
+    background: #00bd56
 }
