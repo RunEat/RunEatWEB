@@ -7,7 +7,7 @@ import { editUser, getUserInfo } from '../../services/UserService';
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const GENDERS = ['male', 'female', 'other'];
+const ACTIVITY = ['Low/Sedentary', 'Moderate', 'Active', 'Very active'];
 
 const validators = {
   // username: value => {
@@ -84,12 +84,13 @@ const ProfileForm = () => {
   const { user, setUser } = useUser();
   
   const [userToEdit, setUserToEdit] = useState({
-    avatar: 'https://prod.liveshare.vsengsaas.visualstudio.com/join?CD38E7B67E848E56EC1A6FEA6807F1B33307',
+    avatar:
+      "https://prod.liveshare.vsengsaas.visualstudio.com/join?CD38E7B67E848E56EC1A6FEA6807F1B33307",
     height: 150,
     weight: 60,
     age: 16,
-    gender: 'Male'
-  })
+    activity: "Sendentary",
+  });
   
   useEffect(() => {
     getUserInfo()
@@ -137,8 +138,8 @@ const ProfileForm = () => {
       let value = e.target.value;
       if (e.target.type === "file") {
         value = e.target.files[0];
-      } else if (e.target.id === 'gender') {
-        value = [...e.target.selectedOptions].map(opt => opt.value)
+      } else if (e.target.id === "activity") {
+        value = [...e.target.selectedOptions].map((opt) => opt.value);
       }
       return {
         ...prevState,
@@ -196,61 +197,147 @@ const ProfileForm = () => {
       })
   }
   
-  const { avatar, username, email, height, weight, age, activity } = userToEdit
+  const { avatar, username, email, height, weight, age, activity} = userToEdit;
 
-  return (
-    !user ? ('loading...') : (
-      user.avatar ? (
-        <div className="ProfileForm mt-4 container d-flex justify-content-center flex-column">
-        <h2>Set Up Profile</h2>
-        <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-          
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username (Name y Surname?)</label>
-            <input
-              placeholder={user.username} className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
-              type="username" id="username" name="username" autoComplete="off"
-              value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-            <div className="invalid-feedback">{errors.username}</div>
-          </div>
+  return !user ? (
+    "loading..."
+  ) : user.avatar ? (
+    <div className="Login mt-4 container d-flex justify-content-center flex-column">
+      <h1>Set Up Profile</h1>
+      <form
+        className="align-self-center"
+        onSubmit={onSubmit}
+        style={{ maxWidth: 500 }}
+      >
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username (Name y Surname?)
+          </label>
+          <input
+            placeholder={user.username}
+            className={`form-control ${
+              touched.username && errors.username ? "is-invalid" : ""
+            }`}
+            type="username"
+            id="username"
+            name="username"
+            autoComplete="off"
+            value={username}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.username}</div>
+        </div>
 
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input
-              placeholder={user.email} className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
-              type="email" id="email" name="email"
-              value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-            <div className="invalid-feedback">{errors.email}</div>
-          </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            placeholder={user.email}
+            className={`form-control ${
+              touched.email && errors.email ? "is-invalid" : ""
+            }`}
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{errors.email}</div>
+        </div>
 
-          <div className="mb-3">
-            <label htmlFor="ageRange" className="form-label">Age</label>
-            <input type="range" className="form-range form-control" id="ageRange"
-              id="age" name="age" min={16} max={120}
-              value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-              <p>{age}</p>  
-          </div>
+        <div className="mb-3">
+          <label htmlFor="ageRange" className="form-label">
+            Age
+          </label>
+          <input
+            type="range"
+            className="form-range form-control"
+            id="ageRange"
+            id="age"
+            name="age"
+            min={16}
+            max={120}
+            value={age}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p>{age}</p>
+        </div>
 
-          <div className="mb-3">
-            <label htmlFor="heightRange" className="form-label">Height</label>
-            <input type="range" className="form-range form-control" id="heightRange"
-              id="height" name="height" min={130} max={230}
-              value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-              <p>{height}</p> 
-          </div>
+        <div className="mb-3">
+          <label htmlFor="heightRange" className="form-label">
+            Height
+          </label>
+          <input
+            type="range"
+            className="form-range form-control"
+            id="heightRange"
+            id="height"
+            name="height"
+            min={130}
+            max={230}
+            value={height}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p>{height}</p>
+        </div>
 
-          <div className="mb-3">
-            <label htmlFor="weightRange" className="form-label">Weight</label>
-            <input type="range" className="form-range form-control" id="weightRange"
-              id="weight" name="weight" min={40} max={300} 
-              value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-              <p>{weight}</p>
-          </div>
+        <div className="mb-3">
+          <label htmlFor="weightRange" className="form-label">
+            Weight
+          </label>
+          <input
+            type="range"
+            className="form-range form-control"
+            id="weightRange"
+            id="weight"
+            name="weight"
+            min={40}
+            max={300}
+            value={weight}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p>{weight}</p>
+        </div>
+
+        <div className="form-group mt-3">
+          <label htmlFor="activity">What's your activity level?</label>
+          <select
+            id="activity"
+            className={`form-control ${errors.activity && "is-invalid"} `}
+            value={activity}
+            onChange={onChange}
+          >
+            {ACTIVITY.map((g, i) => (
+              <option key={i}>{g}</option>
+            ))}
+          </select>
+          <div className="invalid-feedback">{errors.activity}</div>
+        </div>
+
+        <div className="mb-3">
+          <input
+            className="form-control"
+            type="file"
+            onClick={onClick}
+            onChange={onChange}
+            name="<Avatar"
+            id="avatar"
+          />
+          {/* <span className="EditAvatar">&#9999;</span> */}
+
+          {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
+        </div>
 
           <div className="form-group mt-3">
             <label htmlFor="gender">Gender</label>
@@ -267,23 +354,16 @@ const ProfileForm = () => {
             <div className="invalid-feedback">{errors.gender}</div>
           </div>
 
-          <div className="mb-3">
-            <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="<Avatar" id="avatar"
-            />
-          {/* <span className="EditAvatar">&#9999;</span> */}
-            
-          {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
-          </div>
 
-          <button type="submit" className="btn btn-outline-primary">
+        <button type="submit" className="btn btn-outline-primary">
           Update
-          </button>
-        </form>
-        
-        <div className="d-grid gap-2 col-8 mx-auto mt-3">
-          <button className="btn btn-danger" onClick={changePassword}>Update my password</button>
-        </div>
+        </button>
+      </form>
+
+      <div className="d-grid gap-2 col-8 mx-auto mt-3">
+        <button className="btn btn-danger" onClick={changePassword}>
+          Update my password
+        </button>
       </div>
       ) : (
       <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
@@ -355,6 +435,21 @@ const ProfileForm = () => {
             </select>
             <div className="invalid-feedback">{errors.gender}</div>
           </div>
+
+        <div className="form-group mt-3">
+          <label htmlFor="activity">What's your activity level?</label>
+          <select
+            id="activity"
+            className={`form-control ${errors.activity && "is-invalid"} `}
+            value={activity}
+            onChange={onChange}
+          >
+            {ACTIVITY.map((g, i) => (
+              <option key={i}>{g}</option>
+            ))}
+          </select>
+          <div className="invalid-feedback">{errors.activity}</div>
+        </div>
 
           <a href=""><small>Sources of recommendations</small></a>
           <button type="submit" className="btn text-white w-75 mt-2">NEXT</button>

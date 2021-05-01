@@ -7,7 +7,8 @@ import { logout } from '../../store/AccessTokenStore';
 
 const Home = () => {
 
-	const {user} = useUser()
+	const { user } = useUser()
+	
 	
 	return (
 		<div className="Home text-center d-flex justify-content-center align-items-center">

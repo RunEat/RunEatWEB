@@ -1,28 +1,86 @@
-import React from 'react';
-import {Doughnut} from 'react-chartjs-2'
+import React, { useEffect, useState } from "react";
+import { Doughnut } from "react-chartjs-2";
+import { maximumCalories } from "../../Utils/CalculateCalories";
+import { useUser } from "../../hooks/useUserContext";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
-function TotalCalories({ meal }) {
-    
-    //console.log('Meal totalCalories', meal)
-    
-    return (
-        <div className="TotalCalories">
-            <Doughnut
-                data={{
-                    labels: ['Maximun calories', 'Calories'],
-                    datasets: [{
-                        labels: 'Calories',
-                        data: [12, 3],
-                        backgroundColor: ['green', 'grey']
+const TotalCalories = ({ meal }) => {
+  //console.log('Meal totalCalories', meal)
+  const [maxCalories, setMaxCalories] = useState();
+  const [calories, setCalories] = useState();
 
-                    }]
-                }}
-                height={200}
-                weight={200}
-                options={{ maintainAspectRatio: false }}
-            />
-        </div>
-    );
-}
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      setMaxCalories(maximumCalories(user));
+    }
+  }, [user]);
+
+  console.log("meal", meal);
+
+  useEffect(() => {
+    if (meal) {
+      let breakfast = meal.mealType.breakfast
+        ? meal.mealType.breakfast.calories
+        : 0;
+      let lunch = meal.mealType.lunch ? meal.mealType.lunch.calories : 0;
+      let dinner = meal.mealType.dinner ? meal.mealType.dinner.calories : 0;
+      let snacks = meal.mealType.snacks ? meal.mealType.snacks.calories : 0;
+
+      setCalories(breakfast + lunch + dinner + snacks);
+    }
+  }, [meal]);
+
+  return (
+    <div className="TotalCalories">
+      {user ? (
+        <>
+          <CircularProgressbarWithChildren
+            value={calories}
+            maxValue={maxCalories}
+            styles={buildStyles({
+              backgroundColor: "#85ef47",
+              trailColor: "#d6d6d6",
+            })}
+          ></CircularProgressbarWithChildren>
+          <div>
+            <strong>Calories: {calories}</strong> cal
+            <br />
+            <strong>MaxCalories: {maxCalories}</strong> cal
+          </div>
+          {/* <Doughnut
+            data={{
+              labels: ["Maximun", "Calories"],
+              datasets: [
+                {
+                  labels: "Calories",
+                  data: [calories, maxCalories],
+                  backgroundColor: ["green", "grey"],
+                },
+              ],
+            }}
+            height={200}
+            weight={200}
+            options={{
+              ticks: {
+                stepSize: 1,
+                min: 0,
+                max: maxCalories,
+              },
+              maintainAspectRatio: false,
+            }}
+          /> */}
+        </>
+      ) : (
+        "Calculate.."
+      )}
+    </div>
+  );
+};
 
 export default TotalCalories;
