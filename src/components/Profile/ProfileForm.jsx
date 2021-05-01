@@ -339,7 +339,7 @@ const ProfileForm = () => {
           {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
         </div>
 
-          <div className="form-group mt-3">
+        {/* <div className="form-group mt-3">
             <label htmlFor="gender">Gender</label>
             <select
               id="gender"
@@ -352,7 +352,7 @@ const ProfileForm = () => {
               ))}
             </select>
             <div className="invalid-feedback">{errors.gender}</div>
-          </div>
+          </div> */}
 
 
         <button type="submit" className="btn btn-outline-primary">
@@ -364,7 +364,8 @@ const ProfileForm = () => {
         <button className="btn btn-danger" onClick={changePassword}>
           Update my password
         </button>
-      </div>
+        </div>
+    </div>
       ) : (
       <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
         <h2 className="text-center mt-4 text-secondary">FINISH YOUR PROFILE</h2>
@@ -420,8 +421,10 @@ const ProfileForm = () => {
           </label>
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
               name="<Avatar" id="avatar" placeholder="add an image" hidden
+            />
+          </div>
 
-          <div className="form-group mt-3">
+          {/* <div className="form-group mt-3">
             <label htmlFor="gender">Gender</label>
             <select
               id="gender"
@@ -434,7 +437,7 @@ const ProfileForm = () => {
               ))}
             </select>
             <div className="invalid-feedback">{errors.gender}</div>
-          </div>
+          </div> */}
 
         <div className="form-group mt-3">
           <label htmlFor="activity">What's your activity level?</label>
@@ -455,9 +458,7 @@ const ProfileForm = () => {
           <button type="submit" className="btn text-white w-75 mt-2">NEXT</button>
         </form>
       </div>
-      )
     )
-  );
-};
+}
 
 export default ProfileForm;
