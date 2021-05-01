@@ -1,8 +1,21 @@
-ProfileForm .ProfileAvatar {
+.ProfileForm a {
+    color:  #00bd56;
+}
+
+/* .ProfileForm  h2 {
+    color:  #00bd56;
+} */
+
+.ProfileForm  h1 {
+    background-color:  gray;
+    border-radius: 2rem;
+}
+
+.ProfileForm .ProfileAvatar {
     position: relative;
 }
 
-.ProfileForm.ProfileAvatar .EditAvatar {
+.ProfileForm .ProfileAvatar .EditAvatar {
     position: absolute;
     right: 0.4 rem;
     top: 0.2 rem;
@@ -19,10 +32,10 @@ ProfileForm .ProfileAvatar {
     transition: opacity .2s;
 } */
 
-.Slider {
+.ProfileForm .Slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 0.2rem;
+    height: 0.1rem;
     background: #85ef47;
     outline: none;
     opacity: 0.7;
@@ -38,10 +51,10 @@ ProfileForm .ProfileAvatar {
 .Slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 1.3rem;
+    width: 0.7rem;
     height: 1.3rem;
     background: #00bd56;
-    border-radius: 50%;
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 
@@ -49,8 +62,19 @@ ProfileForm .ProfileAvatar {
     color: #00bd56;
 }
 
-
 .ProfileForm button {
     border-radius: 2rem;
     background: #00bd56
+}
+
+input:active,
+input:focus,
+button:focus,
+button:active,
+label:focus,
+.btn:active,
+.btn.active {
+	outline: 0px !important;
+	-webkit-appearance: none;
+	box-shadow: none !important;
 }

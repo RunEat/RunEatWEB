@@ -1,0 +1,35 @@
+/* CHECK EMAIL */
+
+.CheckEmail {
+	height: 51rem;
+}
+
+.colorTitles {
+	color: #fff;
+}
+
+/* .boxCheckEmail {
+	border: 2px solid #00bd56;
+	border-radius: 3rem;
+	margin: 0 1rem 0 1rem;
+} */
+
+.backgroundCheckEmail{
+	background-color: #00bd56;
+}
+
+
+
+/* ACTIVATE */
+
+.heightActivate{
+	height: 45rem;
+}
+
+
+/* SIGNUP */
+
+.signupIcon {
+	font-size: 5rem;
+	color: #ff9d20
+}

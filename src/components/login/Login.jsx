@@ -157,7 +157,7 @@ const Login = () => {
           </div>
 
           <div className="d-grid gap-2 col-8 mx-auto mb-5 w-100">
-            <button className="border-0 bg-transparent" style={{color: '#757e85', 'font-size': '.7rem'}} onClick={changePassword}>
+            <button className="border-0 bg-transparent" style={{color: '#757e85', 'fontSize': '.7rem'}} onClick={changePassword}>
               GET NEW PASSWORD?
             </button>
           </div>
