@@ -197,24 +197,48 @@ const ProfileForm = () => {
       })
   }
   
-  const { avatar, username, email, height, weight, age, activity} = userToEdit;
+  const { avatar, username, email, height, weight, age, activity, mealPlan } = userToEdit;
 
   return !user ? (
     "loading..."
   ) : user.avatar ? (
-    <div className="Login mt-4 container d-flex justify-content-center flex-column">
-      <h1>Set Up Profile</h1>
-      <form
-        className="align-self-center"
-        onSubmit={onSubmit}
-        style={{ maxWidth: 500 }}
-      >
-        <div className="mb-3">
+    <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
+      <h2 className="text-secondary">PROFILE SETUP</h2>
+      
+      <form className="d-flex flex-column align-items-center mb-4 mt-2 w-100" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+          {/* <div className="mb-3 w-75">
+            <label htmlFor="mealPlan" className="form-label"><small>Choose your meal plan</small></label>
+            <select type="range" className="Slider my-2" id="mealPlan"
+              id="age" name="age" min={16} max={120}
+              value={mealPlan} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+            <p className="text-center text-secondary"><small>{age} years old</small></p>   
+          </div> */}
+        
+      
+        <div className="mb-1 w-75">
+          <label htmlFor="avatar" className="form-label">
+            <small>Update your profile picture</small>
+            <br/>
+            <div style={{position: 'relative'}} className="mt-1">
+              <img 
+                src={avatar} alt={user.username} onChange={onChange} 
+                className="ProfileAvatar img-fluid oldAvatar img-thumbnail p-0"
+              />
+              <i className="fas fa-upload text-secondary fs-5 py-2 m-1 newPicture"></i>
+            </div>
+          </label>
+          <input className="form-control" type="file" onClick={onClick} onChange={onChange}
+              name="<Avatar" id="avatar" placeholder="add an image" hidden
+          />
+        </div>
+
+        <div className="w-75 mb-3">
           <label htmlFor="username" className="form-label">
-            Username (Name y Surname?)
+            <small>Username</small>
           </label>
           <input
-            placeholder={user.username}
+            placeholder={username}
             className={`form-control ${
               touched.username && errors.username ? "is-invalid" : ""
             }`}
@@ -230,9 +254,9 @@ const ProfileForm = () => {
           <div className="invalid-feedback">{errors.username}</div>
         </div>
 
-        <div className="mb-3">
+        <div className="mb-3 w-75">
           <label htmlFor="email" className="form-label">
-            Email
+            <small>Email</small>
           </label>
           <input
             placeholder={user.email}
@@ -250,148 +274,53 @@ const ProfileForm = () => {
           <div className="invalid-feedback">{errors.email}</div>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="ageRange" className="form-label">
-            Age
-          </label>
-          <input
-            type="range"
-            className="form-range form-control"
-            id="ageRange"
-            id="age"
-            name="age"
-            min={16}
-            max={120}
-            value={age}
-            onChange={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
-          />
-          <p>{age}</p>
-        </div>
+          <div className="mb-3">
+            <label className="form-label"><small>What's your activity level?</small></label>
+            <br/>
+            {
+              ACTIVITY.map((act, idx) => (
+                  <>
+                    <input 
+                      type="checkbox" 
+                      key={idx}
+                      id={act} 
+                      name={act} 
+                      value={act} 
+                      className="btn-check" 
+                      autoComplete="off"
+                    />
+                    <label 
+                      htmlFor={act} 
+                      key={idx + 10} 
+                      className="btn m-2 text-white"
+                    >
+                      {act}
+                    </label>
+                  </>
+                ))
+            }
+            <div className="invalid-feedback">{errors.activity}</div>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="heightRange" className="form-label">
-            Height
-          </label>
-          <input
-            type="range"
-            className="form-range form-control"
-            id="heightRange"
-            id="height"
-            name="height"
-            min={130}
-            max={230}
-            value={height}
-            onChange={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
-          />
-          <p>{height}</p>
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="weightRange" className="form-label">
-            Weight
-          </label>
-          <input
-            type="range"
-            className="form-range form-control"
-            id="weightRange"
-            id="weight"
-            name="weight"
-            min={40}
-            max={300}
-            value={weight}
-            onChange={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
-          />
-          <p>{weight}</p>
-        </div>
-
-        <div className="form-group mt-3">
-          <label htmlFor="activity">What's your activity level?</label>
-          <select
-            id="activity"
-            className={`form-control ${errors.activity && "is-invalid"} `}
-            value={activity}
-            onChange={onChange}
-          >
-            {ACTIVITY.map((g, i) => (
-              <option key={i}>{g}</option>
-            ))}
-          </select>
-          <div className="invalid-feedback">{errors.activity}</div>
-        </div>
-
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="file"
-            onClick={onClick}
-            onChange={onChange}
-            name="<Avatar"
-            id="avatar"
-          />
-          {/* <span className="EditAvatar">&#9999;</span> */}
-
-          {/* <img src={avatar} alt={user.username} onChange={onChange} className="ProfileAvatar" />*/}
-        </div>
-
-        {/* <div className="form-group mt-3">
-            <label htmlFor="gender">Gender</label>
-            <select
-              id="gender"
-              className={`form-control ${errors.gender && "is-invalid"} `}
-              value={gender}
-              onChange={onChange}
-            >
-              {GENDERS.map((g, i) => (
-                <option key={i}>{g}</option>
-              ))}
-            </select>
-            <div className="invalid-feedback">{errors.gender}</div>
-          </div> */}
-
-
-        <button type="submit" className="btn btn-outline-primary">
-          Update
-        </button>
-      </form>
-
-      <div className="d-grid gap-2 col-8 mx-auto mt-3">
-        <button className="btn btn-danger" onClick={changePassword}>
-          Update my password
-        </button>
-        </div>
-    </div>
-      ) : (
-      <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
-        <h2 className="text-center mt-4 text-secondary">FINISH YOUR PROFILE</h2>
-          {/* <div className="">
-            <p>Username: {user.username}</p>
-            <p>Email: {user.email}</p>
-          </div> */}
-
-          <form className="d-flex flex-column align-items-center my-4 w-100" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-          {/* <div className="mb-3 w-75">
-            <label htmlFor="mealPlan" className="form-label"><small>Choose your meal plan</small></label>
-            <select type="range" className="Slider my-2" id="mealPlan"
-              id="age" name="age" min={16} max={120}
-              value={mealPlan} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-            <p className="text-center text-secondary"><small>{age} years old</small></p>   
-          </div> */}
-          
-          
           <div className="mb-3 w-75">
-            <label htmlFor="ageRange" className="form-label"><small>Your age</small></label>
-            <input type="range" className="Slider my-2" id="ageRange"
-              id="age" name="age" min={16} max={120}
-              value={age} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            <label htmlFor="ageRange" className="form-label">
+              <small>Your age</small>
+            </label>
+            <input 
+              type="range" 
+              className="Slider my-2" 
+              id="ageRange"
+              id="age" 
+              name="age" 
+              min={16} max={120}
+              value={age} 
+              onChange={onChange} 
+              onBlur={onBlur} 
+              onFocus={onFocus}
             />
-            <p className="text-center text-secondary"><small>{age} years old</small></p>   
+            <p className="text-center text-secondary">
+              <small>{age} years old</small>
+            </p>   
           </div>
 
           <div className="mb-3 w-75">
@@ -406,34 +335,128 @@ const ProfileForm = () => {
           <div className="mb-3 w-75">
             <label htmlFor="weightRange" className="form-label"><small>Your weight</small></label>
             <input type="range" className="Slider my-2" id="weightRange"
-              id="weight" name="weight" min={40} max={300}
+              id="weight" name="weight" min={40} max={300} step={0.5}
               value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
             />
               <p className="text-center text-secondary"><small>{weight} kg</small></p>      
           </div>
 
-          <div className="mb-3">
-          <label className="form-label"><small>What's your activity level?</small></label>
-          <br/>
-          {
-            ACTIVITY.map((act, idx) => (
-                <div  key={idx} className="d-inline">
-                <input type="radio" id={act} name={act} 
-                  value={act} className="btn btn-check checked" autoComplete="off"
-                />
-                <label htmlFor={act} className="btn m-2 text-white">{act}</label>
-                </div>
-              ))
-          }
-          <div className="invalid-feedback">{errors.activity}</div>
+          {/* <div className="form-group mt-3">
+            <label htmlFor="mealPlan">Meal Plan</label>
+            <select
+              id="mealPlan"
+              className={`form-control ${errors.mealPlan && "is-invalid"} `}
+              value={mealPlan}
+              onChange={onChange}
+            >
+              {MEAL_PLAN.map((g, i) => (
+                <option key={i}>{g}</option>
+              ))}
+            </select>
+            <div className="invalid-feedback">{errors.mealPlan}</div>
+          </div> */}
 
-        </div>
+          <a href="" className="mt-3"><small>Sources of recommendations</small></a>
+          <button type="submit" className="btn text-white w-75 mt-3">SAVE CHANGES</button>
+        </form>
+        
+      <div className="d-grid gap-2 col-8 mx-auto m-3">
+        <a className="text-secondary" onClick={changePassword}>
+          Update my password
+        </a>
+      </div>
+    </div>
+      ) : (
+      <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
+        <h2 className="text-center text-secondary">FINISH YOUR PROFILE</h2>
+          {/* <div className="">
+            <p>Username: {user.username}</p>
+            <p>Email: {user.email}</p>
+          </div> */}
+
+          <form className="d-flex flex-column align-items-center my-4 w-100" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
+          {/* <div className="mb-3 w-75">
+            <label htmlFor="mealPlan" className="form-label"><small>Choose your meal plan</small></label>
+            <select type="range" className="Slider my-2" id="mealPlan"
+              id="age" name="age" min={16} max={120}
+              value={mealPlan} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+            <p className="text-center text-secondary"><small>{age} years old</small></p>   
+          </div> */}
+
+
+          <div className="mb-3">
+            <label className="form-label"><small>What's your activity level?</small></label>
+            <br/>
+            {
+              ACTIVITY.map((act, idx) => (
+                  <>
+                    <input 
+                      type="checkbox" 
+                      key={idx}
+                      id={act} 
+                      name={act} 
+                      value={act} 
+                      className="btn-check" 
+                      autoComplete="off"
+                    />
+                    <label 
+                      htmlFor={act} 
+                      key={idx + 10} 
+                      className="btn m-2 text-white"
+                    >
+                      {act}
+                    </label>
+                  </>
+                ))
+            }
+            <div className="invalid-feedback">{errors.activity}</div>
+          </div>
+
+          <div className="mb-3 w-75">
+            <label htmlFor="ageRange" className="form-label">
+              <small>Your age</small>
+            </label>
+            <input 
+              type="range" 
+              className="Slider my-2" 
+              id="ageRange"
+              id="age" 
+              name="age" 
+              min={16} max={120}
+              value={age} 
+              onChange={onChange} 
+              onBlur={onBlur} 
+              onFocus={onFocus}
+            />
+            <p className="text-center text-secondary">
+              <small>{age} years old</small>
+            </p>   
+          </div>
+
+          <div className="mb-3 w-75">
+            <label htmlFor="heightRange" className="form-label"><small>Your height</small></label>
+            <input type="range" className="Slider my-2" id="heightRange"
+              id="height" name="height" min={130} max={230}
+              value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p className="text-center text-secondary"><small>{height} cm</small></p>    
+          </div>
+
+          <div className="mb-3 w-75">
+            <label htmlFor="weightRange" className="form-label"><small>Your weight</small></label>
+            <input type="range" className="Slider my-2" id="weightRange"
+              id="weight" name="weight" min={40} max={300} step={0.5}
+              value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
+            />
+              <p className="text-center text-secondary"><small>{weight} kg</small></p>      
+          </div>
 
           <div className="mb-3 w-75">
           <label htmlFor="avatar" className="form-label">
-            <small>Add an image</small>
+            <small>Add your profile picture</small>
             <br/>
-            <i className="fas fa-upload text-secondary fs-1 p-4"></i>
+            <i className="fas fa-upload text-secondary fs-1 p-4 mt-1"></i>
           </label>
             <input className="form-control" type="file" onClick={onClick} onChange={onChange}
               name="<Avatar" id="avatar" placeholder="add an image" hidden
@@ -441,18 +464,18 @@ const ProfileForm = () => {
           </div>
 
           {/* <div className="form-group mt-3">
-            <label htmlFor="gender">Gender</label>
+            <label htmlFor="mealPlan">Gender</label>
             <select
-              id="gender"
-              className={`form-control ${errors.gender && "is-invalid"} `}
-              value={gender}
+              id="mealPlan"
+              className={`form-control ${errors.mealPlan && "is-invalid"} `}
+              value={mealPlan}
               onChange={onChange}
             >
               {GENDERS.map((g, i) => (
                 <option key={i}>{g}</option>
               ))}
             </select>
-            <div className="invalid-feedback">{errors.gender}</div>
+            <div className="invalid-feedback">{errors.mealPlan}</div>
           </div> */}
 
         {/* <div className="mt-3">

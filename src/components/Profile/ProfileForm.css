@@ -21,14 +21,28 @@
     border-radius: 2rem;
 }
 
-.ProfileForm .ProfileAvatar {
-    position: relative;
+.ProfileForm .oldAvatar {
+    opacity: 0.6;
+    border-radius: 50%;
+    width: 12rem;
+    height: 12rem;
+    border: 0.3rem solid gainsboro;
+    object-fit: cover;
 }
 
-.ProfileForm .ProfileAvatar .EditAvatar {
+/* .ProfileForm .ProfileAvatar .EditAvatar {
     position: absolute;
     right: 0.4 rem;
     top: 0.2 rem;
+} */
+
+.ProfileForm .newPicture {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 5rem;
 }
 
 /* .ProfileForm .Slider {
@@ -77,7 +91,7 @@
     background: #00bd56;
 }
 
-input:active,
+/* input:active,
 input:focus,
 button:focus,
 button:active,
@@ -89,12 +103,12 @@ select:active,
 	outline: 0px !important;
 	-webkit-appearance: none;
 	box-shadow: none !important;
-}
+} */
 
-button:active,
+/* button:active,
 button:focus {
     background-color: white;
-}
+} */
 
 .fa-upload {
     background-color: gainsboro;

@@ -86,6 +86,7 @@ const Signup = () => {
     height: 150,
     weight: 60,
     age: 16,
+    activity: ['Sedentary']
 	})
 
 	const [errors, setErrors] = useState({
