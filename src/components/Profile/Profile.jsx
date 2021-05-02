@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useUser } from "../../hooks/useUserContext";
 import { Link, Redirect } from "react-router-dom";
+import { logout } from "../../store/AccessTokenStore";
 import Navbar from "../Navbar/Navbar";
 import './Profile.css'
 
@@ -24,29 +25,29 @@ function Profile() {
   ) : !user.avatar ? (
     <Redirect to="/profile/edit" />
   ) : (
-    <div
-      className="Profile container mt-3"
-      style={{ maxHeight: "85vh", overflow: "scroll" }}
-    >
+    <div className="Profile" style={{ maxHeight: "85vh", overflow: "scroll" }}>
       {user ? (
         <>
-            <img
-              src='./images/cover.jpeg'
-              className="cover"
-              alt={user.username}
-            />
-            <img
-              src={user.avatar}
-              className="imageProfile"
-              alt={user.username}
-              />
-              
-          <div className="InfoProfile text-center border border-2 border-light p-3">
+          <img
+            src="https://source.unsplash.com/user/brookelark/1600x900"
+            className="cover"
+            alt={user.username}
+          />
+          <img src={user.avatar} className="imageProfile" alt={user.username} />
+
+          <div className="InfoProfile text-center border border-2 border-light me-2 ms-2 p-2">
             <h2>{user.username}</h2>
             <p>Activity level · {user.activity}</p>
+            <p>
+              {user.age} years-old{" "}
+              <i
+                class="fas fa-birthday-cake fs-2 ms-2"
+                style={{ color: "red" }}
+              ></i>
+            </p>
           </div>
 
-          <div className="d-flex justify-content-around align-items-center mt-4 border border-2 border-light p-4">
+          <div className="d-flex justify-content-around align-items-center mt-4 border border-2 border-light me-2 ms-2 p-2">
             <div className="InfoBody">
               <button
                 onClick={showBodyF}
@@ -85,22 +86,53 @@ function Profile() {
           </div>
 
           {showBody && (
-            <div className="d-flex justify-content-around align-items-center mt-3 border border-2 border-light p-5">
-              <p className="card-text">Age: {user.age}</p>
-              <p className="card-text">Height: {user.height}</p>
-              <p className="card-text">Weight: {user.weight}</p>
+            <div className="d-flex flex-column justify-content-around align-items-center mt-3 border border-2 border-light p-2 me-2 ms-2">
+              <div className="d-flex mt-3">
+                <p className="card-text me-4">
+                  <i
+                    class="fas fa-ruler-vertical me-2 fs-1 align-items-center"
+                    style={{ color: "#207dff" }}
+                  ></i>
+                  {user.height} cm
+                </p>
+                <p className="card-text">
+                  <i
+                    class="fas fa-weight me-2 fs-1"
+                    style={{ color: "#207dff" }}
+                  ></i>
+                  {user.weight} Kg
+                </p>
+              </div>
             </div>
           )}
           {showSettings && (
-            <div className="d-flex justify-content-around align-items-center mt-3 border border-2 border-light p-5">
-              <p className="card-text">Age: {user.age}</p>
-              <p className="card-text">Email: {user.email}</p>
-              <Link to="/profile/edit" className="btn btn-primary">
-                Edit Profile
-              </Link>
-              <Link to="/profile/delete" className="btn btn-primary">
-                Delete Account
-              </Link>
+            <div className="d-flex flex-column justify-content-around align-items-center mt-3 border border-2 border-light p-2 me-2 ms-2">
+              <div>
+                <h4 className="card-text">Email:</h4>
+                <p>{user.email}</p>
+              </div>
+              <div className="d-flex flex-column align-items-center justify-content-center mt-3">
+                <Link to="/profile/edit" className="btn btn-primary mt-2">
+                  <i class="fas fa-edit me-2" style={{ color: "#fff" }}></i>
+                  Edit Profile
+                </Link>
+                <Link to="/profile/delete" className="btn btn-primary mt-2">
+                  <i
+                    class="fas fa-trash-alt me-2"
+                    style={{ color: "#fff" }}
+                  ></i>
+                  Delete Account
+                </Link>
+                <div
+                  className="d-flex align-items-start mt-2"
+                  style={{ color: "red" }}
+                >
+                  <button className="btn btn-danger mx-1" onClick={logout}>
+                    <i class="fas fa-power-off fs-4 me-2"></i>
+                    Log out
+                  </button>
+                </div>
+              </div>
             </div>
           )}
 
