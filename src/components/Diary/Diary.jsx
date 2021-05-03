@@ -17,7 +17,7 @@ const Diary = () => {
   const { date, setDate } = useDate();
   const { user, setUser } = useUser();
 
-  const [diary, setDiary] = useState();
+  const [diary, setDiary] = useState(); //TODO: Meter estado inicial
 
   const totalCalories = () => {
     let breakfast = diary.meal.mealType.breakfast
