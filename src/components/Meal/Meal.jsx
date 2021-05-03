@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import TotalCalories from './TotalCalories'
 import MacrosChart from './MacrosChart'
 import Menu from './Menu/Menu';
+import Navbar from "../Navbar/Navbar";
 import { getMeal } from "../../services/MealService";
 import { useDate } from "../../hooks/useDateContext";
 import { useUser } from '../../hooks/useUserContext';
 import { getStoredDate } from '../../store/DateStore';
 import SyncLoader from 'react-spinners/SyncLoader';
 import { Link } from 'react-router-dom';
+
 
 const Meal = () => {
 
@@ -37,12 +39,11 @@ const Meal = () => {
   ) : (
     //user.id == meal.user.id &&
     <div className="Meal">
-      <Link to="/">Back to home</Link>
-      <Link to="/diary">Back to diary</Link>
       <h1>Day food: {mealDate}</h1>
       <TotalCalories meal={meal} />
       <MacrosChart meal={meal} />
       <Menu meal={meal} setMeal={setMeal} />
+      <Navbar/>
     </div>
   );
 };

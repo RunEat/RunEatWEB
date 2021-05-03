@@ -4,6 +4,9 @@ import { getRecipe } from "../../../services/RecipeService";
 import { useParams, useLocation } from "react-router-dom";
 import { addMeal } from "../../../services/MealService";
 import { getStoredDate } from "../../../store/DateStore";
+import SyncLoader from "react-spinners/SyncLoader";
+import './RecipeDetail.css'
+import Navbar from "../../Navbar/Navbar";
 
 //import { useDate } from "../../../hooks/useDateContext";
 
@@ -78,40 +81,57 @@ const RecipeDetail = () => {
   
   return (
     <div className="RecipeDetail">
-      Recipe detail
       {!recipe ? (
-        <p>Loading...</p>
+        <div className="text-center">
+          <SyncLoader color="#3ec4fc" />
+        </div>
       ) : (
         <>
-          <h1>Recipe Detail</h1>
-          <img className="w-75" src={recipe.image} />
-          <p>Name: {recipe.name}</p>
-          <p>Diet label:</p>
-          {recipe.dietLabel.map((dietLabel, i) => (
-            <p key={i}>{dietLabel}</p>
-          ))}
-          <p>Ingredients:</p>
-          <ul>
-            {recipe.ingredients.map((ingredientLine, i) => (
-              <li key={i}>{ingredientLine}</li>
+          <img className="w-100" src={recipe.image}></img>
+          <Link to="/meal" className="iconBack">
+            <i className="fas fa-chevron-left ms-4 colorLink"></i>
+          </Link>
+          <div className="text-center">
+            <button className="btnAddMenu w-50 fs-3" onClick={onClick}>
+              Add to menu
+            </button>
+          </div>
+
+          <div className="container text-center">
+            <h1>{recipe.name}</h1>
+            {recipe.dietLabel.map((dietLabel, i) => (
+              <p key={i} className="d-inline dietLabelTag ms-2 p-1">
+                {dietLabel}
+              </p>
             ))}
-          </ul>
+            <h4 className="mt-5">Ingredients:</h4>
+            <div className="ingredients pt-3">
+              <ul>
+                {recipe.ingredients.map((ingredientLine, i) => (
+                  <li key={i}>{ingredientLine}</li>
+                ))}
+              </ul>
+            </div>
 
-          <p>Calories: {recipe.calories} cal</p>
+            <h4 className="mt-5 mb-3">Nutritional information:</h4>
+            <p>Calories: ....................... {recipe.calories} cal</p>
 
-          <p>Carbohidrates: {recipe.macros.carbs}g</p>
-          <p>Proteins: {recipe.macros.proteins}g</p>
-          <p>Fats: {recipe.macros.fats}g</p>
+            <p>Carbohidrates: ................... {recipe.macros.carbs}g</p>
+            <p>Proteins: .............................. {recipe.macros.proteins}g</p>
+            <p>Fats: .................................. {recipe.macros.fats}g</p>
 
-          <h4 className="font-weight-bold">How to prepare it:</h4>
-          <div className="embed-responsive embed-responsive-16by9">
-						<iframe className="embed-responsive-item w-75" src={recipe.instructions} title="Cook recipe"></iframe>
-					</div>
-
-          <button className="btn btn-success" onClick={onClick}>
-            Add to menu
-          </button>
-          <Link to="/meal">Back to menu</Link>
+            <h4 className="font-weight-bold mt-5">How to prepare it:</h4>
+            <div className="embed-responsive embed-responsive-16by9 mb-5">
+              <iframe
+                className="embed-responsive-item w-100 iframeRecipe mb-5"
+                src={recipe.instructions}
+                title="Cook recipe"
+              ></iframe>
+            </div>
+          </div>
+          <>
+            <Navbar />
+          </>
         </>
       )}
     </div>
