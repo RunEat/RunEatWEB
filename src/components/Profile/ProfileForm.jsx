@@ -357,7 +357,8 @@ const ProfileForm = () => {
             </select>
             <div className="invalid-feedback">{errors.mealPlan}</div>
           </div> */}
-          <a href="https://www.lifesum.com/disclaimer" target="_blank" className="mt-3"><small>Sources of recommendations</small></a>
+
+        <a href="https://www.lifesum.com/disclaimer" target="_blank" className="mt-3"><small>Sources of recommendations</small></a>
           <button type="submit" className="btn w-75 mt-3">SAVE CHANGES</button>
         </form>
     </div>
