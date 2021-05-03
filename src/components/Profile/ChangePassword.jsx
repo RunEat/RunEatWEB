@@ -113,7 +113,7 @@ const ChangePassword = () => {
             type="submit"
             className="btn mt-4 w-75"
             style={{
-              "border-radius": "5rem",
+              "borderRadius": "5rem",
               color: "#fff",
               backgroundColor: "#00bd56",
             }}

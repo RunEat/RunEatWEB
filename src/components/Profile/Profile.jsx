@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useUser } from "../../hooks/useUserContext";
 import { Link, Redirect } from "react-router-dom";
 import { logout } from "../../store/AccessTokenStore";
+import { passwordResetEmail } from "../../services/AuthService";
 import Navbar from "../Navbar/Navbar";
 import './Profile.css'
 
@@ -9,6 +10,8 @@ function Profile() {
   const [showBody, setShowBody] = useState(false);
 
   const [showSettings, setShowSettings] = useState(false);
+
+  const [changePasswordInfo, setChangePasswordInfo] = useState(false);
 
   const { user } = useUser();
 
@@ -18,6 +21,20 @@ function Profile() {
 
   const showSettingsF = () => {
     setShowSettings(!showSettings);
+  };
+
+  const changePassword = (e) => {
+    e.preventDefault();
+
+    console.log('user', user.email)
+
+    setChangePasswordInfo(true); 
+    setTimeout(() => {
+      passwordResetEmail(user)
+        .then(() => {
+        setChangePasswordInfo(false); 
+    });
+    }, 5000);
   };
 
   return !user ? (
@@ -30,16 +47,16 @@ function Profile() {
         <>
           <img
             src="https://source.unsplash.com/user/brookelark/1600x900"
-            className="cover"
+            className="w-100"
             alt={user.username}
           />
           <img src={user.avatar} className="imageProfile" alt={user.username} />
 
-          <div className="InfoProfile text-center border border-2 border-light me-2 ms-2 p-2">
+          <div className="text-center border border-2 border-light me-2 ms-2 p-2">
             <h2>{user.username}</h2>
             <p>Activity level · {user.activity}</p>
             <p>
-              {user.age} years-old{" "}
+              {user.age} years-old
               <i
                 class="fas fa-birthday-cake fs-2 ms-2"
                 style={{ color: "red" }}
@@ -112,22 +129,40 @@ function Profile() {
                 <p>{user.email}</p>
               </div>
               <div className="d-flex flex-column align-items-center justify-content-center mt-3">
-                <Link to="/profile/edit" className="btn btn-primary mt-2">
+                <Link
+                  to="/profile/edit"
+                  className="btn btn-primary mt-2 btnStandar"
+                >
                   <i class="fas fa-edit me-2" style={{ color: "#fff" }}></i>
                   Edit Profile
                 </Link>
-                <Link to="/profile/delete" className="btn btn-primary mt-2">
+                <Link
+                  to="/profile/delete"
+                  className="btn btn-primary mt-2 btnStandar"
+                >
                   <i
                     class="fas fa-trash-alt me-2"
                     style={{ color: "#fff" }}
                   ></i>
                   Delete Account
                 </Link>
+                <div className="d-grid gap-2 col-8 mx-auto mt-2">
+                  <button
+                    className="btn btn-outline-primary btnChange btnStandar"
+                    onClick={changePassword}
+                  >
+                    Update password
+                  </button>
+                  {changePasswordInfo && <p>Please, check your email!</p>}
+                </div>
                 <div
                   className="d-flex align-items-start mt-2"
                   style={{ color: "red" }}
                 >
-                  <button className="btn btn-danger mx-1" onClick={logout}>
+                  <button
+                    className="btn btn-danger mx-1 btnStandar"
+                    onClick={logout}
+                  >
                     <i class="fas fa-power-off fs-4 me-2"></i>
                     Log out
                   </button>

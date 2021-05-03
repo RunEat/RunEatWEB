@@ -11,6 +11,7 @@ import { getMeal, addMeal } from "../../services/MealService";
 import { setStoredDate } from "../../store/DateStore";
 import { useUser } from "../../hooks/useUserContext";
 import SyncLoader from 'react-spinners/SyncLoader';
+import Navbar from "../Navbar/Navbar";
 
 const Diary = () => {
   const { date, setDate } = useDate();
@@ -83,17 +84,11 @@ const Diary = () => {
               ) : (
                 <>
                   <p>Total calories: {totalCalories()} cal</p>
-
-                  <Link to={`/meal`}>Meal</Link>
-
-                  <br />
-
-                  <Link to={`/sport`}>Sport</Link>
                 </>
               )}
             </>
             }
-          <Link to="/">Back to home</Link>
+          <Navbar/>
         </div>
       )}
     </>
