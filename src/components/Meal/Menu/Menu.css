@@ -1,0 +1,38 @@
+.btn.btnDeleteMenu {
+    border-radius: 6rem;
+    border: none;
+    color: #fff;
+    background-color: #bd0000;
+    position: relative;
+    top: -4.3rem
+}
+
+.titleRecipeChoose {
+    height: 1rem;
+    color: #000;
+    font-size: 1rem;
+}
+
+.iconMealType {
+    width: 2rem;
+}
+
+.borderTitle {
+    border: 1px solid #C2C4BE;
+    border-bottom: none;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    box-shadow: 0px 2px 3px #D5DED1;
+}
+
+.borderBody {
+    border: 1px solid #C2C4BE;
+    border-top: none;
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    box-shadow: 0px 2px 3px #D5DED1;
+}
+
+.boxMarginBottom {
+    margin-bottom: 6rem
+}

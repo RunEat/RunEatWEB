@@ -38,7 +38,7 @@ const Meal = () => {
     </div>
   ) : (
     //user.id == meal.user.id &&
-    <div className="Meal">
+    <div className="Meal mb-5 bg-light">
       <h1>Day food: {mealDate}</h1>
       <TotalCalories meal={meal} />
       <MacrosChart meal={meal} />
