@@ -89,7 +89,7 @@ const ProfileForm = () => {
     height: 150,
     weight: 60,
     age: 16,
-    activity: "Sendentary",
+    activity: ["Sendentary"],
   });
   
   useEffect(() => {
@@ -116,8 +116,6 @@ const ProfileForm = () => {
         // }
         formData.append(key, value);
     });
-      
-    //console.log('formData after append', formData)
 
     editUser(formData)
       .then((updatedUser) => {
@@ -132,15 +130,17 @@ const ProfileForm = () => {
   }
 
   const onChange = (e) => {
-    //console.log(e.target)
+    console.log('radio value onChange', e.target.value)
 
     setUserToEdit((prevState) => {
       let value = e.target.value;
+
       if (e.target.type === "file") {
         value = e.target.files[0];
       } else if (e.target.id === "activity") {
         value = [...e.target.selectedOptions].map((opt) => opt.value);
       }
+
       return {
         ...prevState,
         [e.target.id]: value
@@ -177,10 +177,19 @@ const ProfileForm = () => {
   const onClick = (e) => {
     const { value } = e.target
 
-    setUserToEdit((prevState) => ({
-          ...prevState,
-          avatar: value
+    console.log('radio value onclick', value)
+
+    if (e.target.type === "file") {
+      setUserToEdit((prevState) => ({
+        ...prevState,
+        avatar: value,
+      }))
+    } else if (e.target.type === "checkbox") {
+      setUserToEdit((prevState) => ({
+        ...prevState,
+        activity: value,
     }))
+    }
     
     // setErrors((prevState) => ({
     //       ...prevState,
@@ -279,24 +288,25 @@ const ProfileForm = () => {
             <br/>
             {
               ACTIVITY.map((act, idx) => (
-                  <>
+                  <div key={idx} className="d-inline">
                     <input 
                       type="checkbox" 
-                      key={idx}
                       id={act} 
                       name={act} 
-                      value={act} 
-                      className="btn-check" 
+                      value={[act]} 
+                      onClick={onClick} 
+                      onBlur={onBlur} 
+                      onFocus={onFocus}
+                      className="btn-check form-control" 
                       autoComplete="off"
                     />
                     <label 
                       htmlFor={act} 
-                      key={idx + 10} 
                       className="btn m-2 text-white"
                     >
                       {act}
                     </label>
-                  </>
+                  </div>
                 ))
             }
             <div className="invalid-feedback">{errors.activity}</div>
@@ -390,24 +400,22 @@ const ProfileForm = () => {
             <br/>
             {
               ACTIVITY.map((act, idx) => (
-                  <>
+                  <div key={idx} className="d-inline">
                     <input 
                       type="checkbox" 
-                      key={idx}
                       id={act} 
                       name={act} 
-                      value={act} 
+                      value={[act]} 
                       className="btn-check" 
                       autoComplete="off"
                     />
                     <label 
                       htmlFor={act} 
-                      key={idx + 10} 
                       className="btn m-2 text-white"
                     >
                       {act}
                     </label>
-                  </>
+                  </div>
                 ))
             }
             <div className="invalid-feedback">{errors.activity}</div>

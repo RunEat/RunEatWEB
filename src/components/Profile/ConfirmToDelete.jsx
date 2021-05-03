@@ -39,7 +39,6 @@ const ConfirmToDelete = () => {
 
 	const isValid = () => {
     const { errors } = userToDelete;
-		console.log('errors', errors)
     return !Object.keys(errors).some(error => errors[error]);
   }
 
@@ -90,7 +89,7 @@ const ConfirmToDelete = () => {
 					/>
 					<div className="invalid-feedback">{userToDelete.errors.email}</div>
 					<button 
-						className="btn btn-danger" 
+						className="btn btn-danger mt-2" 
 						onClick={deleteAccount} 
 						disabled={!isValid()}
 						style={{borderRadius: '2rem'}}
