@@ -17,6 +17,10 @@ export const login = (body) => {
   return http.post('/user/login', body)
 }
 
+export const loginGoogle = (body) => {
+  return http.post("/auth/google/callback", body);
+};
+
 export const passwordResetEmail = (user) => {
   return http.post('/user/password_reset', user)
 }
