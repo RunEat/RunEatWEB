@@ -74,27 +74,37 @@ function MacrosChart({ meal }) {
   }, [meal]);
 
   return (
-    <div className="MacrosChart container">
-      <h4>Fats</h4>
-      <ProgressBar variant="warning" animated now={fats} max={maxFats} />
+    <div className="MacrosChart container d-flex mb-3 justify-content-center text-center w-50 mt-4">
+      <div className="col-3">
+        <p className="text-secondary h6 p-0 m-0">Carbs</p>
+        <p className="p-0 mb-2"><small><b>{carbs}g</b> / {maxCarbs}g</small></p>
+        <ProgressBar
+          variant="success"
+          now={carbs}
+          max={maxCarbs}
+        />
+      </div>
 
-      <h4>Proteins</h4>
-      <ProgressBar
-        striped
-        variant="success"
-        animated
-        now={proteins}
-        max={maxProteins}
-      />
+      <div className="col-3 mx-3">
+        <p className="text-secondary h6 p-0 m-0">Proteins</p>
+        <p className="p-0 mb-2"><small><b>{proteins}g</b> / {maxProteins}g</small></p>
+        <ProgressBar
+          variant="success"
+          style={{color: '#00bd56'}}
+          now={proteins}
+          max={maxProteins}
+        />
+      </div>
 
-      <h4>Carbs</h4>
-      <ProgressBar
-        striped
-        variant="info"
-        animated
-        now={carbs}
-        max={maxCarbs}
-      />
+      <div className="col-3">
+        <p className="text-secondary h6 p-0 m-0">Fats</p>
+        <p className="p-0 mb-2"><small><b>{fats}g</b> / {maxFats}g</small></p>
+        <ProgressBar 
+          variant="success" 
+          now={fats} 
+          max={maxFats} 
+        />
+      </div>
     </div>
   );
 }

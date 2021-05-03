@@ -4,6 +4,7 @@ import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/
 import { useDate } from '../../../hooks/useDateContext';
 import { addMeal, editMeal, getMeal } from "../../../services/MealService";
 import { getStoredDate } from "../../../store/DateStore";
+import SyncLoader from 'react-spinners/SyncLoader';
 
 const Menu = ({meal, setMeal}) => {
   const { date, setDate } = useDate()
@@ -165,7 +166,9 @@ const Menu = ({meal, setMeal}) => {
   return (
     <div className="Menu container">
       {!date ? (
-        "Loading..."
+        <div className="text-center">
+          <SyncLoader color="#00bd56" />
+        </div>
       ) : (
         <>
           <h2>Breakfast</h2>
