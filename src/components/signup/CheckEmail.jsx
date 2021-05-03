@@ -10,7 +10,7 @@ const CheckEmail = () => {
       <i className="fas fa-paper-plane mt-5 mb-5" style={{'color': '#fff', 'fontSize':'8rem'}}></i>
       <Link 
         className="btn LoginButton colorLink w-75" 
-        style={{'border-radius': '5rem', color: '#00bd56', backgroundColor: '#fff'}}
+        style={{'borderRadius': '5rem', color: '#00bd56', backgroundColor: '#fff'}}
         to="/login">GO TO LOG IN
       </Link>
     </div>

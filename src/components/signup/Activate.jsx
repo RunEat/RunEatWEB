@@ -20,7 +20,7 @@ const Activate = () => {
       <img className="w-100" src="../../../images/saladGif.gif"/>
       <Link 
         className="btn LoginButton colorLink w-75" 
-        style={{'border-radius': '5rem', color: '#fff', backgroundColor: '#00bd56'}}
+        style={{'borderRadius': '5rem', color: '#fff', backgroundColor: '#00bd56'}}
         to="/login">GO TO LOG IN
       </Link>
     </div>
