@@ -299,10 +299,12 @@ const ProfileForm = () => {
                       onFocus={onFocus}
                       className="btn-check form-control" 
                       autoComplete="off"
+                      active
+                      ariaPressed='true'
                     />
                     <label 
                       htmlFor={act} 
-                      className="btn m-2 text-white"
+                      className="btn m-2"
                     >
                       {act}
                     </label>
@@ -366,15 +368,9 @@ const ProfileForm = () => {
             <div className="invalid-feedback">{errors.mealPlan}</div>
           </div> */}
 
-          <a href="" className="mt-3"><small>Sources of recommendations</small></a>
-          <button type="submit" className="btn text-white w-75 mt-3">SAVE CHANGES</button>
+          <a href="https://www.lifesum.com/disclaimer" target="_blank" className="mt-3"><small>Sources of recommendations</small></a>
+          <button type="submit" className="btn w-75 mt-3">SAVE CHANGES</button>
         </form>
-        
-      <div className="d-grid gap-2 col-8 mx-auto m-3">
-        <a className="text-secondary" onClick={changePassword}>
-          Update my password
-        </a>
-      </div>
     </div>
       ) : (
       <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
@@ -408,10 +404,12 @@ const ProfileForm = () => {
                       value={[act]} 
                       className="btn-check" 
                       autoComplete="off"
+                      shadow-none
                     />
                     <label 
                       htmlFor={act} 
                       className="btn m-2 text-white"
+                      shadow-none
                     >
                       {act}
                     </label>
@@ -499,7 +497,7 @@ const ProfileForm = () => {
             ))}
           </select> 
         </div> */}
-          <a href="" className="mt-3"><small>Sources of recommendations</small></a>
+          <a href="https://www.lifesum.com/disclaimer" target="_blank" className="mt-3"><small>Sources of recommendations</small></a>
           <button type="submit" className="btn text-white w-75 mt-3">NEXT</button>
         </form>
       </div>
