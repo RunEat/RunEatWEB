@@ -10,7 +10,7 @@ import { useDate } from "../../hooks/useDateContext";
 import { getMeal, addMeal } from "../../services/MealService";
 import { setStoredDate } from "../../store/DateStore";
 import { useUser } from "../../hooks/useUserContext";
-import SyncLoader from 'react-spinners/SyncLoader';
+import SyncLoader from "react-spinners/SyncLoader";
 import Navbar from "../Navbar/Navbar";
 
 const Diary = () => {
@@ -42,57 +42,75 @@ const Diary = () => {
 
     setDate(date);
     setStoredDate(date);
-    
+
     getDiary(date).then((diary) => {
       setDiary(diary);
-      //console.log("diary in diary", diary);
+      console.log("diaryCompleted", diary);
     });
-
   };
 
   useEffect(() => {
     //console.log("useEffect date", mealDate);
-    addMeal(date)
-      .then((diary) => {
-        setDiary(diary);
+    addMeal(date).then((diary) => {
+      setDiary(diary);
     });
-  }, [])
-  
-  console.log('user', user)
-  console.log("diary", diary);
+  }, []);
+
+  //console.log("user", user);
+  //console.log("diary", diary);
 
   return (
-    <>
-    <Calendar onChange={onChange} value={date} />
+    <div className="Diary text-center d-flex flex-column align-items-center pt-5 bg-light">
+      <Calendar onChange={onChange} value={date} />
       {!date ? (
         <div className="text-center">
-          <SyncLoader color="#3ec4fc" />
+          <SyncLoader color="#00bd56" />
         </div>
       ) : (
         <div>
           {
             //user.id == diary.user.id && (
             <>
-                {!diary ? (
-                  <>
-                    <Link to={`/meal`}>Create new Meal</Link>
+              {!diary ? (
+                <div className="d-flex mt-5">
+                  <Link to={`/meal`} className="btn me-4 colorMeal">
+                    <i className="fas fa-plus me-2 colorMeal"></i>
+                    New Meal
+                  </Link>
+
+                  <br />
+
+                  <Link to={`/sport`} className="btn me-4 colorSport">
+                    <i className="fas fa-plus me-2 colorSport"></i>
+                    New Sport
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <h4 className="mt-5 text-secondary">Total calories:</h4>
+                  <h1>{totalCalories()} cal</h1>
+                  <div className="d-flex mt-5">
+                    <Link to={`/meal`} className="btn me-4 colorMeal">
+                      <i class="fas fa-edit me-2 colorMeal"></i>
+                      Update Meal
+                    </Link>
 
                     <br />
 
-                    <Link to={`/sport`}>Create new Sport</Link>
-                  </>
-              ) : (
-                <>
-                  <p>Total calories: {totalCalories()} cal</p>
+                    <Link to={`/sport`} className="btn me-4 colorSport">
+                      <i className="fas fa-plus me-2 colorSport"></i>
+                      New Sport
+                    </Link>
+                  </div>
                 </>
               )}
             </>
-            }
-          <Navbar/>
+          }
+          <Navbar />
         </div>
       )}
-    </>
-  )
-}
+    </div>
+  );
+};
 
 export default Diary;
