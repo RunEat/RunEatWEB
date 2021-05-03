@@ -356,10 +356,9 @@ const ProfileForm = () => {
             <div className="invalid-feedback">{errors.mealPlan}</div>
           </div> */}
 
-        <button type="submit" className="btn btn-outline-primary">
-          Update
-        </button>
-      </form>
+        <a href="https://www.lifesum.com/disclaimer" target="_blank" className="mt-3"><small>Sources of recommendations</small></a>
+          <button type="submit" className="btn w-75 mt-3">SAVE CHANGES</button>
+        </form>
     </div>
       ) : (
       <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
