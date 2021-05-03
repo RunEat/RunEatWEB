@@ -1,0 +1,36 @@
+.btnAddMenu{
+    border-radius: 6rem;
+    border: none;
+    color: #fff;
+    background-color: #00bd56;
+    position: relative;
+    top: -2.5rem;
+}
+
+.iconBack {
+    position: relative;
+    top: -22rem;
+}
+
+.dietLabelTag {
+    border-radius: 5rem;
+    color: #fff;
+    background-color: #ff9d20;
+}
+
+.ingredients {
+    height: 10rem;
+    background-image: url('./ing.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.ingredients > ul{
+    list-style: none;
+}
+
+.iframeRecipe {
+    border: .2rem solid #C2C4BE;
+    height: 20rem;
+}

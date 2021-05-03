@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileForm.css'
 import { useHistory } from 'react-router';
-import { passwordResetEmail } from '../../services/AuthService';
 import { useUser } from '../../hooks/useUserContext';
 import { editUser, getUserInfo } from '../../services/UserService';
 
@@ -120,7 +119,7 @@ const ProfileForm = () => {
     editUser(formData)
       .then((updatedUser) => {
         setUser(updatedUser);
-        push("/")
+        push("/meal")
       })
       .catch((e) => {
         if (e.response.status === 400) {
@@ -195,15 +194,6 @@ const ProfileForm = () => {
     //       ...prevState,
     //       [name]: validators[name] && validators[name](value)
     // }))
-  }
-
-  const changePassword = (e) => {
-    e.preventDefault()
-
-    passwordResetEmail(user.email)
-      .then(() => {
-        console.log('Revisa tu email')
-      })
   }
   
   const { avatar, username, email, height, weight, age, activity, mealPlan } = userToEdit;
@@ -366,15 +356,10 @@ const ProfileForm = () => {
             <div className="invalid-feedback">{errors.mealPlan}</div>
           </div> */}
 
-          <a href="" className="mt-3"><small>Sources of recommendations</small></a>
-          <button type="submit" className="btn text-white w-75 mt-3">SAVE CHANGES</button>
-        </form>
-        
-      <div className="d-grid gap-2 col-8 mx-auto m-3">
-        <a className="text-secondary" onClick={changePassword}>
-          Update my password
-        </a>
-      </div>
+        <button type="submit" className="btn btn-outline-primary">
+          Update
+        </button>
+      </form>
     </div>
       ) : (
       <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">

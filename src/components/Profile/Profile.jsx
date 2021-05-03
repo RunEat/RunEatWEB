@@ -1,47 +1,183 @@
-import React from 'react';
-import { useUser } from '../../hooks/useUserContext';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState } from "react";
+import { useUser } from "../../hooks/useUserContext";
+import { Link, Redirect } from "react-router-dom";
+import { logout } from "../../store/AccessTokenStore";
+import { passwordResetEmail } from "../../services/AuthService";
+import Navbar from "../Navbar/Navbar";
+import './Profile.css'
 
 function Profile() {
+  const [showBody, setShowBody] = useState(false);
 
-    const { user } = useUser()
-    
-    return !user ? (
-      "Error - Unauthorized"
-    ) : !user.avatar ? (
-      <Redirect to="/profile/edit" />
-    ) : (
-      <div className="Profile">
-        {user ? (
-          <div className="card" style={{ width: "18rem" }}>
-            <div className="card-body">
-              <img
-                src={user.avatar}
-                className="card-img-top"
-                alt={user.username}
-              />
-              <h5 className="card-title">Username: {user.username}</h5>
-              <p className="card-text">Email: {user.email}</p>
-              <p className="card-text">Age: {user.age}</p>
-              <p className="card-text">Height: {user.height}</p>
-              <p className="card-text">Weight: {user.weight}</p>
-              <p className="card-text">Activity level: {user.activity}</p>
-              <Link to="/profile/edit" className="btn btn-primary">
-                Edit Profile
-              </Link>
-              <Link to="/profile/delete" className="btn btn-primary">
-                Delete Account
-              </Link>
-            </div>
-            <Link to="/" className="btn btn-secondary">
-              Go to Home
-            </Link>
+  const [showSettings, setShowSettings] = useState(false);
+
+  const [changePasswordInfo, setChangePasswordInfo] = useState(false);
+
+  const { user } = useUser();
+
+  const showBodyF = () => {
+    setShowBody(!showBody);
+  };
+
+  const showSettingsF = () => {
+    setShowSettings(!showSettings);
+  };
+
+  const changePassword = (e) => {
+    e.preventDefault();
+
+    console.log('user', user.email)
+
+    setChangePasswordInfo(true); 
+    setTimeout(() => {
+      passwordResetEmail(user)
+        .then(() => {
+        setChangePasswordInfo(false); 
+    });
+    }, 5000);
+  };
+
+  return !user ? (
+    "Error - Unauthorized"
+  ) : !user.avatar ? (
+    <Redirect to="/profile/edit" />
+  ) : (
+    <div className="Profile" style={{ maxHeight: "85vh", overflow: "scroll" }}>
+      {user ? (
+        <>
+          <img
+            src="https://source.unsplash.com/user/brookelark/1600x900"
+            className="w-100"
+            alt={user.username}
+          />
+          <img src={user.avatar} className="imageProfile" alt={user.username} />
+
+          <div className="text-center border border-2 border-light me-2 ms-2 p-2">
+            <h2>{user.username}</h2>
+            <p>Activity level · {user.activity}</p>
+            <p>
+              {user.age} years-old
+              <i
+                class="fas fa-birthday-cake fs-2 ms-2"
+                style={{ color: "red" }}
+              ></i>
+            </p>
           </div>
-        ) : (
-          <p>loading...</p>
-        )}
-      </div>
-    );
+
+          <div className="d-flex justify-content-around align-items-center mt-4 border border-2 border-light me-2 ms-2 p-2">
+            <div className="InfoBody">
+              <button
+                onClick={showBodyF}
+                className="px-3 py-2 border h-50"
+                style={{
+                  backgroundColor: "#ff9d20",
+                  width: "6rem",
+                  borderRadius: "1rem",
+                }}
+              >
+                <i
+                  className="fas fa-male"
+                  style={{ color: "#fff", fontSize: "1.5rem" }}
+                ></i>
+                <span style={{ color: "#fff" }}>Measures</span>
+              </button>
+            </div>
+
+            <div className="Settings">
+              <button
+                onClick={showSettingsF}
+                className="px-3 py-2 border h-50"
+                style={{
+                  backgroundColor: "#ff9d20",
+                  width: "6rem",
+                  borderRadius: "1rem",
+                }}
+              >
+                <i
+                  class="fas fa-user-cog"
+                  style={{ color: "#fff", fontSize: "1.5rem" }}
+                ></i>
+                <span style={{ color: "#fff" }}>Settings</span>
+              </button>
+            </div>
+          </div>
+
+          {showBody && (
+            <div className="d-flex flex-column justify-content-around align-items-center mt-3 border border-2 border-light p-2 me-2 ms-2">
+              <div className="d-flex mt-3">
+                <p className="card-text me-4">
+                  <i
+                    class="fas fa-ruler-vertical me-2 fs-1 align-items-center"
+                    style={{ color: "#207dff" }}
+                  ></i>
+                  {user.height} cm
+                </p>
+                <p className="card-text">
+                  <i
+                    class="fas fa-weight me-2 fs-1"
+                    style={{ color: "#207dff" }}
+                  ></i>
+                  {user.weight} Kg
+                </p>
+              </div>
+            </div>
+          )}
+          {showSettings && (
+            <div className="d-flex flex-column justify-content-around align-items-center mt-3 border border-2 border-light p-2 me-2 ms-2">
+              <div>
+                <h4 className="card-text">Email:</h4>
+                <p>{user.email}</p>
+              </div>
+              <div className="d-flex flex-column align-items-center justify-content-center mt-3">
+                <Link
+                  to="/profile/edit"
+                  className="btn btn-primary mt-2 btnStandar"
+                >
+                  <i class="fas fa-edit me-2" style={{ color: "#fff" }}></i>
+                  Edit Profile
+                </Link>
+                <Link
+                  to="/profile/delete"
+                  className="btn btn-primary mt-2 btnStandar"
+                >
+                  <i
+                    class="fas fa-trash-alt me-2"
+                    style={{ color: "#fff" }}
+                  ></i>
+                  Delete Account
+                </Link>
+                <div className="d-grid gap-2 col-8 mx-auto mt-2">
+                  <button
+                    className="btn btn-outline-primary btnChange btnStandar"
+                    onClick={changePassword}
+                  >
+                    Update password
+                  </button>
+                  {changePasswordInfo && <p>Please, check your email!</p>}
+                </div>
+                <div
+                  className="d-flex align-items-start mt-2"
+                  style={{ color: "red" }}
+                >
+                  <button
+                    className="btn btn-danger mx-1 btnStandar"
+                    onClick={logout}
+                  >
+                    <i class="fas fa-power-off fs-4 me-2"></i>
+                    Log out
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <Navbar />
+        </>
+      ) : (
+        <p>loading...</p>
+      )}
+    </div>
+  );
 }
 
 export default Profile;

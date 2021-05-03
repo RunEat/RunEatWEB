@@ -1,0 +1,21 @@
+.imageProfile {
+    height: 8rem;
+    width: 8.2rem;
+    border-radius: 50%;
+    border: .3rem solid #00bd56;
+    position: relative;
+    z-index: +1;
+    top: -4rem;
+    left: 7.2rem;
+    margin-bottom: 0;
+}
+
+.btnChange{
+    width: 10rem;
+    margin-right: 5rem;
+}
+
+.btn.btnStandar{
+    border-radius: 5rem;
+}
+

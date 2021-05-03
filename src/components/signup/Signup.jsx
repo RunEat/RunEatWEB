@@ -157,7 +157,7 @@ const Signup = () => {
             className={`form-control ${touched.username && errors.username ? 'is-invalid' : ''}`}
             type="username" id="username" name="username" autoComplete="off" placeholder="Username"
             value={username} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            style={{border: 'none', 'border-bottom': '1px solid #00bd56', 'border-radius': '0px'}}
+            style={{border: 'none', 'borderBottom': '1px solid #00bd56', 'borderRadius': '0px'}}
           />
           <div className="invalid-feedback">{errors.username}</div>
           </div>
@@ -167,7 +167,7 @@ const Signup = () => {
             className={`form-control ${touched.password && errors.password ? 'is-invalid' : ''}`}
             type="password" id="password" name="password" placeholder="Password"
             value={password} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            style={{border: 'none', 'border-bottom': '1px solid #00bd56', 'border-radius': '0px'}}
+            style={{border: 'none', 'borderBottom': '1px solid #00bd56', 'borderRadius': '0px'}}
           />
           <div className="invalid-feedback">{errors.password}</div>
           </div>
@@ -177,7 +177,7 @@ const Signup = () => {
             className={`form-control ${touched.email && errors.email ? 'is-invalid' : ''}`}
             type="email" id="email" name="email" placeholder='Email'
             value={email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            style={{border: 'none', 'border-bottom': '1px solid #00bd56', 'border-radius': '0px'}}
+            style={{border: 'none', 'borderBottom': '1px solid #00bd56', 'borderRadius': '0px'}}
           />
           <div className="invalid-feedback">{errors.email}</div>
           </div>
@@ -215,7 +215,7 @@ const Signup = () => {
           <button
             type="submit"
             className="mt-5 btn LoginButton colorLink w-75"
-            style={{'border-radius': '5rem', color: '#fff', backgroundColor: '#00bd56'}}>
+            style={{'borderRadius': '5rem', color: '#fff', backgroundColor: '#00bd56'}}>
           SUBMIT
           </button>
         </form>
