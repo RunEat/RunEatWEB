@@ -17,6 +17,8 @@ const Diary = () => {
   const { date, setDate } = useDate();
   const { user, setUser } = useUser();
 
+  console.log('user', user)
+
   const [diary, setDiary] = useState(); //TODO: Meter estado inicial
 
   const totalCalories = () => {
@@ -75,25 +77,25 @@ const Diary = () => {
         </div>
       ) : (
         <div>
-          {
-            //user.id == diary.user.id && (
-            <>
-              {!diary ? (
-                <div className="d-flex mt-5">
-                  <Link to={`/meal`} className="btn me-4 colorMeal">
-                    <i className="fas fa-plus me-2 colorMeal"></i>
+            {
+              //user.id == diary.user.id && (
+              <>
+                {!diary ? (
+                  <div className="d-flex mt-5">
+                    <Link to={`/meal`} className="btn me-4 colorMeal">
+                      <i className="fas fa-plus me-2 colorMeal"></i>
                     New Meal
                   </Link>
 
-                  <br />
+                    <br />
 
-                  <Link to={`/sport`} className="btn me-4 colorSport">
-                    <i className="fas fa-plus me-2 colorSport"></i>
+                    <Link to={`/sport`} className="btn me-4 colorSport">
+                      <i className="fas fa-plus me-2 colorSport"></i>
                     New Sport
                   </Link>
-                </div>
-              ) : (
-                <>
+                  </div>
+                ) : (
+                  user.id === diary.user.id ? (<>
                   <h4 className="mt-5 text-secondary">Total calories:</h4>
                   <h1>{totalCalories()} cal</h1>
                   <div className="d-flex mt-5">
@@ -109,7 +111,19 @@ const Diary = () => {
                       New Sport
                     </Link>
                   </div>
-                </>
+                </>): (<div className="d-flex mt-5">
+                    <Link to={`/meal`} className="btn me-4 colorMeal">
+                      <i className="fas fa-plus me-2 colorMeal"></i>
+                    New Meal
+                  </Link>
+
+                    <br />
+
+                    <Link to={`/sport`} className="btn me-4 colorSport">
+                      <i className="fas fa-plus me-2 colorSport"></i>
+                    New Sport
+                  </Link>
+                  </div>)
               )}
             </>
           }
