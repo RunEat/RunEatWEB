@@ -142,7 +142,7 @@ const Signup = () => {
     }))
   }
 
-  const { username, password, email, height, weight, age} = user
+  const { username, password, email, height, weight, age } = user
   
 	return (
     <div className="Login mt-4 container d-flex justify-content-center flex-column">
