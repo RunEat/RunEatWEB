@@ -3,7 +3,7 @@ import { getAccessToken, logout } from "../store/AccessTokenStore";
 
 export const create = (opts = {}) => {
   const http = axios.create({
-    baseURL: `${REACT_APP_API_HOST}`,
+    baseURL: `${process.env.REACT_APP_API_HOST}`,
     ...opts,
   });
 
