@@ -20,8 +20,8 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className="navbar fixed-bottom d-flex justify-content-around"
-        style={{ backgroundColor: "#00bd56" }}
+        className="navbar fixed-bottom d-flex justify-content-around "
+        style={{ backgroundColor: "#00bd56"}}
       >
         <Link className="text-white" to="/profile">
           <i class="fas fa-user-alt ms-1" style={{ fontSize: "2.2rem" }}></i>

@@ -12,7 +12,7 @@ const Mealtype = ({ recipes, mealtype, setMeal }) => {
   return (
     <div className="Carousel card-group">
       {!recipes ? (
-          <div className="text-center">
+          <div className="text-center pb-3">
             <SyncLoader color="#00bd56" />
           </div>
       ) : (

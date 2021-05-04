@@ -165,9 +165,9 @@ const Menu = ({meal, setMeal}) => {
   //console.log ('mealtype', mealtype)
 
   return (
-    <div className="Menu container text-center mt-5">
+    <div className="Menu container text-center mt-4">
       {!date ? (
-        <div className="text-center">
+        <div className="text-center mb-4">
           <SyncLoader color="#00bd56" />
         </div>
       ) : (
