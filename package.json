@@ -2,7 +2,7 @@
   "name": "runeat-web",
   "version": "0.1.0",
   "engines": {
-    "node": "12.18.4.x"
+    "node": "^12.18.4"
   },
   "private": true,
   "dependencies": {
