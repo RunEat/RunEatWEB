@@ -1,0 +1,7 @@
+.CaloriesSummary {
+	background-color: rgba(0, 189, 86, 0.5);
+	border-bottom-left-radius: 60%;
+	border-bottom-right-radius: 60%;
+	padding-bottom: 3rem;
+	width: 200vw;
+}
