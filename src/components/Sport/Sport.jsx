@@ -12,18 +12,17 @@ const Sport = () => {
 
   const [sport, setSport] = useState()
 
-  return (
-    !user ? (
+  return !user ? (
     <div className="text-center">
-      <SyncLoader color="#3ec4fc"/>
+      <SyncLoader color="#3ec4fc" />
     </div>
-    ) : (
-        <>
-          <Chronometer/>
-          <GoogleMaps />
-        </>
-      )
-  )
+  ) : (
+    <>
+      <Chronometer />
+      <GoogleMaps />
+      <Navbar />
+    </>
+  );
 };
 
 export default Sport;

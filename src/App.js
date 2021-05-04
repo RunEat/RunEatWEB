@@ -58,8 +58,6 @@ function App() {
         <Route exact path="/meal" component={Meal} />
         <Route exact path="/sport" component={Sport} />
       </Switch>
-
-      <Navbar />
     </div>
   );
 }

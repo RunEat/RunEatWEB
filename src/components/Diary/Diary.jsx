@@ -11,6 +11,7 @@ import { getMeal, addMeal } from "../../services/MealService";
 import { setStoredDate } from "../../store/DateStore";
 import { useUser } from "../../hooks/useUserContext";
 import SyncLoader from "react-spinners/SyncLoader";
+import Navbar from "../Navbar/Navbar";
 
 const Diary = () => {
   const { date, setDate } = useDate();
@@ -105,6 +106,7 @@ const Diary = () => {
               )}
             </>
           }
+          <Navbar />
         </div>
       )}
     </div>

@@ -170,6 +170,8 @@ function Profile() {
               </div>
             </div>
           )}
+
+          <Navbar />
         </>
       ) : (
         <p>loading...</p>
