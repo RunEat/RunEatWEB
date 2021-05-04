@@ -11,6 +11,10 @@ function MacrosChart({ meal }) {
   const [maxCarbs, setMaxCarbs] = useState();
   const [maxProteins, setMaxProteins] = useState();
   const [maxFats, setMaxFats] = useState();
+
+  const [carbsColor, setCarbsColor] = useState('success');
+  const [proteinsColor, setProteinsColor] = useState('success');
+  const [fatsColor, setFatsColor] = useState('success');
   
   const { user } = useUser();
   
@@ -73,13 +77,19 @@ function MacrosChart({ meal }) {
     }
   }, [meal]);
 
+  useEffect(() => {
+    maxCarbs - carbs < 0 ? setCarbsColor('danger') : setCarbsColor('success');
+    maxProteins - proteins < 0 ? setProteinsColor('danger') : setProteinsColor('success');
+    maxFats - fats < 0 ? setFatsColor('danger') : setFatsColor('success')
+  }, [maxCarbs - carbs, maxProteins - proteins, maxFats - fats])
+
   return (
     <div className="MacrosChart container d-flex mb-3 justify-content-center text-center w-50 mt-4">
       <div className="col-3">
         <p className="text-secondary h6 p-0 m-0">Carbs</p>
         <p className="p-0 mb-2"><small><b>{carbs}g</b> / {maxCarbs}g</small></p>
         <ProgressBar
-          variant="success"
+          variant={carbsColor}
           now={carbs}
           max={maxCarbs}
         />
@@ -89,8 +99,7 @@ function MacrosChart({ meal }) {
         <p className="text-secondary h6 p-0 m-0">Proteins</p>
         <p className="p-0 mb-2"><small><b>{proteins}g</b> / {maxProteins}g</small></p>
         <ProgressBar
-          variant="success"
-          style={{color: '#00bd56'}}
+          variant={proteinsColor}
           now={proteins}
           max={maxProteins}
         />
@@ -100,7 +109,7 @@ function MacrosChart({ meal }) {
         <p className="text-secondary h6 p-0 m-0">Fats</p>
         <p className="p-0 mb-2"><small><b>{fats}g</b> / {maxFats}g</small></p>
         <ProgressBar 
-          variant="success" 
+          variant={fatsColor} 
           now={fats} 
           max={maxFats} 
         />
