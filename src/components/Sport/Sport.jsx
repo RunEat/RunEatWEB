@@ -21,6 +21,7 @@ const Sport = () => {
       <Chronometer />
       <GoogleMaps />
       <Navbar />
+        
     </>
   );
 };
