@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { maximumCalories, maximumCarbs, maximumProteins, maximumFats } from "../../Utils/CalculateCalories";
+import {
+  maximumCalories,
+  maximumCarbs,
+  maximumProteins,
+  maximumFats,
+} from "../../Utils/CalculateCalories";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { useUser } from "../../hooks/useUserContext";
 
@@ -12,30 +17,28 @@ function MacrosChart({ meal }) {
   const [maxProteins, setMaxProteins] = useState();
   const [maxFats, setMaxFats] = useState();
 
-  const [carbsColor, setCarbsColor] = useState('success');
-  const [proteinsColor, setProteinsColor] = useState('success');
-  const [fatsColor, setFatsColor] = useState('success');
-  
+  const [carbsColor, setCarbsColor] = useState("success");
+  const [proteinsColor, setProteinsColor] = useState("success");
+  const [fatsColor, setFatsColor] = useState("success");
+
   const { user } = useUser();
-  
+
   useEffect(() => {
-      if (user) {
-        const TDEE = maximumCalories(user);
-        setMaxCarbs(maximumCarbs(TDEE));
-        setMaxProteins(maximumProteins(TDEE));
-        setMaxFats(maximumFats(TDEE));
+    if (user) {
+      const TDEE = maximumCalories(user);
+      setMaxCarbs(maximumCarbs(TDEE));
+      setMaxProteins(maximumProteins(TDEE));
+      setMaxFats(maximumFats(TDEE));
     }
   });
 
   useEffect(() => {
-      if (meal) {
-        console.log("meal", meal);
+    if (meal) {
+      console.log("meal", meal);
       let fatsBreakfast = meal.mealType.breakfast
         ? meal.mealType.breakfast.macros.fats
         : 0;
-      let fatsLunch = meal.mealType.lunch
-        ? meal.mealType.lunch.macros.fats
-        : 0;
+      let fatsLunch = meal.mealType.lunch ? meal.mealType.lunch.macros.fats : 0;
       let fatsDinner = meal.mealType.dinner
         ? meal.mealType.dinner.macros.fats
         : 0;
@@ -58,7 +61,9 @@ function MacrosChart({ meal }) {
         ? meal.mealType.snacks.macros.proteins
         : 0;
 
-      setProteins(proteinsBreakfast + proteinsDinner + proteinsLunch + proteinsSnacks);
+      setProteins(
+        proteinsBreakfast + proteinsDinner + proteinsLunch + proteinsSnacks
+      );
 
       let carbsBreakfast = meal.mealType.breakfast
         ? meal.mealType.breakfast.macros.carbs
@@ -78,41 +83,43 @@ function MacrosChart({ meal }) {
   }, [meal]);
 
   useEffect(() => {
-    maxCarbs - carbs < 0 ? setCarbsColor('danger') : setCarbsColor('success');
-    maxProteins - proteins < 0 ? setProteinsColor('danger') : setProteinsColor('success');
-    maxFats - fats < 0 ? setFatsColor('danger') : setFatsColor('success')
-  }, [maxCarbs - carbs, maxProteins - proteins, maxFats - fats])
+    maxCarbs - carbs < 0 ? setCarbsColor("danger") : setCarbsColor("success");
+    maxProteins - proteins < 0
+      ? setProteinsColor("danger")
+      : setProteinsColor("success");
+    maxFats - fats < 0 ? setFatsColor("danger") : setFatsColor("success");
+  }, [maxCarbs - carbs, maxProteins - proteins, maxFats - fats]);
 
   return (
     <div className="MacrosChart container d-flex mb-3 justify-content-center text-center w-50 mt-4">
       <div className="col-3">
         <p className="text-secondary h6 p-0 m-0">Carbs</p>
-        <p className="p-0 mb-2"><small><b>{carbs}g</b> / {maxCarbs}g</small></p>
-        <ProgressBar
-          variant={carbsColor}
-          now={carbs}
-          max={maxCarbs}
-        />
+        <p className="p-0 mb-2">
+          <small>
+            <b>{carbs}g</b> / {maxCarbs}g
+          </small>
+        </p>
+        <ProgressBar variant={carbsColor} now={carbs} max={maxCarbs} />
       </div>
 
       <div className="col-3 mx-3">
         <p className="text-secondary h6 p-0 m-0">Proteins</p>
-        <p className="p-0 mb-2"><small><b>{proteins}g</b> / {maxProteins}g</small></p>
-        <ProgressBar
-          variant={proteinsColor}
-          now={proteins}
-          max={maxProteins}
-        />
+        <p className="p-0 mb-2">
+          <small>
+            <b>{proteins}g</b> / {maxProteins}g
+          </small>
+        </p>
+        <ProgressBar variant={proteinsColor} now={proteins} max={maxProteins} />
       </div>
 
       <div className="col-3">
         <p className="text-secondary h6 p-0 m-0">Fats</p>
-        <p className="p-0 mb-2"><small><b>{fats}g</b> / {maxFats}g</small></p>
-        <ProgressBar 
-          variant={fatsColor} 
-          now={fats} 
-          max={maxFats} 
-        />
+        <p className="p-0 mb-2">
+          <small>
+            <b>{fats}g</b> / {maxFats}g
+          </small>
+        </p>
+        <ProgressBar variant={fatsColor} now={fats} max={maxFats} />
       </div>
     </div>
   );

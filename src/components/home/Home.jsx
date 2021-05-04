@@ -23,7 +23,7 @@ const Home = () => {
 						<h4 className="mb-0 pb-0 mt-2">Welcome to</h4>
 						<h1 className="font-weitght-bold mt-0 p-0">RunEat</h1>
 					</div>
-					<video playsinline autoPlay muted loop id="bgvid" className="SignupVideo">
+					<video playsInline autoPlay muted loop id="bgvid" className="SignupVideo">
 						<source src="./RunEat_clip.webm" type="video/webm"/>
 						<source src="./RunEat_clip.mp4" type="video/mp4"/>
 					</video>

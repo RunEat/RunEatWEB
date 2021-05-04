@@ -66,7 +66,9 @@ const Recipe = ({ recipeFromAPI, mealtype, setMeal }) => {
         <>
           <Link to={newTo} className="text-decoration-none">
             <img className="imgRecipe" src={recipeFromAPI.recipe.image} />
-            <h2 className="w-75 ms-4 mt-4 titleRecipe">{recipeFromAPI.recipe.label}</h2>
+            <h2 className="w-75 ms-4 mt-4 titleRecipe">
+              {recipeFromAPI.recipe.label}
+            </h2>
           </Link>
 
           <button

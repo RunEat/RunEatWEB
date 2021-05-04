@@ -17,25 +17,25 @@ const Diary = () => {
   const { date, setDate } = useDate();
   const { user, setUser } = useUser();
 
-  console.log('user', user)
+  //console.log("user", user);
 
   const [diary, setDiary] = useState(); //TODO: Meter estado inicial
 
   const totalCalories = () => {
-      let breakfast = diary.meal.mealType.breakfast
-        ? diary.meal.mealType.breakfast.calories
-        : 0;
-      let lunch = diary.meal.mealType.lunch
-        ? diary.meal.mealType.lunch.calories
-        : 0;
-      let dinner = diary.meal.mealType.dinner
-        ? diary.meal.mealType.dinner.calories
-        : 0;
-      let snacks = diary.meal.mealType.snacks
-        ? diary.meal.mealType.snacks.calories
-        : 0;
-  
-      return breakfast + lunch + dinner + snacks;
+    let breakfast = diary.meal.mealType.breakfast
+      ? diary.meal.mealType.breakfast.calories
+      : 0;
+    let lunch = diary.meal.mealType.lunch
+      ? diary.meal.mealType.lunch.calories
+      : 0;
+    let dinner = diary.meal.mealType.dinner
+      ? diary.meal.mealType.dinner.calories
+      : 0;
+    let snacks = diary.meal.mealType.snacks
+      ? diary.meal.mealType.snacks.calories
+      : 0;
+
+    return breakfast + lunch + dinner + snacks;
   };
 
   const onChange = (date) => {
@@ -46,16 +46,16 @@ const Diary = () => {
     setStoredDate(date);
 
     getDiary(date).then((diary) => {
-      console.log('diaryDB', diary)
+      console.log("diaryDB", diary);
       if (diary.sport) {
         setDiary(diary);
         console.log("diaryCompleted", diary);
       }
       if (diary.errors) {
-        setDiary()
+        setDiary();
       }
-    })
-      //.catch(console.log('No diary'))
+    });
+    //.catch(console.log('No diary'))
   };
 
   useEffect(() => {
@@ -77,25 +77,25 @@ const Diary = () => {
         </div>
       ) : (
         <div>
-            {
-              //user.id == diary.user.id && (
-              <>
-                {!diary ? (
-                  <div className="d-flex mt-5">
-                    <Link to={`/meal`} className="btn me-4 colorMeal">
-                      <i className="fas fa-plus me-2 colorMeal"></i>
+          {
+            //user.id == diary.user.id && (
+            <>
+              {!diary ? (
+                <div className="d-flex mt-5">
+                  <Link to={`/meal`} className="btn me-4 colorMeal">
+                    <i className="fas fa-plus me-2 colorMeal"></i>
                     New Meal
                   </Link>
 
-                    <br />
+                  <br />
 
-                    <Link to={`/sport`} className="btn me-4 colorSport">
-                      <i className="fas fa-plus me-2 colorSport"></i>
+                  <Link to={`/sport`} className="btn me-4 colorSport">
+                    <i className="fas fa-plus me-2 colorSport"></i>
                     New Sport
                   </Link>
-                  </div>
-                ) : (
-                  user.id === diary.user.id ? (<>
+                </div>
+              ) : user.id === diary.user.id ? (
+                <>
                   <h4 className="mt-5 text-secondary">Total calories:</h4>
                   <h1>{totalCalories()} cal</h1>
                   <div className="d-flex mt-5">
@@ -111,19 +111,21 @@ const Diary = () => {
                       New Sport
                     </Link>
                   </div>
-                </>): (<div className="d-flex mt-5">
-                    <Link to={`/meal`} className="btn me-4 colorMeal">
-                      <i className="fas fa-plus me-2 colorMeal"></i>
+                </>
+              ) : (
+                <div className="d-flex mt-5">
+                  <Link to={`/meal`} className="btn me-4 colorMeal">
+                    <i className="fas fa-plus me-2 colorMeal"></i>
                     New Meal
                   </Link>
 
-                    <br />
+                  <br />
 
-                    <Link to={`/sport`} className="btn me-4 colorSport">
-                      <i className="fas fa-plus me-2 colorSport"></i>
+                  <Link to={`/sport`} className="btn me-4 colorSport">
+                    <i className="fas fa-plus me-2 colorSport"></i>
                     New Sport
                   </Link>
-                  </div>)
+                </div>
               )}
             </>
           }

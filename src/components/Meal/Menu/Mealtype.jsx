@@ -1,6 +1,6 @@
-import Recipe from './Recipe';
-import SyncLoader from 'react-spinners/SyncLoader';
-import './Mealtype.css'
+import Recipe from "./Recipe";
+import SyncLoader from "react-spinners/SyncLoader";
+import "./Mealtype.css";
 
 import React, { useState } from "react";
 import ItemsCarousel from "react-items-carousel";
@@ -8,13 +8,13 @@ import ItemsCarousel from "react-items-carousel";
 const Mealtype = ({ recipes, mealtype, setMeal }) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = 40;
-  
+
   return (
     <div className="Carousel card-group">
       {!recipes ? (
-          <div className="text-center pb-3">
-            <SyncLoader color="#00bd56" />
-          </div>
+        <div className="text-center pb-3">
+          <SyncLoader color="#00bd56" />
+        </div>
       ) : (
         <div style={{ padding: `0 ${chevronWidth}px` }}>
           <ItemsCarousel

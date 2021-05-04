@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { logout } from "../../store/AccessTokenStore";
 import { passwordResetEmail } from "../../services/AuthService";
 import Navbar from "../Navbar/Navbar";
-import './Profile.css'
+import "./Profile.css";
 
 function Profile() {
   const [showBody, setShowBody] = useState(false);
@@ -26,14 +26,13 @@ function Profile() {
   const changePassword = (e) => {
     e.preventDefault();
 
-    console.log('user', user.email)
+    console.log("user", user.email);
 
-    setChangePasswordInfo(true); 
+    setChangePasswordInfo(true);
     setTimeout(() => {
-      passwordResetEmail(user)
-        .then(() => {
-        setChangePasswordInfo(false); 
-    });
+      passwordResetEmail(user).then(() => {
+        setChangePasswordInfo(false);
+      });
     }, 5000);
   };
 
@@ -58,7 +57,7 @@ function Profile() {
             <p>
               {user.age} years-old
               <i
-                class="fas fa-birthday-cake fs-2 ms-2"
+                className="fas fa-birthday-cake fs-2 ms-2"
                 style={{ color: "red" }}
               ></i>
             </p>
@@ -94,7 +93,7 @@ function Profile() {
                 }}
               >
                 <i
-                  class="fas fa-user-cog"
+                  className="fas fa-user-cog"
                   style={{ color: "#fff", fontSize: "1.5rem" }}
                 ></i>
                 <span style={{ color: "#fff" }}>Settings</span>
@@ -107,14 +106,14 @@ function Profile() {
               <div className="d-flex mt-3">
                 <p className="card-text me-4">
                   <i
-                    class="fas fa-ruler-vertical me-2 fs-1 align-items-center"
+                    className="fas fa-ruler-vertical me-2 fs-1 align-items-center"
                     style={{ color: "#207dff" }}
                   ></i>
                   {user.height} cm
                 </p>
                 <p className="card-text">
                   <i
-                    class="fas fa-weight me-2 fs-1"
+                    className="fas fa-weight me-2 fs-1"
                     style={{ color: "#207dff" }}
                   ></i>
                   {user.weight} Kg
@@ -133,7 +132,7 @@ function Profile() {
                   to="/profile/edit"
                   className="btn btn-primary mt-2 btnStandar"
                 >
-                  <i class="fas fa-edit me-2" style={{ color: "#fff" }}></i>
+                  <i className="fas fa-edit me-2" style={{ color: "#fff" }}></i>
                   Edit Profile
                 </Link>
                 <Link
@@ -141,7 +140,7 @@ function Profile() {
                   className="btn btn-primary mt-2 btnStandar"
                 >
                   <i
-                    class="fas fa-trash-alt me-2"
+                    className="fas fa-trash-alt me-2"
                     style={{ color: "#fff" }}
                   ></i>
                   Delete Account
@@ -163,7 +162,7 @@ function Profile() {
                     className="btn btn-danger mx-1 btnStandar"
                     onClick={logout}
                   >
-                    <i class="fas fa-power-off fs-4 me-2"></i>
+                    <i className="fas fa-power-off fs-4 me-2"></i>
                     Log out
                   </button>
                 </div>

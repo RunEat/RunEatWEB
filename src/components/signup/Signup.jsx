@@ -148,7 +148,7 @@ const Signup = () => {
     <div className="Login mt-4 container d-flex justify-content-center flex-column">
     <Link to='/'><i className="fas fa-chevron-left ms-4 mt-5 mb-5 colorLink"></i></Link>
       <div className="d-flex flex-column justify-content-between align-items-center text-center">
-        <i class="fas fa-sign-in-alt signupIcon"></i>
+        <i className="fas fa-sign-in-alt signupIcon"></i>
         <h1 style={{color: '#ff7d47'}} className="mb-5">Sign up</h1>
         <form className="align-self-center" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
           
