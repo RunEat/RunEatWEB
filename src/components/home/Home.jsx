@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import './Home.css';
-import Navbar from '../Navbar/Navbar'
 import { useUser } from '../../hooks/useUserContext';
 
 const Home = () => {

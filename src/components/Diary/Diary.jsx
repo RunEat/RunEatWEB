@@ -20,20 +20,20 @@ const Diary = () => {
   const [diary, setDiary] = useState(); //TODO: Meter estado inicial
 
   const totalCalories = () => {
-    let breakfast = diary.meal.mealType.breakfast
-      ? diary.meal.mealType.breakfast.calories
-      : 0;
-    let lunch = diary.meal.mealType.lunch
-      ? diary.meal.mealType.lunch.calories
-      : 0;
-    let dinner = diary.meal.mealType.dinner
-      ? diary.meal.mealType.dinner.calories
-      : 0;
-    let snacks = diary.meal.mealType.snacks
-      ? diary.meal.mealType.snacks.calories
-      : 0;
-
-    return breakfast + lunch + dinner + snacks;
+      let breakfast = diary.meal.mealType.breakfast
+        ? diary.meal.mealType.breakfast.calories
+        : 0;
+      let lunch = diary.meal.mealType.lunch
+        ? diary.meal.mealType.lunch.calories
+        : 0;
+      let dinner = diary.meal.mealType.dinner
+        ? diary.meal.mealType.dinner.calories
+        : 0;
+      let snacks = diary.meal.mealType.snacks
+        ? diary.meal.mealType.snacks.calories
+        : 0;
+  
+      return breakfast + lunch + dinner + snacks;
   };
 
   const onChange = (date) => {
@@ -44,9 +44,16 @@ const Diary = () => {
     setStoredDate(date);
 
     getDiary(date).then((diary) => {
-      setDiary(diary);
-      console.log("diaryCompleted", diary);
-    });
+      console.log('diaryDB', diary)
+      if (diary.sport) {
+        setDiary(diary);
+        console.log("diaryCompleted", diary);
+      }
+      if (diary.errors) {
+        setDiary()
+      }
+    })
+      //.catch(console.log('No diary'))
   };
 
   useEffect(() => {
