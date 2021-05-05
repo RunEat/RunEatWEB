@@ -3,7 +3,7 @@ import { useDate } from "../../hooks/useDateContext";
 import { useUser } from '../../hooks/useUserContext';
 import SyncLoader from 'react-spinners/SyncLoader';
 import Chronometer from './Chronometer';
-import GoogleMaps from './GoogleMaps';
+import Map from './Map';
 import Navbar from '../Navbar/Navbar'
 
 const Sport = () => {
@@ -19,7 +19,7 @@ const Sport = () => {
   ) : (
     <>
       <Chronometer />
-      <GoogleMaps />
+      <Map />
       <Navbar />
         
     </>
