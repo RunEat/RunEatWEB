@@ -74,9 +74,7 @@ const Diary = () => {
         <div className="text-center">
           <SyncLoader color="#00bd56" />
         </div>
-      ) : !user ? (
-        <Redirect to='/login' />
-      ) : (
+      ) :  (
         <div>
           {
             <>
@@ -97,7 +95,7 @@ const Diary = () => {
                     </Link>
                   </div>
                 </>
-              ) : user.id === diary.user.id ? (
+              ) :  (
                 <>
                   <Calendar onChange={onChange} value={date} />
                   <h4 className="mt-5 text-secondary">Total calories:</h4>
@@ -106,23 +104,6 @@ const Diary = () => {
                     <Link to={`/meal`} className="btn me-4 colorMeal">
                       <i className="fas fa-edit me-2 colorMeal"></i>
                       Update Meal
-                    </Link>
-
-                    <br />
-
-                    <Link to={`/sport`} className="btn me-4 colorSport">
-                      <i className="fas fa-plus me-2 colorSport"></i>
-                      New Sport
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Calendar onChange={onChange} value={date} />
-                  <div className="d-flex mt-5">
-                    <Link to={`/meal`} className="btn me-4 colorMeal">
-                      <i className="fas fa-plus me-2 colorMeal"></i>
-                      New Meal
                     </Link>
 
                     <br />

@@ -42,7 +42,7 @@ const Recipe = ({ recipeFromAPI, mealtype, setMeal }) => {
         dietLabel: recipeFromAPI.recipe.dietLabels,
         instructions: recipeFromAPI.recipe.url,
       };
-
+      console.log('newRecipe', newRecipe)
       addMeal(newRecipe).then((meal) => {
         getMeal(mealDate).then((updateMeal) => {
           console.log("updateMeal", updateMeal);

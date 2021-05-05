@@ -9,9 +9,9 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { useUser } from "../../hooks/useUserContext";
 
 function MacrosChart({ meal }) {
-  const [fats, setFats] = useState();
-  const [proteins, setProteins] = useState();
-  const [carbs, setCarbs] = useState();
+  const [fats, setFats] = useState(0);
+  const [proteins, setProteins] = useState(0);
+  const [carbs, setCarbs] = useState(0);
 
   const [maxCarbs, setMaxCarbs] = useState();
   const [maxProteins, setMaxProteins] = useState();

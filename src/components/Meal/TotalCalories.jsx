@@ -11,7 +11,7 @@ import "./TotalCalories.css";
 const TotalCalories = ({ meal }) => {
   //console.log('Meal totalCalories', meal)
   const [maxCalories, setMaxCalories] = useState();
-  const [calories, setCalories] = useState();
+  const [calories, setCalories] = useState(0);
   const [color, setColor] = useState("#198754");
 
   const { user } = useUser();
