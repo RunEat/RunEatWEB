@@ -5,7 +5,7 @@ export const maximumCalories = (user) => {
   let activityLevel;
 
   switch (user.activity[0]) {
-    case "Low/Sedentary":
+    case "Sedentary":
       activityLevel = 1.15;
       break;
     case "Moderate":
@@ -22,7 +22,7 @@ export const maximumCalories = (user) => {
       break;
   }
 
-  //console.log("activityLevel after switch", activityLevel);
+  console.log("activityLevel after switch", activityLevel);
 
   const BMR = 10 * weight + 6.25 * height - 5 * age + 5; // Basal Metabolic Rate (Calories to survive)
   const TDEE = BMR * activityLevel; // Total Daily Energy Expenditure (Target Calories)
