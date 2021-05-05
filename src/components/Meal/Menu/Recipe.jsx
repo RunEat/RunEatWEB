@@ -42,7 +42,7 @@ const Recipe = ({ recipeFromAPI, mealtype, setMeal }) => {
         dietLabel: recipeFromAPI.recipe.dietLabels,
         instructions: recipeFromAPI.recipe.url,
       };
-
+      console.log('newRecipe', newRecipe)
       addMeal(newRecipe).then((meal) => {
         getMeal(mealDate).then((updateMeal) => {
           console.log("updateMeal", updateMeal);
@@ -66,7 +66,9 @@ const Recipe = ({ recipeFromAPI, mealtype, setMeal }) => {
         <>
           <Link to={newTo} className="text-decoration-none">
             <img className="imgRecipe" src={recipeFromAPI.recipe.image} />
-            <h2 className="w-75 ms-4 mt-4 titleRecipe">{recipeFromAPI.recipe.label}</h2>
+            <h2 className="w-75 ms-4 mt-4 titleRecipe">
+              {recipeFromAPI.recipe.label}
+            </h2>
           </Link>
 
           <button
