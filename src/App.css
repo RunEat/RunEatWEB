@@ -7,9 +7,3 @@
   border-bottom: '1px solid #00bd56';
   border-radius: '0px';
 }
-
-@media (min-width: 600px) {
-  .App {
-    display: none;
-  }
-}
