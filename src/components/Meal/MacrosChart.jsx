@@ -91,7 +91,7 @@ function MacrosChart({ meal }) {
   }, [maxCarbs - carbs, maxProteins - proteins, maxFats - fats]);
 
   return (
-    <div className="MacrosChart container d-flex mb-3 justify-content-center text-center w-50 mt-4">
+    <div className="MacrosChart d-flex mb-3 justify-content-center text-center w-100 mt-4">
       <div className="col-3">
         <p className="text-secondary h6 p-0 m-0">Carbs</p>
         <p className="p-0 mb-2">
