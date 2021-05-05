@@ -75,3 +75,12 @@ export const maximumFats = (TDEE) => {
   //     case 'Default': throw new Error("Meal plan is required") break;
   // }
 };
+
+export const caloriesBurned = (sport, user) => {
+  const { distance } = sport;
+  const { weight } = user;
+
+  const avgkCalBurned = 1 * weight // 1kcal * kg --> e.g.: 70kg --> 1 * 70 every km
+
+  return avgkCalBurned * distance;
+}
