@@ -15,20 +15,22 @@ class Geolocation extends Component {
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        })
+          longitude: position.coords.longitude,
+        });
       },
       (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: false, timeout: 20000,  maximumAge: 1000 },
-    )
+      {
+        enableHighAccuracy: false,
+        timeout: 20000,
+        maximumAge: 1000,
+        distanceFilter: 1,
+      }
+    );
     this.watchID = navigator.geolocation.watchPosition((position) => {
       const lastPosition = JSON.stringify(position)
       console.log(lastPosition)
       this.setState({lastPosition})
-    },
-      (error) => console.log(error),
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0, distanceFilter: 1 }
-    )
+    })
     //   let latitudeNow;
     //   let longitudeNow;
     //   if (navigator.geolocation) {
