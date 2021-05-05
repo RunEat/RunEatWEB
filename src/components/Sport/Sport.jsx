@@ -19,8 +19,7 @@ const Sport = () => {
     <>
       <Chronometer />
       <Geolocation />
-      <Navbar />
-        
+      <Navbar /> 
     </>
   );
 };

@@ -7,14 +7,15 @@ const mapStyles = {
 };
 
 class RunningMap extends Component {
-  constructor() {
-    super();
-    this.state = {
+  // constructor() {
+  //   super();
+    state = {
       name: "React"
     };
-  }
-
+  // }
+  
   render() {
+    console.log('props', this.props)
     return (
       <div>
         <Map

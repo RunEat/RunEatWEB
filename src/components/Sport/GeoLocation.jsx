@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import RunningMap from './RunningMap';
 
 class Geolocation extends Component {
   state = {
@@ -68,8 +69,9 @@ class Geolocation extends Component {
   render() {
     return (
       <div>
-            <h4>{this.state.latitude}</h4>
-            <h4>{this.state.longitude}</h4>
+        <h4>{this.state.latitude}</h4>
+        <h4>{this.state.longitude}</h4>
+        <RunningMap lat={this.state.latitude} lng={this.state.longitude}/>
       </div>
     );
   }
