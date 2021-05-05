@@ -27,10 +27,15 @@ const Meal = () => {
   formatedDate();
 
   useEffect(() => {
-    // if (meal) {
-    getMeal(mealDate).then((meal) => {
-      setMeal(meal);
-      console.log('meal MealComponent', meal)
+    getMeal(mealDate)
+    .then((meal) => {
+      if (meal) {
+        setMeal(meal);
+        //console.log('meal MealComponent', meal)
+      }
+      if (!meal) {
+        setMeal()
+      }
     });
   }, [mealDate]);
 
@@ -67,27 +72,26 @@ const Meal = () => {
             <Navbar />
         </>
       )
-      // )
-  //  : (
-  //   user.id == meal.user && (
-      // <>
-      //   <div
-      //     className="Meal d-flex flex-column align-items-center justify-content-center bg-light"
-      //     style={{ maxHeight: "400vh", overflow: "scroll" }}
-      //   >
-      //     <div className="CaloriesSummary d-flex flex-column align-items-center">
-      //       <h1 className="text-white mt-4 mb-2 w-50 text-center">
-      //         {formatedDate()}
-      //       </h1>
-      //       <TotalCalories className="TotalCalories" meal={meal} />
-      //       <MacrosChart className="MacrosChart" meal={meal} />
-      //     </div>
-      //     <Menu meal={meal} setMeal={setMeal} />
-      //   </div>
-      //   <Navbar />
-      // </>
-          // )
-        // )
+    // ) : (
+    // user.id == meal.user && (
+    //   <>
+    //     <div
+    //       className="Meal d-flex flex-column align-items-center justify-content-center bg-light"
+    //       style={{ maxHeight: "400vh", overflow: "scroll" }}
+    //     >
+    //       <div className="CaloriesSummary d-flex flex-column align-items-center">
+    //         <h1 className="text-white mt-4 mb-2 w-50 text-center">
+    //           {formatedDate()}
+    //         </h1>
+    //         <TotalCalories className="TotalCalories" meal={meal} />
+    //         <MacrosChart className="MacrosChart" meal={meal} />
+    //       </div>
+    //       <Menu meal={meal} setMeal={setMeal} />
+    //     </div>
+    //     <Navbar />
+    //   </>
+    //       )
+    //     )
   )
 };
 
