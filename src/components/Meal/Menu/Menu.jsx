@@ -218,7 +218,7 @@ const Menu = ({ meal, setMeal }) => {
                 />
                 <button
                   type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
+                  className="btn btn-success py-2 my-sm-0"
                 >
                   Search
                 </button>
@@ -274,7 +274,7 @@ const Menu = ({ meal, setMeal }) => {
                 />
                 <button
                   type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
+                  className="btn btn-success py-2 my-sm-0"
                 >
                   Search
                 </button>
@@ -326,7 +326,7 @@ const Menu = ({ meal, setMeal }) => {
                 />
                 <button
                   type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
+                  className="btn btn-success py-2 my-sm-0"
                 >
                   Search
                 </button>
@@ -378,7 +378,7 @@ const Menu = ({ meal, setMeal }) => {
                 />
                 <button
                   type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
+                  className="btn btn-success py-2 my-sm-0"
                 >
                   Search
                 </button>

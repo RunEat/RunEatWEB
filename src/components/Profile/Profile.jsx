@@ -147,7 +147,7 @@ function Profile() {
                 </Link>
                 <div className="d-grid gap-2 col-8 mx-auto mt-2">
                   <button
-                    className="btn btn-outline-primary btnChange btnStandar"
+                    className="btn btn-primary btnChange btnStandar"
                     onClick={changePassword}
                   >
                     Update password
