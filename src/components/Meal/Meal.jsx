@@ -45,7 +45,7 @@ const Meal = () => {
     <div className="text-center">
       <SyncLoader color="#00bd56" />
     </div>
-  ) : (
+  ) :  (
         <>
         <div
           className="Meal d-flex flex-column align-items-center justify-content-center bg-light"
