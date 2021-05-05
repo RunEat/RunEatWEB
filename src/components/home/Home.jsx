@@ -28,10 +28,10 @@ const Home = () => {
             id="bgvid"
             className="SignupVideo"
           >
-            <source
+            {/* <source
               src="https://res.cloudinary.com/djuxg0lbj/video/upload/v1620204292/hireHack/RunEat_clip_1_z1pegi.webm"
               type="video/webm"
-            />
+            /> */}
             <source
               src="https://res.cloudinary.com/djuxg0lbj/video/upload/v1620204292/hireHack/RunEat_clip_1_z1pegi.mp4"
               type="video/mp4"
