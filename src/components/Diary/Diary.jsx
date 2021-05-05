@@ -100,7 +100,7 @@ const Diary = () => {
                   <h1>{totalCalories()} cal</h1>
                   <div className="d-flex mt-5">
                     <Link to={`/meal`} className="btn me-4 colorMeal">
-                      <i class="fas fa-edit me-2 colorMeal"></i>
+                      <i className="fas fa-edit me-2 colorMeal"></i>
                       Update Meal
                     </Link>
 

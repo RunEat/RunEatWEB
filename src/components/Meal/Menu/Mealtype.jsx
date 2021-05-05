@@ -24,15 +24,15 @@ const Mealtype = ({ recipes, mealtype, setMeal }) => {
             gutter={0}
             leftChevron={
               <button className="carouselButton mb-5">
-                <i class="fas fa-arrow-left"></i>
+                <i className="fas fa-arrow-left"></i>
               </button>
             }
             rightChevron={
               <button className="carouselButton mb-5">
-                <i class="fas fa-arrow-right"></i>
+                <i className="fas fa-arrow-right"></i>
               </button>
             }
-            placeholderItem="Hello"
+            placeholderitem="Hello"
             chevronWidth={chevronWidth}
           >
             {recipes.map((recipe) => (
