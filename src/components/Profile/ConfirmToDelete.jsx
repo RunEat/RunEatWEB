@@ -77,7 +77,7 @@ const ConfirmToDelete = () => {
 	
 	return (
 		<div className="ConfirmToDelete container p-5 text-justify">
-			<i class="fas fa-exclamation-triangle fs-1 d-flex justify-content-center"></i>
+			<i className="fas fa-exclamation-triangle fs-1 d-flex justify-content-center"></i>
 			<h1 className="mt-3">Are you sure you want to delete your RunEat account?</h1>
 			<form className="mt-3">
 				<label className="form-label text-dark">Upon confirmation there's no turning back.<br/>If you're completely sure, enter your email account to confirm:</label>

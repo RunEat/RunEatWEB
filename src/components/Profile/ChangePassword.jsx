@@ -86,7 +86,7 @@ const ChangePassword = () => {
       "loading"
     ) : (
       <div className="ChangePassword d-flex flex-column align-items-center mt-5">
-        <i class="fas fa-lock mt-5 mb-5 fs-1"></i>
+        <i className="fas fa-lock mt-5 mb-5 fs-1"></i>
         <form
           className="d-flex flex-column align-items-center"
           onSubmit={onSubmit}

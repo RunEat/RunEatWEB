@@ -1,135 +1,137 @@
 import Mealtype from "./Mealtype";
 import React, { useEffect, useState } from "react";
-import { getBreakfast, getDinner, getLunch, getSnacks } from "../../../services/RecipeService";
-import { useDate } from '../../../hooks/useDateContext';
+import {
+  getBreakfast,
+  getDinner,
+  getLunch,
+  getSnacks,
+} from "../../../services/RecipeService";
+import { useDate } from "../../../hooks/useDateContext";
 import { addMeal, editMeal, getMeal } from "../../../services/MealService";
 import { getStoredDate } from "../../../store/DateStore";
-import SyncLoader from 'react-spinners/SyncLoader';
-import './Menu.css';
+import SyncLoader from "react-spinners/SyncLoader";
+import "./Menu.css";
 
-const Menu = ({meal, setMeal}) => {
-  const { date, setDate } = useDate()
+const Menu = ({ meal, setMeal }) => {
+  const { date, setDate } = useDate();
   //console.log('meal', meal)
 
-    const [breakfast, setBreakfast] = useState();
-    const [lunch, setLunch] = useState();
-    const [dinner, setDinner] = useState();
-    const [snacks, setSnacks] = useState();
-    
-    const [search, setSearch] = useState({
-        search: {
-            breakfast: '',
-            lunch: '',
-            dinner: '',
-            snacks: ''
-        },
-        show: false
-     });
+  const [breakfast, setBreakfast] = useState();
+  const [lunch, setLunch] = useState();
+  const [dinner, setDinner] = useState();
+  const [snacks, setSnacks] = useState();
 
-    useEffect(() => {
-      getBreakfast(search.search.breakfast).then((recipes) => {
-        setBreakfast(recipes);
-      });
-      getLunch(search.search.lunch).then((recipes) => {
-        setLunch(recipes);
-      });
-      getDinner(search.search.dinner).then((recipes) => {
-        setDinner(recipes);
-      });
-      getSnacks(search.search.snacks).then((recipes) => {
-        setSnacks(recipes);
-      });  
+  const [search, setSearch] = useState({
+    search: {
+      breakfast: "",
+      lunch: "",
+      dinner: "",
+      snacks: "",
+    },
+    show: false,
+  });
 
-    }, []);
+  useEffect(() => {
+    getBreakfast(search.search.breakfast).then((recipes) => {
+      setBreakfast(recipes);
+    });
+    getLunch(search.search.lunch).then((recipes) => {
+      setLunch(recipes);
+    });
+    getDinner(search.search.dinner).then((recipes) => {
+      setDinner(recipes);
+    });
+    getSnacks(search.search.snacks).then((recipes) => {
+      setSnacks(recipes);
+    });
+  }, []);
 
   const onSubmitBreakfast = (e) => {
     e.preventDefault();
-      
-    setSearch(prevState => ({
+
+    setSearch((prevState) => ({
       ...prevState,
-      show: true
-    }))
+      show: true,
+    }));
 
     getBreakfast(search.search.breakfast)
       .then((recipes) => {
         setBreakfast(recipes);
       })
       .finally(() =>
-        setSearch(prevState => ({
+        setSearch((prevState) => ({
           ...prevState,
-          show: false
+          show: false,
         }))
       );
-  }
+  };
 
   const onSubmitLunch = (e) => {
     e.preventDefault();
 
-    setSearch(prevState => ({
+    setSearch((prevState) => ({
       ...prevState,
-      show: true
-    }))
-    
+      show: true,
+    }));
+
     getLunch(search.search.lunch)
-    .then((recipes) => {
+      .then((recipes) => {
         setLunch(recipes);
-    })
-    .finally(() => 
-        setSearch(prevState => ({
-            ...prevState,
-            show: false
+      })
+      .finally(() =>
+        setSearch((prevState) => ({
+          ...prevState,
+          show: false,
         }))
-    );
-    
-  }
-    
+      );
+  };
+
   const onSubmitDinner = (e) => {
     e.preventDefault();
 
-    setSearch(prevState => ({
+    setSearch((prevState) => ({
       ...prevState,
-      show: true
-    }))
-    
+      show: true,
+    }));
+
     getDinner(search.search.dinner)
       .then((recipes) => {
         setDinner(recipes);
       })
       .finally(() =>
-        setSearch(prevState => ({
+        setSearch((prevState) => ({
           ...prevState,
-          show: false
+          show: false,
         }))
       );
-  }
-        
+  };
+
   const onSubmitSnacks = (e) => {
     e.preventDefault();
 
-    setSearch(prevState => ({
+    setSearch((prevState) => ({
       ...prevState,
-      show: true
-    }))
+      show: true,
+    }));
 
-   getSnacks(search.search.snacks)
-     .then((recipes) => {
-       setSnacks(recipes);
-     })
-     .finally(() =>
-       setSearch(prevState => ({
-         ...prevState,
-         show: false
-       }))
-     );
-  }
-  
+    getSnacks(search.search.snacks)
+      .then((recipes) => {
+        setSnacks(recipes);
+      })
+      .finally(() =>
+        setSearch((prevState) => ({
+          ...prevState,
+          show: false,
+        }))
+      );
+  };
+
   const onChange = (e) => {
-
     let value = e.target.value;
 
     setSearch((prevState) => {
-      return { ...prevState, search: { [e.target.id]: value }};
-    })
+      return { ...prevState, search: { [e.target.id]: value } };
+    });
   };
 
   let mealDate = getStoredDate();
@@ -160,7 +162,7 @@ const Menu = ({meal, setMeal}) => {
         setMeal(updatedMeal);
       });
     }
-  }
+  };
 
   //console.log ('mealtype', mealtype)
 
@@ -180,7 +182,10 @@ const Menu = ({meal, setMeal}) => {
             <h2 className="mt-3">Breakfast</h2>
           </div>
           {meal !== undefined && meal.mealType.breakfast ? ( //deleteRecipe(setState que deje la receta vacia)
-            <div className="borderBody bg-white">
+            <div
+              className="borderBody"
+              style={{ backgroundColor: "rgba(32, 125, 255, 0.2)" }}
+            >
               <img
                 className="imgRecipe mt-3"
                 src={meal.mealType.breakfast.image}
@@ -214,10 +219,7 @@ const Menu = ({meal, setMeal}) => {
                   onChange={onChange}
                   value={search.search.breakfast}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
-                >
+                <button type="submit" className="btn btn-success py-2 my-sm-0">
                   Search
                 </button>
               </form>
@@ -237,7 +239,10 @@ const Menu = ({meal, setMeal}) => {
             <h2 className="mt-3">Lunch</h2>
           </div>
           {meal !== undefined && meal.mealType.lunch ? (
-            <div className="borderBody bg-white">
+            <div
+              className="borderBody"
+              style={{ backgroundColor: "rgba(32, 125, 255, 0.2)" }}
+            >
               <img
                 className="imgRecipe mt-3"
                 src={meal.mealType.lunch.image}
@@ -270,10 +275,7 @@ const Menu = ({meal, setMeal}) => {
                   onChange={onChange}
                   value={search.search.lunch}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
-                >
+                <button type="submit" className="btn btn-success py-2 my-sm-0">
                   Search
                 </button>
               </form>
@@ -289,7 +291,10 @@ const Menu = ({meal, setMeal}) => {
             <h2 className="mt-3">Dinner</h2>
           </div>
           {meal !== undefined && meal.mealType.dinner ? (
-            <div className="borderBody bg-white">
+            <div
+              className="borderBody"
+              style={{ backgroundColor: "rgba(32, 125, 255, 0.2)" }}
+            >
               <img
                 className="imgRecipe mt-3"
                 src={meal.mealType.dinner.image}
@@ -322,10 +327,7 @@ const Menu = ({meal, setMeal}) => {
                   onChange={onChange}
                   value={search.search.dinner}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
-                >
+                <button type="submit" className="btn btn-success py-2 my-sm-0">
                   Search
                 </button>
               </form>
@@ -341,7 +343,10 @@ const Menu = ({meal, setMeal}) => {
             <h2 className="mt-3">Snacks</h2>
           </div>
           {meal !== undefined && meal.mealType.snacks ? (
-            <div className="borderBody boxMarginBottom bg-white">
+            <div
+              className="borderBody boxMarginBottom"
+              style={{ backgroundColor: "rgba(32, 125, 255, 0.2)" }}
+            >
               <img
                 className="imgRecipe mt-3"
                 src={meal.mealType.snacks.image}
@@ -374,10 +379,7 @@ const Menu = ({meal, setMeal}) => {
                   onChange={onChange}
                   value={search.search.snacks}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-outline-success py-2 my-sm-0"
-                >
+                <button type="submit" className="btn btn-success py-2 my-sm-0">
                   Search
                 </button>
               </form>
@@ -388,6 +390,6 @@ const Menu = ({meal, setMeal}) => {
       )}
     </div>
   );
-}
+};
 
 export default Menu;

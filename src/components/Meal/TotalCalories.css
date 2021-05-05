@@ -3,7 +3,7 @@
  * All of the styles in this file are configurable!
  */
 
- .CircularProgressbar {
+.CircularProgressbar {
   /*
    * This fixes an issue where the CircularProgressbar svg has
    * 0 width inside a "display: flex" container, and thus not visible.
@@ -34,7 +34,7 @@
   font-size: 1rem;
   dominant-baseline: middle;
   text-anchor: middle;
-	width: 1rem;
+  width: 1rem;
 }
 
 .CircularProgressbar .CircularProgressbar-background {

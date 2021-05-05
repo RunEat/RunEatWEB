@@ -1,11 +1,11 @@
 export const maximumCalories = (user) => {
-  console.log("user", user);
+  //console.log("user", user);
 
   const { weight, height, age } = user;
   let activityLevel;
 
   switch (user.activity[0]) {
-    case "Low/Sedentary":
+    case "Sedentary":
       activityLevel = 1.15;
       break;
     case "Moderate":

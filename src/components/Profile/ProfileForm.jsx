@@ -119,7 +119,7 @@ const ProfileForm = () => {
     editUser(formData)
       .then((updatedUser) => {
         setUser(updatedUser);
-        push("/meal")
+        push("/profile")
       })
       .catch((e) => {
         if (e.response.status === 400) {
@@ -290,7 +290,7 @@ const ProfileForm = () => {
                       className="btn-check form-control" 
                       autoComplete="off"
                       active
-                      ariaPressed='true'
+                      aria-pressed='true'
                     />
                     <label 
                       htmlFor={act} 
