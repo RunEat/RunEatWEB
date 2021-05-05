@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { getDiary } from "../../services/DiaryService";
 // import Meal from '../Meal/Meal';
 // import Sport from '../Sport/Sport';
@@ -70,32 +70,36 @@ const Diary = () => {
 
   return (
     <div className="Diary text-center d-flex flex-column align-items-center pt-5 bg-light">
-      <Calendar onChange={onChange} value={date} />
       {!date ? (
         <div className="text-center">
           <SyncLoader color="#00bd56" />
         </div>
+      ) : !user ? (
+        <Redirect to='/login' />
       ) : (
         <div>
           {
-            //user.id == diary.user.id && (
             <>
               {!diary ? (
-                <div className="d-flex mt-5">
-                  <Link to={`/meal`} className="btn me-4 colorMeal">
-                    <i className="fas fa-plus me-2 colorMeal"></i>
-                    New Meal
-                  </Link>
+                <>
+                  <Calendar onChange={onChange} value={date} />
+                  <div className="d-flex mt-5">
+                    <Link to={`/meal`} className="btn me-4 colorMeal">
+                      <i className="fas fa-plus me-2 colorMeal"></i>
+                      New Meal
+                    </Link>
 
-                  <br />
+                    <br />
 
-                  <Link to={`/sport`} className="btn me-4 colorSport">
-                    <i className="fas fa-plus me-2 colorSport"></i>
-                    New Sport
-                  </Link>
-                </div>
+                    <Link to={`/sport`} className="btn me-4 colorSport">
+                      <i className="fas fa-plus me-2 colorSport"></i>
+                      New Sport
+                    </Link>
+                  </div>
+                </>
               ) : user.id === diary.user.id ? (
                 <>
+                  <Calendar onChange={onChange} value={date} />
                   <h4 className="mt-5 text-secondary">Total calories:</h4>
                   <h1>{totalCalories()} cal</h1>
                   <div className="d-flex mt-5">
@@ -113,19 +117,22 @@ const Diary = () => {
                   </div>
                 </>
               ) : (
-                <div className="d-flex mt-5">
-                  <Link to={`/meal`} className="btn me-4 colorMeal">
-                    <i className="fas fa-plus me-2 colorMeal"></i>
-                    New Meal
-                  </Link>
+                <>
+                  <Calendar onChange={onChange} value={date} />
+                  <div className="d-flex mt-5">
+                    <Link to={`/meal`} className="btn me-4 colorMeal">
+                      <i className="fas fa-plus me-2 colorMeal"></i>
+                      New Meal
+                    </Link>
 
-                  <br />
+                    <br />
 
-                  <Link to={`/sport`} className="btn me-4 colorSport">
-                    <i className="fas fa-plus me-2 colorSport"></i>
-                    New Sport
-                  </Link>
-                </div>
+                    <Link to={`/sport`} className="btn me-4 colorSport">
+                      <i className="fas fa-plus me-2 colorSport"></i>
+                      New Sport
+                    </Link>
+                  </div>
+                </>
               )}
             </>
           }

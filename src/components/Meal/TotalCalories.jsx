@@ -26,7 +26,7 @@ const TotalCalories = ({ meal }) => {
     }
   }, [user]);
 
-  console.log("meal", meal);
+  //console.log("meal", meal);
 
   useEffect(() => {
     if (meal) {

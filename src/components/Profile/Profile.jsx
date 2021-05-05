@@ -37,7 +37,11 @@ function Profile() {
   };
 
   return !user ? (
-    "Error - Unauthorized"
+    // <div className="container text-center text-info mt-5">
+    //   <img className="w-100" src="../../../images/non-found.jpeg" />
+    //   <h2 className="mt-5">Error - Unauthorized</h2>
+    // </div>
+    <Redirect to="/login" />
   ) : !user.avatar ? (
     <Redirect to="/profile/edit" />
   ) : (

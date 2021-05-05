@@ -34,7 +34,7 @@ function MacrosChart({ meal }) {
 
   useEffect(() => {
     if (meal) {
-      console.log("meal", meal);
+      //console.log("meal", meal);
       let fatsBreakfast = meal.mealType.breakfast
         ? meal.mealType.breakfast.macros.fats
         : 0;
