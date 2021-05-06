@@ -1,0 +1,8 @@
+.BtnComponent .btn {
+  border-radius: 4rem;
+  background-color: green;
+}
+
+.DisplayComponent {
+  font-size: 20 rem;
+}

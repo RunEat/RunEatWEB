@@ -16,7 +16,7 @@ class RunningMap extends Component {
   
   render() {
     return (
-      <div className="ms-3">
+      <div className="RunningMap">
         <Map
           google={this.props.google}
           zoom={14}
