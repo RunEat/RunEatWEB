@@ -3,7 +3,6 @@ import { useDate } from "../../hooks/useDateContext";
 import { useUser } from '../../hooks/useUserContext';
 import SyncLoader from 'react-spinners/SyncLoader';
 import Chronometer from './Chronometer';
-import Geolocation from './GeoLocation';
 import Navbar from '../Navbar/Navbar'
 
 const Sport = () => {
@@ -20,7 +19,6 @@ const Sport = () => {
   return (
     <div className="Sport d-flex flex-column bg-danger">
       <Chronometer />
-      <Geolocation />
       <Navbar /> 
     </div>
   );

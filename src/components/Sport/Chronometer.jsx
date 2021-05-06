@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import BtnComponent from './BtnComponent';
 import DisplayComponent from './DisplayComponent';
+import Geolocation from './GeoLocation';
 
 function Chronometer() {
     const [time, setTime] = useState({ s: 0, m: 0, h: 0 })
@@ -11,6 +12,7 @@ function Chronometer() {
         run()
         setStatus(1)
         setinterv(setInterval(run, 1000))
+        //getLocationUpdate();   //Activamos geolocalización
     }
 
     let updateH = time.h, updateM = time.m, updateS = time.s
@@ -29,8 +31,9 @@ function Chronometer() {
     }
 
     const stop = () => {
-      clearInterval(interv)
-      setStatus(2)
+        clearInterval(interv)
+        setStatus(2)
+        //clearInterval desactivamos la localización
     };
 
     const reset = () => {
@@ -50,6 +53,7 @@ function Chronometer() {
                      <p>Distancia</p>
                      <p>(Tiempo/distancia) pace</p>
                      <p></p>
+                     <Geolocation status={status}/>
            </div>
              </div>
         </div>
