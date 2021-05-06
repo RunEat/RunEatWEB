@@ -1,23 +1,44 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { Map, GoogleApiWrapper, Marker, Polyline  } from 'google-maps-react';
+import haversine from "haversine";
 
 const mapStyles = {
   width: '100%',
   height: '50%'
 };
 
-class RunningMap extends Component {
-   render() {
-    const myLatLng = { lat: this.props.lat, lng: this.props.lng };
+const RunningMap = (props) => {
+    const myLatLng = { lat: props.lat, lng: props.lng };
     //console.log("myLatLng", myLatLng)
 
-     const coordinates = this.props.coordinates
-     //console.log('coordinates', coordinates)
+    const coordinates = props?.coordinates
+    console.log('coordinates', coordinates)
+    
+    useEffect(() => {
+      const start = {
+        latitude: props?.coordinates[0].lat,
+        longitude: props?.coordinates[0].lng
+      }
+      console.log(start)
+      const end = {
+        latitude: props?.coordinates[props?.coordinates.length - 1].lat,
+        longitude: props?.coordinates[props?.coordinates.length - 1].lng
+      }
+      console.log(end)
+
+      start && end && console.log('haversine', haversine(start, end, {unit: 'meter'}))
+    }, [coordinates])
+
+      // console.log(haversine(start, end))
+      // console.log(haversine(start, end, {unit: 'meter'}))
+      
+    
+      
 
     return (
       <div className="RunningMap">
         <Map
-          google={this.props.google}
+          google={props.google}
           zoom={18}
           style={mapStyles}
           initialCenter={{
@@ -30,7 +51,6 @@ class RunningMap extends Component {
         </Map>
       </div>
     );
-  }
 }
 
 export default GoogleApiWrapper({

@@ -10,8 +10,8 @@ function Chronometer() {
 
     const start = () => {
         run()
-        setStatus(1)
         setinterv(setInterval(run, 1000))
+        setStatus(1)
         //getLocationUpdate();   //Activamos geolocalización
     }
 
@@ -50,9 +50,9 @@ function Chronometer() {
                <div className="stopwatch">
                     <DisplayComponent time={time}/>
                      <BtnComponent start={start} reset={reset} stop={stop} resume={resume} status={status} />
-                     <p>Distancia</p>
-                     <p>(Tiempo/distancia) pace</p>
-                     <p></p>
+                     <p>Distance: {}</p>
+                     <p>Calories Burned: {}</p>
+                     <p>Pace: {}</p> // (Tiempo/distancia)
                      <Geolocation status={status}/>
            </div>
              </div>

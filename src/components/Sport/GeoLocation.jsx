@@ -1,6 +1,8 @@
 import React, { Component, setState, useEffect, useState } from "react";
+import { google } from 'google-maps-react';
 import { render } from "react-dom";
 import RunningMap from './RunningMap';
+let interval = null;
 
 const Geolocation = ({status}) => {
     
@@ -34,12 +36,13 @@ const Geolocation = ({status}) => {
   function getLocationUpdate() {
     if (navigator.geolocation) {
       // timeout at 120000 milliseconds (120 seconds)
-      var options = { timeout: 120000, maximumAge: 1000, enableHighAccuracy: false};
+      var options = { timeout: 120000, maximumAge: 1000, enableHighAccuracy: true};
       let geoLoc = navigator.geolocation;
-      setInterval(() => {
+      //console.log('interval', interval)
+      interval = setInterval(() => {
         //let watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
         let watchID = geoLoc.getCurrentPosition(showLocation, errorHandler, options);
-     }, 5000)
+     }, 10000)
     } else {
       alert("Sorry, browser does not support geolocation!");
     }
@@ -49,32 +52,33 @@ const Geolocation = ({status}) => {
   useEffect(() => {
     if (status === 1) {
       getLocationUpdate()      //START 
-    } 
+    }
     if (status === 2) {
-      clearInterval()
+      //console.log ('interval', interval)      //STOP
+      clearInterval(interval)  
     }
   }, [status]);
   
 
-  let newCoordinates = {
-    lat: 40.35718,
-    lng: -3.7735,
-  };
+  // let newCoordinates = {
+  //   lat: 40.35718,
+  //   lng: -3.7735,
+  // };
 
-  const changeCoordinates = () => {
-    setCoordinates((prevCoordinates) =>
-      // console.log('prevCoordinates', prevCoordinates),
-      // console.log('newCordinates', newCoordinates)
-      [...prevCoordinates, newCoordinates]
-    );
-  };
+  // const changeCoordinates = () => {
+  //   setCoordinates((prevCoordinates) =>
+  //     // console.log('prevCoordinates', prevCoordinates),
+  //     // console.log('newCordinates', newCoordinates)
+  //     [...prevCoordinates, newCoordinates]
+  //   );
+  // };
 
   return (
     <div>
       <h4>latitude: {latitude}</h4>
       <h4>longitude: {longitude}</h4>
       {/* <h4>lastPosition: {this.state.lastPosition}</h4> */}
-      <button onClick={changeCoordinates}>Change Coordinates</button>
+      {/* <button onClick={changeCoordinates}>Change Coordinates</button> */}
       <RunningMap lat={latitude} lng={longitude} coordinates={coordinates} />
     </div>
   );
