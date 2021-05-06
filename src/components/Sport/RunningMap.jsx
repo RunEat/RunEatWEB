@@ -18,7 +18,7 @@ class RunningMap extends Component {
       <div className="RunningMap">
         <Map
           google={this.props.google}
-          zoom={16}
+          zoom={15}
           style={mapStyles}
           initialCenter={{
             lat: 40.3562266,
