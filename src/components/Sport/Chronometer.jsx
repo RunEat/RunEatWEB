@@ -43,14 +43,14 @@ function Chronometer() {
 
      return (
        <div className="container text-center mt-5">
--        <div className="clock-holder">
--                <div className="stopwatch">
--                    <DisplayComponent time={time}/>
--                     <BtnComponent start={start} reset={reset} stop={stop} resume={resume} status={status} />
--                     <p>Distancia</p>
--                     <p>(Tiempo/distancia) pace</p>
--                     <p></p>
--               </div>
+        <div className="clock-holder">
+               <div className="stopwatch">
+                    <DisplayComponent time={time}/>
+                     <BtnComponent start={start} reset={reset} stop={stop} resume={resume} status={status} />
+                     <p>Distancia</p>
+                     <p>(Tiempo/distancia) pace</p>
+                     <p></p>
+           </div>
              </div>
         </div>
      );
