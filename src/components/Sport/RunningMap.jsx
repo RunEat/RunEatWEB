@@ -8,12 +8,11 @@ const mapStyles = {
 
 class RunningMap extends Component {
    render() {
-    const myLatLng = [{ lat: this.props.lat, lng: this.props.lng }];
+    const myLatLng = { lat: this.props.lat, lng: this.props.lng };
     console.log("myLatLng", myLatLng);
     console.log('state Running Map', this.state)
 
-     const coordinates = [this.props.coordinates];
-    //  { lat: 40.32718, lng: -3.7635 }
+    const coordinates = [myLatLng, { lat: 40.3592021, lng: -3.7797249 }];
 
     console.log('coordinates Map', coordinates)
 
@@ -21,15 +20,15 @@ class RunningMap extends Component {
       <div className="RunningMap">
         <Map
           google={this.props.google}
-          zoom={14}
+          zoom={16}
           style={mapStyles}
           initialCenter={{
-            lat: this.props.lat,
-            lng: this.props.lng,
+            lat: 40.3562266,
+            lng: -3.7796867,
           }}
         >
           <Marker position={myLatLng} />
-          <Polyline path={coordinates} options={{ strokeColor: "green" }} />
+          <Polyline path={coordinates} options={{ strokeColor: "#85ef47" }} />
         </Map>
       </div>
     );
