@@ -12,17 +12,17 @@ class RunningMap extends Component {
     //console.log("myLatLng", myLatLng)
 
      const coordinates = this.props.coordinates
-     console.log('coordinates', coordinates)
+     //console.log('coordinates', coordinates)
 
     return (
       <div className="RunningMap">
         <Map
           google={this.props.google}
-          zoom={15}
+          zoom={18}
           style={mapStyles}
           initialCenter={{
-            lat: 40.3562266,
-            lng: -3.7796867,
+            lat: 40.4521205,
+            lng: -3.6997216,
           }}
         >
           <Marker position={myLatLng} />

@@ -6,21 +6,18 @@ const Geolocation = () => {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [coordinates, setCoordinates] = useState([
-    {
-      lat: null,
-      lng: null,
-    },
-  ]);
+  const [coordinates, setCoordinates] = useState([]);
   // const [position, setPosition] = useState(null)
 
   function showLocation(position) {
-    console.log('position', position)
+    console.log('latitude', position.coords.latitude)
+    console.log('longitude', position.coords.longitude)
+    //console.log('navigator.geolocation', navigator.geolocation)
     setLatitude(position.coords.latitude);
     setLongitude(position.coords.longitude);
-    setCoordinates([
-      { lat: position.coords.latitude, lng: position.coords.longitude },
-    ]);
+    setCoordinates((prevCoordinates) => (
+      [...prevCoordinates, { lat: position.coords.latitude, lng: position.coords.longitude }]
+    ));
   }
 
   function errorHandler(err) {
@@ -34,9 +31,12 @@ const Geolocation = () => {
   function getLocationUpdate() {
     if (navigator.geolocation) {
       // timeout at 120000 milliseconds (120 seconds)
-      var options = { timeout: 120000, maximumAge: 10000, enableHighAccuracy: true};
+      var options = { timeout: 120000, maximumAge: 1000, enableHighAccuracy: true};
       let geoLoc = navigator.geolocation;
-      let watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
+      setInterval(() => {
+        //let watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
+        let watchID = geoLoc.getCurrentPosition(showLocation, errorHandler, options);
+     }, 8000)
     } else {
       alert("Sorry, browser does not support geolocation!");
     }
@@ -47,22 +47,14 @@ const Geolocation = () => {
     getLocationUpdate();
   }, []); //latitude, longitude??
 
-  // const newPosition = () => {
-  //   if (navigator.geolocation) {
-  //     //console.log('navigator.geolocation true')
-  //     navigator.geolocation.watchPosition(function (position) {
-  //       //console.log("Latitude is :", position.coords.latitude);
-  //       //console.log("Longitude is :", position.coords.longitude);
-  //       console.log('speed', position.coords.speed)
-  //       setLatitude(position.coords.latitude);
-  //       setLongitude(position.coords.longitude);
-  //       setCoordinates([
-  //         { lat: position.coords.latitude, lng: position.coords.longitude },
-  //       ]);
-  //       //setCoordinates((prevCoordinates) => ([...prevCoordinates, newCoordinates]))
-  //     });
-  //   }
-  // };
+  // useEffect(() => {
+  //   setCoordinates((prevCoordinates) => 
+      
+  //   // console.log('prevCoordinates', prevCoordinates),
+  //   // console.log('newCordinates', newCoordinates)
+  //   [...prevCoordinates, ...coordinates])
+    
+  // }, [latitude, longitude])
 
   //WatchID => Hacer clearWatch(this.watchId) y deja de escuchar - STOP CHRONO -
 
