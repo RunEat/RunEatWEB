@@ -9,12 +9,10 @@ const mapStyles = {
 class RunningMap extends Component {
    render() {
     const myLatLng = { lat: this.props.lat, lng: this.props.lng };
-    console.log("myLatLng", myLatLng);
-    console.log('state Running Map', this.state)
+    //console.log("myLatLng", myLatLng)
 
-    const coordinates = [myLatLng, { lat: 40.3592021, lng: -3.7797249 }];
-
-    console.log('coordinates Map', coordinates)
+     const coordinates = this.props.coordinates
+     console.log('coordinates', coordinates)
 
     return (
       <div className="RunningMap">

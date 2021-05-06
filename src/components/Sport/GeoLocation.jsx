@@ -18,20 +18,61 @@ const Geolocation = () => {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [coordinates, setCoordinates] = useState({lat: null, lng: null});
-
+  const [coordinates, setCoordinates] = useState([{
+    lat: null,
+    lng: null,
+  }]);
+  
   useEffect(() => {
+    newPosition()
+  }, []) //latitude, longitude??
+
+  const newPosition = () => {
     if (navigator.geolocation) {
-      console.log('navigator.geolocation true')
+      //console.log('navigator.geolocation true')
       navigator.geolocation.watchPosition(function (position) {
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
-        setLatitude(position.coords.latitude)
-        setLongitude(position.coords.longitude)
-        setCoordinates({lat: position.coords.latitude, lng: position.coords.longitude})
+        //console.log("Latitude is :", position.coords.latitude);
+        //console.log("Longitude is :", position.coords.longitude);
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+        setCoordinates([
+          { lat: position.coords.latitude, lng: position.coords.longitude },
+        ]);
+        //setCoordinates((prevCoordinates) => ([...prevCoordinates, newCoordinates]))
       });
-    }
-  }, [latitude, longitude])
+    } 
+  }
+
+  let newCoordinates = {
+    lat: 40.35718,
+    lng: -3.7735,
+  }
+  
+  const changeCoordinates = () => {
+    setCoordinates((prevCoordinates) => (
+      // console.log('prevCoordinates', prevCoordinates),
+      // console.log('newCordinates', newCoordinates)
+      [...prevCoordinates, newCoordinates]
+      ));
+  }
+  
+    return (
+      <div>
+        <h4>latitude: {latitude}</h4>
+        <h4>longitude: {longitude}</h4>
+        {/* <h4>lastPosition: {this.state.lastPosition}</h4> */}
+        <button onClick={changeCoordinates}>Change Coordinates</button>
+        <RunningMap 
+          lat={latitude} 
+          lng={longitude} 
+          coordinates={coordinates}
+        />
+      </div>
+    );
+  // }
+}
+  
+  export default Geolocation;
 
   // componentDidMount() {
   //   if (navigator.geolocation) {
@@ -62,17 +103,6 @@ const Geolocation = () => {
   //   }
   // }
 
-  let newCoordinates = {
-    lat: 40.32718,
-    lng: -3.7635,
-  }
-
-  const changeCoordinates = () => {
-    setCoordinates((prevCoordinates) => ({
-      ...prevCoordinates,
-      newCoordinates
-    }));
-  }
 
 
   // componentDidMount() {
@@ -132,22 +162,5 @@ const Geolocation = () => {
     // console.log("this.state.lastPosition", this.state.lastPosition);
     // console.log("this.state.latitude", this.state.latitude);
     // console.log("this.state.longitude", this.state.longitude);
-    return (
-      <div>
-        <h4>latitude: {latitude}</h4>
-        <h4>longitude: {longitude}</h4>
-        {/* <h4>lastPosition: {this.state.lastPosition}</h4> */}
-        <button onClick={changeCoordinates}>Change Coordinates</button>
-        <RunningMap 
-          lat={latitude} 
-          lng={longitude} 
-          coordinates={coordinates}
-        />
-      </div>
-    );
-  // }
-}
-
-export default Geolocation;
 
 
