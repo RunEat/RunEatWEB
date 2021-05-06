@@ -42,7 +42,7 @@ function Chronometer() {
     const resume = () => start();
 
      return (
-      <div className="container text-center mt-5">
+      <div className="text-center bg-info">
         <div className="clock-holder">
                 <div className="stopwatch">
                     <DisplayComponent time={time}/>

@@ -11,16 +11,18 @@ const Sport = () => {
   const { user, setUser } = useUser();
   const [sport, setSport] = useState()
 
-  return !user ? (
-    <div className="text-center">
-      <SyncLoader color="#3ec4fc" />
-    </div>
-  ) : (
-    <>
+  // return
+  //  !user ? (
+  //   <div className="text-center">
+  //     <SyncLoader color="#3ec4fc" />
+  //   </div>
+  // ) : 
+  return (
+    <div className="Sport d-flex flex-column bg-danger">
       <Chronometer />
       <Geolocation />
       <Navbar /> 
-    </>
+    </div>
   );
 };
 
