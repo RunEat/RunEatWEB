@@ -30,10 +30,9 @@ const Sport = () => {
       <SyncLoader color="#00bd56" />
     </div>
   ) : ( sport?.chronometer.startTime !== null && sport ? (
-      // <h1>{sport.distance}</h1>
       <SportDetail sport={sport}/>
     ) : (
-    <div className="Sport d-flex flex-column bg-light">
+    <div className="Sport d-flex flex-column bg-light h-100">
       <Chronometer />
       <Navbar />
     </div>)

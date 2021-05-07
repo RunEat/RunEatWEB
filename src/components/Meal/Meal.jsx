@@ -10,6 +10,7 @@ import { getStoredDate } from "../../store/DateStore";
 import SyncLoader from "react-spinners/SyncLoader";
 import { Link, Redirect } from "react-router-dom";
 import "./Meal.css";
+import { formatedDate } from "../../constants/FormatedDate";
 
 const Meal = () => {
   const { user } = useUser();
@@ -18,13 +19,6 @@ const Meal = () => {
   const [meal, setMeal] = useState();
 
   let mealDate = getStoredDate();
-
-  const formatedDate = () => {
-    const formatedDate = new Date(mealDate.split("T")[0]);
-    return formatedDate.toDateString();
-  };
-
-  formatedDate();
 
   useEffect(() => {
     getMeal(mealDate)
@@ -53,7 +47,7 @@ const Meal = () => {
         >
           <div className="CaloriesSummary d-flex flex-column align-items-center">
             <h1 className="text-white mt-4 mb-2 w-50 text-center">
-              {formatedDate()}
+              {formatedDate(mealDate)}
             </h1>
             <TotalCalories className="TotalCalories" meal={meal} />
             <MacrosChart className="MacrosChart" meal={meal} />
