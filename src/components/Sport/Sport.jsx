@@ -27,8 +27,8 @@ const Sport = () => {
     <div className="text-center">
       <SyncLoader color="#00bd56" />
     </div>
-  ) : ( sport ? (
-    <h1>{sport.distance}</h1>
+  ) : ( sport?.chronometer.startTime !== null && sport ? (
+      <h1>{sport.distance}</h1>
     ) : (
     <div className="Sport d-flex flex-column bg-danger">
       <Chronometer />
