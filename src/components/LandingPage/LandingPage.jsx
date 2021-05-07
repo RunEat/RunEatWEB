@@ -153,7 +153,7 @@ const LandingPage = () => {
           </div>
         </section>
       </div>
-      <div>
+      <div className="LandingPage">
         <section id="footer" className="container-fluid bg-light py-4">
           <div className="container-fluid">
             <div className="row">
