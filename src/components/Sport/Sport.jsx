@@ -16,13 +16,13 @@ const Sport = () => {
   console.log("date", date);
 
   useEffect(() => {
-    console.log("useEffect");
-    getDiary(date).then((diary) => {
-      console.log("diary.sport", diary.sport);
-      setSport(diary.sport);
-      console.log("diaryCompleted", diary);
-      console.log("sport", sport);
-    });
+    getDiary(date)
+      .then((diary) => {
+        //console.log("diary.sport", diary.sport);
+        setSport(diary.sport);
+        //console.log("diaryCompleted", diary);
+        console.log("sport", sport);
+      });
   }, [date]);
 
   return !date ? (

@@ -8,8 +8,8 @@ const Geolocation = ({status}) => {
     
   console.log ('status', status)
 
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(40.3926635);
+  const [longitude, setLongitude] = useState(-3.7006367);
   const [coordinates, setCoordinates] = useState([]);
   // const [position, setPosition] = useState(null)
 
@@ -68,7 +68,8 @@ const Geolocation = ({status}) => {
       <RunningMap 
         lat={latitude} 
         lng={longitude} 
-        coordinates={coordinates} 
+        coordinates={coordinates}
+        status={status}
         />
     </div>
   );

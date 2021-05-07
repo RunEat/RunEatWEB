@@ -39,19 +39,34 @@ const RunningMap = (props) => {
   }, [coordinates]);
 
   //console.log('distanceMap', distance)
-  return ( myLatLng.lat && myLatLng.lng &&
-    <div className="RunningMap">
-      <Map
-        class
-        google={props.google}
-        zoom={17}
-        style={mapStyles}
-        initialCenter={myLatLng}
-      >
-        <Marker position={myLatLng} />
-        <Polyline path={coordinates} options={{ strokeColor: "#85ef47" , width: "20rem"}} />
-      </Map>
-    </div>
+  return ( 
+    !myLatLng.lat 
+    && myLatLng.lat == 40.3926635
+    && !myLatLng.lng 
+    && myLatLng.lng == -3.7006367
+    && props.status === 1 
+    ? (
+      <div className="LoadingMap mt-5">
+        <h1>Activity started!</h1>
+        <p>Loading map...</p>
+        <p>Start running!</p>
+        <img src="../../../images/running-gif.gif" className="img-fluid"/>
+      </div>
+    ) : (
+      // myLatLng.lat && myLatLng.lng &&
+      <div className="RunningMap">
+        <Map
+          class
+          google={props.google}
+          zoom={18}
+          style={mapStyles}
+          initialCenter={myLatLng}
+        >
+          <Marker position={myLatLng} />
+          <Polyline path={coordinates} options={{ strokeColor: "#85ef47" , width: "20rem"}} />
+        </Map>
+      </div>
+    )
   );
 }
 
