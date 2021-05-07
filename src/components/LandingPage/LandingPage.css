@@ -35,3 +35,12 @@
 .install-text{
   font-size: 5rem;
 }
+
+.non-decoration {
+  text-decoration: none;
+  color: #000;
+}
+
+.listStyle {
+  list-style: none;
+}
