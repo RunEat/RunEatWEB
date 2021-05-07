@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Map, GoogleApiWrapper, Marker, Polyline  } from 'google-maps-react';
 import haversine from "haversine";
+import {useDistance} from '../../hooks/useDistanceContext'
 
 let totalDistance = 0;
-let totalDistanceArr = [];
-
 const mapStyles = {
   width: '100%',
   height: '50%'
@@ -14,28 +13,11 @@ const RunningMap = (props) => {
   const myLatLng = { lat: props.lat, lng: props.lng };
   //console.log("myLatLng", myLatLng)
 
-  const [meters, setMeters] = useState();
+  const {distance, setDistance} = useDistance()
+
+  //const [distance, setDistance] = useState();
 
   const coordinates = props?.coordinates;
-  console.log("coordinates", coordinates);
-
-  // useEffect(() => {
-  //     const start = {
-  //       latitude: props.coordinates[0]?.lat,
-  //       longitude: props.coordinates[0]?.lng,
-  //     };
-  //     console.log(start);
-  //     const end = {
-  //       latitude: props.coordinates[props.coordinates?.length - 1]?.lat,
-  //       longitude: props.coordinates[props.coordinates?.length - 1]?.lng,
-  //     };
-  //     console.log(end);
-
-  //     start &&
-  //       end &&
-  //       setMeters(haversine(start, end, { unit: "meter" }));
-  // }, [coordinates]);
-
 
   useEffect(() => {
     const start = {
@@ -50,28 +32,17 @@ const RunningMap = (props) => {
     //console.log(end);
 
     let distanceBetweenCoords = haversine(start, end, { unit: "meter" });
-    // while () {
+
     !distanceBetweenCoords
       ? (distanceBetweenCoords = 0)
       : (totalDistance += distanceBetweenCoords);
-    totalDistanceArr.push(distanceBetweenCoords)
-    // }
-    //   distanceBetweenCoords > totalDistance
-    // )
-    //   ? (totalDistance += distanceBetweenCoords)
-    //   : totalDistance;
     
-    console.log('distanceBetweenCoords', distanceBetweenCoords)
+    //console.log('distanceBetweenCoords', distanceBetweenCoords)
     
-    start && end && setMeters(Number(totalDistance.toFixed(1)));
-    //console.log('meters useEffect', meters)
+    start && end && setDistance(Number((totalDistance/1000).toFixed(4)));
   }, [coordinates]);
-  
-  // console.log(haversine(start, end))
-  console.log('global meters', meters)
-  //console.log('totalDistance', totalDistance)
-  //console.log('totalDistanceArr', totalDistanceArr)
 
+  //console.log('distanceMap', distance)
   return (
     <div className="RunningMap">
       <Map

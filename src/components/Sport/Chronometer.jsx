@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import BtnComponent from './BtnComponent';
 import DisplayComponent from './DisplayComponent';
 import Geolocation from './GeoLocation';
+import { useDistance } from "../../hooks/useDistanceContext";
 
 function Chronometer() {
     const [time, setTime] = useState({ s: 0, m: 0, h: 0 })
     const [interv, setinterv] = useState()
     const [status, setStatus] = useState(0);
+
+    const { distance, setDistance } = useDistance();
 
     const start = () => {
         run()
@@ -44,17 +47,23 @@ function Chronometer() {
 
     const resume = () => start();
 
+    const addResult = () => {
+      //createSport
+    }
+
+    console.log("distanceChrono", distance);
+
      return (
        <div className="container text-center mt-5">
         <div className="clock-holder">
                <div className="stopwatch">
                     <DisplayComponent time={time}/>
                      <BtnComponent start={start} reset={reset} stop={stop} resume={resume} status={status} />
-                     <p>Distance: {}</p>
+                     <p>Distance: {distance} km</p>
                      <p>Calories Burned: {}</p>
-                     <p>Pace: {}</p> // (Tiempo/distancia)
-                     <Geolocation status={status}/>
-           </div>
+                     <p>Pace: {}</p>
+                     <Geolocation status={status} />
+                </div>
              </div>
         </div>
      );

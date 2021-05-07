@@ -58,28 +58,18 @@ const Geolocation = ({status}) => {
       clearInterval(interval)  
     }
   }, [status]);
-  
-
-  // let newCoordinates = {
-  //   lat: 40.35718,
-  //   lng: -3.7735,
-  // };
-
-  // const changeCoordinates = () => {
-  //   setCoordinates((prevCoordinates) =>
-  //     // console.log('prevCoordinates', prevCoordinates),
-  //     // console.log('newCordinates', newCoordinates)
-  //     [...prevCoordinates, newCoordinates]
-  //   );
-  // };
 
   return (
     <div>
-      <h4>latitude: {latitude}</h4>
-      <h4>longitude: {longitude}</h4>
+      {/* <h4>latitude: {latitude}</h4>
+      <h4>longitude: {longitude}</h4> */}
       {/* <h4>lastPosition: {this.state.lastPosition}</h4> */}
       {/* <button onClick={changeCoordinates}>Change Coordinates</button> */}
-      <RunningMap lat={latitude} lng={longitude} coordinates={coordinates} />
+      <RunningMap 
+        lat={latitude} 
+        lng={longitude} 
+        coordinates={coordinates} 
+        />
     </div>
   );
   // }

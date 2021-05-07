@@ -31,6 +31,7 @@ function BtnComponent(props) {
             <button className="btn btn-warning" onClick={props.reset}>
               <b>Reset</b>
             </button>
+            <button onClick={props.addResult}>Finish Run</button>
           </div>
         ) : (
           ""
