@@ -3,6 +3,8 @@ import BtnComponent from './BtnComponent';
 import DisplayComponent from './DisplayComponent';
 import Geolocation from './GeoLocation';
 import { useDistance } from "../../hooks/useDistanceContext";
+import { useUser } from "../../hooks/useUserContext";
+import { caloriesBurned } from "../../Utils/CalculateCalories";
 
 function Chronometer() {
     const [time, setTime] = useState({ s: 0, m: 0, h: 0 })
@@ -10,6 +12,7 @@ function Chronometer() {
     const [status, setStatus] = useState(0);
 
     const { distance, setDistance } = useDistance();
+    const { user } = useUser();
 
     const start = () => {
         run()
@@ -51,21 +54,35 @@ function Chronometer() {
       //createSport
     }
 
+    const runningTime = () => {
+        let seconds = time?.s / 60
+        let hours = time?.h * 60
+        let total = time?.m + seconds + hours;
+        return total
+    }
+
+    console.log('runningTime', runningTime())
     console.log("distanceChrono", distance);
 
-     return (
+    return (
        <div className="container text-center mt-5">
-        <div className="clock-holder">
-               <div className="stopwatch">
-                    <DisplayComponent time={time}/>
-                     <BtnComponent start={start} reset={reset} stop={stop} resume={resume} status={status} />
-                     <p>Distance: {distance} km</p>
-                     <p>Calories Burned: {}</p>
-                     <p>Pace: {}</p>
-                     <Geolocation status={status} />
-                </div>
-             </div>
-        </div>
+         <div className="clock-holder">
+           <div className="stopwatch">
+             <DisplayComponent time={time} />
+             <BtnComponent
+               start={start}
+               reset={reset}
+               stop={stop}
+               resume={resume}
+               status={status}
+             />
+             <p>Distance: {distance?.toFixed(1)} km</p>
+             <p>Burned Calories: {user && caloriesBurned(user, distance)}</p>
+             <p>Pace: {runningTime() > 0.1 && distance > 0.001 && (runningTime()/distance).toFixed(0)} min/km</p>
+             <Geolocation status={status} />
+           </div>
+         </div>
+       </div>
      );
 }
 

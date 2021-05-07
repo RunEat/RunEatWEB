@@ -76,11 +76,7 @@ export const maximumFats = (TDEE) => {
   // }
 };
 
-export const caloriesBurned = (sport, user) => {
-  const { distance } = sport;
-  const { weight } = user;
-
-  const avgkCalBurned = 1 * weight // 1kcal * kg --> e.g.: 70kg --> 1 * 70 every km
-
-  return avgkCalBurned * distance;
+export const caloriesBurned = (user, distance) => {
+  const avgkCalBurned = 1 * user.weight // 1kcal * kg --> e.g.: 70kg --> 1 * 70 every km
+  return Number((avgkCalBurned * distance).toFixed(0));
 }

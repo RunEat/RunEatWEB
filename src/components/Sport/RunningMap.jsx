@@ -37,9 +37,9 @@ const RunningMap = (props) => {
       ? (distanceBetweenCoords = 0)
       : (totalDistance += distanceBetweenCoords);
     
-    //console.log('distanceBetweenCoords', distanceBetweenCoords)
+    console.log('distanceBetweenCoords', distanceBetweenCoords)
     
-    start && end && setDistance(Number((totalDistance/1000).toFixed(4)));
+    start && end && setDistance(Number((totalDistance/1000).toFixed(3)));
   }, [coordinates]);
 
   //console.log('distanceMap', distance)
