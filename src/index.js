@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import LandingPage from './components/LandingPage/LandingPage';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -15,7 +16,8 @@ ReactDOM.render(
       <UserContextProvider>
         <DateContextProvider>
           <DistanceContextProvider>
-            <App />
+              <App className="App"/>
+              <LandingPage className="LandingPage"/>
           </DistanceContextProvider>
         </DateContextProvider>
       </UserContextProvider>
