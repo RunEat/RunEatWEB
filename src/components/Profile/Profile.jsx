@@ -49,7 +49,7 @@ function Profile() {
       {user ? (
         <>
           <img
-            src="https://source.unsplash.com/user/brookelark/1600x900"
+        src="https://source.unsplash.com/collection/1982120/1600x900"
             className="w-100"
             alt={user.username}
           />
@@ -70,7 +70,7 @@ function Profile() {
           <div className="d-flex justify-content-around align-items-center mt-4 border border-2 border-light me-2 ms-2 p-2">
             <div className="InfoBody">
               <button
-                onClick={showBodyF}
+              onClick={showBodyF}
                 className="px-3 py-2 border h-50"
                 style={{
                   backgroundColor: "#ff9d20",

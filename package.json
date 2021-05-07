@@ -16,6 +16,8 @@
     "cors": "^2.8.5",
     "cra-template": "1.1.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "google-maps-react": "^2.0.6",
+    "haversine": "^1.1.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-calendar": "^3.4.0",
