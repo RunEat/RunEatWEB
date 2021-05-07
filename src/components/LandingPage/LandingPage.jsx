@@ -126,8 +126,8 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <section className="py-5 text-center">
-          <div className="container">
+        <section className="py-5">
+          <div className="container d-flex flex-column justify-content-center text-center">
             <hr className="w-50 align-self-center" />
             <h2 className="py-5 greenColor">AS SEEN IN</h2>
             <div class="row">
