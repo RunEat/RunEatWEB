@@ -1,0 +1,9 @@
+.BtnComponent .btn {
+  border-radius: 4rem;
+  width: 40%;
+  margin: auto 0.5rem;
+}
+
+.btn.startStopBtn {
+  background: #00bd56
+}

@@ -46,10 +46,10 @@ const Diary = () => {
     setStoredDate(date);
 
     getDiary(date).then((diary) => {
-      console.log("diaryDB", diary);
+      //console.log("diaryDB", diary);
       if (diary.sport) {
         setDiary(diary);
-        console.log("diaryCompleted", diary);
+        //console.log("diaryCompleted", diary);
       }
       if (diary.errors) {
         setDiary();
@@ -84,14 +84,14 @@ const Diary = () => {
                   <div className="d-flex mt-5">
                     <Link to={`/meal`} className="btn me-4 colorMeal">
                       <i className="fas fa-plus me-2 colorMeal"></i>
-                      New Meal
+                      Go to Meal
                     </Link>
 
                     <br />
 
                     <Link to={`/sport`} className="btn me-4 colorSport">
                       <i className="fas fa-plus me-2 colorSport"></i>
-                      New Sport
+                      Go to Sport
                     </Link>
                   </div>
                 </>
@@ -103,14 +103,14 @@ const Diary = () => {
                   <div className="d-flex mt-5">
                     <Link to={`/meal`} className="btn me-4 colorMeal">
                       <i className="fas fa-edit me-2 colorMeal"></i>
-                      Update Meal
+                      Go to Meal
                     </Link>
 
                     <br />
 
                     <Link to={`/sport`} className="btn me-4 colorSport">
                       <i className="fas fa-plus me-2 colorSport"></i>
-                      New Sport
+                      Go to Sport
                     </Link>
                   </div>
                 </>
@@ -121,7 +121,7 @@ const Diary = () => {
         </div>
       )}
     </div>
-  );
+  )
 };
 
 export default Diary;
