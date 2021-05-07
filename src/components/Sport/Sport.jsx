@@ -30,7 +30,7 @@ const Sport = () => {
   ) : ( sport?.chronometer.startTime !== null && sport ? (
       <h1>{sport.distance}</h1>
     ) : (
-    <div className="Sport d-flex flex-column bg-danger">
+    <div className="Sport d-flex flex-column bg-light">
       <Chronometer />
       <Navbar />
     </div>)
