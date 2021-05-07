@@ -46,10 +46,10 @@ const Diary = () => {
     setStoredDate(date);
 
     getDiary(date).then((diary) => {
-      console.log("diaryDB", diary);
+      //console.log("diaryDB", diary);
       if (diary.sport) {
         setDiary(diary);
-        console.log("diaryCompleted", diary);
+        //console.log("diaryCompleted", diary);
       }
       if (diary.errors) {
         setDiary();

@@ -5,6 +5,7 @@ import Geolocation from './GeoLocation';
 import { useDistance } from "../../hooks/useDistanceContext";
 import { useUser } from "../../hooks/useUserContext";
 import { caloriesBurned } from "../../Utils/CalculateCalories";
+import { createSport } from '../../services/SportService';
 
 function Chronometer() {
     const [time, setTime] = useState({ s: 0, m: 0, h: 0 })
@@ -51,7 +52,19 @@ function Chronometer() {
     const resume = () => start();
 
     const addResult = () => {
-      //createSport
+        const newSport = {
+            chronometer: {
+                startTime: new Date(),
+                endTime: new Date()
+            },
+          distance: distance,
+          date: new Date(),
+          user: user.id,
+          pace: runningTime() / distance,
+          caloriesBurned: caloriesBurned(user, distance),
+        };
+        createSport(newSport)
+            .then((sport) => console.log ('sport', sport))  
     }
 
     const runningTime = () => {
@@ -74,7 +87,8 @@ function Chronometer() {
                reset={reset}
                stop={stop}
                resume={resume}
-               status={status}
+                status={status}
+                addResult={addResult}
              />
              <p>Distance: {distance?.toFixed(1)} km</p>
              <p>Burned Calories: {user && caloriesBurned(user, distance)}</p>
