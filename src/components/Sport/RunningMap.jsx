@@ -6,7 +6,7 @@ import {useDistance} from '../../hooks/useDistanceContext'
 let totalDistance = 0;
 const mapStyles = {
   width: '100%',
-  height: '50%'
+  height: '75%'
 };
 
 const RunningMap = (props) => {
@@ -44,10 +44,10 @@ const RunningMap = (props) => {
 
   //console.log('distanceMap', distance)
   return (
-    <div className="RunningMap">
+    <div className="RunningMap h-100">
       <Map
         google={props.google}
-        zoom={18}
+        zoom={14}
         style={mapStyles}
         initialCenter={{
           lat: 40.3579028,
@@ -55,7 +55,7 @@ const RunningMap = (props) => {
         }}
       >
         <Marker position={myLatLng} />
-        <Polyline path={coordinates} options={{ strokeColor: "#85ef47" }} />
+        <Polyline path={coordinates} options={{ strokeColor: "#85ef47" , width: "20rem"}} />
       </Map>
     </div>
   );
