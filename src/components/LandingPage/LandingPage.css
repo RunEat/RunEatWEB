@@ -1,3 +1,14 @@
 .LandingPage h1 {
   font-size: 4.5rem;
 }
+
+.title {
+  font-size: 5rem;
+  text-align: start;
+}
+
+.borderR {
+  border-radius: 5rem;
+  border: .3rem solid #00bd56;
+  color: #00bd56
+}
