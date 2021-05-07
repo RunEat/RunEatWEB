@@ -6,6 +6,7 @@ import { useDistance } from "../../hooks/useDistanceContext";
 import { useUser } from "../../hooks/useUserContext";
 import { caloriesBurned } from "../../Utils/CalculateCalories";
 import { createSport } from '../../services/SportService';
+import './Chronometer.css'
 
 function Chronometer() {
     const [time, setTime] = useState({ s: 0, m: 0, h: 0 })
@@ -78,10 +79,15 @@ function Chronometer() {
     console.log("distanceChrono", distance);
 
     return (
-       <div className="container text-center mt-5">
+       <div className="Chronometer text-center mt-2 px-0 bg-light">
          <div className="clock-holder">
            <div className="stopwatch">
              <DisplayComponent time={time} />
+             <div className="d-flex justify-content-evenly">
+              <p>Distance <br/><span className="h1">{distance?.toFixed(1)}</span> <br/>km</p>
+              <p>Calories <br/><span className="h1">{user && caloriesBurned(user, distance)}</span> <br/> burned</p>
+              <p>Pace <br/> <span className="h1">{runningTime() > 0.1 && distance > 0.001 && (runningTime()/distance).toFixed(0)}</span> <br/> min/km</p>
+             </div>
              <BtnComponent
                start={start}
                reset={reset}
@@ -90,12 +96,9 @@ function Chronometer() {
                 status={status}
                 addResult={addResult}
              />
-             <p>Distance: {distance?.toFixed(1)} km</p>
-             <p>Burned Calories: {user && caloriesBurned(user, distance)}</p>
-             <p>Pace: {runningTime() > 0.1 && distance > 0.001 && (runningTime()/distance).toFixed(0)} min/km</p>
-             <Geolocation status={status} />
            </div>
          </div>
+        <Geolocation className="Geolocation" status={status} />
        </div>
      );
 }

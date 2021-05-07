@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useDate } from "../../hooks/useDateContext";
-import { useUser } from '../../hooks/useUserContext';
-import SyncLoader from 'react-spinners/SyncLoader';
-import Chronometer from './Chronometer';
-import Navbar from '../Navbar/Navbar'
+import { useUser } from "../../hooks/useUserContext";
+import SyncLoader from "react-spinners/SyncLoader";
+import Chronometer from "./Chronometer";
+import Navbar from "../Navbar/Navbar";
+import {getDiary} from "../../services/DiaryService"
 
 const Sport = () => {
-
   const { user, setUser } = useUser();
-  const [sport, setSport] = useState()
+  const { date, setDate } = useDate();
+  const [sport, setSport] = useState();
 
-  // return
-  //  !user ? (
-  //   <div className="text-center">
-  //     <SyncLoader color="#3ec4fc" />
-  //   </div>
-  // ) : 
-  return (
-    <div className="Sport d-flex flex-column bg-danger">
-      <Chronometer />
-      <Navbar /> 
+  console.log("date", date);
+
+  useEffect(() => {
+    console.log("useEffect");
+    getDiary(date).then((diary) => {
+      console.log("diary.sport", diary.sport);
+      setSport(diary.sport);
+      console.log("diaryCompleted", diary);
+      console.log("sport", sport);
+    });
+  }, [date]);
+
+  return !date ? (
+    <div className="text-center">
+      <SyncLoader color="#00bd56" />
     </div>
+  ) : ( sport?.chronometer.startTime !== null && sport ? (
+      <h1>{sport.distance}</h1>
+    ) : (
+    <div className="Sport d-flex flex-column bg-light">
+      <Chronometer />
+      <Navbar />
+    </div>)
   );
 };
 

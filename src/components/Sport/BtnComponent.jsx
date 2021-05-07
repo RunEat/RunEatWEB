@@ -3,9 +3,9 @@ import './BtnComponent.css'
 
 function BtnComponent(props) {
     return (
-      <div className="BtnComponent main-section">
+      <div className="BtnComponent main-section mb-3">
         {props.status === 0 ? (
-          <button className="btn text-white" onClick={props.start}>
+          <button className="btn startStopBtn text-white" onClick={props.start}>
             <b>Start</b>
           </button>
         ) : (
@@ -25,13 +25,15 @@ function BtnComponent(props) {
         )}
         {props.status === 2 ? (
           <div>
-            <button className="btn btn-success" onClick={props.resume}>
+            <button className="btn btn-info my-1" onClick={props.resume}>
               <b>Resume</b>
             </button>
-            <button className="btn btn-warning" onClick={props.reset}>
+            <button className="btn btn-warning my-1" onClick={props.reset}>
               <b>Reset</b>
             </button>
-            <button onClick={props.addResult}>Finish Run</button>
+            <button className="btn startStopBtn text-white mt-2" onClick={props.addResult}>
+              <b>Finish Run</b>
+            </button>
           </div>
         ) : (
           ""

@@ -66,7 +66,7 @@ const Login = () => {
         .then(response => {
           setAccessToken(response.access_token)
           doLogin()
-            .then(() => push('/diary'))
+            .then(() => push('/profile'))
         })
         .catch((errors) => {
           console.log('errors', errors.response.data.errors.username)
