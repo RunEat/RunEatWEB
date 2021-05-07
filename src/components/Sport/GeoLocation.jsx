@@ -42,7 +42,7 @@ const Geolocation = ({status}) => {
       interval = setInterval(() => {
         //let watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
         let watchID = geoLoc.getCurrentPosition(showLocation, errorHandler, options);
-     }, 10000)
+     }, 5000)
     } else {
       alert("Sorry, browser does not support geolocation!");
     }

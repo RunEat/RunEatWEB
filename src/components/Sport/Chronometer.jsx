@@ -7,12 +7,13 @@ import { useUser } from "../../hooks/useUserContext";
 import { caloriesBurned } from "../../Utils/CalculateCalories";
 import { createSport } from '../../services/SportService';
 import './Chronometer.css'
+import { useHistory } from "react-router-dom";
 
 function Chronometer() {
     const [time, setTime] = useState({ s: 0, m: 0, h: 0 })
     const [interv, setinterv] = useState()
     const [status, setStatus] = useState(0);
-
+    const { push, replace } = useHistory();
     const { distance, setDistance } = useDistance();
     const { user } = useUser();
 
@@ -65,7 +66,9 @@ function Chronometer() {
           caloriesBurned: caloriesBurned(user, distance),
         };
         createSport(newSport)
-            .then((sport) => console.log ('sport', sport))  
+            .then(() => {
+              push('/sport-details');
+            })
     }
 
     const runningTime = () => {

@@ -17,6 +17,7 @@ import Sport from './components/Sport/Sport'
 import ChangePassword from './components/Profile/ChangePassword';
 import LoginFirstStep from './components/login/LoginFirstStep'
 import ConfirmToDelete from './components/Profile/ConfirmToDelete';
+import SportDetail from './components/Sport/SportDetail';
 
 // import { getAccessToken } from './store/AccessTokenStore';
 // import { getUserInfo } from './services/UserService'
@@ -57,6 +58,7 @@ function App() {
         <Route exact path="/diary" component={Diary} />
         <Route exact path="/meal" component={Meal} />
         <Route exact path="/sport" component={Sport} />
+        <Route exact path="/sport-details" component={SportDetail} />
       </Switch>
     </div>
   );

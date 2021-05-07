@@ -12,12 +12,8 @@ const mapStyles = {
 const RunningMap = (props) => {
   const myLatLng = { lat: props.lat, lng: props.lng };
   //console.log("myLatLng", myLatLng)
-
-  const {distance, setDistance} = useDistance()
-
-  //const [distance, setDistance] = useState();
-
   const coordinates = props?.coordinates;
+  const {distance, setDistance} = useDistance()
 
   useEffect(() => {
     const start = {
@@ -43,16 +39,14 @@ const RunningMap = (props) => {
   }, [coordinates]);
 
   //console.log('distanceMap', distance)
-  return (
-    <div className="RunningMap h-100">
+  return ( myLatLng.lat && myLatLng.lng &&
+    <div className="RunningMap">
       <Map
+        class
         google={props.google}
-        zoom={14}
+        zoom={17}
         style={mapStyles}
-        initialCenter={{
-          lat: 40.3579028,
-          lng: -3.790206,
-        }}
+        initialCenter={myLatLng}
       >
         <Marker position={myLatLng} />
         <Polyline path={coordinates} options={{ strokeColor: "#85ef47" , width: "20rem"}} />
