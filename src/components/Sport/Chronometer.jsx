@@ -59,7 +59,8 @@ const Chronometer = () => {
           caloriesBurned: caloriesBurned(user, distance),
         };
         createSport(newSport)
-            .then(() => {
+          .then(() => {
+              //console.log('sport', newSport)
               push('/sport-details');
             })
     }
