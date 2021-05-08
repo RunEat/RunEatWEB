@@ -1,6 +1,19 @@
 .SportDetail {
-  min-height: 100vh;
+  max-height: 100vh;
+  max-width: 100vw;
 }
-.SportDetail h3 {
-  
+
+.result {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.btn.newActivity {
+  /* background: #207dff; */
+  border-radius: 4rem;
+  margin: auto 0.5rem;
+}
+
+.card {
+  border-radius: 2rem;
 }

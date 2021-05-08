@@ -10,17 +10,6 @@ const Recipe = ({ recipeFromAPI, mealtype, setMeal }) => {
   //console.log("mealtype recipe", mealtype);
   let id = recipeFromAPI.recipe.uri.split("_")[1]; // Slice Uri from object to us recipe id
 
-  //const { date, setDate } = useDate();
-
-  // useEffect(() => {
-  //   setDate(new Date("April 15, 2021 03:24:00"))
-  // },[])
-
-  // const addDate = () => {
-  //     // let date = new Date();
-  //     return date.toISOString();
-  // };
-
   let mealDate = getStoredDate();
 
   const onClick = (e) => {
