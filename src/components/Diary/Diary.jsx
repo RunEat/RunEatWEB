@@ -78,7 +78,7 @@ const Diary = () => {
               {!diary ? (
                 <>
                   <Calendar onChange={onChange} value={date} />
-                  <h5 className="mt-5 mb-3 text-secondary">No meal registered for this day</h5>
+                  <h5 className="mt-5 mb-3 text-secondary">No meals registered for this day</h5>
                   <div className="d-flex justify-content-center">
                     <Link to={`/meal`} className="btn btn-lg me-4 colorMeal w-50">
                       <i className="fas fa-plus me-2 colorMeal"></i>
