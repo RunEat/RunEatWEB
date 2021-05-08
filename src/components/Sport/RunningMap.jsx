@@ -33,21 +33,6 @@ const RunningMap = (props) => {
   }, [coordinates]);
   //console.log('distanceMap', distance)
   return (
-    // OLD MAP
-    // myLatLng.lat && myLatLng.lng &&
-    // <div className="RunningMap">
-    //   <Map
-    //     class
-    //     google={props.google}
-    //     zoom={18}
-    //     style={mapStyles}
-    //     initialCenter={myLatLng}
-    //   >
-    //     <Marker position={myLatLng} />
-    //     <Polyline path={coordinates} options={{ strokeColor: "#85EF47" , width: "20rem"}} />
-    //   </Map>
-    // </div>
-    // NEW MAP
     !myLatLng.lat
     // && myLatLng.lat == 40.3926635
     && !myLatLng.lng

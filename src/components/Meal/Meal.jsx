@@ -46,7 +46,7 @@ const Meal = () => {
           style={{ maxHeight: "400vh", overflow: "scroll" }}
         >
           <div className="CaloriesSummary d-flex flex-column align-items-center">
-            <h1 className="text-white mt-4 mb-2 w-50 text-center">
+            <h1 className="text-white mt-4 mb-2 w-75 text-center mb-3">
               {formatedDate(mealDate)}
             </h1>
             <TotalCalories className="TotalCalories" meal={meal} />

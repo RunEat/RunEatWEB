@@ -62,13 +62,21 @@ const SportDetail = () => {
                 <h4>No activity registered for this day.</h4>
               </div>
             </div>
-            <div className="text-center mt-5">
+            <div className="text-center mt-4">
               <button 
-                className="btn newActivity w-75 text-white mb-1 fs-5"
+                className="btn newActivity w-50 text-white mb-1"
                 onClick={deleteActivity}
               >
                 Go for a run today!
               </button>
+              <p className="mt-2">
+                <small className="text-secondary">
+                  <i className="fas fa-exclamation-triangle fs-5 d-inline mx-1"></i>
+                  <b>Attention!</b> 
+                  <br/> 
+                  This will overwrite any activity you logged for today.
+                </small>
+              </p>
             </div>
               <Navbar />
           </>

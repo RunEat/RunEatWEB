@@ -92,13 +92,13 @@ const Diary = () => {
                     <Calendar onChange={onChange} value={date} />
                     <h4 className="mt-5 text-secondary">Total calories:</h4>
                     <h1>{totalCalories()} cal</h1>
-                    <div className="d-flex mt-5">
-                      <Link to={`/meal`} className="btn me-4 colorMeal">
+                    <div className="d-flex mt-3 justify-content-center">
+                      <Link to={`/meal`} className="btn btn-lg me-2 colorMeal">
                         <i className="fas fa-edit me-2 colorMeal"></i>
                       Go to Meals
                       </Link>
                       <br />
-                      <Link to={`/sport-details`} className="btn me-4 colorSport">
+                      <Link to={`/sport-details`} className="btn btn-lg ms-2 colorSport">
                         <i className="fas fa-plus me-2 colorSport"></i>
                       Go to Sport
                     </Link>
@@ -110,7 +110,7 @@ const Diary = () => {
                     <h4 className="mt-5 text-secondary">Total calories:</h4>
                     <h1>{totalCalories()} cal</h1>
                     <div className="d-flex mt-3 justify-content-center">
-                      <Link to={`/meal`} className="btn btn-lg me-4 colorMeal">
+                      <Link to={`/meal`} className="btn btn-lg me-2 colorMeal">
                         <i className="fas fa-edit me-2 colorMeal"></i>
                         Edit Meals
                     </Link>
@@ -118,9 +118,9 @@ const Diary = () => {
                       { diary.sport.date <= today.toISOString() &&
                           <Link
                             to={`/sport-details`}
-                            className="btn btn-lg me-4 colorSport"
+                            className="btn btn-lg ms-2 colorSport"
                           >
-                          {/* <i className="fas fa-plus me-2 colorSport"></i> */}
+                          <i className="fas fa-plus me-2 colorSport"></i>
                             View Sport
                           </Link>
                       }
