@@ -8,7 +8,8 @@ import { caloriesBurned } from "../../Utils/CalculateCalories";
 import { createSport } from '../../services/SportService';
 import './Chronometer.css'
 import { useHistory } from "react-router-dom";
-function Chronometer() {
+
+const Chronometer = () => {
     const [time, setTime] = useState({ s: 0, m: 0, h: 0 })
     const [interv, setinterv] = useState()
     const [status, setStatus] = useState(0);

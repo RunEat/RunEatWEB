@@ -77,6 +77,6 @@ const RunningMap = (props) => {
   );
 }
 export default GoogleApiWrapper({
-  apiKey: process.env.APP_KEY,
+  apiKey: process.env.APP_KEY || 'AIzaSyBX68rAdqKraDnrCUgkWmZwGUgHqBjeRv0',
 })(RunningMap);
 
