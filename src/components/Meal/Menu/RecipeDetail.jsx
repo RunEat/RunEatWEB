@@ -88,7 +88,7 @@ const RecipeDetail = () => {
       ) : (
         <>
           <img className="w-100" src={recipe.image}></img>
-          <Link to="/meal" className="iconBack">
+          <Link to="/meal" className="iconBack fs-1">
             <i className="fas fa-chevron-left ms-4 colorLink"></i>
           </Link>
           <div className="text-center">
@@ -117,14 +117,18 @@ const RecipeDetail = () => {
             <p>Calories: ....................... {recipe.calories} cal</p>
 
             <p>Carbohidrates: ................... {recipe.macros.carbs}g</p>
-            <p>Proteins: .............................. {recipe.macros.proteins}g</p>
-            <p>Fats: .................................. {recipe.macros.fats}g</p>
+            <p>
+              Proteins: .............................. {recipe.macros.proteins}g
+            </p>
+            <p>
+              Fats: .................................. {recipe.macros.fats}g
+            </p>
 
             <h4 className="font-weight-bold mt-5">How to prepare it:</h4>
             <div className="embed-responsive embed-responsive-16by9 mb-5">
               <iframe
                 className="embed-responsive-item w-100 iframeRecipe mb-5"
-                src={recipe.instructions}
+                src={recipe.instructions.substring(5)}
                 title="Cook recipe"
               ></iframe>
             </div>

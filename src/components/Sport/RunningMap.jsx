@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Map, GoogleApiWrapper, Marker, Polyline  } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, Polyline } from 'google-maps-react';
 import haversine from "haversine";
-import {useDistance} from '../../hooks/useDistanceContext'
+import { useDistance } from '../../hooks/useDistanceContext'
+
 let totalDistance = 0;
 const mapStyles = {
   width: '100%',

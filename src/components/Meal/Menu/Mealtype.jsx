@@ -23,13 +23,19 @@ const Mealtype = ({ recipes, mealtype, setMeal }) => {
             numberOfCards={1.5}
             gutter={0}
             leftChevron={
-              <button className="carouselButton mb-5">
-                <i className="fas fa-arrow-left"></i>
+              <button
+                className="carouselButton mb-5 w-100 font-weight-bold"
+                style={{ color: "#ff9d20", marginRight: "5rem", fontSize: '3rem'}}
+              >
+                <i class="fas fa-caret-left"></i>
               </button>
             }
             rightChevron={
-              <button className="carouselButton mb-5">
-                <i className="fas fa-arrow-right"></i>
+              <button
+                className="carouselButton mb-5 w-100 font-weight-bold"
+                style={{ color: "#ff9d20", marginLeft: "5rem", fontSize: '3rem'}}
+              >
+                <i class="fas fa-caret-right"></i>
               </button>
             }
             placeholderitem="Hello"
