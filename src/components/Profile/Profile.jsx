@@ -49,7 +49,7 @@ function Profile() {
       {user ? (
         <>
           <img
-        src="https://source.unsplash.com/collection/1982120/1600x900"
+        src="https://source.unsplash.com/collection/1457950/1600x900"
             className="w-100"
             alt={user.username}
           />

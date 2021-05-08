@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import { useUser } from '../../hooks/useUserContext';
 import { deleteUser } from '../../services/UserService';
 import { logout } from '../../store/AccessTokenStore';
+import Navbar from '../Navbar/Navbar';
 
 
 const validators = {
@@ -98,6 +99,7 @@ const ConfirmToDelete = () => {
 					</button>
 				</div>
 			</form>
+			<Navbar/>
 		</div>
 	);
 };

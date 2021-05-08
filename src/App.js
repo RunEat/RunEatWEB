@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Switch } from 'react-router';
 // import { useEffect, useState } from 'react';
-
 import Navbar from "./components/Navbar/Navbar";
 import Home from './components/home/Home';
 import Login from './components/login/Login';
@@ -17,24 +16,10 @@ import Sport from './components/Sport/Sport'
 import ChangePassword from './components/Profile/ChangePassword';
 import LoginFirstStep from './components/login/LoginFirstStep'
 import ConfirmToDelete from './components/Profile/ConfirmToDelete';
-
+import SportDetail from './components/Sport/SportDetail';
 // import { getAccessToken } from './store/AccessTokenStore';
 // import { getUserInfo } from './services/UserService'
-
-
-function App() {
-  // const [user, setUser] = useState(null);
-
-  // const getUser = () => {
-  //   return getUserInfo().then((response) => setUser(response));
-  // };
-
-  // useEffect(() => {
-  //   if (getAccessToken()) {
-  //     getUser();
-  //   }
-  // }, []);
-  
+const App = () => {
   return (
     <div className="App">
       <Switch>
@@ -57,9 +42,9 @@ function App() {
         <Route exact path="/diary" component={Diary} />
         <Route exact path="/meal" component={Meal} />
         <Route exact path="/sport" component={Sport} />
+        <Route exact path="/sport-details" component={SportDetail} />
       </Switch>
     </div>
   );
 }
-
 export default App;
