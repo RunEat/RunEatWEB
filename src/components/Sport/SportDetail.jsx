@@ -55,8 +55,8 @@ const SportDetail = () => {
     ) : (
         sport?.chronometer.startTime == null ? (
           <>
-          <h1 className="text-center mt-4 mb-5">{formatedDate(sport.date)}</h1>
-            <div className="SportDetailcontainer card text-center bg-light p-3 mx-4">
+          <h1 className="SportDetail text-center mt-4 mb-5">{formatedDate(sport.date)}</h1>
+            <div className="card text-center bg-light p-3 mx-4">
               <h1 className="mb-4">Activity Summary</h1>
               <div>
                 <h4>No activity registered for this day.</h4>
@@ -75,7 +75,7 @@ const SportDetail = () => {
         ): (
           <>
             <h1 className="text-center mt-4 mb-4">{formatedDate(sport.date)}</h1>
-            <div className="SportDetail container card text-center bg-light p-3 mx-4">
+            <div className="SportDetail card text-center bg-light p-3 mx-4">
               <h1 className="mb-4">Activity Summary</h1>
               <div>
                 <h4>Distance </h4>
@@ -95,7 +95,7 @@ const SportDetail = () => {
             </div>
             <div className="text-center mt-4">
               <button 
-                className="btn btn-danger newActivity w-50 text-white mb-1"
+                className="btn btn-danger deleteActivity w-50 text-white mb-1"
                 onClick={deleteActivity}
               >
                 Start new activity
