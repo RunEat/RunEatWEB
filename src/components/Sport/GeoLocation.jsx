@@ -77,3 +77,94 @@ const Geolocation = ({status}) => {
 }
   
 export default Geolocation;
+
+
+// import React, { useEffect, useState } from "react";
+// import RunningMap from "./RunningMap";
+// let interval = null;
+// const Geolocation = ({ status }) => {
+//   console.log("status", status);
+//   const [latitude, setLatitude] = useState(null);
+//   const [longitude, setLongitude] = useState(null);
+//   const [coordinates, setCoordinates] = useState([]);
+//   const [drawLine, setDrawLine] = useState(false);
+//   useEffect(() => {
+//     getLocationUpdate();
+//   }, []);
+//   function showLocation(position) {
+//     setLatitude(position.coords.latitude);
+//     setLongitude(position.coords.longitude);
+//     if (drawLine) {
+//       setCoordinates((prevCoordinates) =>
+//         prevCoordinates.includes({
+//           lat: position.coords.latitude,
+//           lng: position.coords.longitude,
+//         }) !== -1
+//           ? [
+//               ...prevCoordinates,
+//               {
+//                 lat: position.coords.latitude,
+//                 lng: position.coords.longitude,
+//               },
+//             ]
+//           : [...prevCoordinates]
+//       );
+//     }
+//   }
+//   function errorHandler(err) {
+//     if (err.code == 1) {
+//       alert("Error: Access is denied!");
+//     } else if (err.code == 2) {
+//       alert("Error: Position is unavailable!");
+//     }
+//   }
+//   function getLocationUpdate() {
+//     if (navigator.geolocation) {
+//       // timeout at 120000 milliseconds (120 seconds)
+//       var options = {
+//         timeout: 120000,
+//         maximumAge: 1000,
+//         enableHighAccuracy: true,
+//       };
+//       let geoLoc = navigator.geolocation;
+//       let watchID = geoLoc.getCurrentPosition(
+//         showLocation,
+//         errorHandler,
+//         options
+//       );
+//       interval = setInterval(() => {
+//         watchID = geoLoc.getCurrentPosition(
+//           showLocation,
+//           errorHandler,
+//           options
+//         );
+//       }, 5000);
+//     } else {
+//       alert("Sorry, browser does not support geolocation!");
+//     }
+//   }
+//   useEffect(() => {
+//     if (status === 1) {
+//       setDrawLine(true); //START
+//     }
+//     if (status === 2) {
+//       setDrawLine(false); //STOP
+//       clearInterval(interval);
+//     }
+//     if (status === 0 && drawLine) {
+//       setDrawLine(false); //START
+//     }
+//   }, [status]);
+//   return (
+//     <div>
+//       <RunningMap
+//         lat={latitude}
+//         lng={longitude}
+//         coordinates={coordinates}
+//         drawLine={drawLine}
+//       />
+//     </div>
+//   );
+//   // }
+// };
+// export default Geolocation;
