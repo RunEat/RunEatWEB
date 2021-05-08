@@ -42,7 +42,7 @@ const SportDetail = () => {
     };
 
     createSport(newSport)
-        .then(() => {
+      .then(() => {
           push('/sport')
         })
   }
@@ -92,7 +92,7 @@ const SportDetail = () => {
               </div>
               <div className="my-4">
                 <h4>Calories</h4>
-                <h1 className="result my-0">{sport?.calories || 0}</h1>
+                <h1 className="result my-0">{sport?.caloriesBurned || 0}</h1>
                 <h5>burned</h5>
               </div>
               <div>
