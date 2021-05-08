@@ -14,6 +14,7 @@ import { useUser } from "../../hooks/useUserContext";
 import SyncLoader from "react-spinners/SyncLoader";
 import Navbar from "../Navbar/Navbar";
 import { formatedDate } from "../../constants/FormatedDate";
+
 const Diary = () => {
   const { date, setDate } = useDate();
   const { user, setUser } = useUser();
@@ -64,28 +65,25 @@ const Diary = () => {
   if (diary) console.log(formatedDate(diary.date));
   console.log('today', today);
   return (
-    <div className="Diary text-center d-flex flex-column align-items-center pt-5 bg-light">
+    <div className="Diary text-center d-flex flex-column align-items-center pt-4 bg-light">
       {!date ? (
         <div className="text-center">
           <SyncLoader color="#00BD56" />
         </div>
       ) : (
         <div>
+          <h1 className="text-center mb-4 mt-3">{formatedDate(mealDate)}</h1>
           {
             <>
               {!diary ? (
                 <>
                   <Calendar onChange={onChange} value={date} />
-                  <div className="d-flex mt-5">
-                    <Link to={`/meal`} className="btn me-4 colorMeal">
+                  <h5 className="mt-5 mb-3 text-secondary">No meal registered for this day</h5>
+                  <div className="d-flex justify-content-center">
+                    <Link to={`/meal`} className="btn btn-lg me-4 colorMeal w-50">
                       <i className="fas fa-plus me-2 colorMeal"></i>
-                      Go to Me !Diary
+                      Add Meal
                     </Link>
-                    <br />
-                    {/* <Link to={`/sport-details`} className="btn me-4 colorSport">
-                      <i className="fas fa-plus me-2 colorSport"></i>
-                      Go to Sport
-                    </Link> */}
                   </div>
                 </>
                 ) : (
@@ -97,12 +95,12 @@ const Diary = () => {
                     <div className="d-flex mt-5">
                       <Link to={`/meal`} className="btn me-4 colorMeal">
                         <i className="fas fa-edit me-2 colorMeal"></i>
-                      Go to Meal diary.sport.chrono
-                    </Link>
+                      Go to Meals
+                      </Link>
                       <br />
                       <Link to={`/sport-details`} className="btn me-4 colorSport">
                         <i className="fas fa-plus me-2 colorSport"></i>
-                      Go to Sport diary.sport.chrono
+                      Go to Sport
                     </Link>
                     </div>
                   </>
@@ -111,25 +109,20 @@ const Diary = () => {
                     <Calendar onChange={onChange} value={date} />
                     <h4 className="mt-5 text-secondary">Total calories:</h4>
                     <h1>{totalCalories()} cal</h1>
-                    <div className="d-flex mt-5">
-                      <Link to={`/meal`} className="btn me-4 colorMeal">
+                    <div className="d-flex mt-3 justify-content-center">
+                      <Link to={`/meal`} className="btn btn-lg me-4 colorMeal">
                         <i className="fas fa-edit me-2 colorMeal"></i>
-                      Update Meal
-                      diary.sport.chrono else
+                        Edit Meals
                     </Link>
                       <br />
-                      { diary.sport.date <= today.toISOString() ? (
+                      { diary.sport.date <= today.toISOString() &&
                           <Link
                             to={`/sport-details`}
-                            className="btn me-4 colorSport"
+                            className="btn btn-lg me-4 colorSport"
                           >
-                          <i className="fas fa-plus me-2 colorSport"></i>
+                          {/* <i className="fas fa-plus me-2 colorSport"></i> */}
                             View Sport
-                            diary.sport.chrono else
                           </Link>
-                        ) : (
-                          'No sports for this day'
-                        )
                       }
                     </div>
                   </>

@@ -79,7 +79,7 @@ const Chronometer = () => {
              <div className="d-flex justify-content-evenly">
               <p>Distance <br/><span className="h1">{distance?.toFixed(1)}</span> <br/>km</p>
               <p>Calories <br/><span className="h1">{user && caloriesBurned(user, distance)}</span> <br/> burned</p>
-              <p>Pace <br/> <span className="h1">{runningTime() > 0.1 && distance > 0.001 && (runningTime()/distance).toFixed(0) || 0}</span> <br/> min/km</p>
+              <p>Pace <br/> <span className="h1">{runningTime() > 0.1 && distance > 0.001 && (runningTime()/distance).toFixed(1) || 0}</span> <br/> min/km</p>
              </div>
              <BtnComponent
                start={start}
