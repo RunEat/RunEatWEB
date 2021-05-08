@@ -211,7 +211,7 @@ const Menu = ({ meal, setMeal }) => {
               >
                 <input
                   type="search"
-                  className="form-control mr-sm-2"
+                  className="form-control mr-sm-2 border border-dark"
                   name="search__breakfast"
                   id="breakfast"
                   placeholder="Search recipe..."
@@ -267,7 +267,7 @@ const Menu = ({ meal, setMeal }) => {
               >
                 <input
                   type="search"
-                  className="form-control mr-sm-2"
+                  className="form-control mr-sm-2 border border-dark"
                   name="search__lunch"
                   id="lunch"
                   placeholder="Search recipe..."
@@ -319,7 +319,7 @@ const Menu = ({ meal, setMeal }) => {
               >
                 <input
                   type="search"
-                  className="form-control mr-sm-2"
+                  className="form-control mr-sm-2 border border-dark"
                   name="search__dinner"
                   id="dinner"
                   placeholder="Search recipe..."
@@ -371,7 +371,7 @@ const Menu = ({ meal, setMeal }) => {
               >
                 <input
                   type="search"
-                  className="form-control mr-sm-2"
+                  className="form-control mr-sm-2 border border-dark"
                   name="search__snacks"
                   id="snacks"
                   placeholder="Search recipe..."

@@ -76,30 +76,43 @@ const ConfirmToDelete = () => {
 	}
 	
 	return (
-		<div className="ConfirmToDelete container p-5 text-justify">
-			<i className="fas fa-exclamation-triangle fs-1 d-flex justify-content-center"></i>
-			<h1 className="mt-3">Are you sure you want to delete your RunEat account?</h1>
-			<form className="mt-3">
-				<label className="form-label text-dark">Upon confirmation there's no turning back.<br/>If you're completely sure, enter your email account to confirm:</label>
-				<div className="mb-3  text-center">
-					<input
-					className={`form-control my-3 ${touched.email && userToDelete.errors.email ? 'is-invalid' : ''}`}
-					type="email" id="email" name="email"
-					value={userToDelete.email} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-					/>
-					<div className="invalid-feedback">{userToDelete.errors.email}</div>
-					<button 
-						className="btn btn-danger mt-2" 
-						onClick={deleteAccount} 
-						disabled={!isValid()}
-						style={{borderRadius: '2rem'}}
-					>
-						Remove my account forever
-					</button>
-				</div>
-			</form>
-		</div>
-	);
+    <div className="ConfirmToDelete container p-5 text-justify">
+      <i className="fas fa-exclamation-triangle fs-1 d-flex justify-content-center"></i>
+      <h1 className="mt-3">
+        Are you sure you want to delete your RunEat account?
+      </h1>
+      <form className="mt-3">
+        <label className="form-label text-dark">
+          Upon confirmation there's no turning back.
+          <br />
+          If you're completely sure, enter your email account to confirm:
+        </label>
+        <div className="mb-3  text-center">
+          <input
+            className={`form-control border border-dark my-3 ${
+              touched.email && userToDelete.errors.email ? "is-invalid" : ""
+            }`}
+            type="email"
+            id="email"
+            name="email"
+            value={userToDelete.email}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <div className="invalid-feedback">{userToDelete.errors.email}</div>
+          <button
+            className="btn btn-danger mt-2"
+            onClick={deleteAccount}
+            disabled={!isValid()}
+            style={{ borderRadius: "2rem" }}
+          >
+            Remove my account forever
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default ConfirmToDelete;

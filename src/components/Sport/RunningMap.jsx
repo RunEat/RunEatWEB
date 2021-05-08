@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Map, GoogleApiWrapper, Marker, Polyline  } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, Polyline } from 'google-maps-react';
 import haversine from "haversine";
-import {useDistance} from '../../hooks/useDistanceContext'
+import { useDistance } from '../../hooks/useDistanceContext'
 
 let totalDistance = 0;
 const mapStyles = {
@@ -55,7 +55,10 @@ const RunningMap = (props) => {
         }}
       >
         <Marker position={myLatLng} />
-        <Polyline path={coordinates} options={{ strokeColor: "#85ef47" , width: "20rem"}} />
+        <Polyline
+          path={coordinates}
+          options={{ strokeColor: "#85ef47", width: "20rem" }}
+        />
       </Map>
     </div>
   );
