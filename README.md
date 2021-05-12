@@ -46,3 +46,18 @@ $ cd RunEatWEB
 $ npm install
 $ npm start
 ```
+
+## Contribute
+- Create a new branch:
+  ```
+  git checkout -b "contribution_[feature to add/edit]"
+  ```
+  
+- Upon completion, run the following commands:
+  ```
+  git add .
+  git commit -m "contribution_[your GitHub username]"
+  git push origin branch-name
+  ```
+  
+- Create Pull Request so we can check up your work and start a discussion.
