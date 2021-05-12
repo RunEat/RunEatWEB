@@ -29,7 +29,7 @@ RunEat is a progressive web app to log your food intake and track your running i
 <img src="https://i.ibb.co/KX70yTG/RPReplay-Final1620503865.gif" data-canonical-src="https://i.ibb.co/KX70yTG/RPReplay-Final1620503865.gif" width="25%" />
 
 ### 3. Check your food and running logs in the calendar
-<img src="https://i.ibb.co/k8jdnV2/Imagen-de-i-OS-3.png" data-canonical-src="https://i.ibb.co/k8jdnV2/Imagen-de-i-OS-3.png" width="25%" />
+<img src="https://i.ibb.co/MccQL9n/Screenshot-2021-05-12-at-11-59-29.png" data-canonical-src="https://i.ibb.co/MccQL9n/Screenshot-2021-05-12-at-11-59-29.png" width="25%" />
 
 ### 4. Update your profile parameters and see your total calories and macronutrients change
 
