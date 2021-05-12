@@ -23,7 +23,7 @@ RunEat is a progressive web app to log your food intake and track your running i
 
 ## How to use RunEat?
 ### 1. Choose a recipe from thousands of options and log your food intake
-<img src="https://i.ibb.co/b3c08Rb/RPReplay-Final1620815099.gif" data-canonical-src="https://i.ibb.co/b3c08Rb/RPReplay-Final1620815099.gif" width="25%" />
+<img src="./images/RPReplay_Final1620812605.gif" data-canonical-src="./images/RPReplay_Final1620812605.gif" width="25%" />
 
 ### 2. Go for a run and track your progress in real time
 <img src="https://i.ibb.co/KX70yTG/RPReplay-Final1620503865.gif" data-canonical-src="https://i.ibb.co/KX70yTG/RPReplay-Final1620503865.gif" width="25%" />
