@@ -5,6 +5,7 @@
 ### Developers: Ángela Herrador López & Javier Repilado López.
 RunEat is a progressive web app to log your food intake and track your running in real time.
 <p>Scan the QR code from the image or try it at <a href="https://runeat.herokuapp.com/">RunEat</a> from a smartphone. Add it to home screen for a better experience (for detailed intstructions go to <a href="https://runeat.herokuapp.com/">RunEat</a> from a PC or laptop).</p>
+<p>To watch the full live demo on Youtube <a href="https://youtu.be/s5Tg_Vl-Sjk">click here.</a></p>
 
 ## Technologies
 - **React**
