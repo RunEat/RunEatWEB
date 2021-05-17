@@ -571,23 +571,31 @@ const ProfileForm = () => {
           />
         </div>
 
-        <div className="mb-3 w-75">
+        <div className="mb-1 w-75">
           <label htmlFor="avatar" className="form-label">
             <small>Add your profile picture</small>
             <br />
-            <i className="fas fa-upload text-secondary fs-1 p-4 mt-1"></i>
+            <div style={{ position: "relative" }} className="mt-1">
+              <img
+                src={avatarPreview ? avatarPreview : avatar}
+                alt={user.username}
+                //onChange={onChange}
+                className="ProfileAvatar img-fluid oldAvatar img-thumbnail p-0"
+              />
+              <i className="fas fa-upload text-secondary fs-5 py-2 m-1 newPicture"></i>
+            </div>
           </label>
           <input
-            className={`form-control ${errors.avatar && "is-invalid"} `}
+            className="form-control"
             type="file"
             onClick={onClick}
-            onChange={onChange}
-            name="Avatar"
+            onChange={onChangeAvatar}
+            name="avatar"
             id="avatar"
             placeholder="add an image"
             hidden
-          />
-          {show && <p className="text-danger">You must add a avatar</p>}
+            />
+          {show && <p className="text-danger">You must add an avatar</p>}
         </div>
 
         {/* <div className="form-group mt-3">
