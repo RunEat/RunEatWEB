@@ -18,6 +18,7 @@ export const login = (body) => {
 }
 
 export const passwordResetEmail = (user) => {
+  console.log(user)
   return http.post('/user/password_reset', user)
 }
 

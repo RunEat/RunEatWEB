@@ -8,6 +8,8 @@ import './Login.css'
 
 import { useUser } from '../../hooks/useUserContext';
 
+const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
 const validators = {
   username: value => {
     let message
@@ -30,6 +32,17 @@ const validators = {
     }
 
     return message
+  },
+  email: value => {
+    let message
+
+    if (!value) {
+      message = 'Email is required'
+    } else if (!EMAIL_PATTERN.test(value)) {
+      message = 'Email is invalid'
+    }
+
+    return message
   }
 }
 
@@ -40,11 +53,13 @@ const Login = () => {
   const [state, setState] = useState({
     fields: {
       username: '',
-      password: ''
+      password: '',
+      email: '',
     },
     errors: {
       username: validators.username(),
-      password: validators.password()
+      password: validators.password(),
+      email: validators.email()
     }
   })
 
@@ -112,13 +127,29 @@ const Login = () => {
 
   const changePassword = (e) => {
     e.preventDefault();
+    console.log('change password', e.target)
 
-    passwordResetEmail().then(() => {
-      console.log("Revisa tu email");
-    });
+    if (isValid()) {
+      passwordResetEmail()
+        .then(() => {
+          console.log('Check your email')
+        })
+        .catch((errors) => {
+          console.log('errors', errors.response.data.errors.email)
+          setErrorLogin(errors.response.data.errors.email);
+          //setShow(true)
+        })
+    }
+      
   };
 
-  const { username, password } = state.fields
+  const passwordRecovery = (e) => {
+    e.preventDefault();
+
+    show === false ? setShow(true) : setShow(false);
+  }
+
+  const { username, password, email } = state.fields
   const { errors } = state
 
   return (
@@ -133,7 +164,9 @@ const Login = () => {
           alt="LoginIcon"
         />
         <form onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-          <div className="mb-5">
+          {
+            !show &&
+            <div className="mb-5">
             <input
               style={{
                 border: "none",
@@ -143,7 +176,7 @@ const Login = () => {
               className={`form-control w-100 ${
                 touched.username && errors.username ? "is-invalid" : ""
               }`}
-              type="username"
+              type="text"
               id="username"
               name="username"
               autoComplete="off"
@@ -154,9 +187,12 @@ const Login = () => {
               placeholder="Username"
             />
             <div className="invalid-feedback">{errors.username}</div>
-          </div>
+            </div>
+          }
 
-          <div className="mb-4">
+          {
+            !show &&
+            <div className="mb-4">
             <input
               style={{
                 border: "none",
@@ -176,18 +212,57 @@ const Login = () => {
               placeholder="Password"
             />
             <div className="invalid-feedback">{errors.password}</div>
-          </div>
+            </div>
+          }
 
           <div className="d-grid gap-2 col-8 mx-auto mb-5 w-100">
             <button
               className="border-0 bg-transparent"
               style={{ color: "#757e85", fontSize: ".7rem" }}
-              onClick={changePassword}
+              onClick={passwordRecovery}
             >
-              GET NEW PASSWORD?
+              {!show ? 'GET NEW PASSWORD?' : 'BACK TO LOGIN'}
             </button>
+            {
+              show &&
+              <>
+              <input
+                style={{
+                  border: "none",
+                  borderBottom: "1px solid #00bd56",
+                  borderRadius: "0px",
+                }}
+                className={`form-control mt-5 w-100 ${
+                  touched.email && errors.email ? "is-invalid" : ""
+                }`}
+                type="email"
+                id="email"
+                name="email"
+                autoComplete="off"
+                value={email}
+                onClick={changePassword}
+                onChange={onChange}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                placeholder="Write your signup email"
+              />
+              <div className="invalid-feedback">{errors.email}</div>
+              <button
+                type="submit"
+                className="btn btn-warning mt-3 text-light passwordRecovery colorLink w-100"
+                style={{
+                  borderRadius: "5rem",
+                }}
+                disabled={!isValid()}
+              >
+                Recover password
+              </button>
+              </>
+            }
           </div>
-
+          
+          {
+            !show &&
           <button
             type="submit"
             className="mt-5 btn LoginButton colorLink w-75"
@@ -200,6 +275,7 @@ const Login = () => {
           >
             LOG IN
           </button>
+          }
         </form>
       </div>
       {errorLogin && show && (
