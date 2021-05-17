@@ -212,11 +212,6 @@ const ProfileForm = () => {
         activity: value,
     }))
     }
-    
-    // setErrors((prevState) => ({
-    //       ...prevState,
-    //       [name]: validators[name] && validators[name](value)
-    // }))
   }
 
   const onChangeAvatar = (e) => {
@@ -228,22 +223,18 @@ const ProfileForm = () => {
       setShow(false)
     }
 
-    // if (userToEdit.avatar.includes('invalid'.toLocaleLowerCase()) || userToEdit.avatar === '' || e.target.files[0] === undefined) {
-    //    setShow(true)
-    // } else {
-      let reader = new FileReader();
-      let file = e.target.files[0];
-   
-      reader.onloadend = () => {
-        setUserToEdit((prevState) => ({
-           ...prevState,
-          avatar: file,
-          avatarPreview: reader.result
-         }));
-      }
-      
-       reader.readAsDataURL(file)  
-    //  }
+    let reader = new FileReader();
+    let file = e.target.files[0];
+  
+    reader.onloadend = () => {
+      setUserToEdit((prevState) => ({
+         ...prevState,
+        avatar: file,
+        avatarPreview: reader.result
+       }));
+    }
+    
+     reader.readAsDataURL(file)  
   }
   
   const { avatar, username, email, height, weight, age, activity, mealPlan, avatarPreview } = userToEdit;
@@ -253,7 +244,6 @@ const ProfileForm = () => {
   ) : user.avatar ? (
     <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
       <h2 className="text-secondary">PROFILE SETUP</h2>
-
       <form
         className="d-flex flex-column align-items-center mb-4 mt-2 w-100"
         onSubmit={onSubmit}
@@ -349,14 +339,14 @@ const ProfileForm = () => {
                 name={act}
                 value={[act]}
                 onClick={onClick}
-                // onBlur={onBlur}
-                // onFocus={onFocus}
+                onBlur={onBlur}
+                onFocus={onFocus}
                 className="btn-check form-control"
                 autoComplete="off"
                 active
                 //aria-pressed="true"
               />
-              <label htmlFor={act} className="btn m-2">
+              <label htmlFor={act} className={act == [activity] ? 'btn btn-selected m-2' : 'btn m-2'}>
                 {act}
               </label>
             </div>
@@ -492,11 +482,18 @@ const ProfileForm = () => {
                 id={act}
                 name={act}
                 value={[act]}
-                className="btn-check"
+                onClick={onClick}
+                onBlur={onBlur}
+                onFocus={onFocus}
                 autoComplete="off"
-                shadow-none
+                className="btn-check form-control"
+                autoComplete="off"
+                active
               />
-              <label htmlFor={act} className="btn m-2 text-white" shadow-none>
+              {/* <label htmlFor={act} className="btn m-2 text-white" shadow-none>
+                {act}
+              </label> */}
+              <label htmlFor={act} className={act == [activity] ? 'btn btn-selected m-2' : 'btn m-2'}>
                 {act}
               </label>
             </div>
