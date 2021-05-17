@@ -149,7 +149,7 @@ const ProfileForm = () => {
     setUserToEdit((prevState) => {
       let value = e.target.value;
       //console.log('radio value onChange', e.target.id)
-      console.log('value', value)
+      console.log('e.target.file', e.target.file)
 
       if (e.target.type === "file") {
         console.log(e.target.files[0])
