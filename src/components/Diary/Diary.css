@@ -1,3 +1,7 @@
+.Diary {
+    height: 100vh;
+}
+
 .react-calendar {
     width: 350px;
     max-width: 100%;
@@ -5,6 +9,7 @@
     border: 1px solid #a0a096;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
+    border-radius: 1.2rem;
 }
 
 .react-calendar--doubleView {
@@ -41,14 +46,18 @@
 }
 
 .react-calendar__navigation {
-    height: 44px;
+    height: 80px;
     margin-bottom: 1em;
+    background: #00bd56;
+    border-top-right-radius: 1.2rem;
+    border-top-left-radius: 1.2rem;
 }
 
 .react-calendar__navigation button {
     min-width: 44px;
     background: none;
     font-size: 1em;
+    color: white;
 }
 
 .react-calendar__navigation button:enabled:hover,
@@ -70,6 +79,7 @@
 
 .react-calendar__month-view__weekdays__weekday {
     padding: 0.5em;
+    color: rgb(99, 96, 96)
 }
 
 .react-calendar__month-view__weekNumbers {
@@ -89,7 +99,8 @@
 }
 
 .react-calendar__month-view__days__day--neighboringMonth {
-    color: #757575;
+    color: #00bd56;
+    visibility: hidden;
 }
 
 .react-calendar__year-view .react-calendar__tile,
@@ -106,21 +117,21 @@
 }
 
 .react-calendar__tile:disabled {
-    background-color: #f0f0f0;
+    background-color: #00bd56;
 }
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-    background-color: #e6e6e6;
+    background-color: #00bd56;
 }
 
 .react-calendar__tile--now {
-    background: #ffff76;
+    background: #00bd56;
 }
 
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-    background: #ffffa9;
+    background: #00bd56;
 }
 
 .react-calendar__tile--hasActive {
@@ -133,15 +144,29 @@
 }
 
 .react-calendar__tile--active {
-    background: #006edc;
+    background: #e6e6e6;
     color: white;
+    border-radius: 2rem;
+    padding: 0.5rem;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-    background: #1087ff;
+    background: #00bd56;
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
+}
+
+.btn.colorMeal {
+    color: #fff;
+    background-color: #ff9d20;
+    border-radius: 5rem;
+}
+
+.btn.colorSport {
+    color: #fff;
+    background-color: #207dff;
+    border-radius: 5rem;
 }

@@ -1,11 +1,11 @@
 export const maximumCalories = (user) => {
-  console.log("user", user);
+  //console.log("user", user);
 
   const { weight, height, age } = user;
   let activityLevel;
 
   switch (user.activity[0]) {
-    case "Low/Sedentary":
+    case "Sedentary":
       activityLevel = 1.15;
       break;
     case "Moderate":
@@ -75,3 +75,8 @@ export const maximumFats = (TDEE) => {
   //     case 'Default': throw new Error("Meal plan is required") break;
   // }
 };
+
+export const caloriesBurned = (user, distance) => {
+  const avgkCalBurned = 1 * user.weight // 1kcal * kg --> e.g.: 70kg --> 1 * 70 every km
+  return Number((avgkCalBurned * distance).toFixed(0));
+}

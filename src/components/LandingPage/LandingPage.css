@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.LandingPage h1 {
+  font-size: 4.5rem;
+}
+
+.title {
+  font-size: 5rem;
+  text-align: start;
+}
+
+.borderR {
+  border-radius: 5rem;
+  border: .3rem solid #42cc8c;
+  color: #42cc8c
+}
+
+.step {
+  height: 5rem;
+}
+
+.RunEat{
+  font-family: 'Lobster', cursive;
+  color: #42cc8c
+}
+
+.greenColor {
+  color: #42cc8c
+}
+
+.iconMobile {
+  width: 5rem;
+}
+
+.install-text{
+  font-size: 5rem;
+}
+
+.non-decoration {
+  text-decoration: none;
+  color: #000;
+}
+
+.listStyle {
+  list-style: none;
+}

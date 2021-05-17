@@ -1,6 +1,9 @@
 {
   "name": "runeat-web",
   "version": "0.1.0",
+  "engines": {
+    "node": "^12.18.4"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
@@ -13,12 +16,16 @@
     "cors": "^2.8.5",
     "cra-template": "1.1.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "google-maps-react": "^2.0.6",
+    "haversine": "^1.1.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-calendar": "^3.4.0",
     "react-chartjs-2": "^3.0.2",
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
+    "react-google-maps": "^9.4.5",
+    "react-items-carousel": "^2.8.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",

@@ -1,0 +1,19 @@
+.btn.btnAddMenu {
+    border-radius: 6rem;
+    border: none;
+    color: #fff;
+    background-color: #00bd56;
+    position: relative;
+    top: -7.3rem
+}
+
+.imgRecipe {
+    width: 11rem;
+    border-radius: 1.5rem;
+}
+
+.titleRecipe {
+    height: 4rem;
+    color: #000;
+    font-size: 1rem;
+}

@@ -74,6 +74,13 @@ const validators = {
     }
 
     return message
+  },
+  avatar: value => {
+    let message
+
+    if (!value) {
+      message = 'Avatar is required'
+    } 
   }
 }
 
@@ -83,13 +90,14 @@ const ProfileForm = () => {
   const { user, setUser } = useUser();
   
   const [userToEdit, setUserToEdit] = useState({
-    avatar:
-      "https://prod.liveshare.vsengsaas.visualstudio.com/join?CD38E7B67E848E56EC1A6FEA6807F1B33307",
+    avatar: " ",
     height: 150,
     weight: 60,
     age: 16,
     activity: ["Sendentary"],
   });
+
+  const [show, setShow] = useState(false)
   
   useEffect(() => {
     getUserInfo()
@@ -100,30 +108,37 @@ const ProfileForm = () => {
     heigth: validators.height(),
     weight: validators.weight(),
     age: validators.age(),
+    avatar: validators.avatar()
 	})
 
   const [touched, setTouched] = useState({})
 
   const onSubmit = (e) => {
     e.preventDefault()
-
+    
     const formData = new FormData();
     
     Object.entries(userToEdit).forEach(([key, value]) => {
-        // if ([key] === weight || height || age || avatar) {
+      // if ([key] === weight || height || age || avatar) {
         //   console.log (formData)
         // }
         formData.append(key, value);
-    });
-
+      });
+    console.log('console', formData)
+    
     editUser(formData)
-      .then((updatedUser) => {
+    .then((updatedUser) => {
+      //console.log("updatedUser", updatedUser);
+      if (!updatedUser.avatar) {
+        setShow(true) 
+      } else {
         setUser(updatedUser);
-        push("/meal")
-      })
-      .catch((e) => {
-        if (e.response.status === 400) {
-          setErrors(e.response.data.errors);
+        push("/profile")
+      }
+    })
+    .catch((e) => {
+      if (e.response.status === 400) {
+        setErrors(e.response.data.errors);
         }
       });
   }
@@ -203,9 +218,13 @@ const ProfileForm = () => {
   ) : user.avatar ? (
     <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
       <h2 className="text-secondary">PROFILE SETUP</h2>
-      
-      <form className="d-flex flex-column align-items-center mb-4 mt-2 w-100" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-          {/* <div className="mb-3 w-75">
+
+      <form
+        className="d-flex flex-column align-items-center mb-4 mt-2 w-100"
+        onSubmit={onSubmit}
+        style={{ maxWidth: 500 }}
+      >
+        {/* <div className="mb-3 w-75">
             <label htmlFor="mealPlan" className="form-label"><small>Choose your meal plan</small></label>
             <select type="range" className="Slider my-2" id="mealPlan"
               id="age" name="age" min={16} max={120}
@@ -213,22 +232,30 @@ const ProfileForm = () => {
             />
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
-        
-      
+
         <div className="mb-1 w-75">
           <label htmlFor="avatar" className="form-label">
             <small>Update your profile picture</small>
-            <br/>
-            <div style={{position: 'relative'}} className="mt-1">
-              <img 
-                src={avatar} alt={user.username} onChange={onChange} 
+            <br />
+            <div style={{ position: "relative" }} className="mt-1">
+              <img
+                src={avatar}
+                alt={user.username}
+                onChange={onChange}
                 className="ProfileAvatar img-fluid oldAvatar img-thumbnail p-0"
               />
               <i className="fas fa-upload text-secondary fs-5 py-2 m-1 newPicture"></i>
             </div>
           </label>
-          <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="<Avatar" id="avatar" placeholder="add an image" hidden
+          <input
+            className="form-control"
+            type="file"
+            onClick={onClick}
+            onChange={onChange}
+            name="<Avatar"
+            id="avatar"
+            placeholder="add an image"
+            hidden
           />
         </div>
 
@@ -273,75 +300,102 @@ const ProfileForm = () => {
           <div className="invalid-feedback">{errors.email}</div>
         </div>
 
-          <div className="mb-3">
-            <label className="form-label"><small>What's your activity level?</small></label>
-            <br/>
-            {
-              ACTIVITY.map((act, idx) => (
-                  <div key={idx} className="d-inline">
-                    <input 
-                      type="checkbox" 
-                      id={act} 
-                      name={act} 
-                      value={[act]} 
-                      onClick={onClick} 
-                      onBlur={onBlur} 
-                      onFocus={onFocus}
-                      className="btn-check form-control" 
-                      autoComplete="off"
-                    />
-                    <label 
-                      htmlFor={act} 
-                      className="btn m-2 text-white"
-                    >
-                      {act}
-                    </label>
-                  </div>
-                ))
-            }
-            <div className="invalid-feedback">{errors.activity}</div>
-          </div>
+        <div className="mb-3">
+          <label className="form-label">
+            <small>What's your activity level?</small>
+          </label>
+          <br />
+          {ACTIVITY.map((act, idx) => (
+            <div key={idx} className="d-inline">
+              <input
+                type="checkbox"
+                id={act}
+                name={act}
+                value={[act]}
+                onClick={onClick}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                className="btn-check form-control"
+                autoComplete="off"
+                active
+                aria-pressed="true"
+              />
+              <label htmlFor={act} className="btn m-2">
+                {act}
+              </label>
+            </div>
+          ))}
+          <div className="invalid-feedback">{errors.activity}</div>
+        </div>
 
-          <div className="mb-3 w-75">
-            <label htmlFor="ageRange" className="form-label">
-              <small>Your age</small>
-            </label>
-            <input 
-              type="range" 
-              className="Slider my-2" 
-              id="ageRange"
-              id="age" 
-              name="age" 
-              min={16} max={120}
-              value={age} 
-              onChange={onChange} 
-              onBlur={onBlur} 
-              onFocus={onFocus}
-            />
-            <p className="text-center text-secondary">
-              <small>{age} years old</small>
-            </p>   
-          </div>
+        <div className="mb-3 w-75">
+          <label htmlFor="ageRange" className="form-label">
+            <small>Your age</small>
+          </label>
+          <input
+            type="range"
+            className="Slider my-2"
+            id="ageRange"
+            id="age"
+            name="age"
+            min={16}
+            max={120}
+            value={age}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p className="text-center text-secondary">
+            <small>{age} years old</small>
+          </p>
+        </div>
 
-          <div className="mb-3 w-75">
-            <label htmlFor="heightRange" className="form-label"><small>Your height</small></label>
-            <input type="range" className="Slider my-2" id="heightRange"
-              id="height" name="height" min={130} max={230}
-              value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-              <p className="text-center text-secondary"><small>{height} cm</small></p>    
-          </div>
+        <div className="mb-3 w-75">
+          <label htmlFor="heightRange" className="form-label">
+            <small>Your height</small>
+          </label>
+          <input
+            type="range"
+            className="Slider my-2"
+            id="heightRange"
+            id="height"
+            name="height"
+            min={130}
+            max={230}
+            value={height}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p className="text-center text-secondary">
+            <small>{height} cm</small>
+          </p>
+        </div>
 
-          <div className="mb-3 w-75">
-            <label htmlFor="weightRange" className="form-label"><small>Your weight</small></label>
-            <input type="range" className="Slider my-2" id="weightRange"
-              id="weight" name="weight" min={40} max={300} step={0.5}
-              value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-              <p className="text-center text-secondary"><small>{weight} kg</small></p>      
-          </div>
+        <div className="mb-3 w-75">
+          <label htmlFor="weightRange" className="form-label">
+            <small>Your weight</small>
+          </label>
+          <input
+            type="range"
+            className="Slider my-2"
+            id="weightRange"
+            id="weight"
+            name="weight"
+            min={40}
+            max={300}
+            step={0.5}
+            value={weight}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p className="text-center text-secondary">
+            <small>{weight} kg</small>
+          </p>
+        </div>
 
-          {/* <div className="form-group mt-3">
+        {/* <div className="form-group mt-3">
             <label htmlFor="mealPlan">Meal Plan</label>
             <select
               id="mealPlan"
@@ -356,20 +410,32 @@ const ProfileForm = () => {
             <div className="invalid-feedback">{errors.mealPlan}</div>
           </div> */}
 
-        <a href="https://www.lifesum.com/disclaimer" target="_blank" className="mt-3"><small>Sources of recommendations</small></a>
-          <button type="submit" className="btn w-75 mt-3">SAVE CHANGES</button>
-        </form>
+        <a
+          href="https://www.lifesum.com/disclaimer"
+          target="_blank"
+          className="mt-3"
+        >
+          <small>Sources of recommendations</small>
+        </a>
+        <button type="submit" className="btn w-75 mt-3">
+          SAVE CHANGES
+        </button>
+      </form>
     </div>
-      ) : (
-      <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
-        <h2 className="text-center text-secondary">FINISH YOUR PROFILE</h2>
-          {/* <div className="">
+  ) : (
+    <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
+      <h2 className="text-center text-secondary">FINISH YOUR PROFILE</h2>
+      {/* <div className="">
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
           </div> */}
 
-          <form className="d-flex flex-column align-items-center my-4 w-100" onSubmit={onSubmit} style={{ maxWidth: 500 }}>
-          {/* <div className="mb-3 w-75">
+      <form
+        className="d-flex flex-column align-items-center my-4 w-100"
+        onSubmit={onSubmit}
+        style={{ maxWidth: 500 }}
+      >
+        {/* <div className="mb-3 w-75">
             <label htmlFor="mealPlan" className="form-label"><small>Choose your meal plan</small></label>
             <select type="range" className="Slider my-2" id="mealPlan"
               id="age" name="age" min={16} max={120}
@@ -378,84 +444,117 @@ const ProfileForm = () => {
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
 
+        <div className="mb-3">
+          <label className="form-label">
+            <small>What's your activity level?</small>
+          </label>
+          <br />
+          {ACTIVITY.map((act, idx) => (
+            <div key={idx} className="d-inline">
+              <input
+                type="checkbox"
+                id={act}
+                name={act}
+                value={[act]}
+                className="btn-check"
+                autoComplete="off"
+                shadow-none
+              />
+              <label htmlFor={act} className="btn m-2 text-white" shadow-none>
+                {act}
+              </label>
+            </div>
+          ))}
+          <div className="invalid-feedback">{errors.activity}</div>
+        </div>
 
-          <div className="mb-3">
-            <label className="form-label"><small>What's your activity level?</small></label>
-            <br/>
-            {
-              ACTIVITY.map((act, idx) => (
-                  <div key={idx} className="d-inline">
-                    <input 
-                      type="checkbox" 
-                      id={act} 
-                      name={act} 
-                      value={[act]} 
-                      className="btn-check" 
-                      autoComplete="off"
-                    />
-                    <label 
-                      htmlFor={act} 
-                      className="btn m-2 text-white"
-                    >
-                      {act}
-                    </label>
-                  </div>
-                ))
-            }
-            <div className="invalid-feedback">{errors.activity}</div>
-          </div>
+        <div className="mb-3 w-75">
+          <label htmlFor="ageRange" className="form-label">
+            <small>Your age</small>
+          </label>
+          <input
+            type="range"
+            className="Slider my-2"
+            id="ageRange"
+            id="age"
+            name="age"
+            min={16}
+            max={120}
+            value={age}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p className="text-center text-secondary">
+            <small>{age} years old</small>
+          </p>
+        </div>
 
-          <div className="mb-3 w-75">
-            <label htmlFor="ageRange" className="form-label">
-              <small>Your age</small>
-            </label>
-            <input 
-              type="range" 
-              className="Slider my-2" 
-              id="ageRange"
-              id="age" 
-              name="age" 
-              min={16} max={120}
-              value={age} 
-              onChange={onChange} 
-              onBlur={onBlur} 
-              onFocus={onFocus}
-            />
-            <p className="text-center text-secondary">
-              <small>{age} years old</small>
-            </p>   
-          </div>
+        <div className="mb-3 w-75">
+          <label htmlFor="heightRange" className="form-label">
+            <small>Your height</small>
+          </label>
+          <input
+            type="range"
+            className="Slider my-2"
+            id="heightRange"
+            id="height"
+            name="height"
+            min={130}
+            max={230}
+            value={height}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p className="text-center text-secondary">
+            <small>{height} cm</small>
+          </p>
+        </div>
 
-          <div className="mb-3 w-75">
-            <label htmlFor="heightRange" className="form-label"><small>Your height</small></label>
-            <input type="range" className="Slider my-2" id="heightRange"
-              id="height" name="height" min={130} max={230}
-              value={height} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-              <p className="text-center text-secondary"><small>{height} cm</small></p>    
-          </div>
+        <div className="mb-3 w-75">
+          <label htmlFor="weightRange" className="form-label">
+            <small>Your weight</small>
+          </label>
+          <input
+            type="range"
+            className="Slider my-2"
+            id="weightRange"
+            id="weight"
+            name="weight"
+            min={40}
+            max={300}
+            step={0.5}
+            value={weight}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+          />
+          <p className="text-center text-secondary">
+            <small>{weight} kg</small>
+          </p>
+        </div>
 
-          <div className="mb-3 w-75">
-            <label htmlFor="weightRange" className="form-label"><small>Your weight</small></label>
-            <input type="range" className="Slider my-2" id="weightRange"
-              id="weight" name="weight" min={40} max={300} step={0.5}
-              value={weight} onChange={onChange} onBlur={onBlur} onFocus={onFocus}
-            />
-              <p className="text-center text-secondary"><small>{weight} kg</small></p>      
-          </div>
-
-          <div className="mb-3 w-75">
+        <div className="mb-3 w-75">
           <label htmlFor="avatar" className="form-label">
             <small>Add your profile picture</small>
-            <br/>
+            <br />
             <i className="fas fa-upload text-secondary fs-1 p-4 mt-1"></i>
           </label>
-            <input className="form-control" type="file" onClick={onClick} onChange={onChange}
-              name="<Avatar" id="avatar" placeholder="add an image" hidden
-            />
-          </div>
+          <input
+            className={`form-control ${errors.avatar && "is-invalid"} `}
+            type="file"
+            onClick={onClick}
+            onChange={onChange}
+            name="Avatar"
+            id="avatar"
+            placeholder="add an image"
+            hidden
+          />
+          {show && <p className="text-danger">You must add a avatar</p>}
+        </div>
 
-          {/* <div className="form-group mt-3">
+        {/* <div className="form-group mt-3">
             <label htmlFor="mealPlan">Gender</label>
             <select
               id="mealPlan"
@@ -483,11 +582,19 @@ const ProfileForm = () => {
             ))}
           </select> 
         </div> */}
-          <a href="" className="mt-3"><small>Sources of recommendations</small></a>
-          <button type="submit" className="btn text-white w-75 mt-3">NEXT</button>
-        </form>
-      </div>
-    )
+        <a
+          href="https://www.lifesum.com/disclaimer"
+          target="_blank"
+          className="mt-3"
+        >
+          <small>Sources of recommendations</small>
+        </a>
+        <button type="submit" className="btn text-white w-75 mt-3">
+          NEXT
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default ProfileForm;
