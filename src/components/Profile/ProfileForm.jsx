@@ -126,6 +126,10 @@ const ProfileForm = () => {
     //console.log('console', formData)
 
     console.log('userToEdit', userToEdit)
+
+    if (userToEdit.avatar === '') {
+      setShow(true) 
+    } 
     
     editUser(formData)
       .then((updatedUser) => {
@@ -145,11 +149,10 @@ const ProfileForm = () => {
   }
 
   const onChange = (e) => {
-    
+
     setUserToEdit((prevState) => {
       let value = e.target.value;
       //console.log('radio value onChange', e.target.id)
-      console.log('e.target.file', e.target.file)
 
       if (e.target.type === "file") {
         console.log(e.target.files[0])
@@ -218,17 +221,29 @@ const ProfileForm = () => {
 
   const onChangeAvatar = (e) => {
     e.preventDefault(); 
-   let reader = new FileReader();
-   let file = e.target.files[0];
+    console.log('e.target.files', e.target.files[0])
+    console.log(userToEdit.avatar, userToEdit.avatarPreview)
 
-   reader.onloadend = () => {
-      setUserToEdit({
-       avatar: file,
-       avatarPreview: reader.result
-      });
-   }
+    if (e.target.files[0]) {
+      setShow(false)
+    }
 
-    reader.readAsDataURL(file)
+    // if (userToEdit.avatar.includes('invalid'.toLocaleLowerCase()) || userToEdit.avatar === '' || e.target.files[0] === undefined) {
+    //    setShow(true)
+    // } else {
+      let reader = new FileReader();
+      let file = e.target.files[0];
+   
+      reader.onloadend = () => {
+        setUserToEdit((prevState) => ({
+           ...prevState,
+          avatar: file,
+          avatarPreview: reader.result
+         }));
+      }
+      
+       reader.readAsDataURL(file)  
+    //  }
   }
   
   const { avatar, username, email, height, weight, age, activity, mealPlan, avatarPreview } = userToEdit;
@@ -276,7 +291,8 @@ const ProfileForm = () => {
             id="avatar"
             placeholder="add an image"
             hidden
-          />
+            />
+          {show && <p className="text-danger">You must add an avatar</p>}
         </div>
 
         <div className="w-75 mb-3">
