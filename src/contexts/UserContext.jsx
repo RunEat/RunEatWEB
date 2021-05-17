@@ -9,7 +9,10 @@ export const UserContextProvider = ({children}) => {
 
     const getUser = () => { 
         return getUserInfo() 
-          .then(response => setUser(response))
+          .then(response => {
+            console.log('responseContext', response)
+            setUser(response)
+            })
     } 
     
       useEffect(() => { 
