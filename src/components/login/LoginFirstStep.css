@@ -8,6 +8,8 @@
 
 .LoginButton {
 	box-shadow: 0px 2px 3px #D5DED1;
+	border-radius: 20rem;
+	color: #000
 }
 
 .heightLoginFirstStep {

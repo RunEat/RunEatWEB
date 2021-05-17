@@ -18,7 +18,7 @@ export const login = (body) => {
 }
 
 export const loginGoogle = (body) => {
-  return http.post("/auth/google/callback", body);
+  return http.get("/authenticate/google/cb", body);
 };
 
 export const passwordResetEmail = (user) => {
