@@ -13,7 +13,7 @@ import { getStoredDate } from "../../store/DateStore";
 import { useUser } from "../../hooks/useUserContext";
 import SyncLoader from "react-spinners/SyncLoader";
 import Navbar from "../Navbar/Navbar";
-import { formatedDate } from "../../constants/FormatedDate";
+import { formatedDate, formatedDate2 } from "../../constants/FormatedDate";
 
 const Diary = () => {
   const { date, setDate } = useDate();
@@ -62,6 +62,7 @@ const Diary = () => {
   }, []);
   //console.log("user", user);
   //console.log("diary", diary);
+  console.log('dateContext', date)
   if (diary) console.log(formatedDate(diary.date));
   console.log('today', today);
   return (
@@ -72,7 +73,7 @@ const Diary = () => {
         </div>
       ) : (
         <div>
-          <h1 className="text-center mb-4 mt-3">{formatedDate(mealDate)}</h1>
+          <h1 className="text-center mb-4 mt-3">{formatedDate2(date)}</h1>
           {
             <>
               {!diary ? (
