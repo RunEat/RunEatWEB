@@ -1,7 +1,7 @@
 export const maximumCalories = (user) => {
   //console.log("user", user);
 
-  const { weight, height, age } = user;
+  const { weight, height, age, mealPlan } = user;
   let activityLevel;
 
   switch (user.activity[0]) {
@@ -63,7 +63,7 @@ export const maximumProteins = (TDEE) => {
   // }
 };
 
-export const maximumFats = (TDEE) => {
+export const maximumFats = (TDEE, user) => {
   // Balanced diet --> 25% fat
   const maximumFats = (TDEE * 0.25) / 9;
   return maximumFats.toFixed(0);

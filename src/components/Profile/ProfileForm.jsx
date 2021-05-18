@@ -7,6 +7,7 @@ import { editUser, getUserInfo } from '../../services/UserService';
 // eslint-disable-next-line no-useless-escape
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 const ACTIVITY = ['Sedentary', 'Moderate', 'Active', 'Very active'];
+const MEAL_PLAN = ["Balanced", "Weight loss", "Weight gain"];
 
 const validators = {
   // username: value => {
@@ -95,6 +96,7 @@ const ProfileForm = () => {
     weight: 60,
     age: 16,
     activity: ["Sendentary"],
+    mealPlan: ["Balanced"]
   });
 
   const [show, setShow] = useState(false)
@@ -151,8 +153,8 @@ const ProfileForm = () => {
 
       if (e.target.type === "file") {
         value = e.target.files[0];
-      } else if (e.target.id === "activity") {
-        value = [...e.target.selectedOptions].map((opt) => opt.value);
+      // } else if (e.target.id === "act" || "plan") {               ///REVISAR!!!!!
+      //   value = [...e.target.selectedOptions].map((opt) => opt.value);
       }
 
       return {
@@ -198,11 +200,25 @@ const ProfileForm = () => {
         ...prevState,
         avatar: value,
       }))
-    } else if (e.target.type === "checkbox") {
+    } else if (
+      e.target.id === "Sedentary" ||
+      e.target.id === "Moderate" ||
+      e.target.id === "Active" ||
+      e.target.id === "Very active"
+    ) {
       setUserToEdit((prevState) => ({
         ...prevState,
         activity: value,
-    }))
+      }));
+    } else if (
+      e.target.id === "Balanced" ||
+      e.target.id === "Weight loss" ||
+      e.target.id === "Weight gain"
+    ) {
+      setUserToEdit((prevState) => ({
+        ...prevState,
+        mealPlan: value,
+      }));
     }
     
     // setErrors((prevState) => ({
@@ -232,6 +248,34 @@ const ProfileForm = () => {
             />
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
+
+        <div className="mb-3">
+          <label className="form-label">
+            <small>Choose your meal plan</small>
+          </label>
+          <br />
+          {MEAL_PLAN.map((plan, idx) => (
+            <div key={idx} className="d-inline">
+              <input
+                type="checkbox"
+                id={plan}
+                name={plan}
+                value={[plan]}
+                onClick={onClick}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                className="btn-check form-control"
+                autoComplete="off"
+                active
+                aria-pressed="true"
+              />
+              <label htmlFor={plan} className="btn mealPlanBtn m-2">
+                {plan}
+              </label>
+            </div>
+          ))}
+          <div className="invalid-feedback">{errors.mealPlan}</div>
+        </div>
 
         <div className="mb-1 w-75">
           <label htmlFor="avatar" className="form-label">
@@ -395,21 +439,6 @@ const ProfileForm = () => {
           </p>
         </div>
 
-        {/* <div className="form-group mt-3">
-            <label htmlFor="mealPlan">Meal Plan</label>
-            <select
-              id="mealPlan"
-              className={`form-control ${errors.mealPlan && "is-invalid"} `}
-              value={mealPlan}
-              onChange={onChange}
-            >
-              {MEAL_PLAN.map((g, i) => (
-                <option key={i}>{g}</option>
-              ))}
-            </select>
-            <div className="invalid-feedback">{errors.mealPlan}</div>
-          </div> */}
-
         <a
           href="https://www.lifesum.com/disclaimer"
           target="_blank"
@@ -443,6 +472,33 @@ const ProfileForm = () => {
             />
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
+        <div className="mb-3">
+          <label className="form-label">
+            <small>Choose your meal plan</small>
+          </label>
+          <br />
+          {MEAL_PLAN.map((plan, idx) => (
+            <div key={idx} className="d-inline">
+              <input
+                type="checkbox"
+                id={plan}
+                name={plan}
+                value={[plan]}
+                onClick={onClick}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                className="btn-check form-control"
+                autoComplete="off"
+                active
+                aria-pressed="true"
+              />
+              <label htmlFor={plan} className="btn mealPlanBtn m-2">
+                {plan}
+              </label>
+            </div>
+          ))}
+          <div className="invalid-feedback">{errors.mealPlan}</div>
+        </div>
 
         <div className="mb-3">
           <label className="form-label">
