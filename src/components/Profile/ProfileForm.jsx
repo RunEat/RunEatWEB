@@ -115,6 +115,7 @@ const ProfileForm = () => {
 	})
 
   const [touched, setTouched] = useState({})
+  //const [checked, setChecked] = useState(false)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -194,55 +195,37 @@ const ProfileForm = () => {
       [name]: false
     }))
   }
+
   const onClick = (e) => {
-    const { value } = e.target;
+    const { value } = e.target
 
     if (e.target.type === "file") {
-      console.log("avatar value", value);
+      console.log('avatar value', value)
       setUserToEdit((prevState) => ({
         ...prevState,
         avatar: value,
-      }));
-      console.log("avatar value", value);
-    } else if (e.target.type === "checkbox") {
-      console.log("radio value onclick", value);
+      }))
+    } else if (
+      e.target.id === "Sedentary" ||
+      e.target.id === "Moderate" ||
+      e.target.id === "Active" ||
+      e.target.id === "Very active"
+    ) {
       setUserToEdit((prevState) => ({
         ...prevState,
         activity: value,
       }));
+    } else if (
+      e.target.id === "Balanced" ||
+      e.target.id === "Weight loss" ||
+      e.target.id === "Weight gain"
+    ) {
+      setUserToEdit((prevState) => ({
+        ...prevState,
+        mealPlan: value,
+      }));
     }
-  };
-
-  // const onClick = (e) => {
-  //   const { value } = e.target
-
-  //   if (e.target.type === "file") {
-  //     console.log('avatar value', value)
-  //     setUserToEdit((prevState) => ({
-  //       ...prevState,
-  //       avatar: value,
-  //     }))
-  //   } else if (
-  //     e.target.id === "Sedentary" ||
-  //     e.target.id === "Moderate" ||
-  //     e.target.id === "Active" ||
-  //     e.target.id === "Very active"
-  //   ) {
-  //     setUserToEdit((prevState) => ({
-  //       ...prevState,
-  //       activity: value,
-  //     }));
-  //   } else if (
-  //     e.target.id === "Balanced" ||
-  //     e.target.id === "Weight loss" ||
-  //     e.target.id === "Weight gain"
-  //   ) {
-  //     setUserToEdit((prevState) => ({
-  //       ...prevState,
-  //       mealPlan: value,
-  //     }));
-  //   }
-  // }
+  }
 
   const onChangeAvatar = (e) => {
     e.preventDefault(); 
@@ -288,7 +271,7 @@ const ProfileForm = () => {
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
 
-        {/* <div className="mb-3">
+        <div className="mb-3">
           <label className="form-label">
             <small>Choose your meal plan</small>
           </label>
@@ -303,6 +286,7 @@ const ProfileForm = () => {
                 onClick={onClick}
                 onBlur={onBlur}
                 onFocus={onFocus}
+                //checked={checked}
                 className="btn-check form-control"
                 autoComplete="off"
                 active
@@ -314,7 +298,7 @@ const ProfileForm = () => {
             </div>
           ))}
           <div className="invalid-feedback">{errors.mealPlan}</div>
-        </div> */}
+        </div>
 
         <div className="mb-1 w-75">
           <label htmlFor="avatar" className="form-label">
@@ -339,7 +323,7 @@ const ProfileForm = () => {
             id="avatar"
             placeholder="add an image"
             hidden
-            />
+          />
           {show && <p className="text-danger">You must add an avatar</p>}
         </div>
 
@@ -399,12 +383,18 @@ const ProfileForm = () => {
                 onClick={onClick}
                 onBlur={onBlur}
                 onFocus={onFocus}
+                //checked={checked}
                 className="btn-check form-control"
                 autoComplete="off"
                 active
                 aria-pressed="true"
               />
-              <label htmlFor={act} className={act == [activity] ? 'btn btn-selected m-2' : 'btn m-2'}>
+              <label
+                htmlFor={act}
+                className={
+                  act == [activity] ? "btn btn-selected m-2" : "btn m-2"
+                }
+              >
                 {act}
               </label>
             </div>
@@ -512,7 +502,7 @@ const ProfileForm = () => {
             />
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
-        {/* <div className="mb-3">
+        <div className="mb-3">
           <label className="form-label">
             <small>Choose your meal plan</small>
           </label>
@@ -538,7 +528,7 @@ const ProfileForm = () => {
             </div>
           ))}
           <div className="invalid-feedback">{errors.mealPlan}</div>
-        </div> */}
+        </div>
 
         <div className="mb-3">
           <label className="form-label">
@@ -563,7 +553,12 @@ const ProfileForm = () => {
               {/* <label htmlFor={act} className="btn m-2 text-white" shadow-none>
                 {act}
               </label> */}
-              <label htmlFor={act} className={act == [activity] ? 'btn btn-selected m-2' : 'btn m-2'}>
+              <label
+                htmlFor={act}
+                className={
+                  act == [activity] ? "btn btn-selected m-2" : "btn m-2"
+                }
+              >
                 {act}
               </label>
             </div>
@@ -661,7 +656,7 @@ const ProfileForm = () => {
             id="avatar"
             placeholder="add an image"
             hidden
-            />
+          />
           {show && <p className="text-danger">You must add an avatar</p>}
         </div>
 

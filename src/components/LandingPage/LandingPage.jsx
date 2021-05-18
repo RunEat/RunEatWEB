@@ -130,7 +130,7 @@ const LandingPage = () => {
           <div className="container d-flex flex-column justify-content-center text-center">
             <hr className="w-50 align-self-center" />
             <h2 className="py-5 greenColor">AS SEEN IN</h2>
-            <div class="row">
+            <div className="row">
               <div className="col-12 col-md-6 col-lg-4">
                 <img className="w-50" src="../../../images/publi1.png" alt="" />
               </div>
