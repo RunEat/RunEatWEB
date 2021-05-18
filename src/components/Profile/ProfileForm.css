@@ -1,5 +1,5 @@
 .ProfileForm a {
-    color:  #00bd56;
+    color: #00bd56;
 }
 
 .ProfileForm a:hover {
@@ -32,8 +32,8 @@
     color:  #00bd56;
 } */
 
-.ProfileForm  h1 {
-    background-color:  gray;
+.ProfileForm h1 {
+    background-color: gray;
     border-radius: 2rem;
 }
 

@@ -91,12 +91,13 @@ const ProfileForm = () => {
   const { user, setUser } = useUser();
   
   const [userToEdit, setUserToEdit] = useState({
-    avatar: " ",
+    avatar: '',
     height: 150,
     weight: 60,
     age: 16,
     activity: ["Sendentary"],
-    mealPlan: ["Balanced"]
+    mealPlan: ["Balanced"],
+    avatarPreview: '',
   });
 
   const [show, setShow] = useState(false)
@@ -121,35 +122,39 @@ const ProfileForm = () => {
     const formData = new FormData();
     
     Object.entries(userToEdit).forEach(([key, value]) => {
-      // if ([key] === weight || height || age || avatar) {
-        //   console.log (formData)
-        // }
-        formData.append(key, value);
-      });
-    console.log('console', formData)
+      formData.append(key, value);
+    });
+
+    //console.log('console', formData)
+
+    console.log('userToEdit', userToEdit)
+
+    if (userToEdit.avatar === '') {
+      setShow(true) 
+    } 
     
     editUser(formData)
-    .then((updatedUser) => {
-      //console.log("updatedUser", updatedUser);
-      if (!updatedUser.avatar) {
-        setShow(true) 
-      } else {
-        setUser(updatedUser);
-        push("/profile")
-      }
-    })
-    .catch((e) => {
-      if (e.response.status === 400) {
-        setErrors(e.response.data.errors);
+      .then((updatedUser) => {
+        console.log("updatedUser", updatedUser);
+        if (!updatedUser.avatar) {
+          setShow(true) 
+        } else {
+          setUser(updatedUser);
+          push("/profile")
         }
-      });
+      })
+      .catch((e) => {
+        if (e.response.status === 400) {
+          setErrors(e.response.data.errors);
+          }
+        });
   }
 
   const onChange = (e) => {
-    console.log('radio value onChange', e.target.value)
 
     setUserToEdit((prevState) => {
       let value = e.target.value;
+      //console.log('radio value onChange', e.target.id)
 
       if (e.target.type === "file") {
         value = e.target.files[0];
@@ -166,8 +171,8 @@ const ProfileForm = () => {
     const { name, value } = e.target
 
     setErrors((prevState) => ({
-          ...prevState,
-          [name]: validators[name] && validators[name](value)
+        ...prevState,
+        [name]: validators[name] && validators[name](value)
     }))
     
   }
@@ -193,9 +198,8 @@ const ProfileForm = () => {
   const onClick = (e) => {
     const { value } = e.target
 
-    console.log('radio value onclick', value)
-
     if (e.target.type === "file") {
+      console.log('avatar value', value)
       setUserToEdit((prevState) => ({
         ...prevState,
         avatar: value,
@@ -220,21 +224,38 @@ const ProfileForm = () => {
         mealPlan: value,
       }));
     }
+  }
+
+  const onChangeAvatar = (e) => {
+    e.preventDefault(); 
+    console.log('e.target.files', e.target.files[0])
+    console.log(userToEdit.avatar, userToEdit.avatarPreview)
+
+    if (e.target.files[0]) {
+      setShow(false)
+    }
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+  
+    reader.onloadend = () => {
+      setUserToEdit((prevState) => ({
+         ...prevState,
+        avatar: file,
+        avatarPreview: reader.result
+       }));
+    }
     
-    // setErrors((prevState) => ({
-    //       ...prevState,
-    //       [name]: validators[name] && validators[name](value)
-    // }))
+     reader.readAsDataURL(file)  
   }
   
-  const { avatar, username, email, height, weight, age, activity, mealPlan } = userToEdit;
+  const { avatar, username, email, height, weight, age, activity, mealPlan, avatarPreview } = userToEdit;
 
   return !user ? (
     "loading..."
   ) : user.avatar ? (
     <div className="ProfileForm mt-4 d-flex justify-content-center flex-column align-items-center text-center">
       <h2 className="text-secondary">PROFILE SETUP</h2>
-
       <form
         className="d-flex flex-column align-items-center mb-4 mt-2 w-100"
         onSubmit={onSubmit}
@@ -283,9 +304,9 @@ const ProfileForm = () => {
             <br />
             <div style={{ position: "relative" }} className="mt-1">
               <img
-                src={avatar}
+                src={avatarPreview ? avatarPreview : avatar}
                 alt={user.username}
-                onChange={onChange}
+                //onChange={onChange}
                 className="ProfileAvatar img-fluid oldAvatar img-thumbnail p-0"
               />
               <i className="fas fa-upload text-secondary fs-5 py-2 m-1 newPicture"></i>
@@ -295,12 +316,13 @@ const ProfileForm = () => {
             className="form-control"
             type="file"
             onClick={onClick}
-            onChange={onChange}
-            name="<Avatar"
+            onChange={onChangeAvatar}
+            name="avatar"
             id="avatar"
             placeholder="add an image"
             hidden
-          />
+            />
+          {show && <p className="text-danger">You must add an avatar</p>}
         </div>
 
         <div className="w-75 mb-3">
@@ -362,9 +384,9 @@ const ProfileForm = () => {
                 className="btn-check form-control"
                 autoComplete="off"
                 active
-                aria-pressed="true"
+                //aria-pressed="true"
               />
-              <label htmlFor={act} className="btn m-2">
+              <label htmlFor={act} className={act == [activity] ? 'btn btn-selected m-2' : 'btn m-2'}>
                 {act}
               </label>
             </div>
@@ -373,9 +395,12 @@ const ProfileForm = () => {
         </div>
 
         <div className="mb-3 w-75">
-          <label htmlFor="ageRange" className="form-label">
+          <label htmlFor="ageRange" className="form-label mb-0">
             <small>Your age</small>
           </label>
+          <p className="text-center text-secondary mb-4">
+            <small>{age} years old</small>
+          </p>
           <input
             type="range"
             className="Slider my-2"
@@ -389,15 +414,15 @@ const ProfileForm = () => {
             onBlur={onBlur}
             onFocus={onFocus}
           />
-          <p className="text-center text-secondary">
-            <small>{age} years old</small>
-          </p>
         </div>
 
-        <div className="mb-3 w-75">
-          <label htmlFor="heightRange" className="form-label">
+        <div className="mb-3 w-75 mt-3">
+          <label htmlFor="heightRange" className="form-label mb-0">
             <small>Your height</small>
           </label>
+          <p className="text-center text-secondary mb-4">
+            <small>{height} cm</small>
+          </p>
           <input
             type="range"
             className="Slider my-2"
@@ -411,15 +436,15 @@ const ProfileForm = () => {
             onBlur={onBlur}
             onFocus={onFocus}
           />
-          <p className="text-center text-secondary">
-            <small>{height} cm</small>
-          </p>
         </div>
 
-        <div className="mb-3 w-75">
-          <label htmlFor="weightRange" className="form-label">
+        <div className="mb-3 w-75 mt-3">
+          <label htmlFor="weightRange" className="form-label mb-0">
             <small>Your weight</small>
           </label>
+          <p className="text-center text-secondary mb-4">
+            <small>{weight} kg</small>
+          </p>
           <input
             type="range"
             className="Slider my-2"
@@ -434,9 +459,6 @@ const ProfileForm = () => {
             onBlur={onBlur}
             onFocus={onFocus}
           />
-          <p className="text-center text-secondary">
-            <small>{weight} kg</small>
-          </p>
         </div>
 
         <a
@@ -512,11 +534,18 @@ const ProfileForm = () => {
                 id={act}
                 name={act}
                 value={[act]}
-                className="btn-check"
+                onClick={onClick}
+                onBlur={onBlur}
+                onFocus={onFocus}
                 autoComplete="off"
-                shadow-none
+                className="btn-check form-control"
+                autoComplete="off"
+                active
               />
-              <label htmlFor={act} className="btn m-2 text-white" shadow-none>
+              {/* <label htmlFor={act} className="btn m-2 text-white" shadow-none>
+                {act}
+              </label> */}
+              <label htmlFor={act} className={act == [activity] ? 'btn btn-selected m-2' : 'btn m-2'}>
                 {act}
               </label>
             </div>
@@ -525,9 +554,12 @@ const ProfileForm = () => {
         </div>
 
         <div className="mb-3 w-75">
-          <label htmlFor="ageRange" className="form-label">
+          <label htmlFor="ageRange" className="form-label mb-0">
             <small>Your age</small>
           </label>
+          <p className="text-center text-secondary mb-4">
+            <small>{age} years old</small>
+          </p>
           <input
             type="range"
             className="Slider my-2"
@@ -541,15 +573,15 @@ const ProfileForm = () => {
             onBlur={onBlur}
             onFocus={onFocus}
           />
-          <p className="text-center text-secondary">
-            <small>{age} years old</small>
-          </p>
         </div>
 
         <div className="mb-3 w-75">
-          <label htmlFor="heightRange" className="form-label">
+          <label htmlFor="heightRange" className="form-label mb-0">
             <small>Your height</small>
           </label>
+          <p className="text-center text-secondary mb-4">
+            <small>{height} cm</small>
+          </p>
           <input
             type="range"
             className="Slider my-2"
@@ -563,15 +595,15 @@ const ProfileForm = () => {
             onBlur={onBlur}
             onFocus={onFocus}
           />
-          <p className="text-center text-secondary">
-            <small>{height} cm</small>
-          </p>
         </div>
 
         <div className="mb-3 w-75">
-          <label htmlFor="weightRange" className="form-label">
+          <label htmlFor="weightRange" className="form-label mb-0">
             <small>Your weight</small>
           </label>
+          <p className="text-center text-secondary mb-4">
+            <small>{weight} kg</small>
+          </p>
           <input
             type="range"
             className="Slider my-2"
@@ -586,28 +618,33 @@ const ProfileForm = () => {
             onBlur={onBlur}
             onFocus={onFocus}
           />
-          <p className="text-center text-secondary">
-            <small>{weight} kg</small>
-          </p>
         </div>
 
-        <div className="mb-3 w-75">
+        <div className="mb-1 w-75">
           <label htmlFor="avatar" className="form-label">
             <small>Add your profile picture</small>
             <br />
-            <i className="fas fa-upload text-secondary fs-1 p-4 mt-1"></i>
+            <div style={{ position: "relative" }} className="mt-1">
+              <img
+                src={avatarPreview ? avatarPreview : avatar}
+                alt={user.username}
+                //onChange={onChange}
+                className="ProfileAvatar img-fluid oldAvatar img-thumbnail p-0"
+              />
+              <i className="fas fa-upload text-secondary fs-5 py-2 m-1 newPicture"></i>
+            </div>
           </label>
           <input
-            className={`form-control ${errors.avatar && "is-invalid"} `}
+            className="form-control"
             type="file"
             onClick={onClick}
-            onChange={onChange}
-            name="Avatar"
+            onChange={onChangeAvatar}
+            name="avatar"
             id="avatar"
             placeholder="add an image"
             hidden
-          />
-          {show && <p className="text-danger">You must add a avatar</p>}
+            />
+          {show && <p className="text-danger">You must add an avatar</p>}
         </div>
 
         {/* <div className="form-group mt-3">
