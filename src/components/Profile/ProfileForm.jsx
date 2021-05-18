@@ -158,8 +158,8 @@ const ProfileForm = () => {
 
       if (e.target.type === "file") {
         value = e.target.files[0];
-      // } else if (e.target.id === "act" || "plan") {               ///REVISAR!!!!!
-      //   value = [...e.target.selectedOptions].map((opt) => opt.value);
+      } else if (e.target.id === "activity" ) {               ///REVISAR!!!!!
+        value = [...e.target.selectedOptions].map((opt) => opt.value);
       }
 
       return {
@@ -194,37 +194,55 @@ const ProfileForm = () => {
       [name]: false
     }))
   }
-
   const onClick = (e) => {
-    const { value } = e.target
+    const { value } = e.target;
 
     if (e.target.type === "file") {
-      console.log('avatar value', value)
+      console.log("avatar value", value);
       setUserToEdit((prevState) => ({
         ...prevState,
         avatar: value,
-      }))
-    } else if (
-      e.target.id === "Sedentary" ||
-      e.target.id === "Moderate" ||
-      e.target.id === "Active" ||
-      e.target.id === "Very active"
-    ) {
+      }));
+      console.log("avatar value", value);
+    } else if (e.target.type === "checkbox") {
+      console.log("radio value onclick", value);
       setUserToEdit((prevState) => ({
         ...prevState,
         activity: value,
       }));
-    } else if (
-      e.target.id === "Balanced" ||
-      e.target.id === "Weight loss" ||
-      e.target.id === "Weight gain"
-    ) {
-      setUserToEdit((prevState) => ({
-        ...prevState,
-        mealPlan: value,
-      }));
     }
-  }
+  };
+
+  // const onClick = (e) => {
+  //   const { value } = e.target
+
+  //   if (e.target.type === "file") {
+  //     console.log('avatar value', value)
+  //     setUserToEdit((prevState) => ({
+  //       ...prevState,
+  //       avatar: value,
+  //     }))
+  //   } else if (
+  //     e.target.id === "Sedentary" ||
+  //     e.target.id === "Moderate" ||
+  //     e.target.id === "Active" ||
+  //     e.target.id === "Very active"
+  //   ) {
+  //     setUserToEdit((prevState) => ({
+  //       ...prevState,
+  //       activity: value,
+  //     }));
+  //   } else if (
+  //     e.target.id === "Balanced" ||
+  //     e.target.id === "Weight loss" ||
+  //     e.target.id === "Weight gain"
+  //   ) {
+  //     setUserToEdit((prevState) => ({
+  //       ...prevState,
+  //       mealPlan: value,
+  //     }));
+  //   }
+  // }
 
   const onChangeAvatar = (e) => {
     e.preventDefault(); 
@@ -270,7 +288,7 @@ const ProfileForm = () => {
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
 
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label className="form-label">
             <small>Choose your meal plan</small>
           </label>
@@ -296,7 +314,7 @@ const ProfileForm = () => {
             </div>
           ))}
           <div className="invalid-feedback">{errors.mealPlan}</div>
-        </div>
+        </div> */}
 
         <div className="mb-1 w-75">
           <label htmlFor="avatar" className="form-label">
@@ -384,7 +402,7 @@ const ProfileForm = () => {
                 className="btn-check form-control"
                 autoComplete="off"
                 active
-                //aria-pressed="true"
+                aria-pressed="true"
               />
               <label htmlFor={act} className={act == [activity] ? 'btn btn-selected m-2' : 'btn m-2'}>
                 {act}
@@ -494,7 +512,7 @@ const ProfileForm = () => {
             />
             <p className="text-center text-secondary"><small>{age} years old</small></p>   
           </div> */}
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label className="form-label">
             <small>Choose your meal plan</small>
           </label>
@@ -520,7 +538,7 @@ const ProfileForm = () => {
             </div>
           ))}
           <div className="invalid-feedback">{errors.mealPlan}</div>
-        </div>
+        </div> */}
 
         <div className="mb-3">
           <label className="form-label">
