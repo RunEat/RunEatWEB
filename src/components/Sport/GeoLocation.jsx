@@ -131,10 +131,10 @@ const Geolocation = ({ status }) => {
       }
    }, [status]);
 
-  console.log('coordinates', coordinates)
-  console.log(latitude, longitude)
+  //console.log('coordinates', coordinates)
+  //console.log(latitude, longitude)
   //console.log('status', status)
-  console.log("drawline start", drawLine);
+  //console.log("drawline start", drawLine);
   
   function errorHandler(err) {
     if (err.code == 1) {
