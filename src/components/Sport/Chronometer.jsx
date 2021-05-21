@@ -70,8 +70,8 @@ const Chronometer = () => {
         let total = time?.m + seconds + hours;
         return total
     }
-    console.log('runningTime', runningTime())
-    console.log("distanceChrono", distance);
+    //console.log('runningTime', runningTime())
+    //console.log("distanceChrono", distance);
     return (
        <div className="Chronometer text-center mt-2 px-0 bg-light">
          <div className="clock-holder">
