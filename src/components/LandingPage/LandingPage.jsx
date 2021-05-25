@@ -100,19 +100,14 @@ const LandingPage = () => {
             }
           />
           <p className="w-75 align-self-center mt-5 fs-5 text-justify">
-            Lorem fistrum jarl sexuarl por la gloria de mi madre la caidita. A
-            gramenawer te va a hasé pupitaa ahorarr está la cosa muy malar ese
-            pedazo de llevame al sircoo te voy a borrar el cerito va usté muy
-            cargadoo benemeritaar pecador qué dise usteer. Al ataquerl a peich
-            ese que llega llevame al sircoo a peich. Caballo blanco caballo
-            negroorl qué dise usteer apetecan benemeritaar por la gloria de mi
-            madre te va a hasé pupitaa jarl diodeno a wan. Ese hombree por la
-            gloria de mi madre a wan condemor ahorarr se calle ustée te voy a
-            borrar el cerito llevame al sircoo va usté muy cargadoo de la
-            pradera. Sexuarl a peich benemeritaar tiene musho peligro ese pedazo
-            de condemor de la pradera va usté muy cargadoo a gramenawer se calle
-            ustée. A wan ese hombree jarl no te digo trigo por no llamarte
-            Rodrigor de la pradera llevame al sircoo a wan benemeritaar.
+            <span className="RunEat">RunEat</span> is an application to control
+            calorie intake. You can choose from thousands of recipes to create
+            your daily menus which you have easy access to through a calendar
+            that summarizes your caloric intake and expenditure. In addition,{" "}
+            <span className="RunEat">RunEat</span> provides you with an
+            interface where you can record your time, distance and accumulated
+            calorie expenditure after a running session. Don't hesitate,{" "}
+            <span className="RunEat">RunEat</span> has everything you need to maintain and achieve a healthy lifestyle.
           </p>
         </div>
 
