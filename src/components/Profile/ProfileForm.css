@@ -1,5 +1,5 @@
 .ProfileForm a {
-    color:  #00bd56;
+    color: #00bd56;
 }
 
 .ProfileForm a:hover {
@@ -17,12 +17,23 @@
     color: #00bd56;
 }
 
+/* .ProfileForm .mealPlanBtn {
+    border-radius: 2rem;
+    background-color: orange;
+}
+
+.ProfileForm .mealPlanBtn .btn:active {
+    border-radius: 2rem;
+    background-color: #00bd56;
+    color: white;
+} */
+
 /* .ProfileForm  h2 {
     color:  #00bd56;
 } */
 
-.ProfileForm  h1 {
-    background-color:  gray;
+.ProfileForm h1 {
+    background-color: gray;
     border-radius: 2rem;
 }
 

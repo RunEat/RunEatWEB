@@ -26,9 +26,9 @@ function MacrosChart({ meal }) {
   useEffect(() => {
     if (user) {
       const TDEE = maximumCalories(user);
-      setMaxCarbs(maximumCarbs(TDEE));
-      setMaxProteins(maximumProteins(TDEE));
-      setMaxFats(maximumFats(TDEE));
+      setMaxCarbs(maximumCarbs(TDEE, user));
+      setMaxProteins(maximumProteins(TDEE, user));
+      setMaxFats(maximumFats(TDEE, user));
     }
   });
 

@@ -28,12 +28,8 @@
   color: #42cc8c
 }
 
-.iconMobile {
-  width: 5rem;
-}
-
 .install-text{
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .non-decoration {
@@ -43,4 +39,9 @@
 
 .listStyle {
   list-style: none;
+}
+
+.download:hover {
+  color: #42cc8c;
+  font-weight: 700;
 }

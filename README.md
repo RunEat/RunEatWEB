@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# RunEat
+<img src="https://i.ibb.co/wpn8Rr4/Screenshot-2021-05-12-at-11-29-26.png" data-canonical-src="https://i.ibb.co/wpn8Rr4/Screenshot-2021-05-12-at-11-29-26.png" width="100%" />
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Developers: Ángela Herrador López & Javier Repilado López.
+RunEat is a progressive web app to log your food intake and track your running in real time.
+<p>Scan the QR code from the image or try it at <a href="https://runeat.herokuapp.com/">RunEat</a> from a smartphone. Add it to home screen for a better experience (for detailed intstructions go to <a href="https://runeat.herokuapp.com/">RunEat</a> from a PC or laptop).</p>
+<p>To watch the full live demo on Youtube <a href="https://youtu.be/s5Tg_Vl-Sjk">click here.</a></p>
 
-## Available Scripts
+## Technologies
+- **React**
+- **Server:** Node.js with Express
+- **Data base:** MongoDB with Mongoose
+- Authentication with JWT
+- Design CSS and Bootstrap V5
+- External API’s: Edamam and Google Maps
+- Cloudinary
+- Nodemailer and MJML
+- Deployment: Heroku
 
-In the project directory, you can run:
+## Development Methodologies
+- Agile SCRUM
+- Agile Kanban
 
-### `npm start`
+## How to use RunEat?
+### 1. Choose a recipe from thousands of options and log your food intake
+<img src="./public/images/RPReplay_Final1620812605.gif" data-canonical-src="./public/images/RPReplay_Final1620812605.gif" width="25%" />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 2. Go for a run and track your progress in real time
+<img src="https://i.ibb.co/KX70yTG/RPReplay-Final1620503865.gif" data-canonical-src="https://i.ibb.co/KX70yTG/RPReplay-Final1620503865.gif" width="25%" />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 3. Check your food and running logs in the calendar
+<img src="https://i.ibb.co/MccQL9n/Screenshot-2021-05-12-at-11-59-29.png" data-canonical-src="https://i.ibb.co/MccQL9n/Screenshot-2021-05-12-at-11-59-29.png" width="25%" />
 
-### `npm test`
+### 4. Update your profile parameters and see your total calories and macronutrients change
+<div>
+  <img src="https://i.ibb.co/Hpf3fDB/Screenshot-2021-05-12-at-11-59-52.png" data-canonical-src="https://i.ibb.co/Hpf3fDB/Screenshot-2021-05-12-at-11-59-52.png" width="25%" />
+  <img src="https://i.ibb.co/XD3L1sh/Screenshot-2021-05-12-at-12-54-16.png" data-canonical-src="https://i.ibb.co/XD3L1sh/Screenshot-2021-05-12-at-12-54-16.png" width="25%" />
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup
+- Fork this repo
+- Clone this repo
 
-### `npm run build`
+```shell
+$ cd RunEatWEB
+$ npm install
+$ npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contribute
+- Create a new branch:
+  ```
+  git checkout -b "contribution_[feature to add/edit]"
+  ```
+  
+- Upon completion, run the following commands:
+  ```
+  git add .
+  git commit -m "contribution_[your GitHub username]"
+  git push origin branch-name
+  ```
+  
+- Create Pull Request so we can check up your work and start a discussion.

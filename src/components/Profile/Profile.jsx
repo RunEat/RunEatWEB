@@ -49,7 +49,7 @@ function Profile() {
       {user ? (
         <>
           <img
-        src="https://source.unsplash.com/collection/1457950/1600x900"
+            src="https://source.unsplash.com/collection/1457950/1600x900"
             className="w-100"
             alt={user.username}
           />
@@ -58,6 +58,7 @@ function Profile() {
           <div className="text-center border border-2 border-light me-2 ms-2 p-2">
             <h2>{user.username}</h2>
             <p>Activity level · {user.activity}</p>
+            <p>Meal plan · {user.mealPlan}</p>
             <p>
               {user.age} years-old
               <i
@@ -70,7 +71,7 @@ function Profile() {
           <div className="d-flex justify-content-around align-items-center mt-4 border border-2 border-light me-2 ms-2 p-2">
             <div className="InfoBody">
               <button
-              onClick={showBodyF}
+                onClick={showBodyF}
                 className="px-3 py-2 border h-50"
                 style={{
                   backgroundColor: "#ff9d20",
