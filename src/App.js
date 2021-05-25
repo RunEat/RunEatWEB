@@ -17,11 +17,18 @@ import ChangePassword from './components/Profile/ChangePassword';
 import LoginFirstStep from './components/login/LoginFirstStep'
 import ConfirmToDelete from './components/Profile/ConfirmToDelete';
 import SportDetail from './components/Sport/SportDetail';
+import { GlowHubLoader } from 'react-glowhub';
+
 // import { getAccessToken } from './store/AccessTokenStore';
 // import { getUserInfo } from './services/UserService'
+
 const App = () => {
   return (
     <div className="App">
+      <GlowHubLoader 
+        clientID='GH-ER4JHWJNRV' 
+      />
+      
       <Switch>
         <Route exact path="/recipe_detail/:id" component={RecipeDetail} />
         <Route exact path="/" component={Home} />
