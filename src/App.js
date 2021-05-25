@@ -26,9 +26,9 @@ const App = () => {
   return (
     <div className="App">
       <GlowHubLoader 
-        clientID='GH-ER4JHWJNRV' 
+        clientID="GH-9PI4NOH524O"
       />
-      
+
       <Switch>
         <Route exact path="/recipe_detail/:id" component={RecipeDetail} />
         <Route exact path="/" component={Home} />
