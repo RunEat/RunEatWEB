@@ -7,8 +7,9 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "./TotalCalories.css";
+import SportCalories from "./SportCalories";
 
-const TotalCalories = ({ meal }) => {
+const TotalCalories = ({ meal, sport }) => {
   //console.log('Meal totalCalories', meal)
   const [maxCalories, setMaxCalories] = useState();
   const [calories, setCalories] = useState(0);
@@ -22,7 +23,11 @@ const TotalCalories = ({ meal }) => {
 
   useEffect(() => {
     if (user) {
-      setMaxCalories(maximumCalories(user));
+      if (SportCalories) {
+        setMaxCalories(maximumCalories(user) + sport.caloriesBurned);
+      } else {
+        setMaxCalories(maximumCalories(user));
+      }
     }
   }, [user]);
 
@@ -79,6 +84,7 @@ const TotalCalories = ({ meal }) => {
               </>
             )}
           </CircularProgressbarWithChildren>
+          <SportCalories/>
         </>
       ) : (
         "Calculating..."

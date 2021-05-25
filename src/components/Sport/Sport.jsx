@@ -16,10 +16,10 @@ const Sport = () => {
   useEffect(() => {
     console.log("useEffect");
     getDiary(date).then((diary) => {
-      console.log("diary.sport", diary.sport);
+      //console.log("diary.sport", diary.sport);
       setSport(diary.sport);
-      console.log("diaryCompleted", diary);
-      console.log("sport", sport);
+      //console.log("diaryCompleted", diary);
+      //console.log("sport", sport);
     });
   }, [date]);
   return !date ? (

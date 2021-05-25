@@ -11,27 +11,42 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { Link, Redirect } from "react-router-dom";
 import "./Meal.css";
 import { formatedDate } from "../../constants/FormatedDate";
+import { getDiary } from "../../services/DiaryService";
 
 const Meal = () => {
   const { user } = useUser();
 
   const { date, setDate } = useDate();
   const [meal, setMeal] = useState();
+  const [sport, setSport] = useState();
 
   let mealDate = getStoredDate();
 
   useEffect(() => {
     getMeal(mealDate)
-    .then((meal) => {
-      if (meal) {
-        setMeal(meal);
-        //console.log('meal MealComponent', meal)
-      }
-      if (!meal) {
-        setMeal()
-      }
-    });
+      .then((meal) => {
+        if (meal) {
+          setMeal(meal);
+          //console.log('meal MealComponent', meal)
+        }
+        if (!meal) {
+          setMeal()
+        }
+      });
   }, [mealDate]);
+  
+  useEffect(() => {
+    getDiary(mealDate)
+      .then((diary) => {
+        if (diary.sport) {
+          setSport(diary.sport)
+        }
+        if (!diary.sport) {
+          setSport()
+        }
+      })
+  })
+
 
   console.log('user', user)
 
@@ -49,7 +64,11 @@ const Meal = () => {
             <h1 className="text-white mt-4 mb-2 w-75 text-center mb-3">
               {formatedDate(mealDate)}
             </h1>
-            <TotalCalories className="TotalCalories" meal={meal} />
+            <TotalCalories 
+              className="TotalCalories" 
+              meal={meal}
+              sport={sport}
+            />
             <MacrosChart className="MacrosChart" meal={meal} />
           </div>
           <Menu meal={meal} setMeal={setMeal} />
