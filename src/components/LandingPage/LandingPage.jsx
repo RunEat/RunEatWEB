@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { GlowHubLoader } from 'react-glowhub';
 import "./LandingPage.css";
 import Carousel from "react-gallery-carousel";
 import "react-gallery-carousel/dist/index.css";
@@ -26,6 +27,9 @@ const LandingPage = () => {
 
   return (
     <>
+      <GlowHubLoader 
+        clientID="GH-9PI4NOH524O"
+      />
       <div className="LandingPage pb-5 pe-5 ps-5 pt-5">
         <div className="text-dark d-flex text-center justify-content-between">
           <h1 className="font-weitght-bold mt-0 p-0 RunEat">RunEat</h1>
