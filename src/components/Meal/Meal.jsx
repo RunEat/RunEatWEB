@@ -53,7 +53,7 @@ const Meal = () => {
     <div className="text-center">
       <SyncLoader color="#00bd56" />
     </div>
-  ) :  (
+  ) : (
         <>
         <div
           className="Meal d-flex flex-column align-items-center justify-content-center bg-light"
@@ -69,6 +69,7 @@ const Meal = () => {
               sport={sport}
             />
             <MacrosChart className="MacrosChart" meal={meal} />
+          {user && <h6 className="text-light mt-3">Meal Plan · {user.mealPlan}</h6>}
           </div>
           <Menu meal={meal} setMeal={setMeal} />
         </div>

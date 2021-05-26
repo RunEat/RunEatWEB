@@ -53,7 +53,7 @@ const TotalCalories = ({ meal, sport }) => {
   }, [meal]);
 
   return (
-    <div className="TotalCalories mt-2">
+    <div className="TotalCalories mt-2 text-center">
       {user ? (
         <>
           <CircularProgressbarWithChildren
@@ -90,8 +90,7 @@ const TotalCalories = ({ meal, sport }) => {
               </>
             )}
           </CircularProgressbarWithChildren>
-        {/* USER'S MEAL PLAN */}
-          { !sport && 
+          { sport && 
             <SportCalories
               countBurnedCals={countBurnedCals}
               setCountBurnedCals={setCountBurnedCals}

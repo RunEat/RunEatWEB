@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from "react-bootstrap/Modal";
-import "bootstrap/dist/css/bootstrap.min.css";
+import './SportCalories.css'
 
 const SportCalories = ({ countBurnedCals, setCountBurnedCals }) => {
   
@@ -20,7 +20,7 @@ const SportCalories = ({ countBurnedCals, setCountBurnedCals }) => {
     <div className="SportCalories mt-4">
       <div className="form-check form-switch">
         <input 
-          className="form-check-input" 
+          className="form-check-input"
           type="checkbox" 
           id="SportCalories"
           onChange={onChange}
@@ -35,13 +35,24 @@ const SportCalories = ({ countBurnedCals, setCountBurnedCals }) => {
         <i onClick={onClick} class="fas fa-info-circle ms-2"></i>
         <br/>
         { show &&
-          <small>Explanation</small>
+          <div className="d-flex align-items-center justify-content-center" style={{height: '100%'}}>
+          (<Modal className="rounded text-center" style={{top: '40vh'}} show={true}>
+            <Modal.Body>Increase today's calories allowance by adding the calories you burned today to the total.</Modal.Body>
+            <Modal.Footer className="d-flex align-self-center justify-content-center w-100">
+              <button 
+                onClick={onClick} 
+                className="btn btn-success w-50"
+                style={{
+                  borderRadius: "6rem",
+                  backgroundColor: "#00bd56",
+                }}
+              >
+                Hide              
+              </button>
+            </Modal.Footer>
+          </Modal>)
+          </div>
         }
-      <Modal show={true}>
-        <Modal.Header>Hi</Modal.Header>
-        <Modal.Body>asdfasdf</Modal.Body>
-        <Modal.Footer>This is the footer</Modal.Footer>
-      </Modal>
       </div>
       
     </div>
