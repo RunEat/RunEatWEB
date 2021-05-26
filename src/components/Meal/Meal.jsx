@@ -59,7 +59,7 @@ const Meal = () => {
           className="Meal d-flex flex-column align-items-center justify-content-center bg-light"
           style={{ maxHeight: "400vh", overflow: "scroll" }}
         >
-          <div className="CaloriesSummary d-flex flex-column align-items-center">
+          <div className={`${sport ? "CaloriesSummary2" : "CaloriesSummary"} d-flex flex-column align-items-center`}>
             <h1 className="text-white mt-4 mb-2 w-75 text-center mb-3">
               {formatedDate(mealDate)}
             </h1>
@@ -69,11 +69,11 @@ const Meal = () => {
               sport={sport}
             />
             <MacrosChart className="MacrosChart" meal={meal} />
-          {user && <h6 className="text-light mt-3">Meal Plan · {user.mealPlan}</h6>}
           </div>
+          {/* {user && <h6 className="mt-2 mb-0">Meal Plan · {user.mealPlan}</h6>} */}
           <Menu meal={meal} setMeal={setMeal} />
         </div>
-            <Navbar />
+        <Navbar />
         </>
       )
 };

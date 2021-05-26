@@ -27,12 +27,12 @@ const SportCalories = ({ countBurnedCals, setCountBurnedCals }) => {
           value={countBurnedCals}
         />
         <label 
-          className="form-check-label" 
+          className="form-check-label text-light" 
           htmlFor="SportCalories"
         > 
           Add Calories Burned
         </label>
-        <i onClick={onClick} class="fas fa-info-circle ms-2"></i>
+        <i onClick={onClick} className="fas fa-info-circle ms-2 text-white"></i>
         <br/>
         { show &&
           <div className="d-flex align-items-center justify-content-center" style={{height: '100%'}}>
