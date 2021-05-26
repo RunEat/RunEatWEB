@@ -96,7 +96,7 @@ const TotalCalories = ({ meal, sport }) => {
               </>
             )}
           </CircularProgressbarWithChildren>
-          { sport && 
+          { sport?.caloriesBurned && 
             <SportCalories
               countBurnedCals={countBurnedCals}
               setCountBurnedCals={setCountBurnedCals}
