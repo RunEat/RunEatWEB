@@ -60,6 +60,7 @@ const TotalCalories = ({ meal, sport }) => {
             value={calories}
             maxValue={maxCalories}
             styles={buildStyles({
+              marginTop: '',
               backgroundColor: "#e9ecef",
               trailColor: "#e9ecef",
               pathColor: color,
@@ -68,7 +69,7 @@ const TotalCalories = ({ meal, sport }) => {
           >
             {maxCalories > calories ? (
               <>
-                <div style={{ fontSize: 15, marginTop: -10, color: "#e9ecef" }}>
+                <div style={{ fontSize: 15, marginTop: 8, color: "#e9ecef" }}>
                   <strong>kCal left</strong>
                 </div>
                 <img
@@ -79,7 +80,7 @@ const TotalCalories = ({ meal, sport }) => {
               </>
             ) : (
               <>
-                <div style={{ fontSize: 15, marginTop: -10, color: "#dc3444" }}>
+                <div style={{ fontSize: 15, marginTop: 8, color: "#dc3444" }}>
                   <strong>excess kCal</strong>
                 </div>
                 <img
