@@ -1,14 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { GlowHubLoader } from 'react-glowhub';
 import "./LandingPage.css";
+import Carousel from "react-gallery-carousel";
+import "react-gallery-carousel/dist/index.css";
 
 const LandingPage = () => {
+  let dynamicImages = [
+    {
+      src: "../../../images/CarouselHome1.jpg",
+      className: "bg-image hover-overlay borderR",
+    },
+    {
+      src: "../../../images/CarouselHome2.jpg",
+      className: "bg-image hover-overlay borderR",
+    },
+    {
+      src: "../../../images/CarouselHome3.jpg",
+      className: "bg-image hover-overlay borderR",
+    },
+    {
+      src: "../../../images/CarouselHome4.jpg",
+      className: "bg-image hover-overlay borderR",
+    },
+  ];
+
   return (
     <>
+      <GlowHubLoader 
+        clientID="GH-9PI4NOH524O"
+      />
       <div className="LandingPage pb-5 pe-5 ps-5 pt-5">
         <div className="text-dark d-flex text-center justify-content-between">
           <h1 className="font-weitght-bold mt-0 p-0 RunEat">RunEat</h1>
-          <div>
+          {/* <div>
             <Link
               to="/Login"
               className="me-3 fs-3 text-decoration-none text-dark"
@@ -21,7 +46,7 @@ const LandingPage = () => {
             >
               Sign up
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="container text-dark d-flex align-items-center justify-content-between pb-5 mt-5">
           <div className="text-dark d-flex flex-column text-center pb-5">
@@ -32,25 +57,108 @@ const LandingPage = () => {
               The digital self-care app that helps you reach your health and
               weight goals through better eating.
             </p>
+            <button className="mt-4 me-3 fs-3 text-decoration-none borderR py-2 px-4 bg-white w-75">
+              Download app scan following QR code
+            </button>
           </div>
           <div className="d-flex justify-content-center col-4 pb-5">
             <img className="w-100" src="../../../images/iphone.png" />
           </div>
         </div>
+
+        <div className="text-dark d-flex flex-column text-center pb-5">
+          <h2 className="fs-1 my-5 font-weight-bold install-text">
+            What is <span className="RunEat install-text">RunEat</span>?
+          </h2>
+          <Carousel
+            className="framed-carousel bg-white"
+            images={dynamicImages}
+            isLoop={true}
+            canAutoPlay={true}
+            isAutoPlaying={true}
+            autoPlayInterval={3000}
+            index={2}
+            isMaximized={false}
+            hasSizeButton={false}
+            hasMediaButton={false}
+            hasIndexBoard={false}
+            hasLeftButton={false}
+            hasRightButton={false}
+            hasCaptionsAtMax="top"
+            hasDotButtonsAtMax="bottom"
+            hasThumbnails={false}
+            hasThumbnailsAtMax={true}
+            thumbnailWidth={"15%"}
+            thumbnailHeight={"15%"}
+            shouldMaximizeOnClick={true}
+            shouldMinimizeOnClick={true}
+            activeIcon={
+              <span className="icon-text" role="img" aria-label="active">
+                🔳
+              </span>
+            }
+            passiveIcon={
+              <span className="icon-text" role="img" aria-label="passive">
+                🔲
+              </span>
+            }
+          />
+          <p className="w-75 align-self-center mt-5 fs-5 text-justify">
+            <span className="RunEat">RunEat</span> is an application to control
+            calorie intake. You can choose from thousands of recipes to create
+            your daily menus which you have easy access to through a calendar
+            that summarizes your caloric intake and expenditure. In addition,{" "}
+            <span className="RunEat">RunEat</span> provides you with an
+            interface where you can record your time, distance and accumulated
+            calorie expenditure after a running session. Don't hesitate,{" "}
+            <span className="RunEat">RunEat</span> has everything you need to maintain and achieve a healthy lifestyle.
+          </p>
+        </div>
+
         <div className="text-dark d-flex flex-column text-center pb-5">
           <hr className="w-50 align-self-center" />
-          <h2 className="install-text my-5">
-            Install RunEat in 3 <u>easy steps</u>
+          <h2 className="fs-1 my-5 install-text mb-5">
+            Install <span className="RunEat install-text">RunEat</span> in 3{" "}
+            <u>easy steps</u>
           </h2>
-          <h3 className="mt-4">
-            IPHONE{" "}
-            <img
-              className="ms-3 iconMobile"
-              src="../../../images/AppleIcon.png"
-            />
-          </h3>
-          <br />
           <div className="d-flex justify-content-around">
+            <div>
+              <img
+                className="ms-3 w-50"
+                src="../../../images/iphoneDownload.png"
+              />
+            </div>
+            <div>
+              <img
+                className="ms-3 w-50"
+                src="../../../images/androidDownload.png"
+              />
+            </div>
+          </div>
+          <div className="d-flex justify-content-around">
+            <div className="mt-5">
+              <Link
+                to="../../../docs/iphone.pdf"
+                target="_blank"
+                className="text-decoration-none borderR py-2 px-4 bg-white download w-25 ms-2"
+                download
+              >
+                Download instructions
+              </Link>
+            </div>
+            <div className="mt-5">
+              <Link
+                to="../../../docs/android.pdf"
+                target="_blank"
+                className="text-decoration-none borderR py-2 px-4 bg-white download w-25 ms-2"
+                download
+              >
+                Download instructions
+              </Link>
+            </div>
+          </div>
+
+          {/* <div className="d-flex justify-content-around">
             <section>
               <h3>
                 <img className="w-25" src="../../../images/one.png" />
@@ -83,16 +191,19 @@ const LandingPage = () => {
               </p>
               <img className="w-50" src="../../../images/Iphone2.png" />
             </section>
-          </div>
+          </div> */}
         </div>
 
-        <div className="text-dark d-flex flex-column text-center pb-5">
+        {/* <div className="text-dark d-flex flex-column text-center pb-5">
           <h3 className="mt-4">
             ANDROID{" "}
             <img className="iconMobile" src="../../../images/AndroidIcon.png" />
           </h3>
           <br />
-          <div className="d-flex justify-content-around">
+          <Link to="../../../docs/android.pdf" target="_blank" download>
+            Download
+          </Link> */}
+        {/* <div className="d-flex justify-content-around">
             <section>
               <h3>
                 <img className="w-25" src="../../../images/one.png" />
@@ -123,8 +234,8 @@ const LandingPage = () => {
               </p>
               <img className="w-50" src="../../../images/Android3.png" />
             </section>
-          </div>
-        </div>
+          </div> 
+        </div>*/}
 
         <section className="py-5">
           <div className="container d-flex flex-column justify-content-center text-center">
@@ -157,8 +268,8 @@ const LandingPage = () => {
         <section id="footer" className="container-fluid bg-light py-4">
           <div className="container-fluid">
             <div className="row">
-              <div className="col-12 col-md-2 col-lg-4">
-                <h1 className="RunEat mt-3">RunEat</h1>
+              <div className="col-8 ms-4 col-md-3 mt-3">
+                <h2 className="RunEat">RunEat</h2>
               </div>
 
               <div className="col-6 col-md-2 mt-3">
