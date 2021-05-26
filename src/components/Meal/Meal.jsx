@@ -45,8 +45,7 @@ const Meal = () => {
           setSport()
         }
       })
-  })
-
+  }, [mealDate]);
 
   console.log('user', user)
 

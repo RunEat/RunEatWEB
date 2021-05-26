@@ -11,9 +11,12 @@ import SportCalories from "./SportCalories";
 
 const TotalCalories = ({ meal, sport }) => {
   //console.log('Meal totalCalories', meal)
+  console.log('sport', sport)
+
   const [maxCalories, setMaxCalories] = useState();
   const [calories, setCalories] = useState(0);
   const [color, setColor] = useState("#198754");
+  const [countBurnedCals, setCountBurnedCals] = useState(false);
 
   const { user } = useUser();
 
@@ -23,7 +26,7 @@ const TotalCalories = ({ meal, sport }) => {
 
   useEffect(() => {
     if (user) {
-      if (SportCalories) {
+      if (countBurnedCals) {
         setMaxCalories(maximumCalories(user) + sport.caloriesBurned);
       } else {
         setMaxCalories(maximumCalories(user));
@@ -41,8 +44,11 @@ const TotalCalories = ({ meal, sport }) => {
       let lunch = meal.mealType.lunch ? meal.mealType.lunch.calories : 0;
       let dinner = meal.mealType.dinner ? meal.mealType.dinner.calories : 0;
       let snacks = meal.mealType.snacks ? meal.mealType.snacks.calories : 0;
+      // let caloriesBurned = sport.caloriesBurned
 
       setCalories(breakfast + lunch + dinner + snacks);
+    } else {
+      
     }
   }, [meal]);
 
@@ -84,7 +90,13 @@ const TotalCalories = ({ meal, sport }) => {
               </>
             )}
           </CircularProgressbarWithChildren>
-          <SportCalories/>
+        {/* USER'S MEAL PLAN */}
+          { !sport && 
+            <SportCalories
+              countBurnedCals={countBurnedCals}
+              setCountBurnedCals={setCountBurnedCals}
+            />
+          }  
         </>
       ) : (
         "Calculating..."
