@@ -31,7 +31,9 @@ const ConfirmToDelete = () => {
 		errors: {email: validators.email()}
 	})
 	
-	const deleteAccount = () => {
+	const deleteAccount = (e) => {
+    e.preventDefault();
+    
 		deleteUser()
 			.then(() => {
 				logout();
