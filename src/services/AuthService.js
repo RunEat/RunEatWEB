@@ -28,5 +28,6 @@ export const passwordReset = (token) => {
 }
 
 export const updatePassword = (user) => {
+  console.log(user)
   return http.put('/user/password_reset', user)
 }

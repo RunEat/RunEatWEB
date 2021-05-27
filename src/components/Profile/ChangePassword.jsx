@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { passwordReset, updatePassword } from "../../services/AuthService";
+import { useUser } from '../../hooks/useUserContext';
+import { setAccessToken } from '../../store/AccessTokenStore';
 
 const validators = {
     password: value => {
@@ -20,20 +22,24 @@ const validators = {
 
 const ChangePassword = () => {
     const { token } = useParams();
-    const { push } = useHistory()
+    const { push } = useHistory();
+    const { user, setUser, getUser: doLogin } = useUser();
 
-
-    const [user, setUser] = useState({
-        password: ''
-    });
+  //   const [user, setUser] = useState({
+  //       password: ''
+  //   });
     
-    const [errors, setErrors] = useState({
-        password: validators.password(),
-	})
+  //   const [errors, setErrors] = useState({
+  //       password: validators.password(),
+	// })
 
     useEffect(() => {
         passwordReset(token)
-          .then(user => setUser(user))
+          .then(user => {
+            setAccessToken(user.access_token)
+            doLogin()
+              .then(() => console.log(user))
+          })
     }, [token])
     
 
@@ -55,10 +61,10 @@ const ChangePassword = () => {
             password: e.target.value
         }))
         
-        setErrors((prevState) => ({
-            ...prevState,
-            password: validators.password && validators.password(value)
-        }))
+        // setErrors((prevState) => ({
+        //     ...prevState,
+        //     password: validators.password && validators.password(value)
+        // }))
     
     }
 
@@ -79,8 +85,6 @@ const ChangePassword = () => {
         [name]: false
         }))
     }
-
-    const {password} = user
         
     return !user ? (
       "loading"
@@ -96,18 +100,16 @@ const ChangePassword = () => {
             Enter your new password:
           </label>
           <input
-            className={`form-control ${
-              touched.password && errors.password ? "is-invalid" : ""
-            }`}
+            className={`form-control`}
             type="password"
             id="password"
             name="password"
-            value={password}
+            value={user.password}
             onChange={onChange}
             onBlur={onBlur}
             onFocus={onFocus}
           />
-          <div className="invalid-feedback">{errors.password}</div>
+          {/* <div className="invalid-feedback">{errors.password}</div> */}
 
           <button
             type="submit"

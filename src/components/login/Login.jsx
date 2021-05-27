@@ -66,6 +66,7 @@ const Login = () => {
   const [touched, setTouched] = useState({})
   const [errorLogin, setErrorLogin] = useState()
   const [show, setShow] = useState(false)
+  const [resetEmail, setResetEmail] = useState(null)
 
   const isValid = () => {
     const { errors } = state;
@@ -93,7 +94,7 @@ const Login = () => {
   }
 
   const onChange = (e) => {
-    const { name, value } = e.target
+    const { name, value, id } = e.target
 
     setState((prevState) => ({
       fields: {
@@ -105,6 +106,12 @@ const Login = () => {
         [name]: validators[name] && validators[name](value)
       }
     }))
+
+    if (id === 'recovery_email')
+    setResetEmail((prevState) => ({
+        ...prevState,
+        [name]: value
+    }));
   }
 
   const onBlur = (e) => {
@@ -130,7 +137,7 @@ const Login = () => {
     console.log('change password', e.target)
 
     if (isValid()) {
-      passwordResetEmail()
+      passwordResetEmail(resetEmail)
         .then(() => {
           console.log('Check your email')
         })
@@ -140,7 +147,6 @@ const Login = () => {
           //setShow(true)
         })
     }
-      
   };
 
   const passwordRecovery = (e) => {
@@ -236,11 +242,10 @@ const Login = () => {
                   touched.email && errors.email ? "is-invalid" : ""
                 }`}
                 type="email"
-                id="email"
+                id="recovery_email"
                 name="email"
                 autoComplete="off"
                 value={email}
-                onClick={changePassword}
                 onChange={onChange}
                 onBlur={onBlur}
                 onFocus={onFocus}
@@ -248,11 +253,11 @@ const Login = () => {
               />
               <div className="invalid-feedback">{errors.email}</div>
               <button
-                type="submit"
                 className="btn btn-warning mt-3 text-light passwordRecovery colorLink w-100"
                 style={{
                   borderRadius: "5rem",
                 }}
+                onClick={changePassword}
                 disabled={!isValid()}
               >
                 Recover password
@@ -263,18 +268,18 @@ const Login = () => {
           
           {
             !show &&
-          <button
-            type="submit"
-            className="mt-5 btn LoginButton colorLink w-75"
-            style={{
-              borderRadius: "5rem",
-              color: "#fff",
-              backgroundColor: "#00bd56",
-            }}
-            disabled={!isValid()}
-          >
-            LOG IN
-          </button>
+            <button
+              type="submit"
+              className="mt-5 btn LoginButton colorLink w-75"
+              style={{
+                borderRadius: "5rem",
+                color: "#fff",
+                backgroundColor: "#00bd56",
+              }}
+              disabled={!isValid()}
+            >
+              LOG IN
+            </button>
           }
         </form>
       </div>
