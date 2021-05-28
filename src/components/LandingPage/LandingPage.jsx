@@ -30,7 +30,7 @@ const LandingPage = () => {
       <GlowHubLoader 
         clientID="GH-9PI4NOH524O"
       />
-      <div className="LandingPage pb-5 pe-5 ps-5 pt-5">
+      <div className="LandingPage pb-5 pe-5 ps-5 pt-3">
         <div className="text-dark d-flex text-center justify-content-between">
           <h1 className="font-weitght-bold mt-0 p-0 RunEat">RunEat</h1>
           {/* <div>
@@ -57,8 +57,8 @@ const LandingPage = () => {
               The digital self-care app that helps you reach your health and
               weight goals through better eating.
             </p>
-            <button className="mt-4 me-3 fs-3 text-decoration-none borderR py-2 px-4 bg-white w-75">
-              Download app scan following QR code
+            <button className="mt-4 me-3 fs-4 text-decoration-none borderR py-2 px-4 bg-white w-75">
+              Download app scanning the following QR code
             </button>
           </div>
           <div className="d-flex justify-content-center col-4 pb-5">
