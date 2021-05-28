@@ -155,11 +155,14 @@ const ProfileForm = () => {
 
     setUserToEdit((prevState) => {
       let value = e.target.value;
+      console.log("e.target.type", e.target.type);
+      console.log('e.target.value', e.target.value)
+      console.log("e.target.id", e.target.id);
       //console.log('radio value onChange', e.target.id)
 
       if (e.target.type === "file") {
         value = e.target.files[0];
-      } else if (e.target.id === "activity" ) {               ///REVISAR!!!!!
+      } else if (e.target.type === "checkbox") {      ///REVISAR!!!!!
         value = [...e.target.selectedOptions].map((opt) => opt.value);
       }
 
@@ -278,7 +281,7 @@ const ProfileForm = () => {
           <br />
           {MEAL_PLAN.map((plan, idx) => (
             <div key={idx} className="d-inline">
-              <input
+              <select
                 type="checkbox"
                 id={plan}
                 name={plan}
@@ -290,6 +293,7 @@ const ProfileForm = () => {
                 className="btn-check form-control"
                 autoComplete="off"
                 active
+                multiple={false}
                 aria-pressed="true"
               />
               <label htmlFor={plan} className="btn mealPlanBtn m-2">
